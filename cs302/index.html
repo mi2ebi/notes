@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+    <title>cs 302</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+  </head>
+  <body>
+    <h1 class="h0">cs 302</h1>
+    <h1>c++ recap</h1>
+    <h2>linked lists</h2>
+    <p>each node of a (doubly) linked list has</p>
+    <ul>
+      <li>pointer to the previous element</li>
+      <li>the actual data</li>
+      <li>pointer to the next element</li>
+    </ul>
+    <p>
+      there's also a pointer <code class="variable">head</code> pointing to the start
+      of the list, and likewise for <code class="variable">tail</code> pointing to the
+      end
+    </p>
+<pre>
+<span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow0">{</span>
+  <span class="keyword">public</span>:
+    <span class="type">int</span> <span class="variable">data</span>;
+    <span class="type">Node *</span><span class="variable">prev</span>;
+    <span class="type">Node *</span><span class="variable">next</span>;
+<span class="rainbow0">}</span>;
+</pre>
+    <p>tail insert / <code><span class="function">push_back</span><span class="rainbow0">(</span><span class="variable">x</span><span class="rainbow0">)</span></code></p>
+<pre>
+<span class="type">Node *</span><span class="variable">tmp</span>;
+<span class="variable">tmp</span> = <span class="keyword">new</span> <span class="type">Node</span>;
+<span class="variable">tmp</span>-&gt;<span class="variable">data</span> = <span class="variable">x</span>; <span class="comment">// <span class="rainbow0">(</span><span class="fgmain">*</span><span class="variable">tmp</span><span class="rainbow0">)</span><span class="fgmain">.</span><span class="variable">data</span> <span class="fgmain">=</span> <span class="variable">x</span><span class="fgmain">;</span></span>
+<span class="variable">tail</span>-&gt;<span class="variable">next</span> = <span class="variable">tmp</span>;
+<span class="variable">tmp</span>-&gt;<span class="variable">prev</span> = <span class="variable">tail</span>;
+<span class="variable">tmp</span>-&gt;<span class="variable">next</span> = <span class="constant">nullptr</span>;
+<span class="variable">tail</span> = <span class="variable">tmp</span>;
+</pre>
+    <p>head remove / <code><span class="function">pop_front</span><span class="rainbow0">()</span></code></p>
+<pre>
+<span class="type">Node *</span><span class="variable">tmp</span>;
+<span class="variable">tmp</span> = <span class="variable">head</span>;
+<span class="variable">head</span> = <span class="variable">head</span>-&gt;<span class="variable">next</span>;
+<span class="keyword">delete</span> <span class="variable">tmp</span>; <span class="comment">// deällocate</span>
+<span class="variable">head</span>-&gt;<span class="variable">prev</span> = <span class="constant">nullptr</span>;
+</pre>
+    <p>swap, assuming pointers <code class="variable">i</code> and <code class="variable">j</code></p>
+<pre>
+<span class="type">Node *</span><span class="variable">i_left</span>  = <span class="variable">i</span>-&gt;<span class="variable">prev</span>;
+<span class="type">Node *</span><span class="variable">i_right</span> = <span class="variable">i</span>-&gt;<span class="variable">next</span>;
+<span class="type">Node *</span><span class="variable">j_left</span>  = <span class="variable">j</span>-&gt;<span class="variable">prev</span>;
+<span class="type">Node *</span><span class="variable">j_right</span> = <span class="variable">j</span>-&gt;<span class="variable">next</span>;
+<span class="variable">i_left</span>-&gt;<span class="variable">next</span>  = <span class="variable">j</span>;
+<span class="variable">i_right</span>-&gt;<span class="variable">prev</span> = <span class="variable">j</span>;
+<span class="variable">j_left</span>-&gt;<span class="variable">next</span>  = <span class="variable">i</span>;
+<span class="variable">j_right</span>-&gt;<span class="variable">prev</span> = <span class="variable">i</span>;
+<span class="variable">i</span>-&gt;<span class="variable">prev</span> = <span class="variable">j_left</span>;
+<span class="variable">j</span>-&gt;<span class="variable">prev</span> = <span class="variable">i_left</span>;
+<span class="variable">i</span>-&gt;<span class="variable">next</span> = <span class="variable">j_right</span>;
+<span class="variable">j</span>-&gt;<span class="variable">next</span> = <span class="variable">i_right</span>;
+<span class="type">Node *</span><span class="variable">t</span> = <span class="variable">i</span>;
+<span class="variable">i</span> = <span class="variable">j</span>;
+<span class="variable">j</span> = <span class="variable">t</span>;
+</pre>
+    <p>we could also just swap the <code class="variable">data</code>s</p>
+    <h1>algorithms</h1>
+    <dl>
+      <dt>algorithm</dt>
+      <dd>process to solve a problem, in general, with finite time</dd>
+      <dd>
+        etymology: <ruby>
+          <span lang="ar">الخوارزمي</span><rp>(</rp><rt>alḵawārizmiyy</rt><rp>(</rp>
+        </ruby>, the last name of an arabic mathematician
+      </dd>
+    </dl>
+    <p>to measure time we can</p>
+    <ul>
+      <li>
+        call eg <code class="function">time</code> on linux to get the amount of real
+        time (not super useful)
+      </li>
+      <li>
+        find growth rate / scaling (count number of steps and classify as proportional
+        to some function of input size \(n\))
+      </li>
+    </ul>
+    <h2>asymptotic complexity classes</h2>
+    <h3>big O</h3>
+    <p>
+      \(g(n) = O(f(n))\)<br />
+      iff \(g(n) \le cf(n)\) for some \(c &gt; 0\) and \(n \ge n_0 &gt; 0\)
+    </p>
+    <table>
+      <tr> <th>complexity</th>      <th>notation</th>             </tr>
+      <tr> <td>constant</td>        <td>\(O(1)\)</td>             </tr>
+      <tr> <td>logarithmic</td>     <td>\(O(\log n)\)</td>        </tr>
+      <tr> <td>linear</td>          <td>\(O(n)\)</td>             </tr>
+      <tr> <td>polylogarithmic</td> <td>\(O(\log^k n)\)</td>      </tr>
+      <tr> <td>quadratic</td>       <td>\(O(n^2)\)</td>           </tr>
+      <tr> <td>exponential</td>     <td>\(O(a^n), a &gt; 1\)</td> </tr>
+    </table>
+    <p>examples</p>
+    <ul>
+      <li>\(n = O(n)\)</li>
+      <li>\(3n = O(n)\)</li>
+      <li>\(1000n = O(n)\)</li>
+      <li>\(1000n + 23 = O(n)\)</li>
+      <li>\(\sqrt n = O(n)\) ...this is sort of weak</li>
+    </ul>
+    <p>big O gives an <i>upper bound</i></p>
+    <h3>big &Omega;</h3>
+    <p>
+      \(g(n) = \Omega(f(n))\)<br />
+      iff \(g(n) \ge cf(n)\) for some \(c &gt; 0\) and \(n \ge n_o &gt; 0\)
+    </p>
+    <p>big omega is a <i>lower bound</i></p>
+    <p>examples</p>
+    <ul>
+      <li>\(n = \Omega(n)\)</li>
+      <li>\(3n = \Omega(n)\)</li>
+      <li>\(5n^2 = \Omega(n)\) ...this is also weak</li>
+    </ul>
+    <h3>big &Theta;</h3>
+    <p>
+      \(g(n) = \Theta(f(n))\)<br />
+      iff \(g(n) = O(f(n))\) and \(g(n) = \Omega(f(n))\)
+    </p>
+    <p>examples</p>
+    <ul>
+      <li>\(n = \Theta(n)\)</li>
+      <li>\(7n = \Theta(n)\)</li>
+      <li>\(3n^2 \ne \Theta(n)\) because it's \(\Omega(n)\) but not \(O(n)\)</li>
+    </ul>
+    <h3>logs</h3>
+    <p>
+      for time complexity the log base doesn't matter. even though in Real Math
+      \(\log x = \log_{10} x\) or \(\ln x\) depending who you ask
+    </p>
+    <p>\(\log_a n = \Theta(\log n)\) regardless of \(a\)</p>
+    <p>\[\log_a n = \frac{\log_b n}{\log_b a}\]</p>
+    <h3>calculus</h3>
+    <p>\[\lim_{n \to \infty} \frac{g(n)}{f(n)}\]</p>
+    <p>this could</p>
+    <ul>
+      <li>go to infinity,in which case \(f\) can't keep up with \(g\) at all)</li>
+      <li>
+        be a constant bigger than 0, in which case \(g\) and \(f\) have the
+        same growth rate
+      </li>
+      <li>be zero, in which case \(f\) is strong enough to pull \(g\) down to zero)</li>
+    </ul>
+    <p>l'h&ocirc;pital's rule says</p>
+    <p>\[
+      \lim_{n \to \infty} \frac{g(x)}{f(x)}
+      = \lim_{n \to \infty} \frac{g'(n)}{f'(n)} = \cdots
+    \]</p>
+    <p>eg is \(n^2 + 33n + 2 = O(n)\)?</p>
+    <p>using normal math: \[
+      \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
+      = \lim_{n \to \infty} \left(n + 33 + \frac2n\right) = \infty
+    \]</p>
+    <p>using l'hopital's: \[
+      \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
+      = \lim_{n \to \infty} (2n + 33) = \infty
+    \]</p>
+    <p>therefore \(n\) is not an upper bound for \(n^2 + 33n + 2\)</p>
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust:true});</script>
+  </body>
+</html>

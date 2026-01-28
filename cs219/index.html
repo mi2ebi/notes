@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <head>
+    <title>cs 219</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+  </head>
+  <body>
+    <h1 class="h0">cs 219</h1>
+    <h1>2026-01-20</h1>
+    <p>computers and brains are very similar!</p>
+<pre>
+        <span style="color: var(--green)">program</span>
+           v
+<span style="color: var(--red)">input</span> &gt; <span style="color: var(--green)">process</span> &gt; <span style="color: var(--magenta-cooler)">output</span>
+           v
+        <span style="color: var(--green)">storage</span>
+</pre>
+    <h2>parts of computers</h2>
+    <ul>
+      <li>input eg keyboard/mouse</li>
+      <li>output eg screen</li>
+      <li>memory</li>
+      <li>
+        processor
+        <ul>
+          <li>data path</li>
+          <li>control unit</li>
+        </ul>
+      </li>
+    </ul>
+    <p>von neumann is slow tho so we can separate instruction memory vs data memory</p>
+    <h2>types of computers</h2>
+    <dl>
+      <dt>personal computers</dt>
+      <dd>general purpose, cost/perf tradeoff</dd>
+      <dt>servers</dt>
+      <dd>high capacity, performance, reliability</dd>
+      <dt>supercomputers</dt>
+      <dd>type of server, highest capabaility but super expensive etc</dd>
+      <dt>embedded computers</dt>
+      <dd>
+        hidden as components of other systems, strict power/cost/perf requirements
+      </dd>
+      <dt>mobile devices</dt>
+      <dd>rely more on batteries rather than eg being plugged in all the time</dd>
+    </dl>
+    <h2>"eight great ideas"</h2>
+    <ol>
+      <li>design for moore's law</li>
+      <li>use abstraction to simplify design</li>
+      <li>make the common case fast</li>
+      <li>performance via parallelism</li>
+      <li>performance via pipelining</li>
+      <li>performance via prediction</li>
+      <li>hierarchy of memories</li>
+      <li>dependability via redundancy</li>
+    </ol>
+    <h1>2026-01-22</h1>
+    <h2>below your program</h2>
+    <ol>
+      <li>application software</li>
+      <li>system software eg compiler, os</li>
+      <li><b>instruction set architecture</b></li>
+      <li>hardware eg processor, memory, i/o</li>
+    </ol>
+    <h2>inside the cpu</h2>
+    <dl>
+      <dt>datapath</dt>
+      <dd>perform ops on data</dd>
+      <dt>control</dt>
+      <dd>sequences datapath, memory, i/o</dd>
+      <dt>cache</dt>
+      <dd>small fast sram</dd>
+    </dl>
+    <dl>
+      <dt>volatile/primary/main memory</dt>
+      <dd>loses state when powered off</dd>
+      <dt>nonvolatile/secondary memory</dt>
+      <dd>eg hard drive, ssd, cdrom, usb stick</dd>
+    </dl>
+    <h2>networks</h2>
+    <dl>
+      <dt>local area network (lan)</dt>
+      <dd>ethernet</dd>
+      <dt>wide area network (wan)</dt>
+      <dd>the internet</dd>
+      <dt>wireless network</dt>
+      <dd>eg wifi, bluetooth</dd>
+    </dl>
+    <h2>performance</h2>
+    <dl>
+      <dt>response time</dt>
+      <dd>how long it takes to do something</dd>
+      <dt>throughput</dt>
+      <dd>total work done per unit of time</dd>
+    </dl>
+    <p>to get 'better performance':</p>
+    <ul>
+      <li>replace processor (rt down, t up)</li>
+      <li>add more proessors (no changes to rt or t)</li>
+    </ul>
+    <p>perf &prop; 1/exectime</p>
+    <h1>2026-01-27</h1>
+    <p>
+      a "2&#x202f;GHz" processor has a 1/(2&#x202f;GHz) = 0.5&#x202f;ns <small>=
+      500&#x202f;ps</small> <b>clock cycle</b>
+    </p>
+    <p>ExecTime = ClockCycles &times; CycleTime = ClockCycles / ClockRate</p>
+    <blockquote>
+      [the math] is trying to touch your brain a little bit.
+      squeeze it, but not crush it<br />
+      &ndash; <cite>prof chidella</cite>
+    </blockquote>
+    <p>CPI = clock cycles per instruction</p>
+    <p>in mips, memory instructions take the most clock cycles</p>
+    <p>
+      mips stands for <del>million instructions per second</del> <ins>microprocessor without interlocked pipeline stages</ins>
+    </p>
+    <dl>
+      <dt>standard equation for ET</dt>
+      <dd>
+        ET<br />
+        = CC &times; CT<br />
+        = IC &times; CPI &times; CT<br />
+        = IC &times; CPI / CR
+      </dd>
+    </dl>
+  </body>
+</html>

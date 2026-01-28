@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+  <head>
+    <title>stat 411</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <style>
+      dt.procedure {
+        color: var(--green-warmer);
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="h0">stat 411</h1>
+    <h1>chapter 1</h1>
+    <h2>1.1 intro/overview</h2>
+    <dl>
+      <dt>statistics</dt>
+      <dd>methods to collect/analyse/present/interpret data <i>inductively</i></dd>
+      <dd>science of data, decisionmaking, methodology</dd>
+    </dl>
+    <p>types of statistics:</p>
+    <ol>
+      <li>
+        <b>descriptive</b> &ndash;
+        methods to organise/display/decribe data
+      </li>
+      <li>
+        <b>inferential</b> &ndash;
+        methods to utitlse data to make decisions and models etc
+      </li>
+    </ol>
+    <p>the generalisation from sample to population is <b>statistical inference</b></p>
+    <h3>history</h3>
+    <p>aristotle combined empricism and rationalism to get rationalism</p>
+    <p>see also <i lang="la">cōgitō ergō sum</i></p>
+    <p>
+      after the industrial revolution there was more of an economy, and governments
+      needed to find out different information about their populations
+    </p>
+    <blockquote>
+      there are 3 lies in society: lies, damned lies, and statistics<br />
+      <cite>&ndash; popularised by mark twain</cite>
+    </blockquote>
+    <p>book rec: <i>how to lie with statistics</i></p>
+    <h2>1.3 experiments and data</h2>
+    <p>no two measurements are ever exactly the same</p>
+    <h2>1.4 inferences</h2>
+    <dl>
+      <dt>population</dt>
+      <dd>
+        all elements under study being characterized by some <b>parameter</b>:
+        eg population mean, \(\mu\)
+      </dd>
+      <dt>sample</dt>
+      <dd>
+        a properly chosen subset of a population characterized by a <b>statistic</b>:
+        eg sample mean, \(\bar x\)
+      </dd>
+      <dt>sample space</dt>
+      <dd>collection of all possible outcomes of an experiment</dd>
+      <dt>random sample</dt>
+      <dd>
+        a sample where every element of the population has the same likelihood to be
+        chosen (assuming the population is finite)
+      </dd>
+      <dt class="procedure">simple random sample</dt>
+      <dd class="dedent"><ol>
+        <li>define the population</li>
+        <li>pick a sample size \(n\)</li>
+        <li>randomly select a sample eg using an rng</li>
+      </ol></dd>
+    </dl>
+    <svg width="400" height="200">
+      <style>
+        rect, line {
+          stroke: var(--fg-main);
+          stroke-width: 3;
+        }
+        text {
+          fill: var(--fg-main);
+          dominant-baseline: hanging;
+        }
+      </style>
+      <defs>
+        <marker id="arrow"
+          viewbox="0 0 10 10"
+          refx="5" refy="5"
+          markerwidth="5" markerheight="5"
+          orient="auto-start-reverse"
+        >
+          <path
+            d="M 0 0 L 10 5 h -10 h 10 L 0 10"
+            stroke="var(--fg-main)" stroke-width="2"
+          />
+        </marker>
+      </defs>
+      <rect x="2" y="25" width="150" height="170" />
+      <text x="36">population</text>
+      <rect x="300" y="75" width="70" height="70" />
+      <text x="308" y="50">sample</text>
+      <line x1="150" y1="50" x2="293" y2="90" marker-end="url(#arrow)" />
+      <text x="190" y="40">sampling</text>
+      <line x1="300" y1="130" x2="158" y2="170" marker-end="url(#arrow)" />
+      <text x="189.5" y="120">inference</text>
+    </svg>
+    <h2>1.5 data</h2>
+    <dl>
+      <dt>element/object/subject</dt>
+      <dd>an imate we collect data about</dd>
+      <dt>variable</dt>
+      <dd>a characteristic being studied</dd>
+      <dt>observation/measurement</dt>
+      <dd>numerical values of a variable for an element</dd>
+    </dl>
+    <h3>places to get data from</h3>
+    <p>census, survey, experiment, simulation, ...</p>
+    <p>but to get scientific data we need 2 <b>statistical studies</b></p>
+    <dl>
+      <dt>observational study</dt>
+      <dd>conducted in a way where we have no control over any variables</dd>
+      <dd>
+        <b>cross-sectional</b> &ndash;
+        collect data at one point in time
+      </dd>
+      <dd>
+        <b>longitudinal/cohort</b> &ndash;
+        collect data over a period of time about common factors
+      </dd>
+      <dt>experimental study</dt>
+      <dd>
+        we have control over 1 variable. <b>treatment</b> group and <b>control</b>
+        group. eg clinical trials
+      </dd>
+      <dd>
+        principles (cf ch13-15 which we're not covering):<br />
+        <b>replication</b>, <b>randomization</b>, <b>blocking/blinding</b>
+      </dd>
+    </dl>
+    <h2>1.6 types of variables</h2>
+    <dl>
+      <dt>quantitative variables</dt>
+      <dd><b>discrete</b> &ndash; countable</dd>
+      <dd><b>continuous</b> &ndash; any numerical value</dd>
+      <dt>qualitative/categorical variables</dt>
+      <dd><b>nominal</b> &ndash; not rankable</dd>
+      <dd><b>ordinal</b> &ndash; rankable</dd>
+    </dl>
+    <p>levels of measurement</p>
+    <ul>
+      <li>nominal</li>
+      <li>ordinal</li>
+      <li>
+        <b>interval</b> &ndash;
+        no such thing as absolute zero. eg we can't say las vegas is twice as hot as
+        chicago if it's 60&deg; in vegas and 30&deg; in chicago
+      </li>
+      <li><b>ratio</b> &ndash; there is a possible absolute zero</li>
+    </ul>
+    <h2>1.3 measures of location and central tendency</h2>
+    <p>if we have a random sample \(x_1, x_2, \dots, x_n\) of size \(n\)</p>
+    <dl>
+      <dt>measure of central tendency</dt>
+      <dd>some indication of where the center of the dataset is</dd>
+      <dt>mean</dt>
+      <dd>simplest and nicest. "center of gravity"</dd>
+      <dd>\(
+        \=x = \frac1n \sum\limits_{i = 1}^n x_i = \sum\limits_{i = 1}^n \frac{x_i}n
+      \)</dd>
+      <dt>trimmed mean</dt>
+      <dd>
+        mean with some of the potential outliers cut out, eg 5% trimmed mean means
+        taking only the middle 90% of the data
+      </dd>
+      <dt>median</dt>
+      <dd>middle value in the ordered dataset</dd>
+      <dd>if \(n\) is odd, \(\~x = x_{\frac{n + 1}2}\)</dd>
+      <dd>
+        if \(n\) is even, \(\~x = \frac12\left(x_{\frac n2} + x_{\frac n2 + 1}\right)\)
+      </dd>
+      <dd>median is less sensitive to outliers so it is more <b>robust</b></dd>
+      <dt>mode</dt>
+      <dd>values that occur most frequently</dd>
+      <dd>one mode &rarr; <b>unimodal</b>, two modes &rarr; <b>bimodal</b>, etc</dd>
+    </dl>
+    <p>if the histogram of the data is symmetric, \(\text{mode} = \~x = \=x\)</p>
+    <p>if the histogram is skewed to (has a longer tail on) the right, \(
+      \text{mode} &lt; \~x &lt; \=x
+    \)</p>
+    <h2>1.4 measures of variability</h2>
+    <dl>
+      <dt>range</dt>
+      <dd>difference in the max and min of the dataset</dd>
+      <dt>(individual) deviation</dt>
+      <dd>\(x_i - \=x\)</dd>
+      <dt>sample variance</dt>
+      <dd>\(
+        s^2
+        = \frac1{n - 1} \sum\limits_{i = 1}^n (x_i - \=x)^2
+        = \frac1{n - 1} \left(
+          \sum\limits_{i = 1}^n x_i^2 - \frac{\left(\sum x_i\right)^2}n
+        \right)
+      \)</dd>
+      <dt>standard deviation</dt>
+      <dd>\(s = \sqrt{s^2}\)</dd>
+    </dl>
+    <p>the sum of deviations is \(\sum\limits_{i = 1}^n (x_i - \=x) = 0\)</p>
+    <dl>
+      <dt>coefficient of variation</dt>
+      <dd>\(\text{CV} = 100s/\=x\)</dd>
+    </dl>
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true});</script>
+  </body>
+</html>
