@@ -157,7 +157,7 @@
       </li>
       <li><b>ratio</b> &ndash; there is a possible absolute zero</li>
     </ul>
-    <h2>1.3 measures of location and central tendency</h2>
+    <h2>1.3 measures of central tendency</h2>
     <p>if we have a random sample \(x_1, x_2, \dots, x_n\) of size \(n\)</p>
     <dl>
       <dt>measure of central tendency</dt>
@@ -204,10 +204,42 @@
       <dt>standard deviation</dt>
       <dd>\(s = \sqrt{s^2}\)</dd>
     </dl>
+    <p>the second form is nicer for computation since you don't need eg 2 loops</p>
+<pre>
+<span class="keyword">let mut</span> <span class="variable">sum_squares</span> @ <span class="keyword">mut</span> <span class="variable">sum</span> = <span class="constant">0</span>;
+<span class="keyword">let</span> <span class="variable">n</span> = <span class="variable">sample</span>.<span class="function">len</span>() <span class="keyword">as</span> <span class="type">f64</span>;
+<span class="keyword">for</span> <span class="variable">x</span> <span class="keyword">in</span> <span class="variable">sample</span> {
+  <span class="variable">sum</span> += <span class="variable">x</span>;
+  <span class="variable">sum_squares</span> += <span class="variable">x</span> * <span class="variable">x</span>;
+}
+<span class="keyword">let</span> <span class="variable">s2</span> = <span class="constant">1.</span>/(<span class="variable">n</span>-<span class="constant">1.</span>) * (<span class="variable">sum_squares</span> - <span class="variable">sum</span>*<span class="variable">sum</span>/<span class="variable">n</span>);
+<span class="keyword">let</span> <span class="variable">s</span> = <span class="variable">s2</span>.<span class="function">sqrt</span>();
+</pre>
     <p>the sum of deviations is \(\sum\limits_{i = 1}^n (x_i - \=x) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
-      <dd>\(\text{CV} = 100s/\=x\)</dd>
+      <dd>\(\text{CV} = 100\% \cdot s/\=x\)</dd>
+    </dl>
+    <dl>
+      <dt>quartiles</dt>
+      <dd>divide the sample into 4 equal parts (by #observations)</dd>
+      <dd>\(Q_1\), med, \(Q_3\)</dd>
+      <dt>interquartile range</dt>
+      <dd>\(\text{IQR} = Q_3 - Q_1\)</dd>
+      <dd>middle 50% of the sample</dd>
+      <dt>five-number summary</dt>
+      <dd>the three quartiles along with min and max</dd>
+      <dd>used to make a <b>boxplot</b></dd>
+      <dt>inner fence</dt>
+      <dd>the range between \(Q_1 - 1.5~\text{IQR}\) and \(Q_3 + 1.5~\text{IQR}\)</dd>
+      <dd>outside this are <b>mild outliers</b></dd>
+      <dt>percentiles</dt>
+      <dd>like quartiles but with 100 equal parts</dd>
+      <dd>\(Q_1 = p_{25}\) etc</dd>
+      <dd>\(p_k = \frac{nk}{100}\)th observation</dd>
+      <dt>percentile rank</dt>
+      <dd>figure out what percentile an observation is</dd>
+      <dd>\(100 \cdot \frac{\text{\# observations} &lt; x_i}n\)</dd>
     </dl>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
