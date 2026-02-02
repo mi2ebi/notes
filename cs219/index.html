@@ -126,5 +126,47 @@
         = IC &times; CPI / CR
       </dd>
     </dl>
+    <h1>2026-01-29</h1>
+    <h2>bin and hex</h2>
+    <p>to convert positive integers to binary: keep dividing by 2 until you get a result less than 2, and prepend each remainder + that final result</p>
+<pre>
+<span class="keyword">fn</span> <span class="function">udec2bin</span>(<span class="variable">x</span>: <span class="type">u32</span>) -&gt; <span class="type">String</span> {
+  <span class="keyword">if</span> <span class="variable">x</span> == <span class="constant">0</span> <span class="rainbow1">{</span>
+    <span class="keyword">return</span> <span class="string">"0"</span>.<span class="function">to_string</span><span class="rainbow2">()</span>;
+  <span class="rainbow1">}</span>
+  <span class="keyword">let mut</span> <span class="variable">bin</span> = <span class="type">String</span>::<span class="function">new</span><span class="rainbow1">()</span>;
+  <span class="keyword">let mut</span> <span class="variable">x</span> = <span class="variable">x</span>;
+  <span class="keyword">while</span> <span class="variable">x</span> &gt; <span class="constant">0</span> <span class="rainbow1">{</span>
+    <span class="variable">bin</span> = <span class="builtin">format!</span><span class="rainbow2">(</span><span class="string">"<span class="rainbow3">{}{</span><span class="variable">bin</span><span class="rainbow3">}</span>"</span>, <span class="variable">x</span> % <span class="constant">2</span><span class="rainbow2">)</span>;
+    <span class="variable">x</span> /= <span class="constant">2</span>;
+  <span class="rainbow1">}</span>
+  <span class="variable">bin</span>
+}
+</pre>
+    <p>for negative integers use 2s complement</p>
+    <ol>
+      <li>ignore the sign and convert it as if it were positive</li>
+      <li>1s complement (flip all the bits)</li>
+      <li>add 1</li>
+    </ol>
+    <p>the range of a signed <i>n</i>-bit integer type is -2<sup><i>n</i>&minus;1</sup> to 2<sup><i>n</i>&minus;1</sup>&nbsp;&minus;&nbsp;1</p>
+    <p>eg <code class="type">i32</code> can store numbers from -2,147,483,648 to 2,147,483,647</p>
+    <h2>"4 design principles"</h2>
+    <ol>
+      <li>simplicity favors regularity</li>
+    </ol>
+    <p>risc has 1 implementation for eg <code class="function">add</code> where cisc can add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a> with the same instruction. in risc there's just</p>
+<pre>
+<span class="comment"># rdst = rsrc + rsr2</span>
+<span class="function">add</span> <span class="variable">rdst</span>, <span class="variable">rsrc</span>, <span class="variable">rsr2</span>
+</pre>
+    <ol start="2">
+      <li>smaller is faster</li>
+    </ol>
+    <p>risc uses only 32bit registers, cisc uses whatever the native size is</p>
+    <ol start="3">
+      <li>make the common case fast</li>
+      <li>good design demands good compromise</li>
+    </ol>
   </body>
 </html>

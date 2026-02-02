@@ -144,19 +144,27 @@
     <p>\[\lim_{n \to \infty} \frac{g(n)}{f(n)}\]</p>
     <p>this could</p>
     <ul>
-      <li>go to infinity,in which case \(f\) can't keep up with \(g\) at all)</li>
+      <li>
+        go to infinity, in which case \(f\) can't keep up with \(g\) at all<br />
+        <span style="color: var(--green-intense)">\(g(n) = \Omega(f(n))\)</span>
+      </li>
       <li>
         be a constant bigger than 0, in which case \(g\) and \(f\) have the
-        same growth rate
+        same growth rate<br />
+        <span style="color: var(--green-intense)">\(g(n) = \Theta(f(n))\)</span>
       </li>
-      <li>be zero, in which case \(f\) is strong enough to pull \(g\) down to zero)</li>
+      <li>
+        be zero, in which case \(f\) is strong enough to pull \(g\) down to zero<br />
+        <span style="color: var(--green-intense)">\(g(n) = O(f(n))\)</span>
+      </li>
     </ul>
     <p>l'h&ocirc;pital's rule says</p>
     <p>\[
       \lim_{n \to \infty} \frac{g(x)}{f(x)}
       = \lim_{n \to \infty} \frac{g'(n)}{f'(n)} = \cdots
     \]</p>
-    <p>eg is \(n^2 + 33n + 2 = O(n)\)?</p>
+    <style>.yes{color:var(--green-intense)}.no{color:var(--red-intense)}</style>
+    <p>eg does \(n^2 + 33n + 2 = O(n)\)?</p>
     <p>using normal math: \[
       \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
       = \lim_{n \to \infty} \left(n + 33 + \frac2n\right) = \infty
@@ -165,7 +173,58 @@
       \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
       = \lim_{n \to \infty} (2n + 33) = \infty
     \]</p>
-    <p>therefore \(n\) is not an upper bound for \(n^2 + 33n + 2\)</p>
+    <p>
+      therefore \(n\) is <span class="no">not</span> an upper bound for
+      \(n^2 + 33n + 2\)
+    </p>
+    <p>does \(\sqrt n = O(\log n)\)?</p>
+    <p>\[
+      \lim_{n \to \infty} \frac{\sqrt n}{\ln n}
+      = \lim_{n \to \infty} \frac n{2 \sqrt n}
+      = \lim_{n \to \infty} \frac{\sqrt n}2
+      = \infty
+    \]</p>
+    <p><span class="no">no</span></p>
+    <p>logs are very nice for runtime</p>
+    <h1>searching</h1>
+    <h2>linear search</h2>
+<pre>
+<span class="comment">// a : array
+// n : size
+// s : searchee</span>
+<span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">i</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span> <span class="comment">// O(1)</span>    <span class="comment">//</span>
+      <span class="keyword">return</span> <span class="constant">true</span>; <span class="comment">//</span>         <span class="comment">//</span>
+  <span class="keyword">return</span> <span class="constant">false</span>;
+}
+</pre>
+    <p>worst case, <code class="variable">s</code> isn't in the array at all.</p>
+    <p>\(O(n)\), \(\Omega(n)\), \(\Theta(n)\)</p>
+    <p>best case, <code><span class="variable">s</span> == <span class="variable">a</span>[<span class="constant">0</span>]</code></p>
+    <p>\(O(1)\), \(\Omega(1)\), \(\Theta(1)\)</p>
+    <p>average case, <code class="variable">s</code> is in the middle</p>
+    <p>\(O(n)\), \(\Omega(n)\), \(\Theta(n)\)</p>
+    <h2>binary search</h2>
+<pre>
+<span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
+  <span class="type">int</span> <span class="variable">l</span> = <span class="constant">0</span>;
+  <span class="type">int</span> <span class="variable">r</span> = <span class="variable">n</span> - <span class="constant">1</span>;
+  <span class="type">int</span> <span class="variable">m</span>;
+  <span class="keyword">while</span> <span class="rainbow1">(</span><span class="variable">l</span> &lt;= <span class="variable">r</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    <span class="variable">m</span> = <span class="variable">l</span> + <span class="rainbow2">(</span><span class="variable">r</span> - <span class="variable">l</span><span class="rainbow2">)</span> / <span class="constant">2</span>; <span class="comment">// O(1)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span>       <span class="comment">//</span>
+      <span class="keyword">return</span> <span class="constant">true</span>;       <span class="comment">//</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> &lt; <span class="variable">s</span><span class="rainbow2">)</span>        <span class="comment">//</span>
+      <span class="variable">l</span> = <span class="variable">m</span> + <span class="constant">1</span>;         <span class="comment">//</span>
+    <span class="keyword">else</span>                 <span class="comment">//</span>
+      <span class="variable">r</span> = <span class="variable">m</span> - <span class="constant">1</span>;         <span class="comment">//</span>
+  <span class="rainbow1">}</span>
+  <span class="keyword">return</span> <span class="constant">false</span>;
+}
+</pre>
+    <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
+    <p>\(O(\log n)\), \(\Omega(\log n)\), \(\Theta(\log n)\)</p>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>

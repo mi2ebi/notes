@@ -12,7 +12,7 @@
   </head>
   <body>
     <h1 class="h0">stat 411</h1>
-    <h1>chapter 1</h1>
+    <h1>ch1</h1>
     <h2>1.1 intro/overview</h2>
     <dl>
       <dt>statistics</dt>
@@ -71,39 +71,7 @@
         <li>randomly select a sample eg using an rng</li>
       </ol></dd>
     </dl>
-    <svg width="400" height="200">
-      <style>
-        rect, line {
-          stroke: var(--fg-main);
-          stroke-width: 3;
-        }
-        text {
-          fill: var(--fg-main);
-          dominant-baseline: hanging;
-        }
-      </style>
-      <defs>
-        <marker id="arrow"
-          viewbox="0 0 10 10"
-          refx="5" refy="5"
-          markerwidth="5" markerheight="5"
-          orient="auto-start-reverse"
-        >
-          <path
-            d="M 0 0 L 10 5 h -10 h 10 L 0 10"
-            stroke="var(--fg-main)" stroke-width="2"
-          />
-        </marker>
-      </defs>
-      <rect x="2" y="25" width="150" height="170" />
-      <text x="36">population</text>
-      <rect x="300" y="75" width="70" height="70" />
-      <text x="308" y="50">sample</text>
-      <line x1="150" y1="50" x2="293" y2="90" marker-end="url(#arrow)" />
-      <text x="190" y="40">sampling</text>
-      <line x1="300" y1="130" x2="158" y2="170" marker-end="url(#arrow)" />
-      <text x="189.5" y="120">inference</text>
-    </svg>
+    <img src="sampling.png" />
     <h2>1.5 data</h2>
     <dl>
       <dt>element/object/subject</dt>
@@ -218,9 +186,8 @@
     <p>the sum of deviations is \(\sum\limits_{i = 1}^n (x_i - \=x) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
-      <dd>\(\text{CV} = 100\% \cdot s/\=x\)</dd>
-    </dl>
-    <dl>
+      <dd>for samples: \(\text{CV} = 100\% \cdot s/\=x\)</dd>
+      <dd>for populations: \(\text{CV} = 100\% \cdot \sigma/\mu\)</dd>
       <dt>quartiles</dt>
       <dd>divide the sample into 4 equal parts (by #observations)</dd>
       <dd>\(Q_1\), med, \(Q_3\)</dd>
@@ -236,10 +203,91 @@
       <dt>percentiles</dt>
       <dd>like quartiles but with 100 equal parts</dd>
       <dd>\(Q_1 = p_{25}\) etc</dd>
-      <dd>\(p_k = \frac{nk}{100}\)th observation</dd>
+      <dd>
+        \(p_k = \frac{nk}{100}\)th observation and says that \(k\)% of the observations
+        are at or below that value
+      </dd>
       <dt>percentile rank</dt>
       <dd>figure out what percentile an observation is</dd>
-      <dd>\(100 \cdot \frac{\text{\# observations} &lt; x_i}n\)</dd>
+      <dd>\(100 \cdot (\text{\# observations} &lt; x_i) / n\)</dd>
+    </dl>
+    <h2>1.10 empirical rule & z-score</h2>
+    <dl>
+      <dt>empirical rule</dt>
+      <dd>
+        for a normal (bell shaped) distribution, <ul>
+          <li>\(\=x \pm s\) contains 68% of values</li>
+          <li>\(\=x \pm 2s\) &rarr; 95%</li>
+          <li>\(\=x \pm 3s\) &rarr; 99.7%</li>
+        </ul>
+        so almost the entire dataset fits in 6 standard deviations.
+        this is only a rule of thumb. also called the <b>6&sigma; rule</b>
+      </dd>
+      <dt>z-score</dt>
+      <dd>\(z_i = \frac{x_i - \=x}s\)</dd>
+      <dd>unit-free!</dd>
+      <dd>if \(|z| &gt; 2\) for an observation it could be considered an outlier</dd>
+      <dd>converting \(x_i\) to \(z_i\) is called <b>standardization</b></dd>
+      <dd>and \(x_i = \=x + z_is\) for <b>destandardization</b></dd>
+    </dl>
+    <h1>ch2 probability</h1>
+    <h2>2.1 intro</h2>
+    <dl>
+      <dt>statistical experiment</dt>
+      <dd>process of generating outcomes that cannot be predicted in advance</dd>
+      <dt>sample space</dt>
+      <dd>set of all possible outcomes. denoted \(S\) or \(\Omega\)</dd>
+      <dt>event</dt>
+      <dd>any subset of \(S\), denoted with a capital letter</dd>
+    </dl>
+    <p>eg rolling a die: \(S = \set{1, 2, 3, 4, 5, 6}\)</p>
+    <dl>
+      <dt>probability</dt>
+      <dd>numerical measure of how likely some event is, denoted \(P(\cdot)\)</dd>
+    </dl>
+    <p>kolmogorov's axioms of probability:</p>
+    <ol>
+      <li>\(0 \le P(A) \le 1\) for any event \(A\)</li>
+      <li>\(P(S) = 1\)</li>
+    </ol>
+    <p>
+      assuming all outcomes in \(S\) are equally likely,
+      \(P(A) = \frac{\#A}{\#S}\)
+    </p>
+    <dl>
+      <dt>venn diagram</dt>
+      <dd>depiction of the relationship btwn sample space and events</dd>
+      <dt>tree diagram</dt>
+      <dd>(pp37-38)</dd>
+    </dl>
+    <h2>2.2 set operations</h2>
+    <dl>
+      <dt>empty set</dt>
+      <dd>\(\emptyset\), the set with nothing in it. \(P(\emptyset) = 0\)</dd>
+      <dt>intersection</dt>
+      <dd>\(A \cap B = \set{x : x \in A \land x \in B}\)</dd>
+      <dt><i>mutually exclusive</i></dt>
+      <dd>if \(A \cap B = \emptyset\)</dd>
+      <dt>union</dt>
+      <dd>\(A \cup B = \set{x : x \in A \lor x \in B}\)</dd>
+      <dt>complement</dt>
+      <dd>\(A^\complement = A' = \=A = \set{x : x \not\in A}\)</dd>
+    </dl>
+    <img src="setoperations.png" />
+    <dl>
+      <dt>rule of addition</dt>
+      <dd>\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</dd>
+      <dt>rule of complement</dt>
+      <dd>\(P(A^\complement) = 1 - P(A)\)</dd>
+      <dt>demorgan's laws</dt>
+      <dd>\((A \cup B)^\complement = A^\complement \cap B^\complement\)</dd>
+      <dd>\((A \cap B)^\complement = A^\complement \cup B^\complement\)</dd>
+      <dt>distributive laws</dt>
+      <dd>\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)</dd>
+      <dd>\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\)</dd>
+      <dt>odds <i>in favor of A</i></dt>
+      <dd>\(\frac{P(A)}{P(A^\complement)}\)</dd>
+      <dd>result between 0 and \(\infty\) exclusive</dd>
     </dl>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
