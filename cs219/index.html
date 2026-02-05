@@ -157,16 +157,61 @@
     </ol>
     <p>risc has 1 implementation for eg <code class="function">add</code> where cisc can add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a> with the same instruction. in risc there's just</p>
 <pre>
-<span class="comment"># rdst = rsrc + rsr2</span>
-<span class="function">add</span> <span class="variable">rdst</span>, <span class="variable">rsrc</span>, <span class="variable">rsr2</span>
+<span class="comment"># rd = rs + rt</span>
+<span class="function">add</span> <span class="variable">rd</span>, <span class="variable">rs</span>, <span class="variable">rt</span>
 </pre>
     <ol start="2">
       <li>smaller is faster</li>
     </ol>
     <p>risc uses only 32bit registers, cisc uses whatever the native size is</p>
+    <p>and risc has less <i>number of</i> registers</p>
+    <h1>2026-02-03</h1>
     <ol start="3">
       <li>make the common case fast</li>
+    </ol>
+    <p>storing stuff in registers is faster than going to main memory every time</p>
+<pre>
+<span class="function">move</span> <span class="constant">$t0</span>, <span class="constant">$t1</span>
+<span class="comment"># is secretly</span>
+<span class="function">add</span> <span class="constant">$t0</span>, <span class="constant">$0</span>, <span class="constant">$t1</span>
+</pre>
+    <aside>
+      <p>see also <a href="../cs218">cs218</a> for mips</p>
+    </aside>
+    <ol start="4">
       <li>good design demands good compromise</li>
     </ol>
+    <p>i) every instruction is 32 bits<br/>ii) minimal changes btwn instr formats</p>
+    <h2>r-format instructions</h2>
+    <p>used by the ALU</p>
+<pre>
+6      5     5     5     5     6
+000000 00000 00000 00000 00000 000000
+opcode rs    rt    rd    shamt funct
+</pre>
+    <p>risc has 32 registers so the registers each take up 5 bits</p>
+    <p><coee>shamt</coee> is 'shift amount', used only for shl/shr, also 5 bits</p>
+    <h2>i-format instructions</h2>
+<pre>
+6      5     5     16
+000000 00000 00000 0000000000000000
+opcode rs    rt    imm
+</pre>
+    <p><code>rt</code> is sometimes a source and sometimes a destination</p>
+    <p>eg</p>
+<pre>
+<span class="function">lw</span> <span class="constant">$s0</span>, <span class="constant">4</span>(<span class="constant">$s2</span>)
+</pre>
+    <ul>
+      <li><code class="constant">$s2</code> is <code>rs</code>
+      <li><code class="constant">$s0</code> is <code>rt</code>
+      <li><code class="constant">4</code> is the <i>offset</i> and goes in <code>imm</code>
+    </ul>
+    <h2>j-format instructions</h2>
+<pre>
+6      26
+000000 00000000000000000000000000
+opcode imm/addr
+</pre>
   </body>
 </html>

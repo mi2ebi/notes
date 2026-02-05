@@ -12,7 +12,7 @@
   </head>
   <body>
     <h1 class="h0">stat 411</h1>
-    <h1>ch1</h1>
+    <h1>ch1 basics</h1>
     <h2>1.1 intro/overview</h2>
     <dl>
       <dt>statistics</dt>
@@ -32,7 +32,7 @@
     </ol>
     <p>the generalisation from sample to population is <b>statistical inference</b></p>
     <h3>history</h3>
-    <p>aristotle combined empricism and rationalism to get rationalism</p>
+    <p>aristotle combined empricism and rationalism</p>
     <p>see also <i lang="la">cōgitō ergō sum</i></p>
     <p>
       after the industrial revolution there was more of an economy, and governments
@@ -71,7 +71,7 @@
         <li>randomly select a sample eg using an rng</li>
       </ol></dd>
     </dl>
-    <img src="sampling.png" />
+    <p><img src="sampling.png" /></p>
     <h2>1.5 data</h2>
     <dl>
       <dt>element/object/subject</dt>
@@ -266,14 +266,14 @@
       <dd>\(\emptyset\), the set with nothing in it. \(P(\emptyset) = 0\)</dd>
       <dt>intersection</dt>
       <dd>\(A \cap B = \set{x : x \in A \land x \in B}\)</dd>
-      <dt><i>mutually exclusive</i></dt>
+      <dt><i>mutually exclusivei / disjoint</i></dt>
       <dd>if \(A \cap B = \emptyset\)</dd>
       <dt>union</dt>
       <dd>\(A \cup B = \set{x : x \in A \lor x \in B}\)</dd>
       <dt>complement</dt>
       <dd>\(A^\complement = A' = \=A = \set{x : x \not\in A}\)</dd>
     </dl>
-    <img src="setoperations.png" />
+    <p><img src="setoperations.png" /></p>
     <dl>
       <dt>rule of addition</dt>
       <dd>\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</dd>
@@ -288,6 +288,47 @@
       <dt>odds <i>in favor of A</i></dt>
       <dd>\(\frac{P(A)}{P(A^\complement)}\)</dd>
       <dd>result between 0 and \(\infty\) exclusive</dd>
+    </dl>
+    <h2>2.4 counting sample points</h2>
+    <dl>
+      <dt>combinatorics</dt>
+      <dd>study of enumeration</dd>
+      <dt>multiplication principle</dt>
+      <dd>
+        for \(k\) choices, if there are \(n_i\) ways to make choice \(i\), then the
+        total number of possibilities is \(\prod\limits_{i = 1}^k n_i\)
+      </dd>
+      <dt>permutation</dt>
+      <dd>an ordered subset</dd>
+      <dt>factorial</dt>
+      <dd>for any integer \(n \ge 0\), \(n! = \prod\limits_{i = 1}^n i\)</dd>
+      <dd>specialcase \(0! = 1\)</dd>
+    </dl>
+    <p>the number of permutations of \(r\) objects among a set of \(n\) is \(P_{n, r} = \frac{n!}{(n - r)!}\)</p>
+    <dl>
+      <dt>combination</dt>
+      <dd>an unordered subset</dd>
+    </dl>
+    <p>
+      the number of ways to choose \(r\) of \(n\) objects, regardless of order, is \[
+        C_{n, r} = {n \choose r} = \frac{P_{n, r}}{r!} = \frac{n!}{r! (n - r)!}
+      \]
+    </p>
+    <p>
+      \(n \choose r\) is also called the <b>binomial coefficient</b> and is equal to
+      \({n \choose n - r}\)
+    </p>
+    <p><img src="urn.png" /></p>
+    <dl>
+      <dt>multinomial combination</dt>
+      <dd>
+        if there are \(k\) kinds, then the ways to choose partition the set into kinds
+        is \[{n \choose n_1, n_2, \dots, n_k} = \frac{n!}{\prod_{i = 1}^k n_i!}\]
+      </dd>
+    <p>
+      eg there are \({n \choose 4, 4, 2, 1} = 34650\) ways to rearrange the letters in
+      "mississippi"
+    </p>
     </dl>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>

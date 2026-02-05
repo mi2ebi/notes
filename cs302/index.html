@@ -225,6 +225,71 @@
 </pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
     <p>\(O(\log n)\), \(\Omega(\log n)\), \(\Theta(\log n)\)</p>
+    <h1>some loops</h1>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span> += <span class="constant">3</span>)
+  <span class="variable">cout</span> &lt;&lt; "...";
+</pre>
+    <p>\(
+      \frac13 \sum\limits_{i = 0}^{n - 1} 1 = \frac n3 = \Theta(n)
+    \)</p>
+    <p>the counter updater bit is a big clue as to the complexity</p>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="variable">n</span>; <span class="variable">i</span> &gt; <span class="constant">0</span>; <span class="variable">i</span> /= <span class="constant">2</span>)
+  <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span> *= <span class="constant">2</span>)
+  <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+    <p>these are both \(\log_2 n = \Theta(\log n)\)</p>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> &lt; <span class="variable">n</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
+    <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+    <p>\(
+      \sum\limits_{i = 0}^{n - 1} \sum\limits_{j = 0}^{n - 1} 1
+      = \sum\limits_{i = 0}^{n - 1} n
+      = n^2 = \Theta(n^2)
+    \)</p>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> &lt; <span class="variable">i</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
+    <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+    <p>\(
+      \sum\limits_{i = 0}^{n - 1} \sum\limits_{j = 0}^{i - 1} 1
+      = \sum\limits_{i = 0}^{n - 1} i
+      = \frac n2 (n - 1) 
+      = \frac{n^2}2 - \frac n2
+      = \Theta(n^2)
+    \)</p>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> &lt; <span class="variable">n</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+
+    <p>\(\Theta(n\log n)\)</p>
+<pre>
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> &lt; <span class="variable">i</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="variable">cout</span> &lt;&lt; ...;
+</pre>
+
+    <p>since \(\log 0\) is undefined we can cheat and do \(
+      \sum\limits_{i = 1}^n \log_2 i
+      = \log_2(n!)
+    \)</p>
+    <p>but \(\log_2(n!)\) isn't v useful</p>
+    <p>the log base doesn't matter so \[
+      \sum_{i = 1}^n \ln n
+      \approx \int_1^n \ln x \;\mathrm d x
+      = \left.(x \ln n - x)\vphantom\int\right|_1^n
+      = n \ln n - n + 1
+      = \Theta(n \log n)
+    \]</p>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>
