@@ -1,0 +1,73 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <title>cs 218 / x86</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1 class="h0">cs 218 / x86</h1>
+    <h1>architecture</h1>
+    <p><b>CPU</b> "brain"<br />contains</p>
+    <ul>
+      <li><b>ALU</b> &ndash; arithmetic logical units</li>
+      <li>memory via <b>registers</b> (fast but tiny) &amp; <b>cache</b>
+    </ul>
+    <h1>assembly</h1>
+    <p>
+      C++ is a <i>high level language</i>. high level means it's closer to
+      natural/spoken/human language
+    </p>
+    <p>assembly is very <i>low level</i>, closer to machine language</p>
+    <h1>data sizes &amp; binary</h1>
+    <table>
+      <tr>
+        <th>name</th>
+        <th>bytes</th>
+        <th>bits</th>
+        <th>C++</th>
+      </tr>
+      <tr>
+        <td>byte</td>
+        <td>1</td>
+        <td>8</td>
+        <td><code class="type">char</code></td>
+      </tr>
+      <tr>
+        <td>word</td>
+        <td>2</td>
+        <td>16</td>
+        <td><code class="type">short</code></td>
+      </tr>
+      <tr>
+        <td>dword</td>
+        <td>4</td>
+        <td>32</td>
+        <td><code class="type">int</code>/<code class="type">float</code></td>
+      </tr>
+      <tr>
+        <td>qword</td>
+        <td>8</td>
+        <td>64</td>
+        <td><code class="type">double</code></td>
+      </tr>
+      <tr>
+        <td>dqword</td>
+        <td>16</td>
+        <td>128</td>
+        <td><code class="type">long long</code></td>
+      </tr>
+    </table>
+    <p>signed types have a sign (<code>+</code>/<code>-</code>), unsigned ones don't. because the sign is 1 bit, signed types have half the range of unsigned ones</p>
+    <p>bases: 2 (bin, <code>&#x25cc;&#x2082;</code> or <code>0b&#x25cc;</code>), 10 (dec), 16 (hex, <code>0x&#x25cc;</code>)</p>
+    <h2>2s complement / negative numbers</h2>
+    <p>for converting a negative integer <i>n</i></p>
+    <ol>
+      <li>convert abs(<i>n</i>) instead</li>
+      <li>flip all the bits</li>
+      <li>add 1</li>
+    </ol>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <title>cs 218</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <h1 class="h0">cs 218</h1>
+    <h1>RISC architecture</h1>
+    <p>Qtspim - emulator thingy</p>
+    <p>x86 is written in CISC (complete instruction set computation)</p>
+    <p>MIPS is in RISC (r stands for reduced)</p>
+    <p>
+      RISC has ~100 instructions compared to CISC's &gt;1000<br/>
+      eg no <code class="function">inc</code>, just add 1 urself smh<br />
+      RISC is actually faster though
+    </p>
+    <p>avg CISC instruction takes 4 lock cycles; 1 cycle/instr for RISC</p>
+    <h1>data sizes</h1>
+    <p>mips is 32 bits</p>
+    <p>byte - 8 bits. @s are still byte addressable but only 32 bits long</p>
+    <p>word - 32 bits! what the fuck</p>
+    <p>halfword - 16 bits</p>
+    <p>float - 32 bits<br/>double - 64 bits</p>
+    <h1>registers</h1>
+    <table>
+      <tr>
+        <th>name</th>
+        <th>#</th>
+        <th>purpose</th>
+      </tr>
+      <tr>
+        <td class="constant">$zero</td>
+        <td>0</td>
+        <td>hardware zero</td>
+      </tr>
+      <tr>
+        <td class="constant">$at</td>
+        <td>1</td>
+        <td>assembler temp</td>
+      </tr>
+      <tr>
+        <td class="constant">$v0 $v1</td>
+        <td>2-3</td>
+        <td>return values</td>
+      </tr>
+      <tr>
+        <td class="constant">$a0-$a3</td>
+        <td>4-7</td>
+        <td>function args</td>
+      </tr>
+      <tr>
+        <td class="constant">$t0-$t9</td>
+        <td>8-15, 24-25</td>
+        <td>temporary (not preserved)</td>
+      </tr>
+      <tr>
+        <td class="constant">$s0-$s7</td>
+        <td>16-23</td>
+        <td>saved registers</td>
+      </tr>
+      <tr>
+        <td class="constant">$sp</td>
+        <td>29</td>
+        <td>stack ptr</td>
+      </tr>
+      <tr>
+        <td class="constant">$fp</td>
+        <td>30</td>
+        <td>frame ptr (<span class="constant">rbp</span>)</td>
+      </tr>
+      <tr>
+        <td class="constant">$ra</td>
+        <td>31</td>
+        <td>return addr of previous fn</td>
+      </tr>
+      <tr>
+        <td class="constant">$pc</td>
+        <td>n/a</td>
+        <td>program counter (<span class="constant">rp</span>)</td>
+      </tr>
+      <tr>
+        <td class="constant">$h $l</td>
+        <td>n/a</td>
+        <td>used for 64 bit stuff</td>
+      </tr>
+    </table>
+    <h1>variables</h1>
+<pre>
+<i class="variable">name</i>: .<i class="type">size</i> <i class="constant">value</i>
+</pre>
+    <p>
+      strings: <code class="type">.asciiz</code> for null terminated,
+      <code class="type">.ascii</code> for not
+    </p>
+  </body>
+</html>
