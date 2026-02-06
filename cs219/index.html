@@ -149,13 +149,22 @@
       <li>1s complement (flip all the bits)</li>
       <li>add 1</li>
     </ol>
-    <p>the range of a signed <i>n</i>-bit integer type is -2<sup><i>n</i>&minus;1</sup> to 2<sup><i>n</i>&minus;1</sup>&nbsp;&minus;&nbsp;1</p>
-    <p>eg <code class="type">i32</code> can store numbers from -2,147,483,648 to 2,147,483,647</p>
+    <p>
+      the range of a signed <i>n</i>-bit integer type is -2<sup><i>n</i>&minus;1</sup>
+      to 2<sup><i>n</i>&minus;1</sup>&nbsp;&minus;&nbsp;1
+    </p>
+    <p>
+      eg <code class="type">int</code> can store numbers from -2,147,483,648 to 2,147,483,647
+    </p>
     <h2>"4 design principles"</h2>
     <ol>
       <li>simplicity favors regularity</li>
     </ol>
-    <p>risc has 1 implementation for eg <code class="function">add</code> where cisc can add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a> with the same instruction. in risc there's just</p>
+    <p>
+      risc has 1 implementation for eg <code class="function">add</code> where cisc can
+      add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a>
+      with the same instruction. in risc there's just
+    </p>
 <pre>
 <span class="comment"># rd = rs + rt</span>
 <span class="function">add</span> <span class="variable">rd</span>, <span class="variable">rs</span>, <span class="variable">rt</span>
@@ -213,5 +222,55 @@ opcode rs    rt    imm
 000000 00000000000000000000000000
 opcode imm/addr
 </pre>
+    <h1>2026-02-09</h1>
+    <h2>mips to hex</h2>
+    <h3><code>
+      <span class="function">add</span>
+      <span class="constant">$t2</span><span class="fgmain">,</span>
+      <span class="constant">$t0</span><span class="fgmain">,</span>
+      <span class="constant">$t1</span>
+    </code></h3>
+    <p>
+      the opcode is always 0 for r-format instructions. instead every r-format
+      instruction has a function number. <code class="function">add</code>'s is 32
+    </p>
+    <p><code class="constant">$t0</code> has a register number of 8 etc</p>
+    <p>so our instruction in binary is</p>
+<pre>
+000000 01000 01001 01010 00000 100000
+0      8     9     10    0     32
+</pre>
+    <p>and in hex this is</p>
+<pre>
+0000 0001 0000 1001 0101 0000 0010 0000
+0    1    0    9    5    0    2    0
+</pre>
+    <p> = <code>0x01095020</code></p>
+    <h3><code>
+      <span class="function">sw</span>
+      <span class="constant">$s7</span><span class="fgmain">,</span>
+      <span class="constant">4</span><span class="fgmain">(</span><span class="constant">$t0</span><span class="fgmain">)</span>
+    </code></h3>
+    <p><code class="function">sw</code>'s opcode is 43
+<pre>
+101011 01000 10111 0000000000000100
+43     8     23    4
+</pre>
+<pre>
+1010 1101 0001 0111 0000 0000 0000 0100
+a    c    1    7    0    0    0    4
+</pre>
+    <p>= <code>0xac170004</code></p>
+    <h3><code>
+      <span class="function">j</span> <span class="constant">0x10000</span>
+    </code></h3>
+    <p>how do you fit a 32 bit address into 26 bits? you don't!</p>
+    <p>
+      offset address = (label address &minus; <code class="constant">$pc</code>) / 4
+    </p>
+    <p>
+      tells you the number of instructions away it is! since instructions are
+      <code class="type">int</code>s and therefore are 4 bytes long
+    </p>
   </body>
 </html>

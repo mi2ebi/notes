@@ -277,7 +277,6 @@
   <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> &lt; <span class="variable">i</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
     <span class="variable">cout</span> &lt;&lt; ...;
 </pre>
-
     <p>since \(\log 0\) is undefined we can cheat and do \(
       \sum\limits_{i = 1}^n \log_2 i
       = \log_2(n!)
@@ -290,6 +289,47 @@
       = n \ln n - n + 1
       = \Theta(n \log n)
     \]</p>
+    <h1>sorting</h1>
+    <h2>insertion sort</h2>
+<pre>
+<span class="type">void</span> <span class="function">insertionSort</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>) {
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    <span class="type">int</span> <span class="variable">key</span> = <span class="variable">a</span><span class="rainbow2">[</span><span class="variable">i</span><span class="rainbow2">]</span>;
+    <span class="type">int</span> <span class="variable">j</span> = <span class="variable">i</span> - <span class="constant">1</span>;
+    <span class="keyword">while</span> <span class="rainbow2">(</span><span class="variable">j</span> &gt;= <span class="constant">0</span> && <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span> &gt; <span class="variable">key</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
+      <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span> + <span class="constant">1</span><span class="rainbow3">]</span> = <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span>;
+      <span class="variable">j</span>--;
+    <span class="rainbow2">}</span>
+    <span class="variable">a</span><span class="rainbow2">[</span><span class="variable">j</span> + <span class="constant">1</span><span class="rainbow2">]</span> = <span class="variable">key</span>;
+  <span class="rainbow1">}</span>
+}
+</pre>
+    <p>
+      after every iteration of the outer loop, the slice of the array from
+      <code class="constant">0</code> to <code>
+        <span class="variable">i</span> - <span class="constant">1</span>
+      </code> is always sorted
+    </p>
+    <p>the inner loop makes room for the key to be inserted</p>
+    <p>
+      worst case, the list of reversed and <code class="variable">j</code> has to go
+      all the way to <code class="constant">-1</code> every time
+    </p>
+    <p>
+      this is a nice \(\frac n2 (n - 2)\) situation, so it's \(\Theta(n^2)\). not great
+    </p>
+    <p>best case, it's already sorted and the inner loop never runs</p>
+    <p>then it's just \(\Theta(n)\)</p>
+    <h2>merge sort</h2>
+    <p>'divide and conquer' algorithm, which unfortunately necessitates recursion</p>
+    <ul>
+      <li>split the array into 2 pieces (the eft side and the right side)</li>
+      <li>
+        recursively <code class="function">mergeSort</code> each half to get two
+        sorted half arrays
+      </li>
+      <li>merge the halves</li>
+    </ul>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>
