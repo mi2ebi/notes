@@ -75,7 +75,7 @@
     <h2>1.5 data</h2>
     <dl>
       <dt>element/object/subject</dt>
-      <dd>an imate we collect data about</dd>
+      <dd>something we collect data about</dd>
       <dt>variable</dt>
       <dd>a characteristic being studied</dd>
       <dt>observation/measurement</dt>
@@ -318,18 +318,72 @@
       \(n \choose r\) is also called the <b>binomial coefficient</b> and is equal to
       \({n \choose n - r}\)
     </p>
-    <p><img src="urn.png" /></p>
     <dl>
       <dt>multinomial combination</dt>
       <dd>
-        if there are \(k\) kinds, then the ways to choose partition the set into kinds
+        if there are \(k\) kinds, then the ways to partition the set into kinds
         is \[{n \choose n_1, n_2, \dots, n_k} = \frac{n!}{\prod_{i = 1}^k n_i!}\]
       </dd>
     </dl>
     <p>
-      eg there are \({n \choose 4, 4, 2, 1} = 34650\) ways to rearrange the letters in
+      eg there are \({11 \choose 4, 4, 2, 1} = 34650\) ways to rearrange the letters in
       "mississippi"
     </p>
+    <h2>2.4 conditional probability</h2>
+    <p>the probability that \(A\) happens <b>given</b> \(B\) is \(
+      P(A \mathbin| B) = \frac{P(A \cap B)}{P(B)}
+    \)</p>
+    <p>this changes the sample space</p>
+    <dl>
+      <dt>rule of multiplication</dt>
+      <dd>\(P(A \cap B) = P(A \mathbin| B)P(B) = P(B \mathbin| A)P(A)\)</dd>
+    </dl>
+    <p>
+      eg if you're rolling a fair die, \(P(\set{5} \mathbin| \set{1, 3, 5}) = \frac13\)
+    </p>
+    <p>
+      two events \(A\) and \(B\) are <b>independent</b> if \(P(A \mathbin| B) = P(A)\),
+      or equivalently if \(P(A \cap B) = P(A)(B)\)
+    </p>
+    <p>two mutually exclusive events are always dependent</p>
+    <img src="given-even.png" />
+    <img src="given-leq7.png" />
+    <h2>2.6 contingency table</h2>
+    <dl>
+      <dt>contingency table</dt>
+      <dd>a table containing all contingent events or categories</dd>
+    </dl>
+    <table>
+      <tr>
+        <td class="noborder"></td>
+        <th>smoking</th>
+        <th>non-<br />smoking</th>
+        <th>marginal<br />total</th>
+      </tr>
+      <tr>
+        <th scope="row">bronchitis</th>
+        <td>50</td>
+        <td>10</td>
+        <td><b>60</b></td>
+      </tr>
+      <tr>
+        <th scope="row">no bronchitis</th>
+        <td>20</td>
+        <td>20</td>
+        <td><b>40</b></td>
+      </tr>
+      <tr>
+        <th scope="row">marginal total</th>
+        <td><b>70</b></td>
+        <td><b>30</b></td>
+        <td><b>100</b></td>
+      </tr>
+    </table>
+    <p>eg \(
+      P\left(\text{smoking} \middle| \text{bronchitis}^\complement\right) = \frac13
+    \)</p>
+    <p>smoking and bronchitis are dependent because \(P(S) \neq P(S \mathbin| B)\)</p>
+    <h2>2.7 bayes' theorem (wednesday!)</h2>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
   </body>
