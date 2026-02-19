@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1 class="h0">cs 219</h1>
+    <p><b>TODO</b> renumber to use chapters</p>
     <h1>2026-01-20</h1>
     <p>computers and brains are very similar!</p>
 <pre>
@@ -272,5 +273,174 @@ a    c    1    7    0    0    0    4
       tells you the number of instructions away it is! since instructions are
       <code class="type">int</code>s and therefore are 4 bytes long
     </p>
+    <h1>2026-02-10</h1>
+    <h2>logical instructions</h2>
+    <p>useful for extracting and inserting certain groups of bits</p>
+    <h3 class="smcp">and</h3>
+    <p><code>and rd, rs, rt</code></p>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>A &and; B</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </table>
+    <h3 class="smcp">or</h3>
+    <p><code>or rd, rs, rt</code></p>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>A &or; B</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </table>
+    <h3 class="smcp">nor</h3>
+    <p><code>nor rd, rs, rt</code></p>
+    <p>= 1s complement of <span class="smcp">or</span></p>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>A &darr; B</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+    </table>
+    <h3 class="smcp">not</h3>
+    <p><code>nor rd, rs, $0</code></p>
+    <p>for integers &not;<i>x</i> = -<i>x</i> &minus; 1</p>
+    <table>
+      <tr>
+        <th>A</th>
+        <th>&not;A</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+      </tr>
+    </table>
+    <h3>logical left shift</h3>
+    <p><code>sll rd, rt, shamt</code></p>
+    <p>eg <code>0b00001001</code> &ll; 2 = <code>0b00100100</code></p>
+    <p>
+      for unsigned integers this produces <i>rs</i> &times; 2<sup><i>shamt</i></sup>
+    </p>
+    <h3>logical right shift</h3>
+    <p><code>srl rd, rt, shamt</code></p>
+    <p>eg <code>0b10010001</code> &gg; 2 = <code>0b00100100</code></p>
+    <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
+    <h2>32-bit constants</h2>
+    <p>
+      most constants are small. i-format instructions can only handle 16-bit immediates
+    </p>
+    <p>to put <code>0x12345678</code> into <code>$t0</code>, you write</p>
+<pre>
+<span class="function">li</span> $t0, 0x12345678
+<span class="comment"># is assembled into</span>
+<span class="function">lui</span> $at, 0x1234       <span class="comment"># Load Upper Immediate</span>
+<span class="function">ori</span> $t0, $at, 0x5678
+</pre>
+    <h1>2026-02-12</h1>
+    <h2>addition</h2>
+    <p><b>signed</b> numbers can be positive and negative and <b>unsigned</b> numbers can only be positive</p>
+    <dl>
+      <dt>overflow</dt>
+      <dd>value outside the range that can fit, eg trying to fit 3&times;10<sup>9</sup> into an <code class="type">int</code></dd>
+      <dt>underflow</dt>
+      <dd>value less than the range, only for floating point numbers</dd>
+    </dl>
+    <p>if you try adding 2 negative numbers and get an extra bit, it doesn't count as an overflow unless the sign bit changes to positive. -3 + -3 = -6 doesn't overflow, but -6 + -8 = -14 = 2 does</p>
+    <p>adding a positive and negative number will never overflow</p>
+    <h2>multiplication</h2>
+    <p>multipying two <i>n</i>-digit number gives an up-to-(2<i>n</i>)-digit number! whatever will we do!</p>
+    <p>mips has 2 bonus registers <code>hi</code> and <code>lo</code> which together store a 64-bit number</p>
+    <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
+    <h1>2026-02-17</h1>
+    <h2>algorithm 1</h2>
+    <h2>optimized algorithm</h2>
+    <p>here the multiplicand and multiplier are both eg 4 bits and the product is twice that</p>
+    <ol>
+      <li>place the multiplier in the right half of the product</li>
+      <li>for each bit of the multiplier,
+        <ol>
+          <li>if the lsb is 1, add the multiplicand to the left half of the product</li>
+          <li>shift the entire product right 1 bit</li>
+        </ol>
+      </li>
+    </ol>
+    <p>for 2 &times; 3 = 6:</p>
+    <table>
+      <tr><th>iter</th><th>product</th></tr>
+      <tr><td>0</td><td>0000'0011</td></tr>
+      <tr><td rowspan="2">1</td><td>0010'0011</td></tr>
+      <tr><td>0001'0001</td></tr>
+      <tr><td rowspan="2">2</td><td>0011'0001</td></tr>
+      <tr><td>0001'1000</td></tr>
+      <tr><td>3</td><td>0000'1100</td></tr>
+      <tr><td>4</td><td>0000'0110</td></tr>
+    </table>
+    <h2>booth's algorithm with sign extension</h2>
   </body>
 </html>

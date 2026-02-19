@@ -331,6 +331,101 @@
       </li>
       <li>merge the halves</li>
     </ul>
+<pre>
+<span class="type">void</span> <span class="function">mergeSort</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> r) {
+  <span class="keyword">if</span> <span class="rainbow1">(</span>l &gt;= r<span class="rainbow1">)</span>
+    <span class="keyword">return</span>;
+  <span class="type">int</span> m = l + <span class="rainbow1">(</span>r - l<span class="rainbow1">)</span> / <span class="constant">2</span>;
+  <span class="function">mergeSort</span><span class="rainbow1">(</span>a, l, m<span class="rainbow1">)</span>;
+  <span class="function">mergeSort</span><span class="rainbow1">(</span>a, m + <span class="constant">1</span>, r<span class="rainbow1">)</span>;
+  <span class="function">merge</span><span class="rainbow1">(</span>a, l, m, r<span class="rainbow1">)</span>;
+}
+<span class="type">void</span> <span class="function">merge</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> m, <span class="type">int</span> r) {
+  <span class="type">int</span> i = l, j = m + <span class="constant">1</span>, k = <span class="constant">0</span>;
+  <span class="type">int</span> b<span class="rainbow1">[</span>r - l + 1<span class="rainbow1">]</span>;
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i &lt;= m &amp;&amp; j &lt;= r<span class="rainbow1">)</span>
+    <span class="keyword">if</span> (a[i] &lt;= a[j])
+      b[k++] = a[i++];
+    <span class="keyword">else</span>
+      b[k++] = a[j++];
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i &lt;= m<span class="rainbow1">)</span>
+    b[k++] = a[i++];
+  <span class="keyword">while</span> <span class="rainbow1">(</span>j &lt;= r<span class="rainbow1">)</span>
+    b[k++] = a[j++];
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> x = 0; x &lt; k; x++<span class="rainbow1">)</span>
+    a[l + x] = b[x];
+}
+</pre>
+    <p>
+      merging all the arrays at a given level together is \(\Theta(n)\), and there are
+      around \(\log_2 n\) levels
+    </p>
+    <p>which means it's better than insertion sort!</p>
+    <h2>quicksort</h2>
+    <p>another recursive one</p>
+    <ul>
+      <li>choose a pivot (any element of the array)</li>
+      <li>
+        partition the list into the elements less than the pivot and the elements
+        greater than the pivot
+      </li>
+      <li>call <code class="function">quickSort</code> on each side</li>
+    </ul>
+<pre>
+int partition(int a[], int l, int r) {
+  int pivot = a[l]; // easy
+  int i = l + 1, j = r;
+  while (i &lt;= j) {
+    if (a[i] &lt;= pivot) i++;
+    if (a[j] &gt; pivot) j--;
+    // if i and j both didn't move
+      // swap a[i++] and a[j--]
+  }
+  return j;
+}
+</pre>
+    <p>worst case, the list is already sorted: \(O(n^2)\)</p>
+    <p>best case the pivot is the median: \(O(n\log n)\)</p>
+    <p>methods to avoid worst case:</p>
+    <ul>
+      <li>trust me bro :) dont worry about it :) itll be fiiiine :)</li>
+      <li>randomly choose a pivot instead of always using the first element</li>
+      <li>find the median of an unsorted array without sorting it...?</li>
+    </ul>
+    <h1>binary trees</h1>
+    <p>honestly not very useful in and of themselves</p>
+    <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
+<pre>
+     a
+  b--'--c
+d-'-e f-'-g
+</pre>
+<pre>
+class BinTreeNode {
+  public:
+    int data;
+    BinTreeNode* left;
+    BinTreeNode* right;
+}
+</pre>
+    <h2>traversing</h2>
+    <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
+    <p>there are a couple different ways to traverse a tree</p>
+    <pre>
+void preorder(BinTreeNode* r) {
+  if (r == nullptr)
+    return;
+  cout &lt;&lt; r->data; // preorder process
+  preorder(r->left);
+  preorder(r->right);
+}
+void postorder(BinTreeNode* r) {
+  if (r == nullptr)
+    return;
+  postorder(r->left);
+  postorder(r->right);
+  cout &lt;&lt; r->data;
+}</pre>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>

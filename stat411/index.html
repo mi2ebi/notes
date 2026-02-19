@@ -5,9 +5,12 @@
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      dt.procedure {
-        color: var(--green-warmer);
-      }
+     dt.procedure {
+       color: var(--green-warmer);
+     }
+     .example {
+       color: var(--magenta-warmer);
+     }
     </style>
   </head>
   <body>
@@ -304,7 +307,10 @@
       <dd>for any integer \(n \ge 0\), \(n! = \prod\limits_{i = 1}^n i\)</dd>
       <dd>specialcase \(0! = 1\)</dd>
     </dl>
-    <p>the number of permutations of \(r\) objects among a set of \(n\) is \(P_{n, r} = \frac{n!}{(n - r)!}\)</p>
+    <p>
+      the number of permutations of \(r\) objects among a set of \(n\) is
+      \(P_{n, r} = \frac{n!}{(n - r)!}\)
+    </p>
     <dl>
       <dt>combination</dt>
       <dd>an unordered subset</dd>
@@ -383,7 +389,146 @@
       P\left(\text{smoking} \middle| \text{bronchitis}^\complement\right) = \frac13
     \)</p>
     <p>smoking and bronchitis are dependent because \(P(S) \neq P(S \mathbin| B)\)</p>
-    <h2>2.7 bayes' theorem (wednesday!)</h2>
+    <h2>2.7 bayes' theorem</h2>
+    <p>the events \(B_1, B_2, \dots, B_k\) <b>partition</b> a sample space \(S\) if</p>
+    <ul>
+      <li>\(B_i \cap B_j = \emptyset\) for all \(i \ne j\)</li>
+      <li>\(\bigcup\limits_{1 \le i \le k} B_i = S\)</li>
+    </ul>
+    <p>
+      suppose \(k = 2\) and some event \(A\) has occurred in a random manner in \(S\),
+      and we want to know \(P(B_i | A)\). since \(A = (A \cap B_1) \cup (A \cap B_2)\)
+      from the partition, \[
+        P(B_i | A) = \frac{P(B_i \cap A)}{P(A)} = \frac{P(A | B_i)P(B_i)}{P(A)}
+        = \frac{P(A | B_i)P(B_i)}{\sum_j P(A | B_j)P(B_j)}
+      \]
+    </p>
+    <p>
+      \(P(B_i | A)\) is the <b>posterior</b> probability
+      and \(P(B_i)\) is the <b>prior</b> probability
+    </p>
+    <h1>ch3 random variables and their probability distributions</h1>
+    <dl>
+      <dt>random variable</dt>
+      <dd>
+        a function \(X : \mathbb R \to \mathbb R\) that assigns numerical values to events
+        in a sample space
+      </dd>
+    </dl>
+    <p>
+      the sample space \(S\) can be either <b>discrete</b> (there are countably many outcomes) or
+      <b>continuous</b> (there are uncountable many outcomes)
+    </p>
+    <p>
+      we also define a <b>probability (mass) function</b> \(p\) which takes the numerical
+      values of the random variable. we write \(P(X = x)\) or \(p(x)\)
+    </p>
+    <p>
+      example: tossing a coin twice, \(X\) is the number of heads we get (0 or 1 or 2). then we
+      can make the <b>probability density function (PDF)</b> of \(X\):
+    </p>
+    <table>
+      <tr>
+        <th scope="row" >X</th>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th scope="row" >P(X = <i>x</i>)</th>
+        <td>\(\frac14\)</td>
+        <td>\(\frac12\)</td>
+        <td>\(\frac34\)</td>
+      </tr>
+    </table>
+    <p>which has these properties. they look suspiciously similar to the axioms of probability!</p>
+    <ul>
+      <li>\(0 \le p(x) &lt; 1\) for all values of \(x\)</li>
+      <li>\(\sum\limits_{\text{all }x} = 1\)</li>
+    </ul>
+    <p>if it's continuous,</p>
+    <ul>
+      <li>\(f(x) \ge 0\) for all \(x\)</li>
+      <li>\(\int_{-\infty}^\infty f(x) \;\mathrm dx = 1\)</li>
+      <li>\(P(a \le X \le b) = \int_a^b f(x) \;\mathrm dx\)</li>
+    </ul>
+    <img src="pdf.png" />
+    <p>
+      the <b>cumulative distribution function (CDF)</b> of a random variable, \(F(x)\),
+      is defined as \[
+      F_X(x) = P(X \le x) = \sum\limits_{X \le x} p(x)
+      \]
+    </p>
+    <p>for the coin example, \(F(1) = P(X \le 1) = \frac34\) etc</p>
+    <p>
+      if it's continuous, \[
+      F_X(x) = P(X \le x) = \int_{-\infty}^\infty f(t) \;\mathrm dx
+      \]
+    </p>
+    <ul>
+      <li>\(\frac{\mathrm d}{\mathrm dx} F(x) = f(x)\)</li>
+      <li>P(a \le X \le b) = F(b) - F(a)</li>
+      <li>\(F_X(b) = P(X \le b) = \int_{-\infty}^b f(x) \;\mathrm dx\)</li>
+    </ul>
+    <p>the cdf \(F(x)\) is more informative than the pdf \(f(x)\) about \(X\)</p>
+    <p>cdf is nondecreasing</p>
+    <p>for continuous variables we can say \(P(X \le a) = P(X &lt; a)\)</p>
+    <p>
+      <b class="example" >example.</b> let \[
+      f(x) = \begin{cases}
+      cx^2 - x, & 0 \le x\le 2\\
+      0, & \text{otherwise}
+      \end{cases}
+      \]
+      <b class="example" >(a)</b> find \(c\).
+    </p>
+    <p>
+      \[
+      \int_0^2 \left(cx^2 + x\right) \;\mathrm dx = 1
+      \Leftrightarrow
+      \left.\left(\frac c3 x^2 + \frac12 x^2\right)\right|_0^2
+      = \frac83 c + 2 = 1
+      \]
+    </p>
+    <p>therefore \(c = -\frac38\)</p>
+    <p><b class="example" >(b)</b> find \(F(x)\).</p>
+    <p>
+      \[
+      \int_0^x \left(-\frac38 t^2 + t\right) \;\mathrm dt
+      = \left.\left(-\frac18 t^3 + \frac12 t^2\right)\right|_0^x
+      = -\frac18 x^3 + \frac12 x^2
+      \]
+    </p>
+    <p>
+      therefore,
+      \[
+      F(x) = \begin{cases}
+      0, & x &lt; 0\\
+      -\frac18 x^3 + \frac12 x^2, & 0 \le x &lt; 2\\
+      1, & x \ge 2
+      \end{cases}
+      \]
+    </p>
+    <p><b class="example" >(c.i)</b> evaluate \(P(0 \le X \le 0.5)\) using pdf \(f(x)\)</p>
+    <p>
+      \[
+      \int_0^{0.5} \left(-\frac38 x^2 + x\right) \;\mathrm dx
+      = \left.\left(-\frac18 x^3 + \frac12 x^2\right)\right|_0^{0.5}
+      = \frac7{64}
+      \]
+    </p>
+    <p>
+      (number theory time! \(77 \cdot 73 = (7 \cdot (7 + 1)) \mathbin⧺ (7 \cdot 3) = 5621\) etc)
+    </p>
+    <p><b class="example" >(c.ii)</b> using cdf \(F(x)\)</p>
+    <p>
+      \[
+      F(0.5) - F(0)
+      = -\frac18 \left(\frac12\right)^3 + \frac12 \left(\frac12\right)^2
+      = -\frac1{64} + \frac18
+      = \frac7{64}
+      \]
+    </p>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
   </body>
