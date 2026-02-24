@@ -486,7 +486,7 @@
       \[
       \int_0^2 \left(cx^2 + x\right) \;\mathrm dx = 1
       \Leftrightarrow
-      \left.\left(\frac c3 x^2 + \frac12 x^2\right)\right|_0^2
+      \left.\left(\frac c3 x^2 + \frac12 x^2\right)\vphantom\int\right|_0^2
       = \frac83 c + 2 = 1
       \]
     </p>
@@ -495,7 +495,7 @@
     <p>
       \[
       \int_0^x \left(-\frac38 t^2 + t\right) \;\mathrm dt
-      = \left.\left(-\frac18 t^3 + \frac12 t^2\right)\right|_0^x
+      = \left.\left(-\frac18 t^3 + \frac12 t^2\right)\vphantom\int\right|_0^x
       = -\frac18 x^3 + \frac12 x^2
       \]
     </p>
@@ -513,7 +513,7 @@
     <p>
       \[
       \int_0^{0.5} \left(-\frac38 x^2 + x\right) \;\mathrm dx
-      = \left.\left(-\frac18 x^3 + \frac12 x^2\right)\right|_0^{0.5}
+      = \left.\left(-\frac18 x^3 + \frac12 x^2\right)\vphantom\int\right|_0^{0.5}
       = \frac7{64}
       \]
     </p>
@@ -529,6 +529,63 @@
       = \frac7{64}
       \]
     </p>
+    <h1>ch4 expectation <span style="color:var(--magenta-cooler)">(not on test!)</span></h1>
+    <h2>4.1 expected value of random variable</h2>
+    <dl>
+      <dt>expected value</dt>
+      <dd>
+        \(
+        E(X) = \mu_X
+        = \begin{cases}
+        \displaystyle\sum\limits_{\text{all }X} xp(x) & \text{if discrete}\\
+        \displaystyle\int_{-\infty}^\infty xf(x) \;\mathrm dx & \text{if continuous}
+        \end{cases}
+        \)
+      </dd>
+    </dl>
+    <p>this is a weighted average. \(E(X)\) is not necessarily a possible value for \(X\)</p>
+    <p>
+      if \(g\) is a real-valued function we can say
+      \(
+      E\set{g(X)} = \mu_{g(X)}
+      = \begin{cases}
+      \sum\limits_{\text{all }X} g(X)p(x)\\
+      \int_{-\infty}^\infty g(X)f(x) \;\mathrm dx
+      \end{cases}
+      \)
+    </p>
+    <dl>
+      <dt><i>n</i>th moment</dt>
+      <dd>\(E(X^n) \coloneqq E\set{g(x)}\) where \(g : x \mapsto x^n\)</dd>
+    </dl>
+    <h2>4.2 expected value of linear combinations</h2>
+    <p>
+      let \(X\) and \(Y\) be random variables and \(a\) and \(b\) be any real constants. then
+    </p>
+    <ul>
+      <li>\(E(a) = a\)</li>
+      <li>\(E(aX \pm b) = aE(X) \pm b\)</li>
+      <li>\(E\set{g(X) \pm h(Y)} = E\set{g(X)} \pm E\set{h(Y)}\)</li>
+    </ul>
+    <p>expected value is another measure of central tendency</p>
+    <h2>4.3 variance of random variable</h2>
+    <p>
+      the variance of a random variable \(X\) is given by
+      \(
+      \operatorname{var}(X) = E\left((X - \mu)^2\right) = \sigma_X^2
+      \)
+    </p>
+    <p>
+      and this is actually the same as
+      \[
+      \begin{align*}
+      E(X^2 - 2\mu X + \mu^2) & = & E(X^2) - 2\mu E(X) + E(\mu^2)\\
+      & = & E(X^2) - 2\mu^2 + \mu^2 \\
+      & = & E(X^2) - \mu^2
+      \end{align*}
+      \]
+    </p>
+    <p>the standard deviation of \(X\) is \(\operatorname{stdev}(X) = \sigma_X = \sqrt{\sigma^2}\)</p>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
   </body>

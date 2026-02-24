@@ -130,20 +130,6 @@
     <h1>2026-01-29</h1>
     <h2>bin and hex</h2>
     <p>to convert positive integers to binary: keep dividing by 2 until you get a result less than 2, and prepend each remainder + that final result</p>
-<pre>
-<span class="keyword">fn</span> <span class="function">udec2bin</span>(<span class="variable">x</span>: <span class="type">u32</span>) -&gt; <span class="type">String</span> {
-  <span class="keyword">if</span> <span class="variable">x</span> == <span class="constant">0</span> <span class="rainbow1">{</span>
-    <span class="keyword">return</span> <span class="string">"0"</span>.<span class="function">to_string</span><span class="rainbow2">()</span>;
-  <span class="rainbow1">}</span>
-  <span class="keyword">let mut</span> <span class="variable">bin</span> = <span class="type">String</span>::<span class="function">new</span><span class="rainbow1">()</span>;
-  <span class="keyword">let mut</span> <span class="variable">x</span> = <span class="variable">x</span>;
-  <span class="keyword">while</span> <span class="variable">x</span> &gt; <span class="constant">0</span> <span class="rainbow1">{</span>
-    <span class="variable">bin</span> = <span class="builtin">format!</span><span class="rainbow2">(</span><span class="string">"<span class="rainbow3">{}{</span><span class="variable">bin</span><span class="rainbow3">}</span>"</span>, <span class="variable">x</span> % <span class="constant">2</span><span class="rainbow2">)</span>;
-    <span class="variable">x</span> /= <span class="constant">2</span>;
-  <span class="rainbow1">}</span>
-  <span class="variable">bin</span>
-}
-</pre>
     <p>for negative integers use 2s complement</p>
     <ol>
       <li>ignore the sign and convert it as if it were positive</li>
@@ -397,10 +383,10 @@ a    c    1    7    0    0    0    4
     </p>
     <p>to put <code>0x12345678</code> into <code>$t0</code>, you write</p>
 <pre>
-<span class="function">li</span> $t0, 0x12345678
+<span class="function">li</span> <span class="constant">$t0</span>, <span class="constant">0x12345678</span>
 <span class="comment"># is assembled into</span>
-<span class="function">lui</span> $at, 0x1234       <span class="comment"># Load Upper Immediate</span>
-<span class="function">ori</span> $t0, $at, 0x5678
+<span class="function">lui</span> <span class="constant">$at</span>, <span class="constant">0x1234</span>       <span class="comment"># Load Upper Immediate</span>
+<span class="function">ori</span> <span class="constant">$t0</span>, <span class="constant">$at</span>, <span class="constant">0x5678</span>
 </pre>
     <h1>2026-02-12</h1>
     <h2>addition</h2>
@@ -418,9 +404,23 @@ a    c    1    7    0    0    0    4
     <p>mips has 2 bonus registers <code>hi</code> and <code>lo</code> which together store a 64-bit number</p>
     <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
     <h1>2026-02-17</h1>
-    <h2>algorithm 1</h2>
-    <h2>optimized algorithm</h2>
-    <p>here the multiplicand and multiplier are both eg 4 bits and the product is twice that</p>
+    <h2>multiplication</h2>
+    <h3>algorithm 1</h3>
+    <p>here everything is eg 8 bits</p>
+    <p>this is the boring "copy the multiplicand under every 1 in the multiplier"</p>
+    <p>multiplicand is 8 bits (so it can hold the doubled values), multiplier and product are 4 bits</p>
+    <ol>
+      <li>fill the product with 0s</li>
+      <li>for each bit of the multiplier:
+        <ol>
+          <li>if the lsb is 1, add the multiplicand to the product</li>
+          <li>shift the multiplicand left 1 bit</li>
+          <li>shift the multiplier right 1 bit</li>
+        </ol>
+      </li>
+    </ol>
+    <h3>optimized algorithm</h3>
+    <p>here the product is eg 8 bits and the multiplicand and multiplier are both 4 bits</p>
     <ol>
       <li>place the multiplier in the right half of the product</li>
       <li>for each bit of the multiplier,
@@ -441,6 +441,226 @@ a    c    1    7    0    0    0    4
       <tr><td>3</td><td>0000'1100</td></tr>
       <tr><td>4</td><td>0000'0110</td></tr>
     </table>
-    <h2>booth's algorithm with sign extension</h2>
+    <h3>booth's algorithm (signed!)</h3>
+    <p>product is 2n bits, multiplicand and multiplier are n bits, plus a "booth bit" (bb)</p>
+    <ol>
+      <li>place the multiplier in the right half of the product, set bb = 0</li>
+      <li>for each bit of the multiplier:
+        <ol>
+          <li><span class="keyword">if</span> bb &gt; product lsb: product left half += multiplicand</li>
+          <li><span class="keyword">else if</span> bb &lt; product lsb: product left half &minus;= multiplicand</li>
+          <li><span class="keyword">else</span>: do nothing</li>
+          <li>arithmetic right shift concatenated-product-and-bb by 1, sign extend</li>
+        </ol>
+      </li>
+    </ol>
+    <p>eg 7 &times; -9</p>
+    <table>
+      <tr><th>iter#</th><th>product</th><th>bb</th></tr>
+      <tr><td>0</td><td>0000'0000'1111'0111</td><td>0</td></tr>
+      <tr><td>1a</td><td>1111'1001'1111'0111</td><td>0</td></tr>
+      <tr><td>1b</td><td>1111'1100'1111'1011</td><td>1</td></tr>
+      <tr><td>2&ndash;3</td><td>1111'1111'0011'1110</td><td>1</td></tr>
+      <tr><td>4a</td><td>0000'0110'0011'1110</td><td>1</td></tr>
+      <tr><td>4b</td><td>0000'0011'0001'1111</td><td>0</td></tr>
+      <tr><td>5a</td><td>1111'1100'0001'1111</td><td>0</td></tr>
+      <tr><td>5b</td><td>1111'1110'0000'1111</td><td>1</td></tr>
+      <tr><td>6&ndash;8</td><td>1111'1111'1100'0001</td><td>1</td></tr>
+    </table>
+    <h1>2026-02-19</h1>
+    <h2>division</h2>
+    <h3>algorithm 1</h3>
+    <p>dividend is 8 bits, divisor and remainder fit in 4 bits but we make them be 8 instead, quotient is 4 bits</p>
+    <ol>
+      <li>place the dividend in the right half of remainder</li>
+      <li>place the divisor in the left half of itself (shifted)</li>
+      <li>for n+1 iterations:
+        <ol>
+          <li>remainder &minus;= divisor</li>
+          <li>if remainder &lt; 0: restore (remainder += divisor), shift quotient left, lsb = 0; otherwise shift quotient left, lsb = 1</li>
+          <li>shift divisor right 1 bit</li>
+        </ol>
+      </li>
+    </ol>
+    <p>for 7<sub>dividend</sub> ÷ 2<sub>divisor</sub></p>
+    <table>
+      <tr>
+        <th>iter</th>
+        <th>quotient</th>
+        <th>divisor</th>
+        <th>remainder</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0000</td>
+        <td>0010'0000</td>
+        <td>0000'0111</td>
+      </tr>
+      <tr>
+        <td>1a</td>
+        <td></td>
+        <td></td>
+        <td>1110'0111</td>
+      </tr>
+      <tr>
+        <td>1b</td>
+        <td>0000</td>
+        <td></td>
+        <td>0000'0111</td>
+      </tr>
+      <tr>
+        <td>1c</td>
+        <td></td>
+        <td>0001'0000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2a</td>
+        <td></td>
+        <td></td>
+        <td>1111'0111</td>
+      </tr>
+      <tr>
+        <td>2b</td>
+        <td>0000</td>
+        <td></td>
+        <td>0000'0111</td>
+      </tr>
+      <tr>
+        <td>2c</td>
+        <td></td>
+        <td>0000'1000</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>3a</td>
+        <td></td>
+        <td></td>
+        <td>1111'1111</td>
+      </tr>
+      <tr>
+        <td>3b</td>
+        <td>0000</td>
+        <td></td>
+        <td>0000'0111</td>
+      </tr>
+      <tr>
+        <td>3c</td>
+        <td></td>
+        <td>0000'0100</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4a</td>
+        <td></td>
+        <td></td>
+        <td>0000'0011</td>
+      </tr>
+      <tr>
+        <td>4b</td>
+        <td>0001</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4c</td>
+        <td></td>
+        <td>0000'0010</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5a</td>
+        <td></td>
+        <td></td>
+        <td>0000'0001</td>
+      </tr>
+      <tr>
+        <td>5b</td>
+        <td>0011</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5c</td>
+        <td></td>
+        <td>0000'0001</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>quot = 3</td>
+        <td></td>
+        <td>rem = 1</td>
+      </tr>
+    </table>
+    <h3>optimized algorithm</h3>
+    <p>remainder is 2n bits (left half starts at 0, right half = dividend), divisor and quotient are n bits. n iterations.</p>
+    <ol>
+      <li>for each iteration:
+        <ol>
+          <li>shift remainder left 1 bit</li>
+          <li>subtract divisor from the left half of remainder</li>
+          <li>if remainder &lt; 0: restore (undo step b), shift quotient left, quotient lsb = 0. otherwise: shift quotient left, quotient lsb = 1</li>
+        </ol>
+      </li>
+    </ol>
+    <p>eg 6 &divide; 3 = <code>0b0000'0110</code> &divide; <code>0b0011</code>, expected quotient 2 remainder 0:</p>
+    <table>
+      <tr><th>iter#</th><th>quotient</th><th>remainder</th></tr>
+      <tr><td>0</td><td>0000</td><td>0000'0110</td></tr>
+      <tr><td>1a</td><td>0000</td><td>0000'1100</td></tr>
+      <tr><td>1b</td><td>0000</td><td>1101'1100</td></tr>
+      <tr><td>1c</td><td>0000</td><td>0000'1100</td></tr>
+      <tr><td>2a</td><td>0000</td><td>0001'1000</td></tr>
+      <tr><td>2b</td><td>0000</td><td>1110'1000</td></tr>
+      <tr><td>2c</td><td>0000</td><td>0001'1000</td></tr>
+      <tr><td>3a</td><td>0000</td><td>0011'0000</td></tr>
+      <tr><td>3b</td><td>0000</td><td>0000'0000</td></tr>
+      <tr><td>3c</td><td>0001</td><td>0000'0000</td></tr>
+      <tr><td>4a</td><td>0001</td><td>0000'0000</td></tr>
+      <tr><td>4b</td><td>0001</td><td>1101'0000</td></tr>
+      <tr><td>4c</td><td>0010</td><td>0000'0000</td></tr>
+    </table>
+    <h2>floats</h2>
+    <dl>
+      <dt>single precision</dt>
+      <dd>32 bit (<code class="type">float</code>) → 6 decimal digit precision</dd>
+      <dt>double precision</dt>
+      <dd>64 bit (<code class="type">double</code>) → 16 decimal digit precision</dd>
+    </dl>
+    <p>single precision:</p>
+    <pre>
+1    8          23
+0    000'0000'0 000'0000'0000'0000'0000'0000
+sign exponent   mantissa</pre>
+    <p><i>x</i> = (-1)<sup><i>s</i></sup> × (1. ⧺ mantissa) × 2<sup>exp − bias</sup></p>
+    <p>the exponents 00000000 and 11111111 are reserved</p>
+    <p>the bias for single precision is 127</p>
+    <p>eg -0.75 = -1.1 × 2<sup>-1</sup> so exp = 126</p>
+    <pre>
+1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
+    <h3>fp addition/subtraction</h3>
+    <ol>
+      <li>align exponents: shift the significand of the smaller-exponent operand right until both exponents match</li>
+      <li>add/subtract the significands</li>
+      <li>normalize: shift result left/right and adjust exponent until it looks like 1.xxx</li>
+      <li>check for exponent overflow/underflow</li>
+      <li>round the mantissa to fit; if rounding changed the form, renormalize (go to step 3)</li>
+    </ol>
+    <p>eg 1.000 × 2<sup>-1</sup> + -1.110 × 2<sup>-2</sup>:</p>
+    <ol>
+      <li>shift: -1.110 × 2<sup>-2</sup> → -0.111 × 2<sup>-1</sup></li>
+      <li>add: 1.000 + (-0.111) = 0.001 × 2<sup>-1</sup></li>
+      <li>normalize: 0.001 × 2<sup>-1</sup> = 1.000 × 2<sup>-4</sup></li>
+    </ol>
+    <h3>fp multiplication</h3>
+    <ol>
+      <li>add the biased exponents, then subtract the bias once (since both already have it baked in: e<sub>1</sub> + e<sub>2</sub> − 127)</li>
+      <li>multiply the significands (including the implicit leading 1) as unsigned integers</li>
+      <li>normalize (same as addition step 3)</li>
+      <li>check for exponent overflow/underflow</li>
+      <li>round and renormalize if needed</li>
+      <li>result sign = XOR of the two sign bits (0 if they were the same and 1 if they were different)</li>
+    </ol>
   </body>
 </html>

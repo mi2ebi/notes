@@ -395,19 +395,17 @@ int partition(int a[], int l, int r) {
     <h1>binary trees</h1>
     <p>honestly not very useful in and of themselves</p>
     <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
-<pre>
-     a
-  b--'--c
-d-'-e f-'-g
-</pre>
-<pre>
+    <pre>
+       a
+   b --'-- c
+d -'- e f -'- g</pre>
+    <pre>
 class BinTreeNode {
   public:
     int data;
     BinTreeNode* left;
     BinTreeNode* right;
-}
-</pre>
+}</pre>
     <h2>traversing</h2>
     <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
     <p>there are a couple different ways to traverse a tree</p>
@@ -426,6 +424,38 @@ void postorder(BinTreeNode* r) {
   postorder(r->right);
   cout &lt;&lt; r->data;
 }</pre>
+    <h2>searching</h2>
+    <pre>
+binTreeNode* find(binTreeNode* r, int s) {
+    if (!r || r->data == s) return r;
+    binTreeNode* left = find(r->left, s);
+    if (left) return left;
+    return find(r->right, s);
+}</pre>
+    <p>runtime for pre/post order:</p>
+    <p>each function body runs \(\Theta(1)\) times, and there are \(n\) nodes</p>
+    <h2>height</h2>
+    <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
+    <pre>
+a
+'- b
+   '- c
+      '- d</pre>
+    <p>the height of this tree is 3 and there are 4 nodes. this is the best case despite the tree looking absolutely fucking stupid</p>
+    <pre>
+               a
+       b ------'------ c
+   d --'-- e       f --'-- g
+h -'- i j -'- k l -'- m n -'- o</pre>
+    <p>
+      this has \(h\) levels and \(n = 2^{h + 1} - 1\) nodes. now we can solve for h: \[
+      \begin{align*}
+      2^{h + 1} - 1 & = & n\\
+      h + 1 & = & \log_2 n\\
+      h & = & \log_2 n - 1 = O(\log n)
+      \end{align*}
+      \]
+    </p>
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>
