@@ -7,7 +7,6 @@
   </head>
   <body>
     <h1 class="h0">cs 219</h1>
-    <p><b>TODO</b> renumber to use chapters</p>
     <h1>2026-01-20</h1>
     <p>computers and brains are very similar!</p>
 <pre>
@@ -17,7 +16,7 @@
            v
         <span style="color: var(--green)">storage</span>
 </pre>
-    <h2>parts of computers</h2>
+    <h2 id="parts-of-computers">parts of computers</h2>
     <ul>
       <li>input eg keyboard/mouse</li>
       <li>output eg screen</li>
@@ -31,7 +30,7 @@
       </li>
     </ul>
     <p>von neumann is slow tho so we can separate instruction memory vs data memory</p>
-    <h2>types of computers</h2>
+    <h2 id="types-of-computers">types of computers</h2>
     <dl>
       <dt>personal computers</dt>
       <dd>general purpose, cost/perf tradeoff</dd>
@@ -46,7 +45,7 @@
       <dt>mobile devices</dt>
       <dd>rely more on batteries rather than eg being plugged in all the time</dd>
     </dl>
-    <h2>"eight great ideas"</h2>
+    <h2 id="eight-great-ideas">"eight great ideas"</h2>
     <ol>
       <li>design for moore's law</li>
       <li>use abstraction to simplify design</li>
@@ -58,14 +57,14 @@
       <li>dependability via redundancy</li>
     </ol>
     <h1>2026-01-22</h1>
-    <h2>below your program</h2>
+    <h2 id="below-your-program">below your program</h2>
     <ol>
       <li>application software</li>
       <li>system software eg compiler, os</li>
       <li><b>instruction set architecture</b></li>
       <li>hardware eg processor, memory, i/o</li>
     </ol>
-    <h2>inside the cpu</h2>
+    <h2 id="inside-the-cpu">inside the cpu</h2>
     <dl>
       <dt>datapath</dt>
       <dd>perform ops on data</dd>
@@ -80,7 +79,7 @@
       <dt>nonvolatile/secondary memory</dt>
       <dd>eg hard drive, ssd, cdrom, usb stick</dd>
     </dl>
-    <h2>networks</h2>
+    <h2 id="networks">networks</h2>
     <dl>
       <dt>local area network (lan)</dt>
       <dd>ethernet</dd>
@@ -89,7 +88,7 @@
       <dt>wireless network</dt>
       <dd>eg wifi, bluetooth</dd>
     </dl>
-    <h2>performance</h2>
+    <h2 id="performance">performance</h2>
     <dl>
       <dt>response time</dt>
       <dd>how long it takes to do something</dd>
@@ -128,7 +127,7 @@
       </dd>
     </dl>
     <h1>2026-01-29</h1>
-    <h2>bin and hex</h2>
+    <h2 id="bin-and-hex">bin and hex</h2>
     <p>to convert positive integers to binary: keep dividing by 2 until you get a result less than 2, and prepend each remainder + that final result</p>
     <p>for negative integers use 2s complement</p>
     <ol>
@@ -143,7 +142,7 @@
     <p>
       eg <code class="type">int</code> can store numbers from -2,147,483,648 to 2,147,483,647
     </p>
-    <h2>"4 design principles"</h2>
+    <h2 id="4-design-principles">"4 design principles"</h2>
     <ol>
       <li>simplicity favors regularity</li>
     </ol>
@@ -178,7 +177,7 @@
       <li>good design demands good compromise</li>
     </ol>
     <p>i) every instruction is 32 bits<br/>ii) minimal changes btwn instr formats</p>
-    <h2>r-format instructions</h2>
+    <h2 id="r-format-instructions">r-format instructions</h2>
     <p>used by the ALU</p>
 <pre>
 6      5     5     5     5     6
@@ -186,8 +185,8 @@
 opcode rs    rt    rd    shamt funct
 </pre>
     <p>risc has 32 registers so the registers each take up 5 bits</p>
-    <p><coee>shamt</coee> is 'shift amount', used only for shl/shr, also 5 bits</p>
-    <h2>i-format instructions</h2>
+    <p><code>shamt</code> is 'shift amount', used only for shl/shr, also 5 bits</p>
+    <h2 id="i-format-instructions">i-format instructions</h2>
 <pre>
 6      5     5     16
 000000 00000 00000 0000000000000000
@@ -203,14 +202,14 @@ opcode rs    rt    imm
       <li><code class="constant">$s0</code> is <code>rt</code>
       <li><code class="constant">4</code> is the <i>offset</i> and goes in <code>imm</code>
     </ul>
-    <h2>j-format instructions</h2>
+    <h2 id="j-format-instructions">j-format instructions</h2>
 <pre>
 6      26
 000000 00000000000000000000000000
 opcode imm/addr
 </pre>
     <h1>2026-02-09</h1>
-    <h2>mips to hex</h2>
+    <h2 id="mips-to-hex">mips to hex</h2>
     <h3><code>
       <span class="function">add</span>
       <span class="constant">$t2</span><span class="fgmain">,</span>
@@ -260,7 +259,7 @@ a    c    1    7    0    0    0    4
       <code class="type">int</code>s and therefore are 4 bytes long
     </p>
     <h1>2026-02-10</h1>
-    <h2>logical instructions</h2>
+    <h2 id="logical-instructions">logical instructions</h2>
     <p>useful for extracting and inserting certain groups of bits</p>
     <h3 class="smcp">and</h3>
     <p><code>and rd, rs, rt</code></p>
@@ -377,7 +376,7 @@ a    c    1    7    0    0    0    4
     <p><code>srl rd, rt, shamt</code></p>
     <p>eg <code>0b10010001</code> &gg; 2 = <code>0b00100100</code></p>
     <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
-    <h2>32-bit constants</h2>
+    <h2 id="32-bit-constants">32-bit constants</h2>
     <p>
       most constants are small. i-format instructions can only handle 16-bit immediates
     </p>
@@ -389,7 +388,7 @@ a    c    1    7    0    0    0    4
 <span class="function">ori</span> <span class="constant">$t0</span>, <span class="constant">$at</span>, <span class="constant">0x5678</span>
 </pre>
     <h1>2026-02-12</h1>
-    <h2>addition</h2>
+    <h2 id="addition">addition</h2>
     <p><b>signed</b> numbers can be positive and negative and <b>unsigned</b> numbers can only be positive</p>
     <dl>
       <dt>overflow</dt>
@@ -399,13 +398,12 @@ a    c    1    7    0    0    0    4
     </dl>
     <p>if you try adding 2 negative numbers and get an extra bit, it doesn't count as an overflow unless the sign bit changes to positive. -3 + -3 = -6 doesn't overflow, but -6 + -8 = -14 = 2 does</p>
     <p>adding a positive and negative number will never overflow</p>
-    <h2>multiplication</h2>
+    <h2 id="multiplication">multiplication</h2>
     <p>multipying two <i>n</i>-digit number gives an up-to-(2<i>n</i>)-digit number! whatever will we do!</p>
     <p>mips has 2 bonus registers <code>hi</code> and <code>lo</code> which together store a 64-bit number</p>
     <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
     <h1>2026-02-17</h1>
-    <h2>multiplication</h2>
-    <h3>algorithm 1</h3>
+    <h3 id="multiplication--algorithm-1">algorithm 1</h3>
     <p>here everything is eg 8 bits</p>
     <p>this is the boring "copy the multiplicand under every 1 in the multiplier"</p>
     <p>multiplicand is 8 bits (so it can hold the doubled values), multiplier and product are 4 bits</p>
@@ -419,7 +417,7 @@ a    c    1    7    0    0    0    4
         </ol>
       </li>
     </ol>
-    <h3>optimized algorithm</h3>
+    <h3 id="multiplication--optimized-algorithm">optimized algorithm</h3>
     <p>here the product is eg 8 bits and the multiplicand and multiplier are both 4 bits</p>
     <ol>
       <li>place the multiplier in the right half of the product</li>
@@ -441,7 +439,7 @@ a    c    1    7    0    0    0    4
       <tr><td>3</td><td>0000'1100</td></tr>
       <tr><td>4</td><td>0000'0110</td></tr>
     </table>
-    <h3>booth's algorithm (signed!)</h3>
+    <h3 id="multiplication--booths-algorithm">booth's algorithm (signed!)</h3>
     <p>product is 2n bits, multiplicand and multiplier are n bits, plus a "booth bit" (bb)</p>
     <ol>
       <li>place the multiplier in the right half of the product, set bb = 0</li>
@@ -468,8 +466,8 @@ a    c    1    7    0    0    0    4
       <tr><td>6&ndash;8</td><td>1111'1111'1100'0001</td><td>1</td></tr>
     </table>
     <h1>2026-02-19</h1>
-    <h2>division</h2>
-    <h3>algorithm 1</h3>
+    <h2 id="division">division</h2>
+    <h3 id="division--algorithm-1">algorithm 1</h3>
     <p>dividend is 8 bits, divisor and remainder fit in 4 bits but we make them be 8 instead, quotient is 4 bits</p>
     <ol>
       <li>place the dividend in the right half of remainder</li>
@@ -593,7 +591,7 @@ a    c    1    7    0    0    0    4
         <td>rem = 1</td>
       </tr>
     </table>
-    <h3>optimized algorithm</h3>
+    <h3 id="division--optimized-algorithm">optimized algorithm</h3>
     <p>remainder is 2n bits (left half starts at 0, right half = dividend), divisor and quotient are n bits. n iterations.</p>
     <ol>
       <li>for each iteration:
@@ -621,7 +619,7 @@ a    c    1    7    0    0    0    4
       <tr><td>4b</td><td>0001</td><td>1101'0000</td></tr>
       <tr><td>4c</td><td>0010</td><td>0000'0000</td></tr>
     </table>
-    <h2>floats</h2>
+    <h2 id="floats">floats</h2>
     <dl>
       <dt>single precision</dt>
       <dd>32 bit (<code class="type">float</code>) → 6 decimal digit precision</dd>
@@ -639,7 +637,7 @@ sign exponent   mantissa</pre>
     <p>eg -0.75 = -1.1 × 2<sup>-1</sup> so exp = 126</p>
     <pre>
 1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
-    <h3>fp addition/subtraction</h3>
+    <h3 id="floats--addition">fp addition/subtraction</h3>
     <ol>
       <li>align exponents: shift the significand of the smaller-exponent operand right until both exponents match</li>
       <li>add/subtract the significands</li>
@@ -653,14 +651,53 @@ sign exponent   mantissa</pre>
       <li>add: 1.000 + (-0.111) = 0.001 × 2<sup>-1</sup></li>
       <li>normalize: 0.001 × 2<sup>-1</sup> = 1.000 × 2<sup>-4</sup></li>
     </ol>
-    <h3>fp multiplication</h3>
+    <h3 id="floats--multiplication">fp multiplication</h3>
     <ol>
-      <li>add the biased exponents, then subtract the bias once (since both already have it baked in: e<sub>1</sub> + e<sub>2</sub> − 127)</li>
+      <li>add the biased exponents, then subtract the bias once since both already have it baked in: e<sub>1</sub> + e<sub>2</sub> − 127</li>
       <li>multiply the significands (including the implicit leading 1) as unsigned integers</li>
       <li>normalize (same as addition step 3)</li>
       <li>check for exponent overflow/underflow</li>
       <li>round and renormalize if needed</li>
       <li>result sign = XOR of the two sign bits (0 if they were the same and 1 if they were different)</li>
     </ol>
+    <h1 id="test-1-review">2026-02-24 <span style="color:var(--magenta-cooler)">test 1 review</span></h1>
+    <p>these links go to sections of the above notes.</p>
+    <ul>
+      <li>basic stuff<ul>
+        <li><a href="#parts-of-computers">parts of computers</a></li>
+        <li><a href="#types-of-computers">types of computers</a></li>
+        <li><a href="#eight-great-ideas">eight great ideas</a></li>
+        <li><a href="#below-your-program">below your program</a></li>
+        <li><a href="#inside-the-cpu">inside the cpu</a></li>
+        <li><a href="#networks">networks</a></li>
+        <li><a href="#performance">performance</a></li>
+        <li><a href="#bin-and-hex">bin and hex</a></li>
+      </ul></li>
+      <li>mips design etc<ul>
+        <li><a href="#4-design-principles">4 design principles</a></li>
+        <li><a href="#r-format-instructions">r-format instructions</a></li>
+        <li><a href="#i-format-instructions">i-format instructions</a></li>
+        <li><a href="#j-format-instructions">j-format instructions</a></li>
+        <li><a href="#mips-to-hex">mips to hex</a></li>
+        <li><a href="#logical-instructions">logical instructions</a></li>
+        <li><a href="#32-bit-constants">32-bit constants</a></li>
+      </ul></li>
+      <li>numbers and math algorithms<ul>
+        <li><a href="#addition">addition</a></li>
+        <li><a href="#multiplication">multiplication</a><ul>
+          <li><a href="#multiplication--algorithm-1">algorithm 1</a></li>
+          <li><a href="#multiplication--optimized-algorithm">optimized algorithm</a></li>
+          <li><a href="#multiplication--booths-algorithm">booth's algorithm</a></li>
+        </ul></li>
+        <li><a href="#division">division</a><ul>
+          <li><a href="#division--algorithm-1">algorithm 1</a></li>
+          <li><a href="#division--optimized-algorithm">optimized algorithm</a></li>
+        </ul></li>
+        <li><a href="#floats">floats</a><ul>
+          <li><a href="#floats--addition">addition</a></li>
+          <li><a href="#floats--multiplication">multiplication</a></li>
+        </ul></li>
+      </ul></li>
+    </ul>
   </body>
 </html>
