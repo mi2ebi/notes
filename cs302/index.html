@@ -450,12 +450,55 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <p>
       this has \(h\) levels and \(n = 2^{h + 1} - 1\) nodes. now we can solve for h: \[
       \begin{align*}
-      2^{h + 1} - 1 & = & n\\
-      h + 1 & = & \log_2 n\\
-      h & = & \log_2 n - 1 = O(\log n)
+      2^{h + 1} - 1 & = n\\
+      h + 1 & = \log_2 n\\
+      h & = \log_2 n - 1 = O(\log n)
       \end{align*}
       \]
     </p>
+    <h1>binary <i>search</i> trees</h1>
+    <dl>
+      <dt>search structure</dt>
+      <dd>a structure that searches!...</dd>
+      <dd>helps find elements quickly, but overhead to maintain</dd>
+    </dl>
+    <p>a bit like having folders!</p>
+    <pre>
+template &lt;class K, class V>
+class BinTreeNode {
+  public:
+    K key;
+    V value;
+    BinTreeNode&lt;K, V>* left;
+    BinTreeNode&lt;K, V>* right;
+}</pre>
+    <p>for each node <i>r</i>:</p>
+    <ul>
+      <li><code>r->left</code>'s key is less than r's key</li>
+      <li><code>r->right</code>'s key is larger than r's key</li>
+    </ul>
+    <h2>searching</h2>
+    <pre>
+template &lt;class K, class V>
+bool find(BinTreeNode&lt;K, V>* r, K k) {
+  if (r == nullptr) return false;
+  if (k == r->key) return true;
+  if (k &lt; r->key)
+    return find(r->left, k);
+  return find(r->right, k);
+}</pre>
+    <p>the function body is constant time. for here we only have to check one node per height level at most</p>
+    <p>best case the runtime is \(\Theta(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
+    <p>the insertion order determines the height of the tree</p>
+    <h2>insertion</h2>
+    <p>because insertion requires finding where to put stuff, insertion has the same time complexity</p>
+    <pre>
+template &lt;class K, class V>
+void insert(BinTreeNode&lt;K, V> r, K k, V v) {
+}</pre>
+    
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust:true});</script>
   </body>

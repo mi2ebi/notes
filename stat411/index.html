@@ -407,6 +407,7 @@
       \(P(B_i | A)\) is the <b>posterior</b> probability
       and \(P(B_i)\) is the <b>prior</b> probability
     </p>
+    <p><b>TODO</b> what does this tell us?</p>
     <h1>ch3 random variables and their probability distributions</h1>
     <dl>
       <dt>random variable</dt>
@@ -569,23 +570,98 @@
     </ul>
     <p>expected value is another measure of central tendency</p>
     <h2>4.3 variance of random variable</h2>
+    \(\gdef\var{\operatorname{var}}\gdef\stdev{\operatorname{stdev}}\)
     <p>
       the variance of a random variable \(X\) is given by
       \(
-      \operatorname{var}(X) = E\left((X - \mu)^2\right) = \sigma_X^2
+      \var(X) = E\left((X - \mu)^2\right) = \sigma_X^2
       \)
     </p>
     <p>
       and this is actually the same as
       \[
       \begin{align*}
-      E(X^2 - 2\mu X + \mu^2) & = & E(X^2) - 2\mu E(X) + E(\mu^2)\\
-      & = & E(X^2) - 2\mu^2 + \mu^2 \\
-      & = & E(X^2) - \mu^2
+      E(X^2 - 2\mu X + \mu^2) & = E(X^2) - 2\mu E(X) + E(\mu^2)\\
+      & = E(X^2) - 2\mu^2 + \mu^2 \\
+      & = E(X^2) - \mu^2
       \end{align*}
       \]
     </p>
-    <p>the standard deviation of \(X\) is \(\operatorname{stdev}(X) = \sigma_X = \sqrt{\sigma^2}\)</p>
+    <p>the standard deviation of \(X\) is \(\stdev(X) = \sigma_X = \sqrt{\sigma^2}\)</p>
+    <p>let \(X, Y\) be random variables and \(a, b\) be any real constants. then</p>
+    <ul>
+      <li>\(\var(a) = 0\)</li>
+      <li>\(\var(aX \pm b) = a^2\var(X)\)</li>
+      <li>\(\var(aX \pm bY) = a^2\var(X) + b^2\var(Y)\) if the random variables are independent</li>
+    </ul>
+    <p>if they're not independent we need to take the covariance \(\gdef\cov{\operatorname{cov}}\cov(X, Y)\) into account</p>
+    <p>
+      <b class="example" >example.</b>
+      let a random variable \(Y\) have the following pdf:
+      \[
+      f(y) = \begin{cases}
+      -\frac38y^2 + y & 0 \le y \le 2\\
+      0 & \text{otherwise}
+      \end{cases}
+      \]
+    </p>
+    <p>
+      <b class="example">(a)</b>
+      the first moment is
+      \[
+      E(Y)
+      = \int_0^2 yf(y) \;\mathrm dy
+      = \int_0^2 y \left(-\frac38y^2 + y\right) \;\mathrm dy
+      = \left.\left(\frac{y^3}3 - \frac{3y^4}{32}\right)\right|_0^2
+      = \frac76
+      \]
+    </p>
+    <p>
+      <b class="example">(b)</b>
+      since the second moment is
+      \[
+      E(Y^2)
+      = \int_0^2 y^2 f(y) \;\mathrm dy
+      = \int_0^2 y^2 \left(-\frac38y^2 + y\right) \;\mathrm dy
+      = \frac85
+      \]
+    </p><p>
+      the variance is
+      \[
+      \var(Y) = E(Y^2) - \mu^2 = \frac85 - \left(\frac76\right)^2 = \frac{43}{180} = 0.23\bar8
+      \]
+    </p>
+    <h2>4.5 <ruby>chebyshev's inequality</h2>
+    <p>
+      for any random variable \(X\) having mean \(\mu\) and variance \(\sigma^2\),
+      \[
+      P(\left|X - \mu\right| &lt; k\sigma) \ge 1-\frac1{k^2}
+      \]
+      where \(k > -1\)
+    </p>
+    <p>
+      alternatively
+      \[
+      P(\mu - k\sigma &lt; X &lt; \mu + k\sigma) \ge 1 - \frac1{k^2}
+      \]
+    </p>
+    <p>this provides the minimum probability that the random variable is within \(k\) standard deviations of \(\mu\).</p>
+    <h1><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h1>
+    <p>
+      when a random variable indicates a single numerical response it is called <b>univariate</b>.
+      when it could have more than one response it's called <b>multivariate</b>.
+      in particular when there are 2 responses it's <b>bivariate</b>
+    </p>
+    <p>eg if we are measuring height and weight at the same time</p>
+    <p>
+      the <b>joint probability density/mass function</b> of \(X_1\) and \(X_2\) is
+      \(
+      p(x_1, x_2) = P(X_1 = x_1, X_2 = x_2)
+      \)
+      for all real numbers \(x_1, x_2\)
+    </p>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
   </body>
