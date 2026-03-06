@@ -12,7 +12,7 @@
 <pre>
         <span style="color: var(--green)">program</span>
            v
-<span style="color: var(--red)">input</span> &gt; <span style="color: var(--green)">process</span> &gt; <span style="color: var(--magenta-cooler)">output</span>
+<span style="color: var(--red)">input</span> > <span style="color: var(--green)">process</span> > <span style="color: var(--magenta-cooler)">output</span>
            v
         <span style="color: var(--green)">storage</span>
 </pre>
@@ -100,17 +100,17 @@
       <li>replace processor (rt down, t up)</li>
       <li>add more proessors (no changes to rt or t)</li>
     </ul>
-    <p>perf &prop; 1/exectime</p>
+    <p>perf ∝ 1/exectime</p>
     <h1>2026-01-27</h1>
     <p>
       a "2&#x202f;GHz" processor has a 1/(2&#x202f;GHz) = 0.5&#x202f;ns <small>=
       500&#x202f;ps</small> <b>clock cycle</b>
     </p>
-    <p>ExecTime = ClockCycles &times; CycleTime = ClockCycles / ClockRate</p>
+    <p>ExecTime = ClockCycles × CycleTime = ClockCycles / ClockRate</p>
     <blockquote>
       [the math] is trying to touch your brain a little bit.
       squeeze it, but not crush it<br />
-      &ndash; <cite>prof chidella</cite>
+      – <cite>prof chidella</cite>
     </blockquote>
     <p>CPI = clock cycles per instruction</p>
     <p>in mips, memory instructions take the most clock cycles</p>
@@ -121,9 +121,9 @@
       <dt>standard equation for ET</dt>
       <dd>
         ET<br />
-        = CC &times; CT<br />
-        = IC &times; CPI &times; CT<br />
-        = IC &times; CPI / CR
+        = CC × CT<br />
+        = IC × CPI × CT<br />
+        = IC × CPI / CR
       </dd>
     </dl>
     <h1>2026-01-29</h1>
@@ -136,8 +136,8 @@
       <li>add 1</li>
     </ol>
     <p>
-      the range of a signed <i>n</i>-bit integer type is -2<sup><i>n</i>&minus;1</sup>
-      to 2<sup><i>n</i>&minus;1</sup>&nbsp;&minus;&nbsp;1
+      the range of a signed <i>n</i>-bit integer type is -2<sup><i>n</i>−1</sup>
+      to 2<sup><i>n</i>−1</sup> − 1
     </p>
     <p>
       eg <code class="type">int</code> can store numbers from -2,147,483,648 to 2,147,483,647
@@ -252,7 +252,7 @@ a    c    1    7    0    0    0    4
     </code></h3>
     <p>how do you fit a 32 bit address into 26 bits? you don't!</p>
     <p>
-      offset address = (label address &minus; <code class="constant">$pc</code>) / 4
+      offset address = (label address − <code class="constant">$pc</code>) / 4
     </p>
     <p>
       tells you the number of instructions away it is! since instructions are
@@ -267,7 +267,7 @@ a    c    1    7    0    0    0    4
       <tr>
         <th>A</th>
         <th>B</th>
-        <th>A &and; B</th>
+        <th>A ∧ B</th>
       </tr>
       <tr>
         <td>0</td>
@@ -296,7 +296,7 @@ a    c    1    7    0    0    0    4
       <tr>
         <th>A</th>
         <th>B</th>
-        <th>A &or; B</th>
+        <th>A ∨ B</th>
       </tr>
       <tr>
         <td>0</td>
@@ -326,7 +326,7 @@ a    c    1    7    0    0    0    4
       <tr>
         <th>A</th>
         <th>B</th>
-        <th>A &darr; B</th>
+        <th>A ↓ B</th>
       </tr>
       <tr>
         <td>0</td>
@@ -351,11 +351,11 @@ a    c    1    7    0    0    0    4
     </table>
     <h3 class="smcp">not</h3>
     <p><code>nor rd, rs, $0</code></p>
-    <p>for integers &not;<i>x</i> = -<i>x</i> &minus; 1</p>
+    <p>for integers ¬<i>x</i> = -<i>x</i> − 1</p>
     <table>
       <tr>
         <th>A</th>
-        <th>&not;A</th>
+        <th>¬A</th>
       </tr>
       <tr>
         <td>0</td>
@@ -368,13 +368,13 @@ a    c    1    7    0    0    0    4
     </table>
     <h3>logical left shift</h3>
     <p><code>sll rd, rt, shamt</code></p>
-    <p>eg <code>0b00001001</code> &ll; 2 = <code>0b00100100</code></p>
+    <p>eg <code>0b00001001</code> ≪ 2 = <code>0b00100100</code></p>
     <p>
-      for unsigned integers this produces <i>rs</i> &times; 2<sup><i>shamt</i></sup>
+      for unsigned integers this produces <i>rs</i> × 2<sup><i>shamt</i></sup>
     </p>
     <h3>logical right shift</h3>
     <p><code>srl rd, rt, shamt</code></p>
-    <p>eg <code>0b10010001</code> &gg; 2 = <code>0b00100100</code></p>
+    <p>eg <code>0b10010001</code> ≫ 2 = <code>0b00100100</code></p>
     <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
     <h2 id="32-bit-constants">32-bit constants</h2>
     <p>
@@ -392,7 +392,7 @@ a    c    1    7    0    0    0    4
     <p><b>signed</b> numbers can be positive and negative and <b>unsigned</b> numbers can only be positive</p>
     <dl>
       <dt>overflow</dt>
-      <dd>value outside the range that can fit, eg trying to fit 3&times;10<sup>9</sup> into an <code class="type">int</code></dd>
+      <dd>value outside the range that can fit, eg trying to fit 3×10<sup>9</sup> into an <code class="type">int</code></dd>
       <dt>underflow</dt>
       <dd>value less than the range, only for floating point numbers</dd>
     </dl>
@@ -428,7 +428,7 @@ a    c    1    7    0    0    0    4
         </ol>
       </li>
     </ol>
-    <p>for 2 &times; 3 = 6:</p>
+    <p>for 2 × 3 = 6:</p>
     <table>
       <tr><th>iter</th><th>product</th></tr>
       <tr><td>0</td><td>0000'0011</td></tr>
@@ -445,25 +445,25 @@ a    c    1    7    0    0    0    4
       <li>place the multiplier in the right half of the product, set bb = 0</li>
       <li>for each bit of the multiplier:
         <ol>
-          <li><span class="keyword">if</span> bb &gt; product lsb: product left half += multiplicand</li>
-          <li><span class="keyword">else if</span> bb &lt; product lsb: product left half &minus;= multiplicand</li>
+          <li><span class="keyword">if</span> bb > product lsb: product left half += multiplicand</li>
+          <li><span class="keyword">else if</span> bb < product lsb: product left half −= multiplicand</li>
           <li><span class="keyword">else</span>: do nothing</li>
           <li>arithmetic right shift concatenated-product-and-bb by 1, sign extend</li>
         </ol>
       </li>
     </ol>
-    <p>eg 7 &times; -9</p>
+    <p>eg 7 × -9</p>
     <table>
       <tr><th>iter#</th><th>product</th><th>bb</th></tr>
       <tr><td>0</td><td>0000'0000'1111'0111</td><td>0</td></tr>
       <tr><td>1a</td><td>1111'1001'1111'0111</td><td>0</td></tr>
       <tr><td>1b</td><td>1111'1100'1111'1011</td><td>1</td></tr>
-      <tr><td>2&ndash;3</td><td>1111'1111'0011'1110</td><td>1</td></tr>
+      <tr><td>2–3</td><td>1111'1111'0011'1110</td><td>1</td></tr>
       <tr><td>4a</td><td>0000'0110'0011'1110</td><td>1</td></tr>
       <tr><td>4b</td><td>0000'0011'0001'1111</td><td>0</td></tr>
       <tr><td>5a</td><td>1111'1100'0001'1111</td><td>0</td></tr>
       <tr><td>5b</td><td>1111'1110'0000'1111</td><td>1</td></tr>
-      <tr><td>6&ndash;8</td><td>1111'1111'1100'0001</td><td>1</td></tr>
+      <tr><td>6–8</td><td>1111'1111'1100'0001</td><td>1</td></tr>
     </table>
     <h1>2026-02-19</h1>
     <h2 id="division">division</h2>
@@ -474,8 +474,8 @@ a    c    1    7    0    0    0    4
       <li>place the divisor in the left half of itself (shifted)</li>
       <li>for n+1 iterations:
         <ol>
-          <li>remainder &minus;= divisor</li>
-          <li>if remainder &lt; 0: restore (remainder += divisor), shift quotient left, lsb = 0; otherwise shift quotient left, lsb = 1</li>
+          <li>remainder −= divisor</li>
+          <li>if remainder < 0: restore (remainder += divisor), shift quotient left, lsb = 0; otherwise shift quotient left, lsb = 1</li>
           <li>shift divisor right 1 bit</li>
         </ol>
       </li>
@@ -598,11 +598,11 @@ a    c    1    7    0    0    0    4
         <ol>
           <li>shift remainder left 1 bit</li>
           <li>subtract divisor from the left half of remainder</li>
-          <li>if remainder &lt; 0: restore (undo step b), shift quotient left, quotient lsb = 0. otherwise: shift quotient left, quotient lsb = 1</li>
+          <li>if remainder < 0: restore (undo step b), shift quotient left, quotient lsb = 0. otherwise: shift quotient left, quotient lsb = 1</li>
         </ol>
       </li>
     </ol>
-    <p>eg 6 &divide; 3 = <code>0b0000'0110</code> &divide; <code>0b0011</code>, expected quotient 2 remainder 0:</p>
+    <p>eg 6 ÷ 3 = <code>0b0000'0110</code> ÷ <code>0b0011</code>, expected quotient 2 remainder 0:</p>
     <table>
       <tr><th>iter#</th><th>quotient</th><th>remainder</th></tr>
       <tr><td>0</td><td>0000</td><td>0000'0110</td></tr>
@@ -699,5 +699,102 @@ sign exponent   mantissa</pre>
         </ul></li>
       </ul></li>
     </ul>
+    <h1>2026-03-03</h1>
+    <h2>the processor</h2>
+    <p>steps to execute an instruction:</p>
+    <ol>
+      <li>
+        <b>IF (instruction fetch)</b> –<br/>
+        pc (program counter) gets the instruction's address and gives it to instruction memory, which
+        converts the instruction into binary
+      </li>
+      <li>
+        <b>ID (instruction decode)</b> –<br/>
+        identifies the registers used in the instruction as source and destination, and sends the values
+        in those registers to the ALU
+      </li>
+      <li>
+        <b>IE (instruction execute)</b> –<br/>
+        ALU takes the inputs and (a) performs the arithmetic/logical operations as necessary (b) calculates addresses for lw/sw (c) makes branch decisions
+      </li>
+      <li><b>DM (data memory)</b> –<br/> not used for every instruction, just for load/store</li>
+      <li><b>WB (write back)</b> –<br/> writes the result into the destination register</li>
+    </ol>
+    <p>reminder: load :  reading from memory :: store : writing to memory</p>
+    <blockquote>
+      generally we are all the people to buy something from the walmart.
+      but not sell anything to the walmart<br />
+      <cite>– prof chidella</cite>
+    </blockquote>
+    <blockquote>
+      are you trying to store money into the bank or is the bank storing money in you?<br />
+      <cite>– prof chidella</cite>
+    </blockquote>
+    <p>honorary mention</p>
+    <blockquote>
+      [miming phone conversation with only one participant]<br/>
+      "hey kishore, did you have the lunch?"<br />
+      "yes! i had the lunch!"<br/>
+      ... we call such people? mad.<br />
+      <cite>– prof kishore chidella</cite>
+    </blockquote>
+    <dl>
+      <dt>mux (multiplexer)</dt>
+      <dd>selects between several input signals and forwrds them to a single place. basically a lightswitch</dd>
+      <dt>combinational</dt>
+      <dd>outputs are only based on current inputs (eg, mux)</dd>
+      <dt>sequential</dt>
+      <dd>outputs are based on current inputs <i>and</i> past state (eg, storage)</dd>
+      <dt>flipflop</dt>
+      <dd>circuit with 2 possible states</dd>
+    </dl>
+    <pre>
+D flipflop: only triggers during the rising edge of the clock
+      ___
+  D -|   |- Q (output)
+     |   |
+Clk -|≥__|</pre>
+    <table>
+      <tr>
+        <th>D</th>
+        <th>Clk</th>
+        <th>Q</th>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>0</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </table>
+    <h1>2026-03-05</h1>
+    <p>recap of last class with some specific instrunctions as examples</p>
+    <blockquote>
+      i'm not giving loan to the bank! that's <em>stupid</em>!<br />
+      <cite>– prof chidella</cite>
+    </blockquote>
+    <p>
+      instructions like <code class="function">j</code> take the fewest steps, and instructions like <code class="function">lw</code> take the most
+    </p>
+    <p>
+      <b>TODO</b> is anything important in the slides?
+      (if you think so, let me know! either by opening an issue at
+      <a href="https://github.com/mi2ebi/notes">https://github.com/mi2ebi/notes</a>,
+      or my dming me on discord <code>mi2ebi</code>)
+    </p>
   </body>
 </html>

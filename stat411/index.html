@@ -25,11 +25,11 @@
     <p>types of statistics:</p>
     <ol>
       <li>
-        <b>descriptive</b> &ndash;
+        <b>descriptive</b> –
         methods to organise/display/decribe data
       </li>
       <li>
-        <b>inferential</b> &ndash;
+        <b>inferential</b> –
         methods to utitlse data to make decisions and models etc
       </li>
     </ol>
@@ -43,7 +43,7 @@
     </p>
     <blockquote>
       there are 3 lies in society: lies, damned lies, and statistics<br />
-      <cite>&ndash; popularised by mark twain</cite>
+      <cite>– popularised by mark twain</cite>
     </blockquote>
     <p>book rec: <i>how to lie with statistics</i></p>
     <h2>1.3 experiments and data</h2>
@@ -53,12 +53,12 @@
       <dt>population</dt>
       <dd>
         all elements under study being characterized by some <b>parameter</b>:
-        eg population mean, \(\mu\)
+        eg population mean, \(μ\)
       </dd>
       <dt>sample</dt>
       <dd>
         a properly chosen subset of a population characterized by a <b>statistic</b>:
-        eg sample mean, \(\bar x\)
+        eg sample mean, \(x̄\)
       </dd>
       <dt>sample space</dt>
       <dd>collection of all possible outcomes of an experiment</dd>
@@ -91,11 +91,11 @@
       <dt>observational study</dt>
       <dd>conducted in a way where we have no control over any variables</dd>
       <dd>
-        <b>cross-sectional</b> &ndash;
+        <b>cross-sectional</b> –
         collect data at one point in time
       </dd>
       <dd>
-        <b>longitudinal/cohort</b> &ndash;
+        <b>longitudinal/cohort</b> –
         collect data over a period of time about common factors
       </dd>
       <dt>experimental study</dt>
@@ -111,32 +111,32 @@
     <h2>1.6 types of variables</h2>
     <dl>
       <dt>quantitative variables</dt>
-      <dd><b>discrete</b> &ndash; countable</dd>
-      <dd><b>continuous</b> &ndash; any numerical value</dd>
+      <dd><b>discrete</b> – countable</dd>
+      <dd><b>continuous</b> – any numerical value</dd>
       <dt>qualitative/categorical variables</dt>
-      <dd><b>nominal</b> &ndash; not rankable</dd>
-      <dd><b>ordinal</b> &ndash; rankable</dd>
+      <dd><b>nominal</b> – not rankable</dd>
+      <dd><b>ordinal</b> – rankable</dd>
     </dl>
     <p>levels of measurement</p>
     <ul>
       <li>nominal</li>
       <li>ordinal</li>
       <li>
-        <b>interval</b> &ndash;
+        <b>interval</b> –
         no such thing as absolute zero. eg we can't say las vegas is twice as hot as
-        chicago if it's 60&deg; in vegas and 30&deg; in chicago
+        chicago if it's 60° in vegas and 30° in chicago
       </li>
-      <li><b>ratio</b> &ndash; there is a possible absolute zero</li>
+      <li><b>ratio</b> – there is a possible absolute zero</li>
     </ul>
     <h2>1.3 measures of central tendency</h2>
-    <p>if we have a random sample \(x_1, x_2, \dots, x_n\) of size \(n\)</p>
+    <p>if we have a random sample \(x₁, x₂, …, xₙ\) of size \(n\)</p>
     <dl>
       <dt>measure of central tendency</dt>
       <dd>some indication of where the center of the dataset is</dd>
       <dt>mean</dt>
       <dd>simplest and nicest. "center of gravity"</dd>
       <dd>\(
-        \=x = \frac1n \sum\limits_{i = 1}^n x_i = \sum\limits_{i = 1}^n \frac{x_i}n
+        x̄ = \frac1n ∑\limitsᵢ₌₁ⁿ xᵢ = ∑\limitsᵢ₌₁ⁿ \frac{xᵢ}n
       \)</dd>
       <dt>trimmed mean</dt>
       <dd>
@@ -145,35 +145,35 @@
       </dd>
       <dt>median</dt>
       <dd>middle value in the ordered dataset</dd>
-      <dd>if \(n\) is odd, \(\~x = x_{\frac{n + 1}2}\)</dd>
+      <dd>if \(n\) is odd, \(x̃ = x_{\frac{n + 1}2}\)</dd>
       <dd>
-        if \(n\) is even, \(\~x = \frac12\left(x_{\frac n2} + x_{\frac n2 + 1}\right)\)
+        if \(n\) is even, \(x̃ = \frac12\left(x_{\frac n2} + x_{\frac n2 + 1}\right)\)
       </dd>
       <dd>median is less sensitive to outliers so it is more <b>robust</b></dd>
       <dt>mode</dt>
       <dd>values that occur most frequently</dd>
-      <dd>one mode &rarr; <b>unimodal</b>, two modes &rarr; <b>bimodal</b>, etc</dd>
+      <dd>one mode → <b>unimodal</b>, two modes → <b>bimodal</b>, etc</dd>
     </dl>
-    <p>if the histogram of the data is symmetric, \(\text{mode} = \~x = \=x\)</p>
+    <p>if the histogram of the data is symmetric, \(\text{mode} = x̃ = x̄\)</p>
     <p>if the histogram is skewed to (has a longer tail on) the right, \(
-      \text{mode} &lt; \~x &lt; \=x
+      \text{mode} < x̃ < x̄
     \)</p>
     <h2>1.4 measures of variability</h2>
     <dl>
       <dt>range</dt>
       <dd>difference in the max and min of the dataset</dd>
       <dt>(individual) deviation</dt>
-      <dd>\(x_i - \=x\)</dd>
+      <dd>\(xᵢ - x̄\)</dd>
       <dt>sample variance</dt>
       <dd>\(
-        s^2
-        = \frac1{n - 1} \sum\limits_{i = 1}^n (x_i - \=x)^2
+        s²
+        = \frac1{n - 1} ∑\limitsᵢ₌₁ⁿ (xᵢ - x̄)²
         = \frac1{n - 1} \left(
-          \sum\limits_{i = 1}^n x_i^2 - \frac{\left(\sum x_i\right)^2}n
+          ∑\limitsᵢ₌₁ⁿ xᵢ² - \frac{\left(∑ xᵢ\right)²}n
         \right)
       \)</dd>
       <dt>standard deviation</dt>
-      <dd>\(s = \sqrt{s^2}\)</dd>
+      <dd>\(s = \sqrt{s²}\)</dd>
     </dl>
     <p>the second form is nicer for computation since you don't need eg 2 loops</p>
 <pre>
@@ -186,52 +186,52 @@
 <span class="keyword">let</span> <span class="variable">s2</span> = <span class="constant">1.</span>/(<span class="variable">n</span>-<span class="constant">1.</span>) * (<span class="variable">sum_squares</span> - <span class="variable">sum</span>*<span class="variable">sum</span>/<span class="variable">n</span>);
 <span class="keyword">let</span> <span class="variable">s</span> = <span class="variable">s2</span>.<span class="function">sqrt</span>();
 </pre>
-    <p>the sum of deviations is \(\sum\limits_{i = 1}^n (x_i - \=x) = 0\)</p>
+    <p>the sum of deviations is \(∑\limitsᵢ₌₁ⁿ (xᵢ - x̄) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
-      <dd>for samples: \(\text{CV} = 100\% \cdot s/\=x\)</dd>
-      <dd>for populations: \(\text{CV} = 100\% \cdot \sigma/\mu\)</dd>
+      <dd>for samples: \(\text{CV} = 100\% · s/x̄\)</dd>
+      <dd>for populations: \(\text{CV} = 100\% · σ/μ\)</dd>
       <dt>quartiles</dt>
       <dd>divide the sample into 4 equal parts (by #observations)</dd>
-      <dd>\(Q_1\), med, \(Q_3\)</dd>
+      <dd>\(Q₁\), med, \(Q₃\)</dd>
       <dt>interquartile range</dt>
-      <dd>\(\text{IQR} = Q_3 - Q_1\)</dd>
+      <dd>\(\text{IQR} = Q₃ - Q₁\)</dd>
       <dd>middle 50% of the sample</dd>
       <dt>five-number summary</dt>
       <dd>the three quartiles along with min and max</dd>
       <dd>used to make a <b>boxplot</b></dd>
       <dt>inner fence</dt>
-      <dd>the range between \(Q_1 - 1.5~\text{IQR}\) and \(Q_3 + 1.5~\text{IQR}\)</dd>
+      <dd>the range between \(Q₁ - 1.5~\text{IQR}\) and \(Q₃ + 1.5~\text{IQR}\)</dd>
       <dd>outside this are <b>mild outliers</b></dd>
       <dt>percentiles</dt>
       <dd>like quartiles but with 100 equal parts</dd>
-      <dd>\(Q_1 = p_{25}\) etc</dd>
+      <dd>\(Q₁ = p₂₅\) etc</dd>
       <dd>
-        \(p_k = \frac{nk}{100}\)th observation and says that \(k\)% of the observations
+        \(pₖ = \frac{nk}{100}\)th observation and says that \(k\)% of the observations
         are at or below that value
       </dd>
       <dt>percentile rank</dt>
       <dd>figure out what percentile an observation is</dd>
-      <dd>\(100 \cdot (\text{\# observations} &lt; x_i) / n\)</dd>
+      <dd>\(100 · (\text{\# observations} < xᵢ) / n\)</dd>
     </dl>
     <h2>1.10 empirical rule & z-score</h2>
     <dl>
       <dt>empirical rule</dt>
       <dd>
         for a normal (bell shaped) distribution, <ul>
-          <li>\(\=x \pm s\) contains 68% of values</li>
-          <li>\(\=x \pm 2s\) &rarr; 95%</li>
-          <li>\(\=x \pm 3s\) &rarr; 99.7%</li>
+          <li>\(x̄ ± s\) contains 68% of values</li>
+          <li>\(x̄ ± 2s\) → 95%</li>
+          <li>\(x̄ ± 3s\) → 99.7%</li>
         </ul>
         so almost the entire dataset fits in 6 standard deviations.
-        this is only a rule of thumb. also called the <b>6&sigma; rule</b>
+        this is only a rule of thumb. also called the <b>6σ rule</b>
       </dd>
       <dt>z-score</dt>
-      <dd>\(z_i = \frac{x_i - \=x}s\)</dd>
+      <dd>\(zᵢ = \frac{xᵢ - x̄}s\)</dd>
       <dd>unit-free!</dd>
-      <dd>if \(|z| &gt; 2\) for an observation it could be considered an outlier</dd>
-      <dd>converting \(x_i\) to \(z_i\) is called <b>standardization</b></dd>
-      <dd>and \(x_i = \=x + z_is\) for <b>destandardization</b></dd>
+      <dd>if \(|z| > 2\) for an observation it could be considered an outlier</dd>
+      <dd>converting \(xᵢ\) to \(zᵢ\) is called <b>standardization</b></dd>
+      <dd>and \(xᵢ = x̄ + zᵢs\) for <b>destandardization</b></dd>
     </dl>
     <h1>ch2 probability</h1>
     <h2>2.1 intro</h2>
@@ -239,18 +239,18 @@
       <dt>statistical experiment</dt>
       <dd>process of generating outcomes that cannot be predicted in advance</dd>
       <dt>sample space</dt>
-      <dd>set of all possible outcomes. denoted \(S\) or \(\Omega\)</dd>
+      <dd>set of all possible outcomes. denoted \(S\) or \(Ω\)</dd>
       <dt>event</dt>
       <dd>any subset of \(S\), denoted with a capital letter</dd>
     </dl>
     <p>eg rolling a die: \(S = \set{1, 2, 3, 4, 5, 6}\)</p>
     <dl>
       <dt>probability</dt>
-      <dd>numerical measure of how likely some event is, denoted \(P(\cdot)\)</dd>
+      <dd>numerical measure of how likely some event is, denoted \(P(·)\)</dd>
     </dl>
     <p>kolmogorov's axioms of probability:</p>
     <ol>
-      <li>\(0 \le P(A) \le 1\) for any event \(A\)</li>
+      <li>\(0 ≤ P(A) ≤ 1\) for any event \(A\)</li>
       <li>\(P(S) = 1\)</li>
     </ol>
     <p>
@@ -266,31 +266,31 @@
     <h2>2.2 set operations</h2>
     <dl>
       <dt>empty set</dt>
-      <dd>\(\emptyset\), the set with nothing in it. \(P(\emptyset) = 0\)</dd>
+      <dd>\(∅\), the set with nothing in it. \(P(∅) = 0\)</dd>
       <dt>intersection</dt>
-      <dd>\(A \cap B = \set{x : x \in A \land x \in B}\)</dd>
+      <dd>\(A ∩ B = \set{x : x ∈ A ∧ x ∈ B}\)</dd>
       <dt><i>mutually exclusivei / disjoint</i></dt>
-      <dd>if \(A \cap B = \emptyset\)</dd>
+      <dd>if \(A ∩ B = ∅\)</dd>
       <dt>union</dt>
-      <dd>\(A \cup B = \set{x : x \in A \lor x \in B}\)</dd>
+      <dd>\(A ∪ B = \set{x : x ∈ A ∨ x ∈ B}\)</dd>
       <dt>complement</dt>
-      <dd>\(A^\complement = A' = \=A = \set{x : x \not\in A}\)</dd>
+      <dd>\(A^∁ = A' = Ā = \set{x : x ∉ A}\)</dd>
     </dl>
     <p><img src="setoperations.png" /></p>
     <dl>
       <dt>rule of addition</dt>
-      <dd>\(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)</dd>
+      <dd>\(P(A ∪ B) = P(A) + P(B) - P(A ∩ B)\)</dd>
       <dt>rule of complement</dt>
-      <dd>\(P(A^\complement) = 1 - P(A)\)</dd>
+      <dd>\(P(A^∁) = 1 - P(A)\)</dd>
       <dt>demorgan's laws</dt>
-      <dd>\((A \cup B)^\complement = A^\complement \cap B^\complement\)</dd>
-      <dd>\((A \cap B)^\complement = A^\complement \cup B^\complement\)</dd>
+      <dd>\((A ∪ B)^∁ = A^∁ ∩ B^∁\)</dd>
+      <dd>\((A ∩ B)^∁ = A^∁ ∪ B^∁\)</dd>
       <dt>distributive laws</dt>
-      <dd>\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)</dd>
-      <dd>\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\)</dd>
+      <dd>\(A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)\)</dd>
+      <dd>\(A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)\)</dd>
       <dt>odds <i>in favor of A</i></dt>
-      <dd>\(\frac{P(A)}{P(A^\complement)}\)</dd>
-      <dd>result between 0 and \(\infty\) exclusive</dd>
+      <dd>\(\frac{P(A)}{P(A^∁)}\)</dd>
+      <dd>result between 0 and \(∞\) exclusive</dd>
     </dl>
     <h2>2.4 counting sample points</h2>
     <dl>
@@ -298,13 +298,13 @@
       <dd>study of enumeration</dd>
       <dt>multiplication principle</dt>
       <dd>
-        for \(k\) choices, if there are \(n_i\) ways to make choice \(i\), then the
-        total number of possibilities is \(\prod\limits_{i = 1}^k n_i\)
+        for \(k\) choices, if there are \(nᵢ\) ways to make choice \(i\), then the
+        total number of possibilities is \(∏\limitsᵢ₌₁ᵏ nᵢ\)
       </dd>
       <dt>permutation</dt>
       <dd>an ordered subset</dd>
       <dt>factorial</dt>
-      <dd>for any integer \(n \ge 0\), \(n! = \prod\limits_{i = 1}^n i\)</dd>
+      <dd>for any integer \(n ≥ 0\), \(n! = ∏\limitsᵢ₌₁ⁿ i\)</dd>
       <dd>specialcase \(0! = 1\)</dd>
     </dl>
     <p>
@@ -328,7 +328,7 @@
       <dt>multinomial combination</dt>
       <dd>
         if there are \(k\) kinds, then the ways to partition the set into kinds
-        is \[{n \choose n_1, n_2, \dots, n_k} = \frac{n!}{\prod_{i = 1}^k n_i!}\]
+        is \[{n \choose n₁, n₂, …, nₖ} = \frac{n!}{∏ᵢ₌₁ᵏ nᵢ!}\]
       </dd>
     </dl>
     <p>
@@ -337,19 +337,19 @@
     </p>
     <h2>2.4 conditional probability</h2>
     <p>the probability that \(A\) happens <b>given</b> \(B\) is \(
-      P(A \mathbin| B) = \frac{P(A \cap B)}{P(B)}
+      P(A \mathbin| B) = \frac{P(A ∩ B)}{P(B)}
     \)</p>
     <p>this changes the sample space</p>
     <dl>
       <dt>rule of multiplication</dt>
-      <dd>\(P(A \cap B) = P(A \mathbin| B)P(B) = P(B \mathbin| A)P(A)\)</dd>
+      <dd>\(P(A ∩ B) = P(A \mathbin| B)P(B) = P(B \mathbin| A)P(A)\)</dd>
     </dl>
     <p>
       eg if you're rolling a fair die, \(P(\set{5} \mathbin| \set{1, 3, 5}) = \frac13\)
     </p>
     <p>
       two events \(A\) and \(B\) are <b>independent</b> if \(P(A \mathbin| B) = P(A)\),
-      or equivalently if \(P(A \cap B) = P(A)(B)\)
+      or equivalently if \(P(A ∩ B) = P(A)(B)\)
     </p>
     <p>two mutually exclusive events are always dependent</p>
     <img src="given-even.png" />
@@ -386,33 +386,33 @@
       </tr>
     </table>
     <p>eg \(
-      P\left(\text{smoking} \middle| \text{bronchitis}^\complement\right) = \frac13
+      P\left(\text{smoking} \middle| \text{bronchitis}^∁\right) = \frac13
     \)</p>
-    <p>smoking and bronchitis are dependent because \(P(S) \neq P(S \mathbin| B)\)</p>
+    <p>smoking and bronchitis are dependent because \(P(S) ≠ P(S \mathbin| B)\)</p>
     <h2>2.7 bayes' theorem</h2>
-    <p>the events \(B_1, B_2, \dots, B_k\) <b>partition</b> a sample space \(S\) if</p>
+    <p>the events \(B₁, B₂, …, Bₖ\) <b>partition</b> a sample space \(S\) if</p>
     <ul>
-      <li>\(B_i \cap B_j = \emptyset\) for all \(i \ne j\)</li>
-      <li>\(\bigcup\limits_{1 \le i \le k} B_i = S\)</li>
+      <li>\(Bᵢ ∩ Bⱼ = ∅\) for all \(i ≠ j\)</li>
+      <li>\(⋃\limits_{1 ≤ i ≤ k} Bᵢ = S\)</li>
     </ul>
     <p>
       suppose \(k = 2\) and some event \(A\) has occurred in a random manner in \(S\),
-      and we want to know \(P(B_i | A)\). since \(A = (A \cap B_1) \cup (A \cap B_2)\)
+      and we want to know \(P(Bᵢ \mathbin| A)\). since \(A = (A ∩ B₁) ∪ (A ∩ B₂)\)
       from the partition, \[
-        P(B_i | A) = \frac{P(B_i \cap A)}{P(A)} = \frac{P(A | B_i)P(B_i)}{P(A)}
-        = \frac{P(A | B_i)P(B_i)}{\sum_j P(A | B_j)P(B_j)}
+        P(Bᵢ \mathbin| A) = \frac{P(Bᵢ ∩ A)}{P(A)} = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{P(A)}
+        = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{∑ⱼ P(A \mathbin| Bⱼ)P(Bⱼ)}
       \]
     </p>
     <p>
-      \(P(B_i | A)\) is the <b>posterior</b> probability
-      and \(P(B_i)\) is the <b>prior</b> probability
+      \(P(Bᵢ \mathbin| A)\) is the <b>posterior</b> probability
+      and \(P(Bᵢ)\) is the <b>prior</b> probability
     </p>
-    <p><b>TODO</b> what does this tell us?</p>
+    <p>this tells us how to <b>update</b> \(P(Bᵢ)\) given the new information \(P(A)\)</p>
     <h1>ch3 random variables and their probability distributions</h1>
     <dl>
       <dt>random variable</dt>
       <dd>
-        a function \(X : \mathbb R \to \mathbb R\) that assigns numerical values to events
+        a function \(X : ℝ → ℝ\) that assigns numerical values to events
         in a sample space
       </dd>
     </dl>
@@ -444,40 +444,40 @@
     </table>
     <p>which has these properties. they look suspiciously similar to the axioms of probability!</p>
     <ul>
-      <li>\(0 \le p(x) &lt; 1\) for all values of \(x\)</li>
-      <li>\(\sum\limits_{\text{all }x} = 1\)</li>
+      <li>\(0 ≤ p(x) < 1\) for all values of \(x\)</li>
+      <li>\(∑\limits_{\text{all }x} = 1\)</li>
     </ul>
     <p>if it's continuous,</p>
     <ul>
-      <li>\(f(x) \ge 0\) for all \(x\)</li>
-      <li>\(\int_{-\infty}^\infty f(x) \;\mathrm dx = 1\)</li>
-      <li>\(P(a \le X \le b) = \int_a^b f(x) \;\mathrm dx\)</li>
+      <li>\(f(x) ≥ 0\) for all \(x\)</li>
+      <li>\(∫_{-∞}^∞ f(x) \;\mathrm dx = 1\)</li>
+      <li>\(P(a ≤ X ≤ b) = ∫ₐᵇ f(x) \;\mathrm dx\)</li>
     </ul>
     <img src="pdf.png" />
     <p>
       the <b>cumulative distribution function (CDF)</b> of a random variable, \(F(x)\),
       is defined as \[
-      F_X(x) = P(X \le x) = \sum\limits_{X \le x} p(x)
+      F_X(x) = P(X ≤ x) = ∑\limits_{X ≤ x} p(x)
       \]
     </p>
-    <p>for the coin example, \(F(1) = P(X \le 1) = \frac34\) etc</p>
+    <p>for the coin example, \(F(1) = P(X ≤ 1) = \frac34\) etc</p>
     <p>
       if it's continuous, \[
-      F_X(x) = P(X \le x) = \int_{-\infty}^\infty f(t) \;\mathrm dx
+      F_X(x) = P(X ≤ x) = ∫_{-∞}^∞ f(t) \;\mathrm dx
       \]
     </p>
     <ul>
       <li>\(\frac{\mathrm d}{\mathrm dx} F(x) = f(x)\)</li>
       <li>P(a \le X \le b) = F(b) - F(a)</li>
-      <li>\(F_X(b) = P(X \le b) = \int_{-\infty}^b f(x) \;\mathrm dx\)</li>
+      <li>\(F_X(b) = P(X ≤ b) = ∫_{-∞}ᵇ f(x) \;\mathrm dx\)</li>
     </ul>
     <p>the cdf \(F(x)\) is more informative than the pdf \(f(x)\) about \(X\)</p>
     <p>cdf is nondecreasing</p>
-    <p>for continuous variables we can say \(P(X \le a) = P(X &lt; a)\)</p>
+    <p>for continuous variables we can say \(P(X ≤ a) = P(X < a)\)</p>
     <p>
       <b class="example" >example.</b> let \[
       f(x) = \begin{cases}
-      cx^2 - x, & 0 \le x\le 2\\
+      cx² - x, & 0 ≤ x≤ 2\\
       0, & \text{otherwise}
       \end{cases}
       \]
@@ -485,9 +485,9 @@
     </p>
     <p>
       \[
-      \int_0^2 \left(cx^2 + x\right) \;\mathrm dx = 1
-      \Leftrightarrow
-      \left.\left(\frac c3 x^2 + \frac12 x^2\right)\vphantom\int\right|_0^2
+      ∫₀² \left(cx² + x\right) \;\mathrm dx = 1
+      ⟺
+      \left.\left(\frac c3 x² + \frac12 x²\right)\vphantom∫\right|₀²
       = \frac83 c + 2 = 1
       \]
     </p>
@@ -495,37 +495,37 @@
     <p><b class="example" >(b)</b> find \(F(x)\).</p>
     <p>
       \[
-      \int_0^x \left(-\frac38 t^2 + t\right) \;\mathrm dt
-      = \left.\left(-\frac18 t^3 + \frac12 t^2\right)\vphantom\int\right|_0^x
-      = -\frac18 x^3 + \frac12 x^2
+      ∫₀ˣ \left(-\frac38 t² + t\right) \;\mathrm dt
+      = \left.\left(-\frac18 t³ + \frac12 t²\right)\vphantom∫\right|₀ˣ
+      = -\frac18 x³ + \frac12 x²
       \]
     </p>
     <p>
       therefore,
       \[
       F(x) = \begin{cases}
-      0, & x &lt; 0\\
-      -\frac18 x^3 + \frac12 x^2, & 0 \le x &lt; 2\\
-      1, & x \ge 2
+      0, & x < 0\\
+      -\frac18 x³ + \frac12 x², & 0 ≤ x < 2\\
+      1, & x ≥ 2
       \end{cases}
       \]
     </p>
-    <p><b class="example" >(c.i)</b> evaluate \(P(0 \le X \le 0.5)\) using pdf \(f(x)\)</p>
+    <p><b class="example" >(c.i)</b> evaluate \(P(0 ≤ X ≤ 0.5)\) using pdf \(f(x)\)</p>
     <p>
       \[
-      \int_0^{0.5} \left(-\frac38 x^2 + x\right) \;\mathrm dx
-      = \left.\left(-\frac18 x^3 + \frac12 x^2\right)\vphantom\int\right|_0^{0.5}
+      ∫₀^{0.5} \left(-\frac38 x² + x\right) \;\mathrm dx
+      = \left.\left(-\frac18 x³ + \frac12 x²\right)\vphantom∫\right|₀^{0.5}
       = \frac7{64}
       \]
     </p>
     <p>
-      (number theory time! \(77 \cdot 73 = (7 \cdot (7 + 1)) \mathbin⧺ (7 \cdot 3) = 5621\) etc)
+      (number theory time! \(77 · 73 = (7 · (7 + 1)) \mathbin⧺ (7 · 3) = 5621\) etc)
     </p>
     <p><b class="example" >(c.ii)</b> using cdf \(F(x)\)</p>
     <p>
       \[
       F(0.5) - F(0)
-      = -\frac18 \left(\frac12\right)^3 + \frac12 \left(\frac12\right)^2
+      = -\frac18 \left(\frac12\right)³ + \frac12 \left(\frac12\right)²
       = -\frac1{64} + \frac18
       = \frac7{64}
       \]
@@ -536,10 +536,10 @@
       <dt>expected value</dt>
       <dd>
         \(
-        E(X) = \mu_X
+        E(X) = μ_X
         = \begin{cases}
-        \displaystyle\sum\limits_{\text{all }X} xp(x) & \text{if discrete}\\
-        \displaystyle\int_{-\infty}^\infty xf(x) \;\mathrm dx & \text{if continuous}
+        \displaystyle∑\limits_{\text{all }X} xp(x) & \text{if discrete}\\
+        \displaystyle∫_{-∞}^∞ xf(x) \;\mathrm dx & \text{if continuous}
         \end{cases}
         \)
       </dd>
@@ -548,16 +548,16 @@
     <p>
       if \(g\) is a real-valued function we can say
       \(
-      E\set{g(X)} = \mu_{g(X)}
+      E\set{g(X)} = μ_{g(X)}
       = \begin{cases}
-      \sum\limits_{\text{all }X} g(X)p(x)\\
-      \int_{-\infty}^\infty g(X)f(x) \;\mathrm dx
+      ∑\limits_{\text{all }X} g(X)p(x)\\
+      ∫_{-∞}^∞ g(X)f(x) \;\mathrm dx
       \end{cases}
       \)
     </p>
     <dl>
       <dt><i>n</i>th moment</dt>
-      <dd>\(E(X^n) \coloneqq E\set{g(x)}\) where \(g : x \mapsto x^n\)</dd>
+      <dd>\(E(Xⁿ) ≔ E\set{g(x)}\) where \(g : x ↦ xⁿ\)</dd>
     </dl>
     <h2>4.2 expected value of linear combinations</h2>
     <p>
@@ -565,8 +565,8 @@
     </p>
     <ul>
       <li>\(E(a) = a\)</li>
-      <li>\(E(aX \pm b) = aE(X) \pm b\)</li>
-      <li>\(E\set{g(X) \pm h(Y)} = E\set{g(X)} \pm E\set{h(Y)}\)</li>
+      <li>\(E(aX ± b) = aE(X) ± b\)</li>
+      <li>\(E\set{g(X) ± h(Y)} = E\set{g(X)} ± E\set{h(Y)}\)</li>
     </ul>
     <p>expected value is another measure of central tendency</p>
     <h2>4.3 variance of random variable</h2>
@@ -574,33 +574,37 @@
     <p>
       the variance of a random variable \(X\) is given by
       \(
-      \var(X) = E\left((X - \mu)^2\right) = \sigma_X^2
+      \var(X) = E\left((X - μ)²\right) = σ_X²
       \)
     </p>
     <p>
       and this is actually the same as
       \[
       \begin{align*}
-      E(X^2 - 2\mu X + \mu^2) & = E(X^2) - 2\mu E(X) + E(\mu^2)\\
-      & = E(X^2) - 2\mu^2 + \mu^2 \\
-      & = E(X^2) - \mu^2
+      E(X² - 2μ X + μ²) & = E(X²) - 2μ E(X) + E(μ²)\\
+      & = E(X²) - 2μ² + μ² \\
+      & = E(X²) - μ²
       \end{align*}
       \]
     </p>
-    <p>the standard deviation of \(X\) is \(\stdev(X) = \sigma_X = \sqrt{\sigma^2}\)</p>
+    <p>the standard deviation of \(X\) is \(\stdev(X) = σ_X = \sqrt{σ²}\)</p>
     <p>let \(X, Y\) be random variables and \(a, b\) be any real constants. then</p>
     <ul>
       <li>\(\var(a) = 0\)</li>
-      <li>\(\var(aX \pm b) = a^2\var(X)\)</li>
-      <li>\(\var(aX \pm bY) = a^2\var(X) + b^2\var(Y)\) if the random variables are independent</li>
+      <li>\(\var(aX ± b) = a²\var(X)\)</li>
+      <li>\(\var(aX ± bY) = a²\var(X) + b²\var(Y)\) if the random variables are independent</li>
     </ul>
-    <p>if they're not independent we need to take the covariance \(\gdef\cov{\operatorname{cov}}\cov(X, Y)\) into account</p>
+    <p>
+      if they're not independent we need to take the covariance
+      \(\gdef\cov{\operatorname{cov}}\cov(X, Y)\)
+      into account
+    </p>
     <p>
       <b class="example" >example.</b>
       let a random variable \(Y\) have the following pdf:
       \[
       f(y) = \begin{cases}
-      -\frac38y^2 + y & 0 \le y \le 2\\
+      -\frac38y² + y & 0 ≤ y ≤ 2\\
       0 & \text{otherwise}
       \end{cases}
       \]
@@ -610,9 +614,9 @@
       the first moment is
       \[
       E(Y)
-      = \int_0^2 yf(y) \;\mathrm dy
-      = \int_0^2 y \left(-\frac38y^2 + y\right) \;\mathrm dy
-      = \left.\left(\frac{y^3}3 - \frac{3y^4}{32}\right)\right|_0^2
+      = ∫₀² yf(y) \;\mathrm dy
+      = ∫₀² y \left(-\frac38y² + y\right) \;\mathrm dy
+      = \left.\left(\frac{y³}3 - \frac{3y⁴}{32}\right)\right|₀²
       = \frac76
       \]
     </p>
@@ -620,33 +624,36 @@
       <b class="example">(b)</b>
       since the second moment is
       \[
-      E(Y^2)
-      = \int_0^2 y^2 f(y) \;\mathrm dy
-      = \int_0^2 y^2 \left(-\frac38y^2 + y\right) \;\mathrm dy
+      E(Y²)
+      = ∫₀² y² f(y) \;\mathrm dy
+      = ∫₀² y² \left(-\frac38y² + y\right) \;\mathrm dy
       = \frac85
       \]
     </p><p>
       the variance is
       \[
-      \var(Y) = E(Y^2) - \mu^2 = \frac85 - \left(\frac76\right)^2 = \frac{43}{180} = 0.23\bar8
+      \var(Y) = E(Y²) - μ² = \frac85 - \left(\frac76\right)² = \frac{43}{180} = 0.238̄
       \]
     </p>
     <h2>4.5 <ruby>chebyshev's inequality</h2>
     <p>
-      for any random variable \(X\) having mean \(\mu\) and variance \(\sigma^2\),
+      for any random variable \(X\) having mean \(μ\) and variance \(σ²\),
       \[
-      P(\left|X - \mu\right| &lt; k\sigma) \ge 1-\frac1{k^2}
+      P(\left|X - μ\right| < kσ) ≥ 1-\frac1{k²}
       \]
       where \(k > -1\)
     </p>
     <p>
       alternatively
       \[
-      P(\mu - k\sigma &lt; X &lt; \mu + k\sigma) \ge 1 - \frac1{k^2}
+      P(μ - kσ < X < μ + kσ) ≥ 1 - \frac1{k²}
       \]
     </p>
-    <p>this provides the minimum probability that the random variable is within \(k\) standard deviations of \(\mu\).</p>
-    <h1><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h1>
+    <p>
+      this provides the minimum probability that the random variable is within \(k\) standard deviations
+      of \(μ\).
+    </p>
+    <h2><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h2>
     <p>
       when a random variable indicates a single numerical response it is called <b>univariate</b>.
       when it could have more than one response it's called <b>multivariate</b>.
@@ -654,12 +661,116 @@
     </p>
     <p>eg if we are measuring height and weight at the same time</p>
     <p>
-      the <b>joint probability density/mass function</b> of \(X_1\) and \(X_2\) is
+      the <b>joint probability density/mass function</b> of \(X₁\) and \(X₂\) is
       \(
-      p(x_1, x_2) = P(X_1 = x_1, X_2 = x_2)
+      p(x₁, x₂) = P(X₁ = x₁, X₂ = x₂)
       \)
-      for all real numbers \(x_1, x_2\)
+      for all real numbers \(x₁, x₂\) in their domains
     </p>
+    <p>it satisfies the properties:</p>
+    <ul>
+      <li>\(p(x₁, x₂) ≥ 0\)</li>
+      <li>\(∑\limits_{x₁} ∑\limits_{x₂} p(x₁, x₂) = 1\)</li>
+    </ul>
+    <p>
+      the <b>marginal probability distributions</b> of \(X₁\) and \(X₂\) respectively are given by
+      \[
+      p₁(x₁) = ∑\limits_{x₂} p(x₁, x₂)
+      \]
+      and
+      \[
+      p₂(x₂) = ∑\limits_{x₁} p(x₁, x₂)
+      \]
+    </p>
+    <p>
+      the <b>conditional probability function</b> of \(X₁\) given \(X₂=x₂\) is
+      \[
+      P(X₁ = x₁ \mathbin| X₂ = x₂) = \frac{p(x₁, x₂)}{p₂(x₂)}
+      \]
+      provided \(p₂(x₂) ≠ 0\)
+    </p>
+    <p>
+      two random variables are independent iff either
+      \[
+      p(x₁ \mathbin| x₂) = p(x₁)
+      \]
+      or equivalently,
+      \[
+      p(x₁, x₂) = p(x₁) · p(x₂)
+      \]
+      for all \(x₁, x₂\)
+    </p>
+    \(\gdef\cov{\operatorname{cov}}\)
+    <p>
+      the <b>covariance</b> of two random variables is defined by
+      \[
+      \cov(X₁, X₂)
+      = E[(X₁ - μ₁)(X₂ - μ₂)]
+      = E(X₁X₂) - μ₁μ₂
+      \]
+      where
+      \[
+      E(X₁X₂) = ∑\limits_{x₁}∑\limits_{x₂} x₁x₂ p(x₁, x₂)
+      \]
+      it measures how strongly two variables are (linearly) associated or related. it can be positive or
+      negative or zero
+    </p>
+    <ul>
+      <li>\(\cov(aX₁, bX₂) = ab\cov(X₁, X₂)\)</li>
+      <li>
+        when \(X₁\) and \(X₂\) are independent, \(\cov(X₁, X₂) = 0\).<br/>not true the other way around!
+      </li>
+      <li>\(\cov(X₁, X₁) = \var(X₁)\)</li>
+    </ul>
+    <p>
+      if they're continuous we get
+      \[
+      E(X₁X₂) = ∬ x₁x₂ p(x₁, x₂) \;\mathrm dx₁ \;\mathrm dx₂
+      \]
+    </p>
+    \(\gdef\corr{\operatorname{corr}}\)
+    <p>
+      since the covariance depends on the measurement unit, we standardize it, which is called the
+      <b>correlation coefficient</b>
+      \[
+      \corr(X₁, X₂) = ρ_{x₁, x₂}
+      = \frac{\cov(X₁, X₂)}{\sqrt{\var(X₁)}\sqrt{\var(X₂)}}
+      \]
+    </p>
+    <p>
+      it measures the direction and strength of the linear association between \(X₁\) and \(X₂\). it's
+      not a slope! \(-1 ≤ ρ ≤ 1\)
+    </p>
+    <p>
+      the <b>sample correlation coefficient</b> is defined as
+      \[
+      r_{X, Y}
+      = \frac{\cov(X, Y)}{\sqrt{\var(X)}\sqrt{\var(Y)}}
+      = \frac1{n - 1} ∑ᵢ₌₁ⁿ \frac{xᵢ - x̄}{sₓ}\frac{yᵢ - ȳ}{s_y}
+      \]
+    </p>
+    <p>
+      the continuous version of the joint pmf is the <b>joint pdf</b> \(f(x₁, x₂)\)
+    </p>
+    <ul>
+      <li>\(f(x₁,x₂) ≥ 0\) for all real numbers \(x₁, x₂\)</li>
+      <li>\(\displaystyle∫_{-∞}^∞ ∫_{-∞}^∞ f(x₁, x₂) \;\mathrm dx₁ \;\mathrm dx₂ = 1\)</li>
+    </ul>
+    <p>
+      the other stuff is all the same except the usual
+      <code><span class="function">s</span>/</code>
+      \(\displaystyle∑\)
+      <code>/</code>
+      \(\displaystyle∫\)
+      <code>/<span class="builtin">g</span></code>
+    </p>
+    <p>for two random variables,</p>
+    <ul>
+      <li>\(E(aX ± bY) = aE(X) + bE(Y)\)</li>
+      <li>\(\var(aX ± bY) = a²\var(X) + b²\var(Y) ± 2ab\cov(X, Y)\)</li>
+      <li>if they're independent \(E(XY) = E(X)E(Y)\)</li>
+    </ul>
+    <h1>ch5 discrete probability distributions</h1>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

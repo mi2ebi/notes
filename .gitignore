@@ -4,3 +4,8 @@ cs219/a*
 cs219/w*
 cs302/a*
 phil242/p*
+
+
+# Added by cargo
+
+/target

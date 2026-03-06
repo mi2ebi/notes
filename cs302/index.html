@@ -32,34 +32,34 @@
 <pre>
 <span class="type">Node *</span><span class="variable">tmp</span>;
 <span class="variable">tmp</span> = <span class="keyword">new</span> <span class="type">Node</span>;
-<span class="variable">tmp</span>-&gt;<span class="variable">data</span> = <span class="variable">x</span>; <span class="comment">// <span class="rainbow0">(</span><span class="fgmain">*</span><span class="variable">tmp</span><span class="rainbow0">)</span><span class="fgmain">.</span><span class="variable">data</span> <span class="fgmain">=</span> <span class="variable">x</span><span class="fgmain">;</span></span>
-<span class="variable">tail</span>-&gt;<span class="variable">next</span> = <span class="variable">tmp</span>;
-<span class="variable">tmp</span>-&gt;<span class="variable">prev</span> = <span class="variable">tail</span>;
-<span class="variable">tmp</span>-&gt;<span class="variable">next</span> = <span class="constant">nullptr</span>;
+<span class="variable">tmp</span>-><span class="variable">data</span> = <span class="variable">x</span>; <span class="comment">// <span class="rainbow0">(</span><span class="fgmain">*</span><span class="variable">tmp</span><span class="rainbow0">)</span><span class="fgmain">.</span><span class="variable">data</span> <span class="fgmain">=</span> <span class="variable">x</span><span class="fgmain">;</span></span>
+<span class="variable">tail</span>-><span class="variable">next</span> = <span class="variable">tmp</span>;
+<span class="variable">tmp</span>-><span class="variable">prev</span> = <span class="variable">tail</span>;
+<span class="variable">tmp</span>-><span class="variable">next</span> = <span class="constant">nullptr</span>;
 <span class="variable">tail</span> = <span class="variable">tmp</span>;
 </pre>
     <p>head remove / <code><span class="function">pop_front</span><span class="rainbow0">()</span></code></p>
 <pre>
 <span class="type">Node *</span><span class="variable">tmp</span>;
 <span class="variable">tmp</span> = <span class="variable">head</span>;
-<span class="variable">head</span> = <span class="variable">head</span>-&gt;<span class="variable">next</span>;
+<span class="variable">head</span> = <span class="variable">head</span>-><span class="variable">next</span>;
 <span class="keyword">delete</span> <span class="variable">tmp</span>; <span class="comment">// deällocate</span>
-<span class="variable">head</span>-&gt;<span class="variable">prev</span> = <span class="constant">nullptr</span>;
+<span class="variable">head</span>-><span class="variable">prev</span> = <span class="constant">nullptr</span>;
 </pre>
     <p>swap, assuming pointers <code class="variable">i</code> and <code class="variable">j</code></p>
 <pre>
-<span class="type">Node *</span><span class="variable">i_left</span>  = <span class="variable">i</span>-&gt;<span class="variable">prev</span>;
-<span class="type">Node *</span><span class="variable">i_right</span> = <span class="variable">i</span>-&gt;<span class="variable">next</span>;
-<span class="type">Node *</span><span class="variable">j_left</span>  = <span class="variable">j</span>-&gt;<span class="variable">prev</span>;
-<span class="type">Node *</span><span class="variable">j_right</span> = <span class="variable">j</span>-&gt;<span class="variable">next</span>;
-<span class="variable">i_left</span>-&gt;<span class="variable">next</span>  = <span class="variable">j</span>;
-<span class="variable">i_right</span>-&gt;<span class="variable">prev</span> = <span class="variable">j</span>;
-<span class="variable">j_left</span>-&gt;<span class="variable">next</span>  = <span class="variable">i</span>;
-<span class="variable">j_right</span>-&gt;<span class="variable">prev</span> = <span class="variable">i</span>;
-<span class="variable">i</span>-&gt;<span class="variable">prev</span> = <span class="variable">j_left</span>;
-<span class="variable">j</span>-&gt;<span class="variable">prev</span> = <span class="variable">i_left</span>;
-<span class="variable">i</span>-&gt;<span class="variable">next</span> = <span class="variable">j_right</span>;
-<span class="variable">j</span>-&gt;<span class="variable">next</span> = <span class="variable">i_right</span>;
+<span class="type">Node *</span><span class="variable">i_left</span>  = <span class="variable">i</span>-><span class="variable">prev</span>;
+<span class="type">Node *</span><span class="variable">i_right</span> = <span class="variable">i</span>-><span class="variable">next</span>;
+<span class="type">Node *</span><span class="variable">j_left</span>  = <span class="variable">j</span>-><span class="variable">prev</span>;
+<span class="type">Node *</span><span class="variable">j_right</span> = <span class="variable">j</span>-><span class="variable">next</span>;
+<span class="variable">i_left</span>-><span class="variable">next</span>  = <span class="variable">j</span>;
+<span class="variable">i_right</span>-><span class="variable">prev</span> = <span class="variable">j</span>;
+<span class="variable">j_left</span>-><span class="variable">next</span>  = <span class="variable">i</span>;
+<span class="variable">j_right</span>-><span class="variable">prev</span> = <span class="variable">i</span>;
+<span class="variable">i</span>-><span class="variable">prev</span> = <span class="variable">j_left</span>;
+<span class="variable">j</span>-><span class="variable">prev</span> = <span class="variable">i_left</span>;
+<span class="variable">i</span>-><span class="variable">next</span> = <span class="variable">j_right</span>;
+<span class="variable">j</span>-><span class="variable">next</span> = <span class="variable">i_right</span>;
 <span class="type">Node *</span><span class="variable">t</span> = <span class="variable">i</span>;
 <span class="variable">i</span> = <span class="variable">j</span>;
 <span class="variable">j</span> = <span class="variable">t</span>;
@@ -90,16 +90,16 @@
     <h3>big O</h3>
     <p>
       \(g(n) = O(f(n))\)<br />
-      iff \(g(n) \le cf(n)\) for some \(c &gt; 0\) and \(n \ge n_0 &gt; 0\)
+      iff \(g(n) ≤ cf(n)\) for some \(c > 0\) and \(n ≥ n₀ > 0\)
     </p>
     <table>
       <tr> <th>complexity</th>      <th>notation</th>             </tr>
       <tr> <td>constant</td>        <td>\(O(1)\)</td>             </tr>
       <tr> <td>logarithmic</td>     <td>\(O(\log n)\)</td>        </tr>
       <tr> <td>linear</td>          <td>\(O(n)\)</td>             </tr>
-      <tr> <td>polylogarithmic</td> <td>\(O(\log^k n)\)</td>      </tr>
-      <tr> <td>quadratic</td>       <td>\(O(n^2)\)</td>           </tr>
-      <tr> <td>exponential</td>     <td>\(O(a^n), a &gt; 1\)</td> </tr>
+      <tr> <td>polylogarithmic</td> <td>\(O(\logᵏ n)\)</td>      </tr>
+      <tr> <td>quadratic</td>       <td>\(O(n²)\)</td>           </tr>
+      <tr> <td>exponential</td>     <td>\(O(aⁿ), a > 1\)</td> </tr>
     </table>
     <p>examples</p>
     <ul>
@@ -110,79 +110,79 @@
       <li>\(\sqrt n = O(n)\) ...this is sort of weak</li>
     </ul>
     <p>big O gives an <i>upper bound</i></p>
-    <h3>big &Omega;</h3>
+    <h3>big Ω</h3>
     <p>
-      \(g(n) = \Omega(f(n))\)<br />
-      iff \(g(n) \ge cf(n)\) for some \(c &gt; 0\) and \(n \ge n_o &gt; 0\)
+      \(g(n) = Ω(f(n))\)<br />
+      iff \(g(n) ≥ cf(n)\) for some \(c > 0\) and \(n ≥ nₒ > 0\)
     </p>
     <p>big omega is a <i>lower bound</i></p>
     <p>examples</p>
     <ul>
-      <li>\(n = \Omega(n)\)</li>
-      <li>\(3n = \Omega(n)\)</li>
-      <li>\(5n^2 = \Omega(n)\) ...this is also weak</li>
+      <li>\(n = Ω(n)\)</li>
+      <li>\(3n = Ω(n)\)</li>
+      <li>\(5n² = Ω(n)\) ...this is also weak</li>
     </ul>
-    <h3>big &Theta;</h3>
+    <h3>big Θ</h3>
     <p>
-      \(g(n) = \Theta(f(n))\)<br />
-      iff \(g(n) = O(f(n))\) and \(g(n) = \Omega(f(n))\)
+      \(g(n) = Θ(f(n))\)<br />
+      iff \(g(n) = O(f(n))\) and \(g(n) = Ω(f(n))\)
     </p>
     <p>examples</p>
     <ul>
-      <li>\(n = \Theta(n)\)</li>
-      <li>\(7n = \Theta(n)\)</li>
-      <li>\(3n^2 \ne \Theta(n)\) because it's \(\Omega(n)\) but not \(O(n)\)</li>
+      <li>\(n = Θ(n)\)</li>
+      <li>\(7n = Θ(n)\)</li>
+      <li>\(3n² ≠ Θ(n)\) because it's \(Ω(n)\) but not \(O(n)\)</li>
     </ul>
     <h3>logs</h3>
     <p>
       for time complexity the log base doesn't matter. even though in Real Math
-      \(\log x = \log_{10} x\) or \(\ln x\) depending who you ask
+      \(\log x = \log₁₀ x\) or \(\ln x\) depending who you ask
     </p>
-    <p>\(\log_a n = \Theta(\log n)\) regardless of \(a\)</p>
-    <p>\[\log_a n = \frac{\log_b n}{\log_b a}\]</p>
+    <p>\(\logₐ n = Θ(\log n)\) regardless of \(a\)</p>
+    <p>\[\logₐ n = \frac{\log_b n}{\log_b a}\]</p>
     <h3>calculus</h3>
-    <p>\[\lim_{n \to \infty} \frac{g(n)}{f(n)}\]</p>
+    <p>\[\lim_{n → ∞} \frac{g(n)}{f(n)}\]</p>
     <p>this could</p>
     <ul>
       <li>
         go to infinity, in which case \(f\) can't keep up with \(g\) at all<br />
-        <span style="color: var(--green-intense)">\(g(n) = \Omega(f(n))\)</span>
+        <span style="color: var(--green-intense)">\(g(n) = Ω(f(n))\)</span>
       </li>
       <li>
         be a constant bigger than 0, in which case \(g\) and \(f\) have the
         same growth rate<br />
-        <span style="color: var(--green-intense)">\(g(n) = \Theta(f(n))\)</span>
+        <span style="color: var(--green-intense)">\(g(n) = Θ(f(n))\)</span>
       </li>
       <li>
         be zero, in which case \(f\) is strong enough to pull \(g\) down to zero<br />
         <span style="color: var(--green-intense)">\(g(n) = O(f(n))\)</span>
       </li>
     </ul>
-    <p>l'h&ocirc;pital's rule says</p>
+    <p>l'hôpital's rule says</p>
     <p>\[
-      \lim_{n \to \infty} \frac{g(x)}{f(x)}
-      = \lim_{n \to \infty} \frac{g'(n)}{f'(n)} = \cdots
+      \lim_{n → ∞} \frac{g(x)}{f(x)}
+      = \lim_{n → ∞} \frac{g'(n)}{f'(n)} = ⋯
     \]</p>
     <style>.yes{color:var(--green-intense)}.no{color:var(--red-intense)}</style>
-    <p>eg does \(n^2 + 33n + 2 = O(n)\)?</p>
+    <p>eg does \(n² + 33n + 2 = O(n)\)?</p>
     <p>using normal math: \[
-      \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
-      = \lim_{n \to \infty} \left(n + 33 + \frac2n\right) = \infty
+      \lim_{n → ∞} \frac{n² + 33n + 2}n
+      = \lim_{n → ∞} \left(n + 33 + \frac2n\right) = ∞
     \]</p>
     <p>using l'hopital's: \[
-      \lim_{n \to \infty} \frac{n^2 + 33n + 2}n
-      = \lim_{n \to \infty} (2n + 33) = \infty
+      \lim_{n → ∞} \frac{n² + 33n + 2}n
+      = \lim_{n → ∞} (2n + 33) = ∞
     \]</p>
     <p>
       therefore \(n\) is <span class="no">not</span> an upper bound for
-      \(n^2 + 33n + 2\)
+      \(n² + 33n + 2\)
     </p>
     <p>does \(\sqrt n = O(\log n)\)?</p>
     <p>\[
-      \lim_{n \to \infty} \frac{\sqrt n}{\ln n}
-      = \lim_{n \to \infty} \frac n{2 \sqrt n}
-      = \lim_{n \to \infty} \frac{\sqrt n}2
-      = \infty
+      \lim_{n → ∞} \frac{\sqrt n}{\ln n}
+      = \lim_{n → ∞} \frac n{2 \sqrt n}
+      = \lim_{n → ∞} \frac{\sqrt n}2
+      = ∞
     \]</p>
     <p><span class="no">no</span></p>
     <p>logs are very nice for runtime</p>
@@ -193,29 +193,29 @@
 // n : size
 // s : searchee</span>
 <span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
     <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">i</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span> <span class="comment">// O(1)</span>    <span class="comment">//</span>
       <span class="keyword">return</span> <span class="constant">true</span>; <span class="comment">//</span>         <span class="comment">//</span>
   <span class="keyword">return</span> <span class="constant">false</span>;
 }
 </pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all.</p>
-    <p>\(O(n)\), \(\Omega(n)\), \(\Theta(n)\)</p>
+    <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
     <p>best case, <code><span class="variable">s</span> == <span class="variable">a</span>[<span class="constant">0</span>]</code></p>
-    <p>\(O(1)\), \(\Omega(1)\), \(\Theta(1)\)</p>
+    <p>\(O(1)\), \(Ω(1)\), \(Θ(1)\)</p>
     <p>average case, <code class="variable">s</code> is in the middle</p>
-    <p>\(O(n)\), \(\Omega(n)\), \(\Theta(n)\)</p>
+    <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
     <h2>binary search</h2>
 <pre>
 <span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
   <span class="type">int</span> <span class="variable">l</span> = <span class="constant">0</span>;
   <span class="type">int</span> <span class="variable">r</span> = <span class="variable">n</span> - <span class="constant">1</span>;
   <span class="type">int</span> <span class="variable">m</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span><span class="variable">l</span> &lt;= <span class="variable">r</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+  <span class="keyword">while</span> <span class="rainbow1">(</span><span class="variable">l</span> <= <span class="variable">r</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
     <span class="variable">m</span> = <span class="variable">l</span> + <span class="rainbow2">(</span><span class="variable">r</span> - <span class="variable">l</span><span class="rainbow2">)</span> / <span class="constant">2</span>; <span class="comment">// O(1)</span>
     <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span>       <span class="comment">//</span>
       <span class="keyword">return</span> <span class="constant">true</span>;       <span class="comment">//</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> &lt; <span class="variable">s</span><span class="rainbow2">)</span>        <span class="comment">//</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> < <span class="variable">s</span><span class="rainbow2">)</span>        <span class="comment">//</span>
       <span class="variable">l</span> = <span class="variable">m</span> + <span class="constant">1</span>;         <span class="comment">//</span>
     <span class="keyword">else</span>                 <span class="comment">//</span>
       <span class="variable">r</span> = <span class="variable">m</span> - <span class="constant">1</span>;         <span class="comment">//</span>
@@ -224,79 +224,79 @@
 }
 </pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
-    <p>\(O(\log n)\), \(\Omega(\log n)\), \(\Theta(\log n)\)</p>
+    <p>\(O(\log n)\), \(Ω(\log n)\), \(Θ(\log n)\)</p>
     <h1>some loops</h1>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span> += <span class="constant">3</span>)
-  <span class="variable">cout</span> &lt;&lt; "...";
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span> += <span class="constant">3</span>)
+  <span class="variable">cout</span> << "...";
 </pre>
     <p>\(
-      \frac13 \sum\limits_{i = 0}^{n - 1} 1 = \frac n3 = \Theta(n)
+      \frac13 ∑\limitsᵢ₌₀ⁿ⁻¹ 1 = \frac n3 = Θ(n)
     \)</p>
     <p>the counter updater bit is a big clue as to the complexity</p>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="variable">n</span>; <span class="variable">i</span> &gt; <span class="constant">0</span>; <span class="variable">i</span> /= <span class="constant">2</span>)
-  <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="variable">n</span>; <span class="variable">i</span> > <span class="constant">0</span>; <span class="variable">i</span> /= <span class="constant">2</span>)
+  <span class="variable">cout</span> << ...;
 </pre>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span> *= <span class="constant">2</span>)
-  <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span> *= <span class="constant">2</span>)
+  <span class="variable">cout</span> << ...;
 </pre>
-    <p>these are both \(\log_2 n = \Theta(\log n)\)</p>
+    <p>these are both \(\log₂ n = Θ(\log n)\)</p>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> &lt; <span class="variable">n</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
-    <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> < <span class="variable">n</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
+    <span class="variable">cout</span> << ...;
 </pre>
     <p>\(
-      \sum\limits_{i = 0}^{n - 1} \sum\limits_{j = 0}^{n - 1} 1
-      = \sum\limits_{i = 0}^{n - 1} n
-      = n^2 = \Theta(n^2)
+      ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁿ⁻¹ 1
+      = ∑\limitsᵢ₌₀ⁿ⁻¹ n
+      = n² = Θ(n²)
     \)</p>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> &lt; <span class="variable">i</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
-    <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> < <span class="variable">i</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
+    <span class="variable">cout</span> << ...;
 </pre>
     <p>\(
-      \sum\limits_{i = 0}^{n - 1} \sum\limits_{j = 0}^{i - 1} 1
-      = \sum\limits_{i = 0}^{n - 1} i
+      ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁱ⁻¹ 1
+      = ∑\limitsᵢ₌₀ⁿ⁻¹ i
       = \frac n2 (n - 1) 
-      = \frac{n^2}2 - \frac n2
-      = \Theta(n^2)
+      = \frac{n²}2 - \frac n2
+      = Θ(n²)
     \)</p>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> &lt; <span class="variable">n</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> < <span class="variable">n</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="variable">cout</span> << ...;
 </pre>
 
-    <p>\(\Theta(n\log n)\)</p>
+    <p>\(Θ(n\log n)\)</p>
 <pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> &lt; <span class="variable">i</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="variable">cout</span> &lt;&lt; ...;
+<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> < <span class="variable">i</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="variable">cout</span> << ...;
 </pre>
     <p>since \(\log 0\) is undefined we can cheat and do \(
-      \sum\limits_{i = 1}^n \log_2 i
-      = \log_2(n!)
+      ∑\limitsᵢ₌₁ⁿ \log₂ i
+      = \log₂(n!)
     \)</p>
-    <p>but \(\log_2(n!)\) isn't v useful</p>
+    <p>but \(\log₂(n!)\) isn't v useful</p>
     <p>the log base doesn't matter so \[
-      \sum_{i = 1}^n \ln n
-      \approx \int_1^n \ln x \;\mathrm d x
-      = \left.(x \ln n - x)\vphantom\int\right|_1^n
+      ∑ᵢ₌₁ⁿ \ln n
+      ≈ ∫₁ⁿ \ln x \;\mathrm d x
+      = \left.(x \ln n - x)\vphantom∫\right|₁ⁿ
       = n \ln n - n + 1
-      = \Theta(n \log n)
+      = Θ(n \log n)
     \]</p>
     <h1>sorting</h1>
     <h2>insertion sort</h2>
 <pre>
 <span class="type">void</span> <span class="function">insertionSort</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>) {
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> &lt; <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
     <span class="type">int</span> <span class="variable">key</span> = <span class="variable">a</span><span class="rainbow2">[</span><span class="variable">i</span><span class="rainbow2">]</span>;
     <span class="type">int</span> <span class="variable">j</span> = <span class="variable">i</span> - <span class="constant">1</span>;
-    <span class="keyword">while</span> <span class="rainbow2">(</span><span class="variable">j</span> &gt;= <span class="constant">0</span> && <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span> &gt; <span class="variable">key</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
+    <span class="keyword">while</span> <span class="rainbow2">(</span><span class="variable">j</span> >= <span class="constant">0</span> && <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span> > <span class="variable">key</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
       <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span> + <span class="constant">1</span><span class="rainbow3">]</span> = <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span>;
       <span class="variable">j</span>--;
     <span class="rainbow2">}</span>
@@ -317,10 +317,10 @@
       all the way to <code class="constant">-1</code> every time
     </p>
     <p>
-      this is a nice \(\frac n2 (n - 2)\) situation, so it's \(\Theta(n^2)\). not great
+      this is a nice \(\frac n2 (n - 2)\) situation, so it's \(Θ(n²)\). not great
     </p>
     <p>best case, it's already sorted and the inner loop never runs</p>
-    <p>then it's just \(\Theta(n)\)</p>
+    <p>then it's just \(Θ(n)\)</p>
     <h2>merge sort</h2>
     <p>'divide and conquer' algorithm, which unfortunately necessitates recursion</p>
     <ul>
@@ -333,7 +333,7 @@
     </ul>
 <pre>
 <span class="type">void</span> <span class="function">mergeSort</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> r) {
-  <span class="keyword">if</span> <span class="rainbow1">(</span>l &gt;= r<span class="rainbow1">)</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>l >= r<span class="rainbow1">)</span>
     <span class="keyword">return</span>;
   <span class="type">int</span> m = l + <span class="rainbow1">(</span>r - l<span class="rainbow1">)</span> / <span class="constant">2</span>;
   <span class="function">mergeSort</span><span class="rainbow1">(</span>a, l, m<span class="rainbow1">)</span>;
@@ -343,22 +343,22 @@
 <span class="type">void</span> <span class="function">merge</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> m, <span class="type">int</span> r) {
   <span class="type">int</span> i = l, j = m + <span class="constant">1</span>, k = <span class="constant">0</span>;
   <span class="type">int</span> b<span class="rainbow1">[</span>r - l + 1<span class="rainbow1">]</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i &lt;= m &amp;&amp; j &lt;= r<span class="rainbow1">)</span>
-    <span class="keyword">if</span> (a[i] &lt;= a[j])
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m &amp;&amp; j <= r<span class="rainbow1">)</span>
+    <span class="keyword">if</span> (a[i] <= a[j])
       b[k++] = a[i++];
     <span class="keyword">else</span>
       b[k++] = a[j++];
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i &lt;= m<span class="rainbow1">)</span>
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m<span class="rainbow1">)</span>
     b[k++] = a[i++];
-  <span class="keyword">while</span> <span class="rainbow1">(</span>j &lt;= r<span class="rainbow1">)</span>
+  <span class="keyword">while</span> <span class="rainbow1">(</span>j <= r<span class="rainbow1">)</span>
     b[k++] = a[j++];
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> x = 0; x &lt; k; x++<span class="rainbow1">)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> x = 0; x < k; x++<span class="rainbow1">)</span>
     a[l + x] = b[x];
 }
 </pre>
     <p>
-      merging all the arrays at a given level together is \(\Theta(n)\), and there are
-      around \(\log_2 n\) levels
+      merging all the arrays at a given level together is \(Θ(n)\), and there are
+      around \(\log₂ n\) levels
     </p>
     <p>which means it's better than insertion sort!</p>
     <h2>quicksort</h2>
@@ -375,16 +375,16 @@
 int partition(int a[], int l, int r) {
   int pivot = a[l]; // easy
   int i = l + 1, j = r;
-  while (i &lt;= j) {
-    if (a[i] &lt;= pivot) i++;
-    if (a[j] &gt; pivot) j--;
+  while (i <= j) {
+    if (a[i] <= pivot) i++;
+    if (a[j] > pivot) j--;
     // if i and j both didn't move
       // swap a[i++] and a[j--]
   }
   return j;
 }
 </pre>
-    <p>worst case, the list is already sorted: \(O(n^2)\)</p>
+    <p>worst case, the list is already sorted: \(O(n²)\)</p>
     <p>best case the pivot is the median: \(O(n\log n)\)</p>
     <p>methods to avoid worst case:</p>
     <ul>
@@ -413,7 +413,7 @@ class BinTreeNode {
 void preorder(BinTreeNode* r) {
   if (r == nullptr)
     return;
-  cout &lt;&lt; r->data; // preorder process
+  cout << r->data; // preorder process
   preorder(r->left);
   preorder(r->right);
 }
@@ -422,7 +422,7 @@ void postorder(BinTreeNode* r) {
     return;
   postorder(r->left);
   postorder(r->right);
-  cout &lt;&lt; r->data;
+  cout << r->data;
 }</pre>
     <h2>searching</h2>
     <pre>
@@ -433,9 +433,9 @@ binTreeNode* find(binTreeNode* r, int s) {
     return find(r->right, s);
 }</pre>
     <p>runtime for pre/post order:</p>
-    <p>each function body runs \(\Theta(1)\) times, and there are \(n\) nodes</p>
+    <p>each function body runs \(Θ(1)\) times, and there are \(n\) nodes</p>
     <h2>height</h2>
-    <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
+    <p>levels are 0 indexed <span class="clarity"><55555555</span></p>
     <pre>
 a
 '- b
@@ -448,11 +448,11 @@ a
    d --'-- e       f --'-- g
 h -'- i j -'- k l -'- m n -'- o</pre>
     <p>
-      this has \(h\) levels and \(n = 2^{h + 1} - 1\) nodes. now we can solve for h: \[
+      this has \(h\) levels and \(n = 2ʰ⁺¹ - 1\) nodes. now we can solve for h: \[
       \begin{align*}
-      2^{h + 1} - 1 & = n\\
-      h + 1 & = \log_2 n\\
-      h & = \log_2 n - 1 = O(\log n)
+      2ʰ⁺¹ - 1 & = n\\
+      h + 1 & = \log₂ n\\
+      h & = \log₂ n - 1 = O(\log n)
       \end{align*}
       \]
     </p>
@@ -472,7 +472,7 @@ class BinTreeNode {
     BinTreeNode&lt;K, V>* left;
     BinTreeNode&lt;K, V>* right;
 }</pre>
-    <p>for each node <i>r</i>:</p>
+    <p>for each node \(r\):</p>
     <ul>
       <li><code>r->left</code>'s key is less than r's key</li>
       <li><code>r->right</code>'s key is larger than r's key</li>
@@ -483,20 +483,72 @@ template &lt;class K, class V>
 bool find(BinTreeNode&lt;K, V>* r, K k) {
   if (r == nullptr) return false;
   if (k == r->key) return true;
-  if (k &lt; r->key)
+  if (k < r->key)
     return find(r->left, k);
   return find(r->right, k);
 }</pre>
     <p>the function body is constant time. for here we only have to check one node per height level at most</p>
-    <p>best case the runtime is \(\Theta(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
+    <p>best case the runtime is \(Θ(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
     <p>the insertion order determines the height of the tree</p>
-    <h2>insertion</h2>
-    <p>because insertion requires finding where to put stuff, insertion has the same time complexity</p>
+    <p>so the question is can we have the tree balance itself?</p>
+    <h1>avl trees</h1>
+    <p>this is a self-balancing binary search tree. when we insert or delete we balance the tree if needed</p>
+    <p>how do we know if a tree is balanced? for each node the difference in its left and right subtree heights cannot exceed 1</p>
+    <p>this requires adding a <code><span class="type">size_t</span> <span class="variable">height</span></code> into <code class="type">BinTreeNode</code></p>
+    <p>the empty tree has a height of -1. for every node \(r\) its height is
+      \(
+      \max(
+      r\mathord→\mathrm{left}\mathord→\mathrm{height},
+      r\mathord→\mathrm{right}\mathord→\mathrm{height}
+      ) + 1
+      \)
+    </p>
+    <p>to fix imbalanced trees we can <b class="rotate">rotate</b> them</p>
+    <style>
+     .rotate {display: inline-block; animation: spin 3s linear infinite;}
+     @keyframes spin {from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
+    </style>
+    <img src="rotation.png"  />
+    <p>
+      if the tree still isn't balanced, via a zigzag, we need to
+      <b class="rotate">
+        <span class="rotate" style="background:var(--bg-main);padding:2px">double</span>
+        <span style="background:var(--bg-main);padding:2px">rotate</span>
+      </b>
+      instead. we perform an intermediate rotation on one of the subtrees to align the tree
+    </p>
+    <p>eg inserting \([75, 50, 90, 40, 60, 100, 55, 65, 52]\)</p>
+    <p>runtime!</p>
+    <ul>
+      <li>finding the vacancy in the tree takes \(h\) steps</li>
+      <li>each rotation is constant time</li>
+      <li>we perform at most 2 rotations</li>
+      <li>so maintaining  balance requires no overhead!</li>
+    </ul>
+    <p>
+      worst case, for each node except the leaves, the difference of its left and right subtree heights
+      will be exactly 1:
+      \[
+      \begin{align*}
+      N(h) & = N(h - 1) + N(h - 2) + 1\\
+      N(-1) & = 0\\
+      h & ≈ \sqrt 2 \, \log₂ n = O(\log n)
+      \end{align*}
+      \]
+    </p>
+    <h1>maps</h1>
+    <p>
+      stl has a type called <code class="type">Map</code> for an ordered map, which is basically an
+      avl tree
+    </p>
     <pre>
-template &lt;class K, class V>
-void insert(BinTreeNode&lt;K, V> r, K k, V v) {
+#include &lt;map>
+using std::map;
+int main() {
+  map&lt;string, int> people;
+  people["Dan"] = 13;
+  people.insert({"Tom", 12});
 }</pre>
-    
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
