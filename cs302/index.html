@@ -20,50 +20,46 @@
       of the list, and likewise for <code class="variable">tail</code> pointing to the
       end
     </p>
-<pre>
+    <pre class="highlit">
 <span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow0">{</span>
   <span class="keyword">public</span>:
     <span class="type">int</span> <span class="variable">data</span>;
     <span class="type">Node *</span><span class="variable">prev</span>;
     <span class="type">Node *</span><span class="variable">next</span>;
-<span class="rainbow0">}</span>;
-</pre>
-    <p>tail insert / <code><span class="function">push_back</span><span class="rainbow0">(</span><span class="variable">x</span><span class="rainbow0">)</span></code></p>
-<pre>
+<span class="rainbow0">}</span>;</pre>
+    <p>tail insert / <code class="highlit">push_back(x)</code></p>
+    <pre class="highlit">
 <span class="type">Node *</span><span class="variable">tmp</span>;
-<span class="variable">tmp</span> = <span class="keyword">new</span> <span class="type">Node</span>;
-<span class="variable">tmp</span>-><span class="variable">data</span> = <span class="variable">x</span>; <span class="comment">// <span class="rainbow0">(</span><span class="fgmain">*</span><span class="variable">tmp</span><span class="rainbow0">)</span><span class="fgmain">.</span><span class="variable">data</span> <span class="fgmain">=</span> <span class="variable">x</span><span class="fgmain">;</span></span>
-<span class="variable">tail</span>-><span class="variable">next</span> = <span class="variable">tmp</span>;
-<span class="variable">tmp</span>-><span class="variable">prev</span> = <span class="variable">tail</span>;
-<span class="variable">tmp</span>-><span class="variable">next</span> = <span class="constant">nullptr</span>;
-<span class="variable">tail</span> = <span class="variable">tmp</span>;
-</pre>
-    <p>head remove / <code><span class="function">pop_front</span><span class="rainbow0">()</span></code></p>
-<pre>
+tmp = <span class="keyword">new</span> <span class="type">Node</span>;
+tmp->data = x; <span class="comment">// (*tmp).data = x;</span>
+tail->next = tmp;
+tmp->prev = tail;
+tmp->next = <span class="constant">nullptr</span>;
+tail = tmp;</pre>
+    <p>head remove / <code class="highlit">pop_front()</code></p>
+    <pre class="highlit">
 <span class="type">Node *</span><span class="variable">tmp</span>;
-<span class="variable">tmp</span> = <span class="variable">head</span>;
-<span class="variable">head</span> = <span class="variable">head</span>-><span class="variable">next</span>;
-<span class="keyword">delete</span> <span class="variable">tmp</span>; <span class="comment">// deällocate</span>
-<span class="variable">head</span>-><span class="variable">prev</span> = <span class="constant">nullptr</span>;
-</pre>
+tmp = head;
+head = head->next;
+<span class="keyword">delete</span> tmp; <span class="comment">// deällocate</span>
+head->prev = <span class="constant">nullptr</span>;</pre>
     <p>swap, assuming pointers <code class="variable">i</code> and <code class="variable">j</code></p>
-<pre>
-<span class="type">Node *</span><span class="variable">i_left</span>  = <span class="variable">i</span>-><span class="variable">prev</span>;
-<span class="type">Node *</span><span class="variable">i_right</span> = <span class="variable">i</span>-><span class="variable">next</span>;
-<span class="type">Node *</span><span class="variable">j_left</span>  = <span class="variable">j</span>-><span class="variable">prev</span>;
-<span class="type">Node *</span><span class="variable">j_right</span> = <span class="variable">j</span>-><span class="variable">next</span>;
-<span class="variable">i_left</span>-><span class="variable">next</span>  = <span class="variable">j</span>;
-<span class="variable">i_right</span>-><span class="variable">prev</span> = <span class="variable">j</span>;
-<span class="variable">j_left</span>-><span class="variable">next</span>  = <span class="variable">i</span>;
-<span class="variable">j_right</span>-><span class="variable">prev</span> = <span class="variable">i</span>;
-<span class="variable">i</span>-><span class="variable">prev</span> = <span class="variable">j_left</span>;
-<span class="variable">j</span>-><span class="variable">prev</span> = <span class="variable">i_left</span>;
-<span class="variable">i</span>-><span class="variable">next</span> = <span class="variable">j_right</span>;
-<span class="variable">j</span>-><span class="variable">next</span> = <span class="variable">i_right</span>;
-<span class="type">Node *</span><span class="variable">t</span> = <span class="variable">i</span>;
-<span class="variable">i</span> = <span class="variable">j</span>;
-<span class="variable">j</span> = <span class="variable">t</span>;
-</pre>
+    <pre class="highlit">
+<span class="type">Node *</span><span class="variable">i_left</span>  = i->prev;
+<span class="type">Node *</span><span class="variable">i_right</span> = i->next;
+<span class="type">Node *</span><span class="variable">j_left</span>  = j->prev;
+<span class="type">Node *</span><span class="variable">j_right</span> = j->next;
+i_left->next  = j;
+i_right->prev = j;
+j_left->next  = i;
+j_right->prev = i;
+i->prev = j_left;
+j->prev = i_left;
+i->next = j_right;
+j->next = i_right;
+<span class="type">Node *</span><span class="variable">t</span> = i;
+i = j;
+j = t;</pre>
     <p>we could also just swap the <code class="variable">data</code>s</p>
     <h1>algorithms</h1>
     <dl>
@@ -188,76 +184,69 @@
     <p>logs are very nice for runtime</p>
     <h1>searching</h1>
     <h2>linear search</h2>
-<pre>
+    <pre class="highlit">
 <span class="comment">// a : array
 // n : size
 // s : searchee</span>
-<span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">i</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span> <span class="comment">// O(1)</span>    <span class="comment">//</span>
+<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> == s<span class="rainbow2">)</span> <span class="comment">// O(1)</span>    <span class="comment">//</span>
       <span class="keyword">return</span> <span class="constant">true</span>; <span class="comment">//</span>         <span class="comment">//</span>
   <span class="keyword">return</span> <span class="constant">false</span>;
-}
-</pre>
+<span class="rainbow0">}</span></pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all.</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
-    <p>best case, <code><span class="variable">s</span> == <span class="variable">a</span>[<span class="constant">0</span>]</code></p>
+    <p>best case, <code class="highlit">s == a[0]</code></p>
     <p>\(O(1)\), \(Ω(1)\), \(Θ(1)\)</p>
     <p>average case, <code class="variable">s</code> is in the middle</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
     <h2>binary search</h2>
-<pre>
-<span class="type">bool</span> <span class="function">find</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span>) {
+    <pre class="highlit">
+<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
   <span class="type">int</span> <span class="variable">l</span> = <span class="constant">0</span>;
-  <span class="type">int</span> <span class="variable">r</span> = <span class="variable">n</span> - <span class="constant">1</span>;
+  <span class="type">int</span> <span class="variable">r</span> = n - <span class="constant">1</span>;
   <span class="type">int</span> <span class="variable">m</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span><span class="variable">l</span> <= <span class="variable">r</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    <span class="variable">m</span> = <span class="variable">l</span> + <span class="rainbow2">(</span><span class="variable">r</span> - <span class="variable">l</span><span class="rainbow2">)</span> / <span class="constant">2</span>; <span class="comment">// O(1)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> == <span class="variable">s</span><span class="rainbow2">)</span>       <span class="comment">//</span>
+  <span class="keyword">while</span> <span class="rainbow1">(</span>l <= r<span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    m = l + <span class="rainbow2">(</span>r - l<span class="rainbow2">)</span> / <span class="constant">2</span>; <span class="comment">// O(1)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>m<span class="rainbow3">]</span> == s<span class="rainbow2">)</span>       <span class="comment">//</span>
       <span class="keyword">return</span> <span class="constant">true</span>;       <span class="comment">//</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span><span class="variable">a</span><span class="rainbow3">[</span><span class="variable">m</span><span class="rainbow3">]</span> < <span class="variable">s</span><span class="rainbow2">)</span>        <span class="comment">//</span>
-      <span class="variable">l</span> = <span class="variable">m</span> + <span class="constant">1</span>;         <span class="comment">//</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>m<span class="rainbow3">]</span> < s<span class="rainbow2">)</span>        <span class="comment">//</span>
+      l = m + <span class="constant">1</span>;         <span class="comment">//</span>
     <span class="keyword">else</span>                 <span class="comment">//</span>
-      <span class="variable">r</span> = <span class="variable">m</span> - <span class="constant">1</span>;         <span class="comment">//</span>
+      r = m - <span class="constant">1</span>;         <span class="comment">//</span>
   <span class="rainbow1">}</span>
   <span class="keyword">return</span> <span class="constant">false</span>;
-}
-</pre>
+<span class="rainbow0">}</span></pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
     <p>\(O(\log n)\), \(Ω(\log n)\), \(Θ(\log n)\)</p>
     <h1>some loops</h1>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span> += <span class="constant">3</span>)
-  <span class="variable">cout</span> << "...";
-</pre>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i += <span class="constant">3</span><span class="rainbow0">)</span>
+  <span class="builtin">cout</span> << <span class="string">"..."</span>;</pre>
     <p>\(
       \frac13 ∑\limitsᵢ₌₀ⁿ⁻¹ 1 = \frac n3 = Θ(n)
     \)</p>
     <p>the counter updater bit is a big clue as to the complexity</p>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="variable">n</span>; <span class="variable">i</span> > <span class="constant">0</span>; <span class="variable">i</span> /= <span class="constant">2</span>)
-  <span class="variable">cout</span> << ...;
-</pre>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span> *= <span class="constant">2</span>)
-  <span class="variable">cout</span> << ...;
-</pre>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = n; i > <span class="constant">0</span>; i /= <span class="constant">2</span><span class="rainbow0">)</span>
+  <span class="builtin">cout</span> << ...;</pre>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; i < n; i *= <span class="constant">2</span><span class="rainbow0">)</span>
+  <span class="builtin">cout</span> << ...;</pre>
     <p>these are both \(\log₂ n = Θ(\log n)\)</p>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> < <span class="variable">n</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
-    <span class="variable">cout</span> << ...;
-</pre>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; j < n; j++<span class="rainbow1">)</span>
+    <span class="builtin">cout</span> << ...;</pre>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁿ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ n
       = n² = Θ(n²)
     \)</p>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; <span class="variable">j</span> < <span class="variable">i</span>; <span class="variable">j</span>++<span class="rainbow1">)</span>
-    <span class="variable">cout</span> << ...;
-</pre>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; j < i; j++<span class="rainbow1">)</span>
+    <span class="builtin">cout</span> << ...;</pre>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁱ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ i
@@ -265,17 +254,17 @@
       = \frac{n²}2 - \frac n2
       = Θ(n²)
     \)</p>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> < <span class="variable">n</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="variable">cout</span> << ...;
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; j < n; j *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="builtin">cout</span> << ...;
 </pre>
 
     <p>\(Θ(n\log n)\)</p>
-<pre>
-<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++)
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; <span class="variable">j</span> < <span class="variable">i</span>; <span class="variable">j</span> *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="variable">cout</span> << ...;
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; j < i; j *= <span class="constant">2</span><span class="rainbow1">)</span>
+    <span class="builtin">cout</span> << ...;
 </pre>
     <p>since \(\log 0\) is undefined we can cheat and do \(
       ∑\limitsᵢ₌₁ⁿ \log₂ i
@@ -291,24 +280,24 @@
     \]</p>
     <h1>sorting</h1>
     <h2>insertion sort</h2>
-<pre>
-<span class="type">void</span> <span class="function">insertionSort</span>(<span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>) {
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; <span class="variable">i</span> < <span class="variable">n</span>; <span class="variable">i</span>++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    <span class="type">int</span> <span class="variable">key</span> = <span class="variable">a</span><span class="rainbow2">[</span><span class="variable">i</span><span class="rainbow2">]</span>;
-    <span class="type">int</span> <span class="variable">j</span> = <span class="variable">i</span> - <span class="constant">1</span>;
-    <span class="keyword">while</span> <span class="rainbow2">(</span><span class="variable">j</span> >= <span class="constant">0</span> && <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span> > <span class="variable">key</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
-      <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span> + <span class="constant">1</span><span class="rainbow3">]</span> = <span class="variable">a</span><span class="rainbow3">[</span><span class="variable">j</span><span class="rainbow3">]</span>;
-      <span class="variable">j</span>--;
+    <pre class="highlit">
+<span class="type">void</span> <span class="function">insertionSort</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; i < n; i++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    <span class="type">int</span> <span class="variable">key</span> = a<span class="rainbow2">[</span>i<span class="rainbow2">]</span>;
+    <span class="type">int</span> <span class="variable">j</span> = i - <span class="constant">1</span>;
+    <span class="keyword">while</span> <span class="rainbow2">(</span>j >= <span class="constant">0</span> && a<span class="rainbow3">[</span>j<span class="rainbow3">]</span> > key<span class="rainbow2">)</span> <span class="rainbow2">{</span>
+      a<span class="rainbow3">[</span>j + <span class="constant">1</span><span class="rainbow3">]</span> = a<span class="rainbow3">[</span>j<span class="rainbow3">]</span>;
+      j--;
     <span class="rainbow2">}</span>
-    <span class="variable">a</span><span class="rainbow2">[</span><span class="variable">j</span> + <span class="constant">1</span><span class="rainbow2">]</span> = <span class="variable">key</span>;
+    a<span class="rainbow2">[</span>j + <span class="constant">1</span><span class="rainbow2">]</span> = key;
   <span class="rainbow1">}</span>
-}
+<span class="rainbow0">}</span>
 </pre>
     <p>
       after every iteration of the outer loop, the slice of the array from
       <code class="constant">0</code>
       to
-      <code><span class="variable">i</span> - <span class="constant">1</span></code>
+      <code class="highlit">i - 1</code>
       is always sorted
     </p>
     <p>the inner loop makes room for the key to be inserted</p>
@@ -331,31 +320,28 @@
       </li>
       <li>merge the halves</li>
     </ul>
-<pre>
-<span class="type">void</span> <span class="function">mergeSort</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> r) {
+    <pre class="highlit">
+<span class="type">void</span> <span class="function">mergeSort</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
   <span class="keyword">if</span> <span class="rainbow1">(</span>l >= r<span class="rainbow1">)</span>
     <span class="keyword">return</span>;
-  <span class="type">int</span> m = l + <span class="rainbow1">(</span>r - l<span class="rainbow1">)</span> / <span class="constant">2</span>;
-  <span class="function">mergeSort</span><span class="rainbow1">(</span>a, l, m<span class="rainbow1">)</span>;
-  <span class="function">mergeSort</span><span class="rainbow1">(</span>a, m + <span class="constant">1</span>, r<span class="rainbow1">)</span>;
-  <span class="function">merge</span><span class="rainbow1">(</span>a, l, m, r<span class="rainbow1">)</span>;
-}
-<span class="type">void</span> <span class="function">merge</span>(<span class="type">int</span> a<span class="rainbow1">[]</span>, <span class="type">int</span> l, <span class="type">int</span> m, <span class="type">int</span> r) {
-  <span class="type">int</span> i = l, j = m + <span class="constant">1</span>, k = <span class="constant">0</span>;
-  <span class="type">int</span> b<span class="rainbow1">[</span>r - l + 1<span class="rainbow1">]</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m &amp;&amp; j <= r<span class="rainbow1">)</span>
-    <span class="keyword">if</span> (a[i] <= a[j])
-      b[k++] = a[i++];
-    <span class="keyword">else</span>
-      b[k++] = a[j++];
+  <span class="type">int</span> <span class="variable">m</span> = l + <span class="rainbow1">(</span>r - l<span class="rainbow1">)</span> / <span class="constant">2</span>;
+  mergeSort<span class="rainbow1">(</span>a, l, m<span class="rainbow1">)</span>;
+  mergeSort<span class="rainbow1">(</span>a, m + <span class="constant">1</span>, r<span class="rainbow1">)</span>;
+  merge<span class="rainbow1">(</span>a, l, m, r<span class="rainbow1">)</span>;
+<span class="rainbow0">}</span>
+<span class="type">void</span> <span class="function">merge</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">m</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="type">int</span> <span class="variable">i</span> = <span class="constant">l</span>, <span class="variable">j</span> = m + <span class="constant">1</span>, <span class="variable">k</span> = <span class="constant">0</span>;
+  <span class="type">int</span> <span class="variable">b</span><span class="rainbow1">[</span>r - l + <span class="constant">1</span><span class="rainbow1">]</span>;
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m ** j <= r<span class="rainbow1">)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> <= a<span class="rainbow3">[</span>j<span class="rainbow3">]</span><span class="rainbow2">)</span>
+      b<span class="rainbow3">[</span>k++<span class="rainbow3">]</span> = a<span class="rainbow3">[</span>j++<span class="rainbow3">]</span>;
   <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m<span class="rainbow1">)</span>
-    b[k++] = a[i++];
+    b<span class="rainbow2">[</span>k++<span class="rainbow2">]</span> = a<span class="rainbow2">[</span>i++<span class="rainbow2">]</span>;
   <span class="keyword">while</span> <span class="rainbow1">(</span>j <= r<span class="rainbow1">)</span>
-    b[k++] = a[j++];
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> x = 0; x < k; x++<span class="rainbow1">)</span>
-    a[l + x] = b[x];
-}
-</pre>
+    b<span class="rainbow2">[</span>k++<span class="rainbow2">]</span> = a<span class="rainbow2">[</span>j++<span class="rainbow2">]</span>;
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">x</span> = <span class="constant">0</span>; x < r - l + <span class="constant">1</span>; x++<span class="rainbow1">)</span>
+    a<span class="rainbow2">[</span>l + x<span class="rainbow2">]</span> = b<span class="rainbow2">[</span>x<span class="rainbow2">]</span>;
+<span class="rainbow0">}</span></pre>
     <p>
       merging all the arrays at a given level together is \(Θ(n)\), and there are
       around \(\log₂ n\) levels
@@ -371,19 +357,18 @@
       </li>
       <li>call <code class="function">quickSort</code> on each side</li>
     </ul>
-<pre>
-int partition(int a[], int l, int r) {
-  int pivot = a[l]; // easy
-  int i = l + 1, j = r;
-  while (i <= j) {
-    if (a[i] <= pivot) i++;
-    if (a[j] > pivot) j--;
-    // if i and j both didn't move
-      // swap a[i++] and a[j--]
-  }
-  return j;
-}
-</pre>
+    <pre class="highlit">
+<span class="type">int</span> <span class="function">partition</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow1">{</span>
+  <span class="type">int</span> <span class="variable">pivot</span> = a<span class="rainbow1">[</span>l<span class="rainbow1">]</span>; <span class="comment">// easy</span>
+  <span class="type">int</span> <span class="variable">i</span> = l + 1, <span class="variable">j</span> = r;
+  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= j<span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    <span class="keyword">while</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> < pivot<span class="rainbow2">)</span> i++;
+    <span class="keyword">while</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>j<span class="rainbow3">]</span> > pivot<span class="rainbow2">)</span> j--;
+    <span class="comment">// if i and j both didn't move</span>
+      <span class="comment">// swap a[i++] and a[j--]</span>
+  <span class="rainbow1">}</span>
+  <span class="keyword">return</span> j;
+}</pre>
     <p>worst case, the list is already sorted: \(O(n²)\)</p>
     <p>best case the pivot is the median: \(O(n\log n)\)</p>
     <p>methods to avoid worst case:</p>
@@ -392,57 +377,79 @@ int partition(int a[], int l, int r) {
       <li>randomly choose a pivot instead of always using the first element</li>
       <li>find the median of an unsorted array without sorting it...?</li>
     </ul>
+    <aside style="background:var(--bg-green-nuanced)">
+    <h2>lower bound for comparison-based sorting</h2>
+    <p>
+      suppose in the worst case the lower bound is \(Ω(n)\). then we <i>could</i> run faster than
+      \(O(n \log n)\) in the worst case. problem is we don't know of any sorting algorithm better than
+      \(O(n \log n)\) in the worst case
+    </p>
+    <p>
+      suppose in the worst case the lower bound is \(Ω(n \log n)\). then sorting is a closed problem
+      and we've solved it
+    </p>
+    <p>say we have a list \([a₁a₂a₃]\). if we make a tree of all the possibilities, there are 6 ways they could be arranged and the height of the tree is 3. so there's no way to sort a list in less than 3 comparsions</p>
+    <p>so the lower bound for sorting is the height of our tree</p>
+    <p>it's close enough to just say \(h = \log₂(\text{\# leaves})\). how many leaves are there?</p>
+    <dl>
+      <dt>permutation</dt>
+      <dd>number of ways to arrange a list</dd>
+    </dl>
+    <p>for an array of length \(n\) there are \(n!\) permutations</p>
+    <p>so \(h = \log₂ (n!)\). we know from doing some loops that that's \(O(n \log n)\)</p>
+    <p>therefore the lower bound of comparison-based sorting is \(Ω(n \log n)\)</p>
+    </aside>
     <h1>binary trees</h1>
     <p>honestly not very useful in and of themselves</p>
     <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
-    <pre>
+    <pre class="highlit">
        a
    b --'-- c
 d -'- e f -'- g</pre>
-    <pre>
-class BinTreeNode {
-  public:
-    int data;
-    BinTreeNode* left;
-    BinTreeNode* right;
+    <pre class="highlit">
+<span class="keyword">class</span> <span class="type">BinTreeNode</span> <span class="rainbow0">{</span>
+  <span class="keyword">public</span>:
+    <span class="type">int</span> <span class="variable">data</span>;
+    <span class="type">BinTreeNode*</span> <span class="variable">left</span>;
+    <span class="type">BinTreeNode*</span> <span class="variable">right</span>;
 }</pre>
     <h2>traversing</h2>
     <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
     <p>there are a couple different ways to traverse a tree</p>
-    <pre>
-void preorder(BinTreeNode* r) {
-  if (r == nullptr)
-    return;
-  cout << r->data; // preorder process
-  preorder(r->left);
-  preorder(r->right);
-}
-void postorder(BinTreeNode* r) {
-  if (r == nullptr)
-    return;
-  postorder(r->left);
-  postorder(r->right);
-  cout << r->data;
+    <pre class="highlit">
+<span class="type">void</span> <span class="function">preorder</span><span class="rainbow0">(</span><span class="type">BinTreeNode*</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span>
+    <span class="keyword">return</span>;
+  <span class="builtin">cout</span> << data; <span class="comment">// preorder process</span>
+  preorder<span class="rainbow1">(</span>r->left<span class="rainbow1">)</span>;
+  preorder<span class="rainbow1">(</span>r->right<span class="rainbow1">)</span>;
+<span class="rainbow0">}</span>
+<span class="type">void</span> <span class="function">postorder</span><span class="rainbow0">(</span><span class="type">BinTreeNode*</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span>
+    <span class="keyword">return</span>;
+  postorder<span class="rainbow1">(</span>r->left<span class="rainbow1">)</span>;
+  postorder<span class="rainbow1">(</span>r->right<span class="rainbow1">)</span>;
+  <span class="builtin">cout</span> << data;
 }</pre>
     <h2>searching</h2>
-    <pre>
-binTreeNode* find(binTreeNode* r, int s) {
-    if (!r || r->data == s) return r;
-    binTreeNode* left = find(r->left, s);
-    if (left) return left;
-    return find(r->right, s);
+    <pre class="highlit">
+<span class="type">binTreeNode*</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">binTreeNode*</span> <span class="variable">r</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+    <span class="keyword">if</span> <span class="rainbow1">(</span>!r || r->data == s<span class="rainbow1">)</span> <span class="keyword">return</span> r;
+    <span class="type">binTreeNode*</span> <span class="variable">left</span> = find(r->left, s);
+    <span class="keyword">if</span> <span class="rainbow1">(</span>left<span class="rainbow1">)</span> <span class="keyword">return</span> left;
+    <span class="keyword">return</span> find(r->right, s);
 }</pre>
     <p>runtime for pre/post order:</p>
     <p>each function body runs \(Θ(1)\) times, and there are \(n\) nodes</p>
     <h2>height</h2>
-    <p>levels are 0 indexed <span class="clarity"><55555555</span></p>
-    <pre>
+    <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
+    <pre class="highlit">
 a
 '- b
    '- c
       '- d</pre>
     <p>the height of this tree is 3 and there are 4 nodes. this is the best case despite the tree looking absolutely fucking stupid</p>
-    <pre>
+    <pre class="highlit">
                a
        b ------'------ c
    d --'-- e       f --'-- g
@@ -463,29 +470,29 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       <dd>helps find elements quickly, but overhead to maintain</dd>
     </dl>
     <p>a bit like having folders!</p>
-    <pre>
-template &lt;class K, class V>
-class BinTreeNode {
-  public:
-    K key;
-    V value;
-    BinTreeNode&lt;K, V>* left;
-    BinTreeNode&lt;K, V>* right;
+    <pre class="highlit">
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
+<span class="keyword">class</span> <span class="type">BinTreeNode</span> <span class="rainbow0">{</span>
+  <span class="keyword">public</span>:
+    <span class="type">K</span> <span class="variable">key</span>;
+    <span class="type">V</span> <span class="variable">value</span>;
+    <span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">left</span>;
+    <span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">right</span>;
 }</pre>
     <p>for each node \(r\):</p>
     <ul>
-      <li><code>r->left</code>'s key is less than r's key</li>
-      <li><code>r->right</code>'s key is larger than r's key</li>
+      <li><code class="highlit">r->left</code>'s key is less than r's key</li>
+      <li><code class="highlit">r->right</code>'s key is larger than r's key</li>
     </ul>
     <h2>searching</h2>
-    <pre>
-template &lt;class K, class V>
-bool find(BinTreeNode&lt;K, V>* r, K k) {
-  if (r == nullptr) return false;
-  if (k == r->key) return true;
-  if (k < r->key)
-    return find(r->left, k);
-  return find(r->right, k);
+    <pre class="highlit">
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
+<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">r</span>, <span class="type">K</span> <span class="variable">k</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span> <span class="keyword">return</span> <span class="constant">false</span>;
+  <span class="keyword">if</span> <span class="rainbow1">(</span>k == r->key<span class="rainbow1">)</span> <span class="keyword">return</span> <span class="constant">true</span>;
+  <span class="keyword">if</span> <span class="rainbow1">(</span>k < r->key<span class="rainbow1">)</span>
+    <span class="keyword">return</span> find<span class="rainbow2">(</span>r->left, k<span class="rainbow2">)</span>;
+  <span class="keyword">return</span> find<span class="rainbow1">(</span>r->right, k<span class="rainbow1">)</span>;
 }</pre>
     <p>the function body is constant time. for here we only have to check one node per height level at most</p>
     <p>best case the runtime is \(Θ(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
@@ -494,7 +501,7 @@ bool find(BinTreeNode&lt;K, V>* r, K k) {
     <h1>avl trees</h1>
     <p>this is a self-balancing binary search tree. when we insert or delete we balance the tree if needed</p>
     <p>how do we know if a tree is balanced? for each node the difference in its left and right subtree heights cannot exceed 1</p>
-    <p>this requires adding a <code><span class="type">size_t</span> <span class="variable">height</span></code> into <code class="type">BinTreeNode</code></p>
+    <p>this requires adding a <code class="highlit"><span class="type">size_t</span> height</code> into <code class="type">BinTreeNode</code></p>
     <p>the empty tree has a height of -1. for every node \(r\) its height is
       \(
       \max(
@@ -541,14 +548,29 @@ bool find(BinTreeNode&lt;K, V>* r, K k) {
       stl has a type called <code class="type">Map</code> for an ordered map, which is basically an
       avl tree
     </p>
-    <pre>
-#include &lt;map>
-using std::map;
-int main() {
-  map&lt;string, int> people;
-  people["Dan"] = 13;
-  people.insert({"Tom", 12});
+    <pre class="highlit">
+<span class="preprocessor">#include</span> <span class="string">&lt;map></span>
+<span class="keyword">using</span> <span class="constant">std</span>::<span class="type">map</span>;
+<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
+  <span class="type">map</span><span class="rainbow1"><</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow1">></span> <span class="variable">people</span>;
+  people<span class="rainbow1">[</span><span class="string">"Dan"</span><span class="rainbow1">]</span> = <span class="constant">13</span>;
+  people.insert<span class="rainbow1">(</span><span class="rainbow2">{</span><span class="string">"Tom"</span>, <span class="constant">12</span><span class="rainbow2">}</span><span class="rainbow1">)</span>;
 }</pre>
+    <p>ways to do stuff to every element:</p>
+    <pre class="highlit">
+<span class="comment">// `it` is a map&lt;string, int>::iterator</span>
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span> = people.begin<span class="rainbow1">()</span>; it != people.end<span class="rainbow1">()</span>; it++<span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="constant">// first = key, second = value</span>
+  <span class="builtin">cout</span> << first second << <span class="builtin">endl</span>;
+<span class="rainbow0">}</span>
+
+<span class="comment">// `it` is the actual node object</span>
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span>: people<span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="builtin">cout</span> << it.first << <span class="string">":"</span> << it.second << <span class="builtin">endl</span>;
+}</pre>
+    <h2>unordered maps</h2>
+    <p><code class="highlit">unordered_map</code>, uses a hash table instead of a tree</p>
+    <p>insert and find are \(O(1)\)!</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

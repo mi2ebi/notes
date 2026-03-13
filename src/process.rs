@@ -4,11 +4,9 @@ use fancy_regex::{Captures as FancyCaptures, Regex as FancyRegex};
 use regex::Regex;
 
 use crate::{
-    accents,
     colors::{RESET, YELLOW},
-    entities, fonts,
-    fonts::FontMaps,
-    macros, scripts,
+    entities,
+    tex::{accents, fonts, fonts::FontMaps, macros, scripts},
 };
 
 static INLINE_MATH_RE: LazyLock<FancyRegex> =
@@ -42,6 +40,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf::phf_set! {
     "cases",
     "cfrac",
     "choose",
+    "class",
     "color",
     "colorbox",
     "cos",
@@ -211,7 +210,7 @@ pub fn warn_unknown(processed: &str, math_regions: &[String]) {
     for caps in UNKNOWN_ENTITY_RE.captures_iter(processed) {
         let entity = caps.get(0).unwrap().as_str();
         if !matches!(entity, "&lt;" | "&gt;" | "&amp;") {
-            eprintln!("{YELLOW}unknown entity:{RESET} {entity}");
+            println!("  {YELLOW}unknown entity:{RESET} {entity}");
         }
     }
     let mut seen = std::collections::HashSet::new();
@@ -219,7 +218,7 @@ pub fn warn_unknown(processed: &str, math_regions: &[String]) {
         for caps in UNCONVERTED_MACRO_RE.captures_iter(content) {
             let name = caps.get(1).unwrap().as_str();
             if !STRUCTURAL.contains(name) && seen.insert(name.to_owned()) {
-                eprintln!("{YELLOW}unknown macro:{RESET} \\{name}");
+                println!("  {YELLOW}unknown macro:{RESET} \\{name}");
             }
         }
     }

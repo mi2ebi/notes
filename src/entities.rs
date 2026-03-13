@@ -64,6 +64,7 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
     "&le;" => '≤',
     "&ll;" => '≪',
     "&mdash;" => '—',
+    "&micro;" => 'µ',
     "&minus;" => '−',
     "&mu;" => 'μ',
     "&nabla;" => '∇',
@@ -106,7 +107,9 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
 };
 
 static LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9])").unwrap());
+    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/])").unwrap());
+static AMP_RE: LazyLock<FancyRegex> =
+    LazyLock::new(|| FancyRegex::new("&amp;(?![a-zA-Z0-9#])").unwrap());
 
 static ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&[a-zA-Z]+;").unwrap());
 
@@ -116,5 +119,6 @@ pub fn replace(text: &str) -> String {
         ENTITIES.get(entity).map_or_else(|| entity.to_owned(), |&c| c.to_string())
     });
     let text = text.replace("&gt;", ">");
-    LT_RE.replace_all(&text, "<").into_owned()
+    let text = LT_RE.replace_all(&text, "<");
+    AMP_RE.replace_all(&text, "&").into_owned()
 }

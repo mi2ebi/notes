@@ -6,12 +6,9 @@
     clippy::cast_sign_loss
 )]
 
-pub mod accents;
 pub mod colors;
 pub mod entities;
-pub mod fonts;
-pub mod macros;
+pub mod hl;
 pub mod process;
-pub mod scripts;
-pub mod tests;
+pub mod tex;
 pub mod unicode_data;

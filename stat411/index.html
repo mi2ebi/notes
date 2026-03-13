@@ -26,16 +26,16 @@
     <ol>
       <li>
         <b>descriptive</b> –
-        methods to organise/display/decribe data
+        methods to organise/display/describe data
       </li>
       <li>
         <b>inferential</b> –
-        methods to utitlse data to make decisions and models etc
+        methods to utilise data to make decisions and models etc
       </li>
     </ol>
     <p>the generalisation from sample to population is <b>statistical inference</b></p>
     <h3>history</h3>
-    <p>aristotle combined empricism and rationalism</p>
+    <p>aristotle combined empiricism and rationalism</p>
     <p>see also <i lang="la">cōgitō ergō sum</i></p>
     <p>
       after the industrial revolution there was more of an economy, and governments
@@ -176,16 +176,15 @@
       <dd>\(s = \sqrt{s²}\)</dd>
     </dl>
     <p>the second form is nicer for computation since you don't need eg 2 loops</p>
-<pre>
-<span class="keyword">let mut</span> <span class="variable">sum_squares</span> @ <span class="keyword">mut</span> <span class="variable">sum</span> = <span class="constant">0</span>;
-<span class="keyword">let</span> <span class="variable">n</span> = <span class="variable">sample</span>.<span class="function">len</span>() <span class="keyword">as</span> <span class="type">f64</span>;
-<span class="keyword">for</span> <span class="variable">x</span> <span class="keyword">in</span> <span class="variable">sample</span> {
-  <span class="variable">sum</span> += <span class="variable">x</span>;
-  <span class="variable">sum_squares</span> += <span class="variable">x</span> * <span class="variable">x</span>;
-}
-<span class="keyword">let</span> <span class="variable">s2</span> = <span class="constant">1.</span>/(<span class="variable">n</span>-<span class="constant">1.</span>) * (<span class="variable">sum_squares</span> - <span class="variable">sum</span>*<span class="variable">sum</span>/<span class="variable">n</span>);
-<span class="keyword">let</span> <span class="variable">s</span> = <span class="variable">s2</span>.<span class="function">sqrt</span>();
-</pre>
+    <pre class="highlit">
+<span class="keyword">let</span> <span class="keyword">mut</span> <span class="variable">sum_squares</span> @ <span class="keyword">mut</span> <span class="variable">sum</span> = <span class="constant">0</span>;
+<span class="keyword">let</span> <span class="variable">n</span> = sample.len<span class="rainbow0">()</span> <span class="keyword">as</span> <span class="type">f64</span>;
+<span class="keyword">for</span> <span class="variable">x</span> <span class="keyword">in</span> sample <span class="rainbow0">{</span>
+  sum += x;
+  sum_squares += x * x;
+<span class="rainbow0">}</span>
+<span class="keyword">let</span> <span class="variable">s2</span> = <span class="constant">1.</span>/<span class="rainbow0">(</span>n-<span class="constant">1.</span><span class="rainbow0">)</span> * <span class="rainbow0">(</span>sum_squares - sum*sum/n<span class="rainbow0">)</span>;
+<span class="keyword">let</span> <span class="variable">s</span> = s2.sqrt<span class="rainbow0">()</span>;</pre>
     <p>the sum of deviations is \(∑\limitsᵢ₌₁ⁿ (xᵢ - x̄) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
@@ -269,7 +268,7 @@
       <dd>\(∅\), the set with nothing in it. \(P(∅) = 0\)</dd>
       <dt>intersection</dt>
       <dd>\(A ∩ B = \set{x : x ∈ A ∧ x ∈ B}\)</dd>
-      <dt><i>mutually exclusivei / disjoint</i></dt>
+      <dt><i>mutually exclusive / disjoint</i></dt>
       <dd>if \(A ∩ B = ∅\)</dd>
       <dt>union</dt>
       <dd>\(A ∪ B = \set{x : x ∈ A ∨ x ∈ B}\)</dd>
@@ -305,7 +304,7 @@
       <dd>an ordered subset</dd>
       <dt>factorial</dt>
       <dd>for any integer \(n ≥ 0\), \(n! = ∏\limitsᵢ₌₁ⁿ i\)</dd>
-      <dd>specialcase \(0! = 1\)</dd>
+      <dd>special case \(0! = 1\)</dd>
     </dl>
     <p>
       the number of permutations of \(r\) objects among a set of \(n\) is
@@ -349,7 +348,7 @@
     </p>
     <p>
       two events \(A\) and \(B\) are <b>independent</b> if \(P(A \mathbin| B) = P(A)\),
-      or equivalently if \(P(A ∩ B) = P(A)(B)\)
+      or equivalently if \(P(A ∩ B) = P(A)P(B)\)
     </p>
     <p>two mutually exclusive events are always dependent</p>
     <img src="given-even.png" />
@@ -386,7 +385,7 @@
       </tr>
     </table>
     <p>eg \(
-      P\left(\text{smoking} \middle| \text{bronchitis}^∁\right) = \frac13
+      P\left(\text{smoking} \middle| \text{bronchitis}^∁\right) = \frac12
     \)</p>
     <p>smoking and bronchitis are dependent because \(P(S) ≠ P(S \mathbin| B)\)</p>
     <h2>2.7 bayes' theorem</h2>
@@ -412,13 +411,13 @@
     <dl>
       <dt>random variable</dt>
       <dd>
-        a function \(X : ℝ → ℝ\) that assigns numerical values to events
+        a function \(X : S → ℝ\) that assigns numerical values to events
         in a sample space
       </dd>
     </dl>
     <p>
       the sample space \(S\) can be either <b>discrete</b> (there are countably many outcomes) or
-      <b>continuous</b> (there are uncountable many outcomes)
+      <b>continuous</b> (there are uncountably many outcomes)
     </p>
     <p>
       we also define a <b>probability (mass) function</b> \(p\) which takes the numerical
@@ -439,13 +438,13 @@
         <th scope="row" >P(X = <i>x</i>)</th>
         <td>\(\frac14\)</td>
         <td>\(\frac12\)</td>
-        <td>\(\frac34\)</td>
+        <td>\(\frac14\)</td>
       </tr>
     </table>
     <p>which has these properties. they look suspiciously similar to the axioms of probability!</p>
     <ul>
-      <li>\(0 ≤ p(x) < 1\) for all values of \(x\)</li>
-      <li>\(∑\limits_{\text{all }x} = 1\)</li>
+      <li>\(0 ≤ p(x) ≤ 1\) for all values of \(x\)</li>
+      <li>\(∑\limits_{\text{all }x} p(x) = 1\)</li>
     </ul>
     <p>if it's continuous,</p>
     <ul>
@@ -463,12 +462,12 @@
     <p>for the coin example, \(F(1) = P(X ≤ 1) = \frac34\) etc</p>
     <p>
       if it's continuous, \[
-      F_X(x) = P(X ≤ x) = ∫_{-∞}^∞ f(t) \;\mathrm dx
+      F_X(x) = P(X ≤ x) = ∫_{-∞}ˣ f(t) \;\mathrm dt
       \]
     </p>
     <ul>
       <li>\(\frac{\mathrm d}{\mathrm dx} F(x) = f(x)\)</li>
-      <li>P(a \le X \le b) = F(b) - F(a)</li>
+      <li>\(P(a ≤ X ≤ b) = F(b) - F(a)\)</li>
       <li>\(F_X(b) = P(X ≤ b) = ∫_{-∞}ᵇ f(x) \;\mathrm dx\)</li>
     </ul>
     <p>the cdf \(F(x)\) is more informative than the pdf \(f(x)\) about \(X\)</p>
@@ -477,7 +476,7 @@
     <p>
       <b class="example" >example.</b> let \[
       f(x) = \begin{cases}
-      cx² - x, & 0 ≤ x≤ 2\\
+      cx² + x, & 0 ≤ x ≤ 2\\
       0, & \text{otherwise}
       \end{cases}
       \]
@@ -486,8 +485,8 @@
     <p>
       \[
       ∫₀² \left(cx² + x\right) \;\mathrm dx = 1
-      ⟺
-      \left.\left(\frac c3 x² + \frac12 x²\right)\vphantom∫\right|₀²
+      ⇔
+      \left.\left(\frac c3 x³ + \frac12 x²\right)\vphantom∫\right|₀²
       = \frac83 c + 2 = 1
       \]
     </p>
@@ -635,13 +634,13 @@
       \var(Y) = E(Y²) - μ² = \frac85 - \left(\frac76\right)² = \frac{43}{180} = 0.238̄
       \]
     </p>
-    <h2>4.5 <ruby>chebyshev's inequality</h2>
+    <h2>4.5 chebyshev's inequality</h2>
     <p>
       for any random variable \(X\) having mean \(μ\) and variance \(σ²\),
       \[
       P(\left|X - μ\right| < kσ) ≥ 1-\frac1{k²}
       \]
-      where \(k > -1\)
+      where \(k > 1\)
     </p>
     <p>
       alternatively
@@ -744,9 +743,16 @@
     <p>
       the <b>sample correlation coefficient</b> is defined as
       \[
+      \begin{align*}
       r_{X, Y}
-      = \frac{\cov(X, Y)}{\sqrt{\var(X)}\sqrt{\var(Y)}}
-      = \frac1{n - 1} ∑ᵢ₌₁ⁿ \frac{xᵢ - x̄}{sₓ}\frac{yᵢ - ȳ}{s_y}
+      &= \frac{\cov(X, Y)}{\sqrt{\var(X)}\sqrt{\var(Y)}}\\
+      &= \frac{
+      n ∑ xy - ∑ x ∑ y
+      }{
+      \sqrt{n ∑ x² - \Big(∑ x\Big)²} \sqrt{n ∑ y² - \Big(∑ y\Big)²}
+      } \class{comment}{\text{/* why? */}}\\
+      &= \frac1{n - 1} ∑ᵢ₌₁ⁿ \frac{xᵢ - x̄}{sₓ}\frac{yᵢ - ȳ}{s_y}
+      \end{align*}
       \]
     </p>
     <p>
@@ -758,15 +764,24 @@
     </ul>
     <p>
       the other stuff is all the same except the usual
-      <code><span class="function">s</span>/</code>
-      \(\displaystyle∑\)
-      <code>/</code>
-      \(\displaystyle∫\)
-      <code>/<span class="builtin">g</span></code>
+      <code class="highlit"><span class="function">s</span>/</code> \(\displaystyle∑\) <code class="highlit">/</code> \(\displaystyle∫\) <code class="highlit">/g</code>
+      and
+      <code class="highlit"><span class="function">s</span>/</code>\(p\)<code class="highlit">/</code>\(f\)<code class="highlit">/g</code>
+    </p>
+    <p>
+      \[
+      P(a ≤ X₁ ≤ b, c ≤ X₂ ≤ d)
+      = ∫_cᵈ∫_bᵃ f(x₁, x₂) \;\mathrm dx₁ \;\mathrm dx₂
+      \]
+    </p>
+    <p>
+      \[
+      f₁(x₁) = ∫_{-∞}^∞ f(x₁, x₂) \;\mathrm dx₂
+      \]
     </p>
     <p>for two random variables,</p>
     <ul>
-      <li>\(E(aX ± bY) = aE(X) + bE(Y)\)</li>
+      <li>\(E(aX ± bY) = aE(X) ± bE(Y)\)</li>
       <li>\(\var(aX ± bY) = a²\var(X) + b²\var(Y) ± 2ab\cov(X, Y)\)</li>
       <li>if they're independent \(E(XY) = E(X)E(Y)\)</li>
     </ul>

@@ -2,7 +2,7 @@ use std::{collections::HashMap, fs, io, path::Path};
 
 use reqwest::blocking::get;
 
-use crate::colors::{GREEN, RED, RESET, YELLOW};
+use crate::colors::{RED, RESET, YELLOW};
 
 const UNICODE_DATA_URL: &str = "https://unicode.org/Public/UCD/latest/ucd/UnicodeData.txt";
 const LOCAL_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/UnicodeData.txt");
@@ -17,52 +17,44 @@ pub struct UnicodeData {
 }
 
 pub fn load() -> io::Result<UnicodeData> {
-    let (raw, changed) = fetch_raw()?;
+    let raw = fetch_raw()?;
     let ud = parse(&raw);
-    if changed {
-        eprintln!("{GREEN}modified:{RESET} UnicodeData.txt");
-    }
     Ok(ud)
 }
 
-pub fn fetch_raw() -> io::Result<(String, bool)> {
+pub fn fetch_raw() -> io::Result<String> {
     get(UNICODE_DATA_URL).and_then(reqwest::blocking::Response::text).map_or_else(
         |_| {
-            eprintln!("{RED}error:{RESET} could not fetch UnicodeData.txt, trying local backup");
+            eprintln!("  {YELLOW}fetch error:{RESET} trying local backup");
             let path = Path::new(LOCAL_PATH);
             if path.exists() {
-                fs::read_to_string(path).map(|s| (s, false))
+                fs::read_to_string(path)
             } else {
                 Err(io::Error::new(
                     io::ErrorKind::NotFound,
                     format!(
-                        "{RED}error:{RESET} fetch failed and no backup exists. download manually \
-                         from:\n  {UNICODE_DATA_URL}"
+                        "  {RED}error:{RESET} fetch failed and no backup exists.\n  download \
+                         manually from:\n    {UNICODE_DATA_URL}"
                     ),
                 ))
             }
         },
         |new_text| {
             let path = Path::new(LOCAL_PATH);
-            let changed = if path.exists() {
-                match fs::read_to_string(path) {
-                    Ok(old_text) if old_text != new_text => {
-                        let old = parse(&old_text);
-                        let new = parse(&new_text);
-                        diff_maps("superscripts", &old.superscripts, &new.superscripts);
-                        diff_maps("subscripts", &old.subscripts, &new.subscripts);
-                        diff_maps("negations", &old.negations, &new.negations);
-                        true
-                    }
-                    _ => false,
+            match fs::read_to_string(path) {
+                Ok(old_text) if old_text != new_text => {
+                    let old = parse(&old_text);
+                    let new = parse(&new_text);
+                    diff_maps("superscripts", &old.superscripts, &new.superscripts);
+                    diff_maps("subscripts", &old.subscripts, &new.subscripts);
+                    diff_maps("negations", &old.negations, &new.negations);
                 }
-            } else {
-                true
-            };
-            if fs::write(LOCAL_PATH, &new_text).is_err() {
-                eprintln!("{RED}error:{RESET} could not write to {LOCAL_PATH}");
+                _ => {}
             }
-            Ok((new_text, changed))
+            if fs::write(LOCAL_PATH, &new_text).is_err() {
+                eprintln!("  {RED}writing error{RESET}");
+            }
+            Ok(new_text)
         },
     )
 }
@@ -72,7 +64,7 @@ fn diff_maps(name: &str, old: &HashMap<char, char>, new: &HashMap<char, char>) {
     new.sort();
     for (&base, &new_val) in new {
         if !old.contains_key(&base) {
-            eprintln!("{YELLOW}{name} added:{RESET} {base} -> {new_val}");
+            println!("  {YELLOW}{name} added:{RESET} {base} -> {new_val}");
         }
     }
 }

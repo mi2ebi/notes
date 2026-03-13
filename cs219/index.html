@@ -9,12 +9,11 @@
     <h1 class="h0">cs 219</h1>
     <h1>2026-01-20</h1>
     <p>computers and brains are very similar!</p>
-<pre>
-        <span style="color: var(--green)">program</span>
+    <pre class="highlit">        program
            v
-<span style="color: var(--red)">input</span> > <span style="color: var(--green)">process</span> > <span style="color: var(--magenta-cooler)">output</span>
+input > process > output
            v
-        <span style="color: var(--green)">storage</span>
+        storage
 </pre>
     <h2 id="parts-of-computers">parts of computers</h2>
     <ul>
@@ -151,8 +150,7 @@
       add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a>
       with the same instruction. in risc there's just
     </p>
-<pre>
-<span class="comment"># rd = rs + rt</span>
+<pre class="highlit"><span class="comment"># rd = rs + rt</span>
 <span class="function">add</span> <span class="variable">rd</span>, <span class="variable">rs</span>, <span class="variable">rt</span>
 </pre>
     <ol start="2">
@@ -165,8 +163,7 @@
       <li>make the common case fast</li>
     </ol>
     <p>storing stuff in registers is faster than going to main memory every time</p>
-<pre>
-<span class="function">move</span> <span class="constant">$t0</span>, <span class="constant">$t1</span>
+<pre class="highlit"><span class="function">move</span> <span class="constant">$t0</span>, <span class="constant">$t1</span>
 <span class="comment"># is secretly</span>
 <span class="function">add</span> <span class="constant">$t0</span>, <span class="constant">$0</span>, <span class="constant">$t1</span>
 </pre>
@@ -179,41 +176,36 @@
     <p>i) every instruction is 32 bits<br/>ii) minimal changes btwn instr formats</p>
     <h2 id="r-format-instructions">r-format instructions</h2>
     <p>used by the ALU</p>
-<pre>
-6      5     5     5     5     6
+<pre class="highlit">6      5     5     5     5     6
 000000 00000 00000 00000 00000 000000
 opcode rs    rt    rd    shamt funct
 </pre>
     <p>risc has 32 registers so the registers each take up 5 bits</p>
-    <p><code>shamt</code> is 'shift amount', used only for shl/shr, also 5 bits</p>
+    <p><code class="highlit">shamt</code> is 'shift amount', used only for shl/shr, also 5 bits</p>
     <h2 id="i-format-instructions">i-format instructions</h2>
-<pre>
-6      5     5     16
+<pre class="highlit">6      5     5     16
 000000 00000 00000 0000000000000000
 opcode rs    rt    imm
 </pre>
-    <p><code>rt</code> is sometimes a source and sometimes a destination</p>
+    <p><code class="highlit">rt</code> is sometimes a source and sometimes a destination</p>
     <p>eg</p>
-<pre>
-<span class="function">lw</span> <span class="constant">$s0</span>, <span class="constant">4</span>(<span class="constant">$s2</span>)
+<pre class="highlit"><span class="function">lw</span> <span class="constant">$s0</span>, <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$s2</span><span class="rainbow0">)</span>
 </pre>
     <ul>
-      <li><code class="constant">$s2</code> is <code>rs</code>
-      <li><code class="constant">$s0</code> is <code>rt</code>
-      <li><code class="constant">4</code> is the <i>offset</i> and goes in <code>imm</code>
+      <li><code class="constant">$s2</code> is <code class="highlit">rs</code>
+      <li><code class="constant">$s0</code> is <code class="highlit">rt</code>
+      <li><code class="constant">4</code> is the <i>offset</i> and goes in <code class="highlit">imm</code>
     </ul>
     <h2 id="j-format-instructions">j-format instructions</h2>
-<pre>
-6      26
+<pre class="highlit">6      26
 000000 00000000000000000000000000
 opcode imm/addr
 </pre>
     <h1>2026-02-09</h1>
     <h2 id="mips-to-hex">mips to hex</h2>
-    <h3><code>
-      <span class="function">add</span>
-      <span class="constant">$t2</span><span class="fgmain">,</span>
-      <span class="constant">$t0</span><span class="fgmain">,</span>
+    <h3><code class="highlit">      <span class="function">add</span>
+      <span class="constant">$t2</span>,
+      <span class="constant">$t0</span>,
       <span class="constant">$t1</span>
     </code></h3>
     <p>
@@ -222,33 +214,27 @@ opcode imm/addr
     </p>
     <p><code class="constant">$t0</code> has a register number of 8 etc</p>
     <p>so our instruction in binary is</p>
-<pre>
-000000 01000 01001 01010 00000 100000
+<pre class="highlit">000000 01000 01001 01010 00000 100000
 0      8     9     10    0     32
 </pre>
     <p>and in hex this is</p>
-<pre>
-0000 0001 0000 1001 0101 0000 0010 0000
+<pre class="highlit">0000 0001 0000 1001 0101 0000 0010 0000
 0    1    0    9    5    0    2    0
 </pre>
-    <p> = <code>0x01095020</code></p>
-    <h3><code>
-      <span class="function">sw</span>
-      <span class="constant">$s7</span><span class="fgmain">,</span>
-      <span class="constant">4</span><span class="fgmain">(</span><span class="constant">$t0</span><span class="fgmain">)</span>
+    <p> = <code class="highlit">0x01095020</code></p>
+    <h3><code class="highlit">      <span class="function">sw</span>
+      <span class="constant">$s7</span>,
+      <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$t0</span><span class="rainbow0">)</span>
     </code></h3>
     <p><code class="function">sw</code>'s opcode is 43
-<pre>
-101011 01000 10111 0000000000000100
+<pre class="highlit">101011 01000 10111 0000000000000100
 43     8     23    4
 </pre>
-<pre>
-1010 1101 0001 0111 0000 0000 0000 0100
+<pre class="highlit">1010 1101 0001 0111 0000 0000 0000 0100
 a    c    1    7    0    0    0    4
 </pre>
-    <p>= <code>0xac170004</code></p>
-    <h3><code>
-      <span class="function">j</span> <span class="constant">0x10000</span>
+    <p>= <code class="highlit">0xac170004</code></p>
+    <h3><code class="highlit">      <span class="function">j</span> <span class="constant">0x10000</span>
     </code></h3>
     <p>how do you fit a 32 bit address into 26 bits? you don't!</p>
     <p>
@@ -262,7 +248,7 @@ a    c    1    7    0    0    0    4
     <h2 id="logical-instructions">logical instructions</h2>
     <p>useful for extracting and inserting certain groups of bits</p>
     <h3 class="smcp">and</h3>
-    <p><code>and rd, rs, rt</code></p>
+    <p><code class="highlit"><span class="function">and</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <table>
       <tr>
         <th>A</th>
@@ -291,7 +277,7 @@ a    c    1    7    0    0    0    4
       </tr>
     </table>
     <h3 class="smcp">or</h3>
-    <p><code>or rd, rs, rt</code></p>
+    <p><code class="highlit"><span class="function">or</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <table>
       <tr>
         <th>A</th>
@@ -320,7 +306,7 @@ a    c    1    7    0    0    0    4
       </tr>
     </table>
     <h3 class="smcp">nor</h3>
-    <p><code>nor rd, rs, rt</code></p>
+    <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <p>= 1s complement of <span class="smcp">or</span></p>
     <table>
       <tr>
@@ -350,7 +336,7 @@ a    c    1    7    0    0    0    4
       </tr>
     </table>
     <h3 class="smcp">not</h3>
-    <p><code>nor rd, rs, $0</code></p>
+    <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, $0</code></p>
     <p>for integers ¬<i>x</i> = -<i>x</i> − 1</p>
     <table>
       <tr>
@@ -367,22 +353,21 @@ a    c    1    7    0    0    0    4
       </tr>
     </table>
     <h3>logical left shift</h3>
-    <p><code>sll rd, rt, shamt</code></p>
-    <p>eg <code>0b00001001</code> ≪ 2 = <code>0b00100100</code></p>
+    <p><code class="highlit"><span class="function">sll</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
+    <p>eg <code class="highlit">0b00001001</code> ≪ 2 = <code class="highlit">0b00100100</code></p>
     <p>
       for unsigned integers this produces <i>rs</i> × 2<sup><i>shamt</i></sup>
     </p>
     <h3>logical right shift</h3>
-    <p><code>srl rd, rt, shamt</code></p>
-    <p>eg <code>0b10010001</code> ≫ 2 = <code>0b00100100</code></p>
+    <p><code class="highlit"><span class="function">srl</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
+    <p>eg <code class="highlit">0b10010001</code> ≫ 2 = <code class="highlit">0b00100100</code></p>
     <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
     <h2 id="32-bit-constants">32-bit constants</h2>
     <p>
       most constants are small. i-format instructions can only handle 16-bit immediates
     </p>
-    <p>to put <code>0x12345678</code> into <code>$t0</code>, you write</p>
-<pre>
-<span class="function">li</span> <span class="constant">$t0</span>, <span class="constant">0x12345678</span>
+    <p>to put <code class="highlit">0x12345678</code> into <code class="highlit">$t0</code>, you write</p>
+<pre class="highlit"><span class="function">li</span> <span class="constant">$t0</span>, <span class="constant">0x12345678</span>
 <span class="comment"># is assembled into</span>
 <span class="function">lui</span> <span class="constant">$at</span>, <span class="constant">0x1234</span>       <span class="comment"># Load Upper Immediate</span>
 <span class="function">ori</span> <span class="constant">$t0</span>, <span class="constant">$at</span>, <span class="constant">0x5678</span>
@@ -400,7 +385,7 @@ a    c    1    7    0    0    0    4
     <p>adding a positive and negative number will never overflow</p>
     <h2 id="multiplication">multiplication</h2>
     <p>multipying two <i>n</i>-digit number gives an up-to-(2<i>n</i>)-digit number! whatever will we do!</p>
-    <p>mips has 2 bonus registers <code>hi</code> and <code>lo</code> which together store a 64-bit number</p>
+    <p>mips has 2 bonus registers <code class="highlit">hi</code> and <code class="highlit">lo</code> which together store a 64-bit number</p>
     <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
     <h1>2026-02-17</h1>
     <h3 id="multiplication--algorithm-1">algorithm 1</h3>
@@ -602,7 +587,7 @@ a    c    1    7    0    0    0    4
         </ol>
       </li>
     </ol>
-    <p>eg 6 ÷ 3 = <code>0b0000'0110</code> ÷ <code>0b0011</code>, expected quotient 2 remainder 0:</p>
+    <p>eg 6 ÷ 3 = <code class="highlit">0b0000'0110</code> ÷ <code class="highlit">0b0011</code>, expected quotient 2 remainder 0:</p>
     <table>
       <tr><th>iter#</th><th>quotient</th><th>remainder</th></tr>
       <tr><td>0</td><td>0000</td><td>0000'0110</td></tr>
@@ -627,16 +612,14 @@ a    c    1    7    0    0    0    4
       <dd>64 bit (<code class="type">double</code>) → 16 decimal digit precision</dd>
     </dl>
     <p>single precision:</p>
-    <pre>
-1    8          23
+    <pre class="highlit">1    8          23
 0    000'0000'0 000'0000'0000'0000'0000'0000
 sign exponent   mantissa</pre>
     <p><i>x</i> = (-1)<sup><i>s</i></sup> × (1. ⧺ mantissa) × 2<sup>exp − bias</sup></p>
     <p>the exponents 00000000 and 11111111 are reserved</p>
     <p>the bias for single precision is 127</p>
     <p>eg -0.75 = -1.1 × 2<sup>-1</sup> so exp = 126</p>
-    <pre>
-1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
+    <pre class="highlit">1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
     <h3 id="floats--addition">fp addition/subtraction</h3>
     <ol>
       <li>align exponents: shift the significand of the smaller-exponent operand right until both exponents match</li>
@@ -741,6 +724,16 @@ sign exponent   mantissa</pre>
     <dl>
       <dt>mux (multiplexer)</dt>
       <dd>selects between several input signals and forwrds them to a single place. basically a lightswitch</dd>
+      <aside style="background:var(--bg-ochre)">
+        <dt>RegDst mux</dt>
+        <dd>picks the destination register (rd or rt) depending on instruction format</dd>
+        <dt>ALUSrc mux</dt>
+        <dd>picks the ALU's second input: value of rt for r-format, sign-extended immediate for i-format</dd>
+        <dt>branch mux / PcSrc</dt>
+        <dd>next pc: pc+4 normally, branch target if branching</dd>
+        <dt>MemToReg mux</dt>
+        <dd>what to write back to the register: ALU result (r-format) or memory data (<code class="function highlit">lw</code>)</dd>
+      </aside>
       <dt>combinational</dt>
       <dd>outputs are only based on current inputs (eg, mux)</dd>
       <dt>sequential</dt>
@@ -748,8 +741,7 @@ sign exponent   mantissa</pre>
       <dt>flipflop</dt>
       <dd>circuit with 2 possible states</dd>
     </dl>
-    <pre>
-D flipflop: only triggers during the rising edge of the clock
+    <pre class="highlit">D flipflop: only triggers during the rising edge of the clock
       ___
   D -|   |- Q (output)
      |   |
@@ -781,6 +773,16 @@ Clk -|≥__|</pre>
         <td>1</td>
       </tr>
     </table>
+    <dl>
+      <dt>clock signal</dt>
+      <dd>a square wave that synchronizes state changes</dd>
+      <dt>edge-triggered</dt>
+      <dd>something that happens when the clock value changes</dd>
+      <dt>control signal</dt>
+      <dd>signal that <i>directs</i> datapath components</dd>
+      <dt>data</dt>
+      <dd>the actual values being operated on</dd>
+    </dl>
     <h1>2026-03-05</h1>
     <p>recap of last class with some specific instrunctions as examples</p>
     <blockquote>
@@ -790,11 +792,9 @@ Clk -|≥__|</pre>
     <p>
       instructions like <code class="function">j</code> take the fewest steps, and instructions like <code class="function">lw</code> take the most
     </p>
-    <p>
-      <b>TODO</b> is anything important in the slides?
-      (if you think so, let me know! either by opening an issue at
-      <a href="https://github.com/mi2ebi/notes">https://github.com/mi2ebi/notes</a>,
-      or my dming me on discord <code>mi2ebi</code>)
-    </p>
+    <h1>2026-03-10 <span style="color:var(--cyan-cooler)">online</span></h1>
+    <h2>control signals</h2>
+    <h1>2026-03-12</h1>
+    
   </body>
 </html>
