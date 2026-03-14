@@ -85,7 +85,7 @@ fn parse(raw: &str) -> UnicodeData {
         let name = fields[1];
         let decomp = fields[5];
         if let Some(base) = parse_tagged(decomp, "<super>") {
-            if !matches!(cp, '\u{00AA}' | '\u{00BA}') {
+            if !"ªº".contains(cp) && !name.contains("IDEOGRAPHIC ANNOTATION") {
                 superscripts.entry(base).or_insert(cp);
             }
         } else if let Some(base) = parse_tagged(decomp, "<sub>") {
