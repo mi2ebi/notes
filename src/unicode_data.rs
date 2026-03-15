@@ -103,6 +103,8 @@ fn parse(raw: &str) -> UnicodeData {
     }
     superscripts.insert('-', '⁻');
     subscripts.insert('-', '₋');
+    superscripts.insert('ɜ', 'ᶟ');
+    superscripts.insert('ᴈ', 'ᵌ');
     UnicodeData { superscripts, subscripts, negations, letters }
 }
 
