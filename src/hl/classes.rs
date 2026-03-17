@@ -13,7 +13,6 @@ macro_rules! class {
 
 pub const CLASSES: &[ClassInfo] = &[
     class!('b', "builtin", 0xfe 0xac 0xd0),
-    class!(';', "comment", 0xef 0x83 0x86),
     class!('c', "constant", 0xb6 0xa0 0xff),
     class!('d', "docstring", 0x9a 0xc8 0xe0),
     class!('f', "function", 0xf7 0x8f 0xe7),
@@ -32,6 +31,7 @@ pub const CLASSES: &[ClassInfo] = &[
     class!('6', "rainbow6", 0x44 0xdf 0x44),
     class!('7', "rainbow7", 0x79 0xa8 0xff),
     class!('8', "rainbow8", 0xf7 0x8f 0xe7),
+    class!(';', "comment", 0xef 0x83 0x86),
 ];
 
 pub fn by_key(key: char) -> Option<&'static ClassInfo> { CLASSES.iter().find(|c| c.key == key) }

@@ -1,14 +1,9 @@
-use std::{fmt::Write as _, sync::LazyLock};
+use std::fmt::Write as _;
 
-use regex::Regex;
-
-use crate::hl::{classes, session::FinishedSpan};
-
-static LANG_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"\slang="([^"]+)""#).unwrap());
-static CLASS_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"\sclass="([^"]*)""#).unwrap());
-
-static TAG_RE: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new("(?s)<!--.*?-->|<[a-zA-Z0-9/][^>]*>").unwrap());
+use crate::{
+    hl::{classes, session::FinishedSpan},
+    html::{CLASS_RE, strip_tags},
+};
 
 const DONE_CLASS: &str = "highlit";
 
@@ -24,7 +19,6 @@ pub struct Element {
     pub attrs: String,
     pub content: String,
     pub stripped_content: String,
-    pub lang: Option<String>,
 }
 
 pub fn find(html: &str) -> Vec<Element> {
@@ -68,7 +62,6 @@ fn find_elements_of_kind(html: &str, kind: &ElementKind) -> Vec<Element> {
                 let s = strip_tags(&content);
                 s.strip_prefix('\n').unwrap_or(&s).to_owned()
             };
-            let lang = LANG_RE.captures(attrs).map(|c| c.get(1).unwrap().as_str().to_owned());
             elements.push(Element {
                 kind: kind.clone(),
                 start,
@@ -76,15 +69,12 @@ fn find_elements_of_kind(html: &str, kind: &ElementKind) -> Vec<Element> {
                 attrs: attrs.to_owned(),
                 content,
                 stripped_content,
-                lang,
             });
         }
         pos = end;
     }
     elements
 }
-
-pub fn strip_tags(html: &str) -> String { TAG_RE.replace_all(html, "").into_owned() }
 
 fn has_done_class(attrs: &str, kind: &ElementKind) -> bool {
     CLASS_RE.captures(attrs).is_some_and(|c| {
@@ -124,7 +114,8 @@ fn apply_spans_to_content(content: &str, spans: &[FinishedSpan]) -> String {
         content.char_indices().map(|(b, _)| b).chain(std::iter::once(content.len())).collect();
     let mut result = String::new();
     let mut cursor = 0;
-    let spans = spans.to_vec();
+    let mut spans = spans.to_vec();
+    spans.sort_by_key(|s| s.start);
     for span in spans {
         if span.start < cursor {
             continue;

@@ -6,8 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
+    <!-- toc skip -->
     <h1 class="h0">cs 219</h1>
-    <h1>2026-01-20</h1>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li>basic stuff<ul>
+<li><a href="#parts-of-computers">parts of computers</a></li>
+<li><a href="#types-of-computers">types of computers</a></li>
+<li><a href="#eight-great-ideas">"eight great ideas"</a></li>
+<li><a href="#below-your-program">below your program</a></li>
+<li><a href="#inside-the-cpu">inside the cpu</a></li>
+<li><a href="#networks">networks</a></li>
+<li><a href="#performance">performance</a></li>
+<li><a href="#bin-and-hex">bin and hex</a></li>
+</ul>
+</li>
+<li>mips design etc<ul>
+<li><a href="#4-design-principles">"4 design principles"</a></li>
+<li><a href="#r-format-instructions">r-format instructions</a></li>
+<li><a href="#i-format-instructions">i-format instructions</a></li>
+<li><a href="#j-format-instructions">j-format instructions</a></li>
+<li><a href="#mips-to-hex">mips to hex</a></li>
+<li><a href="#logical-instructions">logical instructions</a><ul>
+<li><a href="#logical-instructions--and">and</a></li>
+<li><a href="#logical-instructions--or">or</a></li>
+<li><a href="#logical-instructions--nor">nor</a></li>
+<li><a href="#logical-instructions--not">not</a></li>
+</ul>
+</li>
+<li><a href="#32-bit-constants">32-bit constants</a></li>
+</ul>
+</li>
+<li>numbers and math algorithms<ul>
+<li><a href="#addition">addition</a></li>
+<li><a href="#multiplication">multiplication</a><ul>
+<li><a href="#multiplication--algorithm-1">algorithm 1</a></li>
+<li><a href="#multiplication--optimized-algorithm">optimized algorithm</a></li>
+<li><a href="#multiplication--booths-algorithm">booth's algorithm (signed!)</a></li>
+</ul>
+</li>
+<li><a href="#division">division</a><ul>
+<li><a href="#division--algorithm-1">algorithm 1</a></li>
+<li><a href="#division--optimized-algorithm">optimized algorithm</a></li>
+</ul>
+</li>
+<li><a href="#floats">floats</a><ul>
+<li><a href="#floats--fp-addition-subtraction">fp addition/subtraction</a></li>
+<li><a href="#floats--fp-multiplication">fp multiplication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>hardware?<ul>
+<li><a href="#the-processor">the processor</a></li>
+<li><a href="#control-signals">control signals</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<!-- toc skip -->
+<h1>2026-01-20</h1>
+<!-- toc fake label: basic stuff -->
     <p>computers and brains are very similar!</p>
     <pre class="highlit">        program
            v
@@ -55,6 +115,7 @@ input > process > output
       <li>hierarchy of memories</li>
       <li>dependability via redundancy</li>
     </ol>
+    <!-- toc skip -->
     <h1>2026-01-22</h1>
     <h2 id="below-your-program">below your program</h2>
     <ol>
@@ -100,6 +161,7 @@ input > process > output
       <li>add more proessors (no changes to rt or t)</li>
     </ul>
     <p>perf ∝ 1/exectime</p>
+    <!-- toc skip -->
     <h1>2026-01-27</h1>
     <p>
       a "2&#x202f;GHz" processor has a 1/(2&#x202f;GHz) = 0.5&#x202f;ns <small>=
@@ -125,6 +187,7 @@ input > process > output
         = IC × CPI / CR
       </dd>
     </dl>
+    <!-- toc skip -->
     <h1>2026-01-29</h1>
     <h2 id="bin-and-hex">bin and hex</h2>
     <p>to convert positive integers to binary: keep dividing by 2 until you get a result less than 2, and prepend each remainder + that final result</p>
@@ -141,6 +204,7 @@ input > process > output
     <p>
       eg <code class="type">int</code> can store numbers from -2,147,483,648 to 2,147,483,647
     </p>
+    <!-- toc fake label: mips design etc -->
     <h2 id="4-design-principles">"4 design principles"</h2>
     <ol>
       <li>simplicity favors regularity</li>
@@ -158,6 +222,7 @@ input > process > output
     </ol>
     <p>risc uses only 32bit registers, cisc uses whatever the native size is</p>
     <p>and risc has less <i>number of</i> registers</p>
+    <!-- toc skip -->
     <h1>2026-02-03</h1>
     <ol start="3">
       <li>make the common case fast</li>
@@ -201,8 +266,10 @@ opcode rs    rt    imm
 000000 00000000000000000000000000
 opcode imm/addr
 </pre>
+    <!-- toc skip -->
     <h1>2026-02-09</h1>
     <h2 id="mips-to-hex">mips to hex</h2>
+    <!-- toc skip -->
     <h3><code class="highlit">      <span class="function">add</span>
       <span class="constant">$t2</span>,
       <span class="constant">$t0</span>,
@@ -222,6 +289,7 @@ opcode imm/addr
 0    1    0    9    5    0    2    0
 </pre>
     <p> = <code class="highlit">0x01095020</code></p>
+    <!-- toc skip -->
     <h3><code class="highlit">      <span class="function">sw</span>
       <span class="constant">$s7</span>,
       <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$t0</span><span class="rainbow0">)</span>
@@ -234,6 +302,7 @@ opcode imm/addr
 a    c    1    7    0    0    0    4
 </pre>
     <p>= <code class="highlit">0xac170004</code></p>
+    <!-- toc skip -->
     <h3><code class="highlit">      <span class="function">j</span> <span class="constant">0x10000</span>
     </code></h3>
     <p>how do you fit a 32 bit address into 26 bits? you don't!</p>
@@ -244,10 +313,11 @@ a    c    1    7    0    0    0    4
       tells you the number of instructions away it is! since instructions are
       <code class="type">int</code>s and therefore are 4 bytes long
     </p>
+    <!-- toc skip -->
     <h1>2026-02-10</h1>
     <h2 id="logical-instructions">logical instructions</h2>
     <p>useful for extracting and inserting certain groups of bits</p>
-    <h3 class="smcp">and</h3>
+    <h3 id="logical-instructions--and" class="smcp">and</h3>
     <p><code class="highlit"><span class="function">and</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <table>
       <tr>
@@ -276,7 +346,7 @@ a    c    1    7    0    0    0    4
         <td>1</td>
       </tr>
     </table>
-    <h3 class="smcp">or</h3>
+    <h3 id="logical-instructions--or" class="smcp">or</h3>
     <p><code class="highlit"><span class="function">or</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <table>
       <tr>
@@ -305,7 +375,7 @@ a    c    1    7    0    0    0    4
         <td>1</td>
       </tr>
     </table>
-    <h3 class="smcp">nor</h3>
+    <h3 id="logical-instructions--nor" class="smcp">nor</h3>
     <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
     <p>= 1s complement of <span class="smcp">or</span></p>
     <table>
@@ -335,7 +405,7 @@ a    c    1    7    0    0    0    4
         <td>0</td>
       </tr>
     </table>
-    <h3 class="smcp">not</h3>
+    <h3 id="logical-instructions--not" class="smcp">not</h3>
     <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, $0</code></p>
     <p>for integers ¬<i>x</i> = -<i>x</i> − 1</p>
     <table>
@@ -352,13 +422,15 @@ a    c    1    7    0    0    0    4
         <td>0</td>
       </tr>
     </table>
-    <h3>logical left shift</h3>
+    <!-- toc skip -->
+    <h3 id="logical-instructions--logical-left-shift">logical left shift</h3>
     <p><code class="highlit"><span class="function">sll</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
     <p>eg <code class="highlit">0b00001001</code> ≪ 2 = <code class="highlit">0b00100100</code></p>
     <p>
       for unsigned integers this produces <i>rs</i> × 2<sup><i>shamt</i></sup>
     </p>
-    <h3>logical right shift</h3>
+    <!-- toc skip -->
+    <h3 id="logical-instructions--logical-right-shift">logical right shift</h3>
     <p><code class="highlit"><span class="function">srl</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
     <p>eg <code class="highlit">0b10010001</code> ≫ 2 = <code class="highlit">0b00100100</code></p>
     <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
@@ -372,7 +444,9 @@ a    c    1    7    0    0    0    4
 <span class="function">lui</span> <span class="constant">$at</span>, <span class="constant">0x1234</span>       <span class="comment"># Load Upper Immediate</span>
 <span class="function">ori</span> <span class="constant">$t0</span>, <span class="constant">$at</span>, <span class="constant">0x5678</span>
 </pre>
-    <h1>2026-02-12</h1>
+    <!-- toc skip -->
+<h1>2026-02-12</h1>
+<!-- toc fake label: numbers and math algorithms -->
     <h2 id="addition">addition</h2>
     <p><b>signed</b> numbers can be positive and negative and <b>unsigned</b> numbers can only be positive</p>
     <dl>
@@ -387,6 +461,7 @@ a    c    1    7    0    0    0    4
     <p>multipying two <i>n</i>-digit number gives an up-to-(2<i>n</i>)-digit number! whatever will we do!</p>
     <p>mips has 2 bonus registers <code class="highlit">hi</code> and <code class="highlit">lo</code> which together store a 64-bit number</p>
     <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
+    <!-- toc skip -->
     <h1>2026-02-17</h1>
     <h3 id="multiplication--algorithm-1">algorithm 1</h3>
     <p>here everything is eg 8 bits</p>
@@ -424,6 +499,7 @@ a    c    1    7    0    0    0    4
       <tr><td>3</td><td>0000'1100</td></tr>
       <tr><td>4</td><td>0000'0110</td></tr>
     </table>
+    <!-- toc id: booths-algorithm -->
     <h3 id="multiplication--booths-algorithm">booth's algorithm (signed!)</h3>
     <p>product is 2n bits, multiplicand and multiplier are n bits, plus a "booth bit" (bb)</p>
     <ol>
@@ -450,6 +526,7 @@ a    c    1    7    0    0    0    4
       <tr><td>5b</td><td>1111'1110'0000'1111</td><td>1</td></tr>
       <tr><td>6–8</td><td>1111'1111'1100'0001</td><td>1</td></tr>
     </table>
+    <!-- toc skip -->
     <h1>2026-02-19</h1>
     <h2 id="division">division</h2>
     <h3 id="division--algorithm-1">algorithm 1</h3>
@@ -620,7 +697,7 @@ sign exponent   mantissa</pre>
     <p>the bias for single precision is 127</p>
     <p>eg -0.75 = -1.1 × 2<sup>-1</sup> so exp = 126</p>
     <pre class="highlit">1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
-    <h3 id="floats--addition">fp addition/subtraction</h3>
+    <h3 id="floats--fp-addition-subtraction">fp addition/subtraction</h3>
     <ol>
       <li>align exponents: shift the significand of the smaller-exponent operand right until both exponents match</li>
       <li>add/subtract the significands</li>
@@ -634,7 +711,7 @@ sign exponent   mantissa</pre>
       <li>add: 1.000 + (-0.111) = 0.001 × 2<sup>-1</sup></li>
       <li>normalize: 0.001 × 2<sup>-1</sup> = 1.000 × 2<sup>-4</sup></li>
     </ol>
-    <h3 id="floats--multiplication">fp multiplication</h3>
+    <h3 id="floats--fp-multiplication">fp multiplication</h3>
     <ol>
       <li>add the biased exponents, then subtract the bias once since both already have it baked in: e<sub>1</sub> + e<sub>2</sub> − 127</li>
       <li>multiply the significands (including the implicit leading 1) as unsigned integers</li>
@@ -643,47 +720,12 @@ sign exponent   mantissa</pre>
       <li>round and renormalize if needed</li>
       <li>result sign = XOR of the two sign bits (0 if they were the same and 1 if they were different)</li>
     </ol>
+    <!-- toc skip -->
     <h1 id="test-1-review">2026-02-24 <span style="color:var(--magenta-cooler)">test 1 review</span></h1>
-    <p>these links go to sections of the above notes.</p>
-    <ul>
-      <li>basic stuff<ul>
-        <li><a href="#parts-of-computers">parts of computers</a></li>
-        <li><a href="#types-of-computers">types of computers</a></li>
-        <li><a href="#eight-great-ideas">eight great ideas</a></li>
-        <li><a href="#below-your-program">below your program</a></li>
-        <li><a href="#inside-the-cpu">inside the cpu</a></li>
-        <li><a href="#networks">networks</a></li>
-        <li><a href="#performance">performance</a></li>
-        <li><a href="#bin-and-hex">bin and hex</a></li>
-      </ul></li>
-      <li>mips design etc<ul>
-        <li><a href="#4-design-principles">4 design principles</a></li>
-        <li><a href="#r-format-instructions">r-format instructions</a></li>
-        <li><a href="#i-format-instructions">i-format instructions</a></li>
-        <li><a href="#j-format-instructions">j-format instructions</a></li>
-        <li><a href="#mips-to-hex">mips to hex</a></li>
-        <li><a href="#logical-instructions">logical instructions</a></li>
-        <li><a href="#32-bit-constants">32-bit constants</a></li>
-      </ul></li>
-      <li>numbers and math algorithms<ul>
-        <li><a href="#addition">addition</a></li>
-        <li><a href="#multiplication">multiplication</a><ul>
-          <li><a href="#multiplication--algorithm-1">algorithm 1</a></li>
-          <li><a href="#multiplication--optimized-algorithm">optimized algorithm</a></li>
-          <li><a href="#multiplication--booths-algorithm">booth's algorithm</a></li>
-        </ul></li>
-        <li><a href="#division">division</a><ul>
-          <li><a href="#division--algorithm-1">algorithm 1</a></li>
-          <li><a href="#division--optimized-algorithm">optimized algorithm</a></li>
-        </ul></li>
-        <li><a href="#floats">floats</a><ul>
-          <li><a href="#floats--addition">addition</a></li>
-          <li><a href="#floats--multiplication">multiplication</a></li>
-        </ul></li>
-      </ul></li>
-    </ul>
+    <!-- toc skip -->
     <h1>2026-03-03</h1>
-    <h2>the processor</h2>
+    <!-- toc fake label: hardware? -->
+    <h2 id="the-processor">the processor</h2>
     <p>steps to execute an instruction:</p>
     <ol>
       <li>
@@ -783,6 +825,7 @@ Clk -|≥__|</pre>
       <dt>data</dt>
       <dd>the actual values being operated on</dd>
     </dl>
+    <!-- toc skip -->
     <h1>2026-03-05</h1>
     <p>recap of last class with some specific instrunctions as examples</p>
     <blockquote>
@@ -792,8 +835,10 @@ Clk -|≥__|</pre>
     <p>
       instructions like <code class="function">j</code> take the fewest steps, and instructions like <code class="function">lw</code> take the most
     </p>
+    <!-- toc skip -->
     <h1>2026-03-10 <span style="color:var(--cyan-cooler)">online</span></h1>
-    <h2>control signals</h2>
+    <h2 id="control-signals">control signals</h2>
+    <!-- toc skip -->
     <h1>2026-03-12</h1>
     
   </body>

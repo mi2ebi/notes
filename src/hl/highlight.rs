@@ -3,7 +3,7 @@ use std::{fs, io, path::Path};
 use crate::{
     colors::{GREEN, RESET},
     hl::{
-        apply::{apply_spans, find},
+        elements::{apply_spans, find},
         session::Session,
         tui::{self, TuiResult},
     },

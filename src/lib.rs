@@ -9,6 +9,8 @@
 pub mod colors;
 pub mod entities;
 pub mod hl;
-pub mod process;
+pub mod html;
+pub mod math;
 pub mod tex;
-pub mod unicode_data;
+pub mod toc;
+pub mod unicode;

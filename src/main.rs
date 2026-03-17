@@ -3,14 +3,14 @@ use std::path::PathBuf;
 use glob::glob;
 use notes::{
     colors::{CYAN, GREEN, RED, RESET, YELLOW},
-    hl::highlight,
-    process,
+    hl, math,
     tex::{
+        self,
         accents::COMBINING,
         fonts::{self, FONT_ALIASES, FONT_PREDICATES},
         macros::MACROS,
     },
-    unicode_data,
+    toc, unicode,
 };
 
 fn main() {
@@ -34,8 +34,8 @@ fn main() {
         eprintln!("{YELLOW}no html files{RESET}");
         std::process::exit(1);
     }
-    println!("{CYAN}checking for unicode updates{RESET}");
-    let unicode = match unicode_data::load() {
+    println!("checking for unicode updates");
+    let unicode = match unicode::load() {
         Ok(u) => u,
         Err(e) => {
             eprintln!("{RED}unicode error:{RESET} {e}");
@@ -47,24 +47,24 @@ fn main() {
     let subscripts = &unicode.subscripts;
     let negations = &unicode.negations;
     for key in MACROS.keys() {
-        if process::STRUCTURAL.contains(key) {
+        if tex::STRUCTURAL.contains(key) {
             eprintln!("{YELLOW}duplicate:{RESET} '{key}' is in both MACROS and STRUCTURAL");
         }
     }
     for key in COMBINING.keys() {
-        if process::STRUCTURAL.contains(key) {
+        if tex::STRUCTURAL.contains(key) {
             eprintln!("{YELLOW}duplicate:{RESET} '{key}' is in both COMBINING and STRUCTURAL");
         }
     }
     for (font, _) in FONT_PREDICATES {
-        if process::STRUCTURAL.contains(font) {
+        if tex::STRUCTURAL.contains(font) {
             eprintln!(
                 "{YELLOW}duplicate:{RESET} '{font}' is in both FONT_PREDICATES and STRUCTURAL"
             );
         }
     }
     for (alias, _) in FONT_ALIASES.entries() {
-        if process::STRUCTURAL.contains(alias) {
+        if tex::STRUCTURAL.contains(alias) {
             eprintln!("{YELLOW}duplicate:{RESET} '{alias}' is in both FONT_ALIASES and STRUCTURAL");
         }
     }
@@ -82,9 +82,12 @@ fn main() {
                 continue;
             }
         };
-        let (converted, math_regions) =
-            process::process(&original, &font_maps, superscripts, subscripts, negations);
-        process::warn_unknown(&converted, &math_regions);
+        let (mut converted, math_regions) =
+            math::process(&original, &font_maps, superscripts, subscripts, negations);
+        math::warn_unknown(&converted, &math_regions);
+        if let Some(with_toc) = toc::process(&converted) {
+            converted = with_toc;
+        }
         if converted == original {
         } else if check {
             println!("  {CYAN}possible{RESET}");
@@ -98,7 +101,7 @@ fn main() {
         }
         if !check
             && !no_hl
-            && let Err(e) = highlight::process_file(path, &converted)
+            && let Err(e) = hl::process_file(path, &converted)
         {
             eprintln!("  {RED}error:{RESET} {e}");
         }

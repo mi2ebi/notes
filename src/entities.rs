@@ -107,7 +107,7 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
 };
 
 static LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/])").unwrap());
+    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/!])").unwrap());
 static AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&amp;(?![a-zA-Z0-9#])").unwrap());
 

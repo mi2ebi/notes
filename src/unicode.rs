@@ -25,7 +25,7 @@ pub fn load() -> io::Result<UnicodeData> {
 pub fn fetch_raw() -> io::Result<String> {
     get(UNICODE_DATA_URL).and_then(reqwest::blocking::Response::text).map_or_else(
         |_| {
-            eprintln!("  {YELLOW}fetch error:{RESET} trying local backup");
+            println!("  {YELLOW}fetch error:{RESET} trying local backup");
             let path = Path::new(LOCAL_PATH);
             if path.exists() {
                 fs::read_to_string(path)
@@ -52,7 +52,7 @@ pub fn fetch_raw() -> io::Result<String> {
                 _ => {}
             }
             if fs::write(LOCAL_PATH, &new_text).is_err() {
-                eprintln!("  {RED}writing error{RESET}");
+                println!("  {RED}writing error{RESET}");
             }
             Ok(new_text)
         },

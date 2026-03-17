@@ -6,9 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-    <h1 class="h0">cs 302</h1>
-    <h1>c++ recap</h1>
-    <h2>linked lists</h2>
+    <!-- toc skip -->
+    <h1 id="cs-302" class="h0">cs 302</h1>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li><a href="#c-recap">c++ recap</a><ul>
+<li><a href="#c-recap--linked-lists">linked lists</a></li>
+</ul>
+</li>
+<li><a href="#algorithms">algorithms</a><ul>
+<li><a href="#algorithms--asymptotic-complexity-classes">asymptotic complexity classes</a><ul>
+<li><a href="#algorithms--asymptotic-complexity-classes--big-o">big O</a></li>
+<li><a href="#algorithms--asymptotic-complexity-classes--big-ω">big Ω</a></li>
+<li><a href="#algorithms--asymptotic-complexity-classes--big-θ">big Θ</a></li>
+<li><a href="#algorithms--asymptotic-complexity-classes--logs">logs</a></li>
+<li><a href="#algorithms--asymptotic-complexity-classes--calculus">calculus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#searching">searching</a><ul>
+<li><a href="#searching--linear-search">linear search</a></li>
+<li><a href="#searching--binary-search">binary search</a></li>
+</ul>
+</li>
+<li><a href="#some-loops">some loops</a></li>
+<li><a href="#sorting">sorting</a><ul>
+<li><a href="#sorting--insertion-sort">insertion sort</a></li>
+<li><a href="#sorting--merge-sort">merge sort</a></li>
+<li><a href="#sorting--quicksort">quicksort</a></li>
+<li><a href="#sorting--lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</a></li>
+</ul>
+</li>
+<li><a href="#binary-trees">binary trees</a><ul>
+<li><a href="#binary-trees--traversing">traversing</a></li>
+<li><a href="#binary-trees--searching">searching</a></li>
+<li><a href="#binary-trees--height">height</a></li>
+</ul>
+</li>
+<li><a href="#binary-search-trees">binary search trees</a><ul>
+<li><a href="#binary-search-trees--searching">searching</a></li>
+</ul>
+</li>
+<li><a href="#avl-trees">avl trees</a></li>
+<li><a href="#maps">maps</a><ul>
+<li><a href="#maps--unordered-maps">unordered maps</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h1 id="c-recap">c++ recap</h1>
+    <h2 id="c-recap--linked-lists">linked lists</h2>
     <p>each node of a (doubly) linked list has</p>
     <ul>
       <li>pointer to the previous element</li>
@@ -61,7 +110,7 @@ j->next = i_right;
 i = j;
 j = t;</pre>
     <p>we could also just swap the <code class="variable">data</code>s</p>
-    <h1>algorithms</h1>
+    <h1 id="algorithms">algorithms</h1>
     <dl>
       <dt>algorithm</dt>
       <dd>process to solve a problem, in general, with finite time</dd>
@@ -82,8 +131,8 @@ j = t;</pre>
         to some function of input size \(n\))
       </li>
     </ul>
-    <h2>asymptotic complexity classes</h2>
-    <h3>big O</h3>
+    <h2 id="algorithms--asymptotic-complexity-classes">asymptotic complexity classes</h2>
+    <h3 id="algorithms--asymptotic-complexity-classes--big-o">big O</h3>
     <p>
       \(g(n) = O(f(n))\)<br />
       iff \(g(n) ≤ cf(n)\) for some \(c > 0\) and \(n ≥ n₀ > 0\)
@@ -106,7 +155,7 @@ j = t;</pre>
       <li>\(\sqrt n = O(n)\) ...this is sort of weak</li>
     </ul>
     <p>big O gives an <i>upper bound</i></p>
-    <h3>big Ω</h3>
+    <h3 id="algorithms--asymptotic-complexity-classes--big-ω">big Ω</h3>
     <p>
       \(g(n) = Ω(f(n))\)<br />
       iff \(g(n) ≥ cf(n)\) for some \(c > 0\) and \(n ≥ nₒ > 0\)
@@ -118,7 +167,7 @@ j = t;</pre>
       <li>\(3n = Ω(n)\)</li>
       <li>\(5n² = Ω(n)\) ...this is also weak</li>
     </ul>
-    <h3>big Θ</h3>
+    <h3 id="algorithms--asymptotic-complexity-classes--big-θ">big Θ</h3>
     <p>
       \(g(n) = Θ(f(n))\)<br />
       iff \(g(n) = O(f(n))\) and \(g(n) = Ω(f(n))\)
@@ -129,14 +178,14 @@ j = t;</pre>
       <li>\(7n = Θ(n)\)</li>
       <li>\(3n² ≠ Θ(n)\) because it's \(Ω(n)\) but not \(O(n)\)</li>
     </ul>
-    <h3>logs</h3>
+    <h3 id="algorithms--asymptotic-complexity-classes--logs">logs</h3>
     <p>
       for time complexity the log base doesn't matter. even though in Real Math
       \(\log x = \log₁₀ x\) or \(\ln x\) depending who you ask
     </p>
     <p>\(\logₐ n = Θ(\log n)\) regardless of \(a\)</p>
     <p>\[\logₐ n = \frac{\log_b n}{\log_b a}\]</p>
-    <h3>calculus</h3>
+    <h3 id="algorithms--asymptotic-complexity-classes--calculus">calculus</h3>
     <p>\[\lim_{n → ∞} \frac{g(n)}{f(n)}\]</p>
     <p>this could</p>
     <ul>
@@ -182,8 +231,8 @@ j = t;</pre>
     \]</p>
     <p><span class="no">no</span></p>
     <p>logs are very nice for runtime</p>
-    <h1>searching</h1>
-    <h2>linear search</h2>
+    <h1 id="searching">searching</h1>
+    <h2 id="searching--linear-search">linear search</h2>
     <pre class="highlit">
 <span class="comment">// a : array
 // n : size
@@ -200,7 +249,7 @@ j = t;</pre>
     <p>\(O(1)\), \(Ω(1)\), \(Θ(1)\)</p>
     <p>average case, <code class="variable">s</code> is in the middle</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
-    <h2>binary search</h2>
+    <h2 id="searching--binary-search">binary search</h2>
     <pre class="highlit">
 <span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
   <span class="type">int</span> <span class="variable">l</span> = <span class="constant">0</span>;
@@ -219,7 +268,7 @@ j = t;</pre>
 <span class="rainbow0">}</span></pre>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
     <p>\(O(\log n)\), \(Ω(\log n)\), \(Θ(\log n)\)</p>
-    <h1>some loops</h1>
+    <h1 id="some-loops">some loops</h1>
     <pre class="highlit">
 <span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i += <span class="constant">3</span><span class="rainbow0">)</span>
   <span class="builtin">cout</span> << <span class="string">"..."</span>;</pre>
@@ -278,8 +327,8 @@ j = t;</pre>
       = n \ln n - n + 1
       = Θ(n \log n)
     \]</p>
-    <h1>sorting</h1>
-    <h2>insertion sort</h2>
+    <h1 id="sorting">sorting</h1>
+    <h2 id="sorting--insertion-sort">insertion sort</h2>
     <pre class="highlit">
 <span class="type">void</span> <span class="function">insertionSort</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
   <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; i < n; i++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
@@ -310,7 +359,7 @@ j = t;</pre>
     </p>
     <p>best case, it's already sorted and the inner loop never runs</p>
     <p>then it's just \(Θ(n)\)</p>
-    <h2>merge sort</h2>
+    <h2 id="sorting--merge-sort">merge sort</h2>
     <p>'divide and conquer' algorithm, which unfortunately necessitates recursion</p>
     <ul>
       <li>split the array into 2 pieces (the left side and the right side)</li>
@@ -347,7 +396,7 @@ j = t;</pre>
       around \(\log₂ n\) levels
     </p>
     <p>which means it's better than insertion sort!</p>
-    <h2>quicksort</h2>
+    <h2 id="sorting--quicksort">quicksort</h2>
     <p>another recursive one</p>
     <ul>
       <li>choose a pivot (any element of the array)</li>
@@ -378,7 +427,7 @@ j = t;</pre>
       <li>find the median of an unsorted array without sorting it...?</li>
     </ul>
     <aside style="background:var(--bg-green-nuanced)">
-    <h2>lower bound for comparison-based sorting</h2>
+    <h2 id="sorting--lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</h2>
     <p>
       suppose in the worst case the lower bound is \(Ω(n)\). then we <i>could</i> run faster than
       \(O(n \log n)\) in the worst case. problem is we don't know of any sorting algorithm better than
@@ -399,7 +448,7 @@ j = t;</pre>
     <p>so \(h = \log₂ (n!)\). we know from doing some loops that that's \(O(n \log n)\)</p>
     <p>therefore the lower bound of comparison-based sorting is \(Ω(n \log n)\)</p>
     </aside>
-    <h1>binary trees</h1>
+    <h1 id="binary-trees">binary trees</h1>
     <p>honestly not very useful in and of themselves</p>
     <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
     <pre class="highlit">
@@ -413,7 +462,7 @@ d -'- e f -'- g</pre>
     <span class="type">BinTreeNode*</span> <span class="variable">left</span>;
     <span class="type">BinTreeNode*</span> <span class="variable">right</span>;
 }</pre>
-    <h2>traversing</h2>
+    <h2 id="binary-trees--traversing">traversing</h2>
     <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
     <p>there are a couple different ways to traverse a tree</p>
     <pre class="highlit">
@@ -431,7 +480,7 @@ d -'- e f -'- g</pre>
   postorder<span class="rainbow1">(</span>r->right<span class="rainbow1">)</span>;
   <span class="builtin">cout</span> << data;
 }</pre>
-    <h2>searching</h2>
+    <h2 id="binary-trees--searching">searching</h2>
     <pre class="highlit">
 <span class="type">binTreeNode*</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">binTreeNode*</span> <span class="variable">r</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
     <span class="keyword">if</span> <span class="rainbow1">(</span>!r || r->data == s<span class="rainbow1">)</span> <span class="keyword">return</span> r;
@@ -441,7 +490,7 @@ d -'- e f -'- g</pre>
 }</pre>
     <p>runtime for pre/post order:</p>
     <p>each function body runs \(Θ(1)\) times, and there are \(n\) nodes</p>
-    <h2>height</h2>
+    <h2 id="binary-trees--height">height</h2>
     <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
     <pre class="highlit">
 a
@@ -463,7 +512,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       \end{align*}
       \]
     </p>
-    <h1>binary <i>search</i> trees</h1>
+    <h1 id="binary-search-trees">binary <i>search</i> trees</h1>
     <dl>
       <dt>search structure</dt>
       <dd>a structure that searches!...</dd>
@@ -484,7 +533,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       <li><code class="highlit">r->left</code>'s key is less than r's key</li>
       <li><code class="highlit">r->right</code>'s key is larger than r's key</li>
     </ul>
-    <h2>searching</h2>
+    <h2 id="binary-search-trees--searching">searching</h2>
     <pre class="highlit">
 <span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
 <span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">r</span>, <span class="type">K</span> <span class="variable">k</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
@@ -498,7 +547,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <p>best case the runtime is \(Θ(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
     <p>the insertion order determines the height of the tree</p>
     <p>so the question is can we have the tree balance itself?</p>
-    <h1>avl trees</h1>
+    <h1 id="avl-trees">avl trees</h1>
     <p>this is a self-balancing binary search tree. when we insert or delete we balance the tree if needed</p>
     <p>how do we know if a tree is balanced? for each node the difference in its left and right subtree heights cannot exceed 1</p>
     <p>this requires adding a <code class="highlit"><span class="type">size_t</span> height</code> into <code class="type">BinTreeNode</code></p>
@@ -543,7 +592,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       \end{align*}
       \]
     </p>
-    <h1>maps</h1>
+    <h1 id="maps">maps</h1>
     <p>
       stl has a type called <code class="type">Map</code> for an ordered map, which is basically an
       avl tree
@@ -568,7 +617,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
 <span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span>: people<span class="rainbow0">)</span> <span class="rainbow0">{</span>
   <span class="builtin">cout</span> << it.first << <span class="string">":"</span> << it.second << <span class="builtin">endl</span>;
 }</pre>
-    <h2>unordered maps</h2>
+    <h2 id="maps--unordered-maps">unordered maps</h2>
     <p><code class="highlit">unordered_map</code>, uses a hash table instead of a tree</p>
     <p>insert and find are \(O(1)\)!</p>
     <!-- temml -->
