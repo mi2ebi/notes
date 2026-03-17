@@ -31,7 +31,7 @@ pub fn dedup_slug(base: &str, used: &mut HashSet<String>) -> String {
     loop {
         let candidate = format!("{base}-{n}");
         if used.insert(candidate.clone()) {
-            eprintln!("{YELLOW}duplicate slug:{RESET} '{base}', using '{candidate}'");
+            println!("{YELLOW}duplicate slug:{RESET} '{base}', using '{candidate}'");
             return candidate;
         }
         n += 1;
