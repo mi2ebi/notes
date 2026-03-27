@@ -1,8 +1,8 @@
-use std::{io, io::Write};
+use std::io::{self, Write};
 
 use crossterm::{
     cursor,
-    event::{self, Event, KeyCode, KeyEvent, KeyModifiers},
+    event::{self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers},
     execute, queue,
     style::{self, Color, Print, SetBackgroundColor, SetForegroundColor},
     terminal::{self, Clear, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
@@ -41,7 +41,10 @@ enum Action {
 }
 
 fn cursor_line(session: &Session) -> usize {
-    session.chars[..session.cursor()].iter().filter(|&&c| c == '\n').count()
+    session.chars[..session.cursor()]
+        .iter()
+        .filter(|&&c| c == '\n')
+        .count()
 }
 
 fn run_inner(
@@ -89,7 +92,13 @@ fn run_inner(
 
 fn read_event() -> io::Result<Action> {
     loop {
-        let Event::Key(KeyEvent { code, modifiers, .. }) = event::read()? else {
+        let Event::Key(KeyEvent {
+            code,
+            modifiers,
+            kind: KeyEventKind::Press,
+            ..
+        }) = event::read()?
+        else {
             continue;
         };
         let action = match (code, modifiers) {
@@ -139,14 +148,32 @@ struct Cell {
 }
 
 impl Default for Cell {
-    fn default() -> Self { Self { ch: ' ', fg: Color::Reset, bg: Color::Reset } }
+    fn default() -> Self {
+        Self {
+            ch: ' ',
+            fg: Color::Reset,
+            bg: Color::Reset,
+        }
+    }
 }
 
 const fn style_bg(style: &CharStyle) -> Color {
     match style {
-        CharStyle::Open => Color::Rgb { r: SELECTED_C.0, g: SELECTED_C.1, b: SELECTED_C.2 },
-        CharStyle::Bg(r, g, b) => Color::Rgb { r: *r, g: *g, b: *b },
-        CharStyle::Tag(_) => Color::Rgb { r: TAG_C.0, g: TAG_C.1, b: TAG_C.2 },
+        CharStyle::Open => Color::Rgb {
+            r: SELECTED_C.0,
+            g: SELECTED_C.1,
+            b: SELECTED_C.2,
+        },
+        CharStyle::Bg(r, g, b) => Color::Rgb {
+            r: *r,
+            g: *g,
+            b: *b,
+        },
+        CharStyle::Tag(_) => Color::Rgb {
+            r: TAG_C.0,
+            g: TAG_C.1,
+            b: TAG_C.2,
+        },
         _ => Color::Reset,
     }
 }
@@ -157,18 +184,34 @@ const fn char_to_cell(ch: char, style: &CharStyle, trailing: bool) -> Cell {
         '\n' => Cell {
             ch: '\u{21b5}',
             fg: if is_cursor {
-                Color::Rgb { r: CURSOR_WS_C.0, g: CURSOR_WS_C.1, b: CURSOR_WS_C.2 }
+                Color::Rgb {
+                    r: CURSOR_WS_C.0,
+                    g: CURSOR_WS_C.1,
+                    b: CURSOR_WS_C.2,
+                }
             } else {
-                Color::Rgb { r: TRAILING_C.0, g: TRAILING_C.1, b: TRAILING_C.2 }
+                Color::Rgb {
+                    r: TRAILING_C.0,
+                    g: TRAILING_C.1,
+                    b: TRAILING_C.2,
+                }
             },
             bg: style_bg(style),
         },
         ' ' if trailing || is_cursor => Cell {
             ch: '\u{00b7}',
             fg: if is_cursor {
-                Color::Rgb { r: CURSOR_WS_C.0, g: CURSOR_WS_C.1, b: CURSOR_WS_C.2 }
+                Color::Rgb {
+                    r: CURSOR_WS_C.0,
+                    g: CURSOR_WS_C.1,
+                    b: CURSOR_WS_C.2,
+                }
             } else {
-                Color::Rgb { r: TRAILING_C.0, g: TRAILING_C.1, b: TRAILING_C.2 }
+                Color::Rgb {
+                    r: TRAILING_C.0,
+                    g: TRAILING_C.1,
+                    b: TRAILING_C.2,
+                }
             },
             bg: Color::Reset,
         },
@@ -177,7 +220,11 @@ const fn char_to_cell(ch: char, style: &CharStyle, trailing: bool) -> Cell {
             fg: match style {
                 CharStyle::Bg(_, _, _) => Color::Black,
                 CharStyle::Tag(_) => Color::White,
-                CharStyle::Cursor => Color::Rgb { r: CURSOR_C.0, g: CURSOR_C.1, b: CURSOR_C.2 },
+                CharStyle::Cursor => Color::Rgb {
+                    r: CURSOR_C.0,
+                    g: CURSOR_C.1,
+                    b: CURSOR_C.2,
+                },
                 _ => Color::Reset,
             },
             bg: style_bg(style),
@@ -239,7 +286,11 @@ fn build_frame(
     for (col, ch) in bar.chars().take(width as usize).enumerate() {
         cells[bar_row * width as usize + col] = Cell {
             ch,
-            fg: Color::Rgb { r: KEYBINDS_C.0, g: KEYBINDS_C.1, b: KEYBINDS_C.2 },
+            fg: Color::Rgb {
+                r: KEYBINDS_C.0,
+                g: KEYBINDS_C.1,
+                b: KEYBINDS_C.2,
+            },
             bg: Color::Reset,
         };
     }
@@ -247,7 +298,11 @@ fn build_frame(
     for (col, ch) in status.chars().take(width as usize).enumerate() {
         cells[status_row * width as usize + col] = Cell {
             ch,
-            fg: Color::Rgb { r: STATUS_C.0, g: STATUS_C.1, b: STATUS_C.2 },
+            fg: Color::Rgb {
+                r: STATUS_C.0,
+                g: STATUS_C.1,
+                b: STATUS_C.2,
+            },
             bg: Color::Reset,
         };
     }
@@ -263,8 +318,14 @@ fn emit_diff(
 ) -> io::Result<()> {
     if prev_cells.len() != new_cells.len() {
         queue!(stdout, terminal::Clear(ClearType::All))?;
-        *prev_cells =
-            vec![Cell { ch: '\x00', fg: Color::Reset, bg: Color::Reset }; new_cells.len()];
+        *prev_cells = vec![
+            Cell {
+                ch: '\x00',
+                fg: Color::Reset,
+                bg: Color::Reset
+            };
+            new_cells.len()
+        ];
     }
     let mut cur_fg = Color::Reset;
     let mut cur_bg = Color::Reset;
@@ -291,7 +352,11 @@ fn emit_diff(
         last_pos = Some((row, col));
     }
     if cur_fg != Color::Reset || cur_bg != Color::Reset {
-        queue!(stdout, SetForegroundColor(Color::Reset), SetBackgroundColor(Color::Reset))?;
+        queue!(
+            stdout,
+            SetForegroundColor(Color::Reset),
+            SetBackgroundColor(Color::Reset)
+        )?;
     }
     prev_cells.clone_from_slice(new_cells);
     Ok(())
@@ -322,7 +387,11 @@ fn render(
             *cs = CharStyle::Cursor;
         }
     } else {
-        for cs in char_styles.iter_mut().take(open_span.end).skip(open_span.start) {
+        for cs in char_styles
+            .iter_mut()
+            .take(open_span.end)
+            .skip(open_span.start)
+        {
             *cs = CharStyle::Open;
         }
     }
@@ -347,8 +416,15 @@ fn render(
             *t = true;
         }
     }
-    let new_cells =
-        build_frame(session, &char_styles, &trailing, scroll_offset, width, height, status);
+    let new_cells = build_frame(
+        session,
+        &char_styles,
+        &trailing,
+        scroll_offset,
+        width,
+        height,
+        status,
+    );
     emit_diff(stdout, &new_cells, prev_cells, width)?;
     stdout.flush()
 }
@@ -358,17 +434,27 @@ fn prompt(stdout: &mut impl Write, prefix: &str) -> io::Result<Option<String>> {
     let row = height - 1;
     let mut input = String::new();
     loop {
-        queue!(stdout, cursor::MoveTo(0, row), Clear(ClearType::CurrentLine))?;
         queue!(
             stdout,
-            SetForegroundColor(Color::Rgb { r: PROMPT_C.0, g: PROMPT_C.1, b: PROMPT_C.2 }),
+            cursor::MoveTo(0, row),
+            Clear(ClearType::CurrentLine)
+        )?;
+        queue!(
+            stdout,
+            SetForegroundColor(Color::Rgb {
+                r: PROMPT_C.0,
+                g: PROMPT_C.1,
+                b: PROMPT_C.2
+            }),
             style::Print(prefix),
             SetForegroundColor(Color::Reset),
             style::Print(&input),
         )?;
         queue!(stdout, cursor::Show)?;
         stdout.flush()?;
-        let Event::Key(KeyEvent { code, .. }) = event::read()? else { continue };
+        let Event::Key(KeyEvent { code, .. }) = event::read()? else {
+            continue;
+        };
         match code {
             KeyCode::Enter => {
                 queue!(stdout, cursor::Hide)?;

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>cs 219</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- toc skip -->
+    <h1 class="h0">cs 219</h1>
+    <!-- toc here -->
+<!-- toc skip -->
+    <h1>2026 03 26</h1>
+    <p>multi cycle implementation is not always faster than single cycle!</p>
+    <p>but we can try something else...</p>
+    <dl>
+      <dt>pipelining</dt>
+      <dd>overlapping execution of multiple instructions/steps</dd>
+    </dl>
+    <p>a nice analogy is doing laundry. if you have, say, 3 loads of laundry to do, instead of</p>
+    <ul>
+      <li>doing the entire first load</li>
+      <li>doing the entire second load</li>
+      <li>doing the entire third load</li>
+    </ul>
+    <p>you can save a lot of time by</p>
+    <ul>
+      <li>putting the first load in the washer</li>
+      <li>when it's done, moving it to the dryer and starting the next load</li>
+      <li>etc</li>
+    </ul>
+    <p>buuuuut moving stuff between the washer and dryer takes time! (<b>overhead</b>)</p>
+    <p>we want CPI to be as close to 1 as possible</p>
+    <p>pipelining does come with <b>hazards</b>, eg the same processor unit can't be used twice in the same cycle</p>
+    <dl>
+      <dt>control hazard</dt>
+      <dd>branches and jumps</dd>
+      <dt>data hazard</dt>
+      <dd>
+        dependencies between instructions<br />
+        <b>WaR</b> (write after read)<br />
+        <b>RaW</b> (read after write)<br />
+        <b>WaW</b> (write after write)<br />
+      </dd>
+      <dt>structural hazard</dt>
+      <dd>resource conflicts</dd>
+    </dl>
+    <!-- toc skip -->
+    <h1>2026 03 31 <span style="color: var(--magenta-cooler)">test 2 review</span></h1>
+  </body>
+</html>

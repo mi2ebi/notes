@@ -5,7 +5,6 @@ use regex::Regex;
 
 use crate::{
     colors::{RESET, YELLOW},
-    entities,
     tex::{self, fonts::FontMaps},
 };
 
@@ -43,8 +42,7 @@ pub fn process(
     subscripts: &HashMap<char, char>,
     negations: &HashMap<char, char>,
 ) -> (String, Vec<String>) {
-    let text = entities::replace(text);
-    apply_in_math_regions(&text, font_maps, superscripts, subscripts, negations)
+    apply_in_math_regions(text, font_maps, superscripts, subscripts, negations)
 }
 
 static UNKNOWN_ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&([a-zA-Z]+);").unwrap());

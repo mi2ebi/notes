@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <title>cs 302</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <!-- toc skip -->
+    <h1 class="h0">cs 302</h1>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li><a href="#hash-maps">hash maps</a><ul>
+<li><a href="#hash-maps--separate-chaining">separate chaining</a></li>
+<li><a href="#hash-maps--expected-runtime">expected runtime</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h1 id="hash-maps">hash maps</h1>
+    <p>we maintain a very large table and have a hash function that helps us locate elements in the table</p>
+    <p>
+      \[
+      h(\text{key}) \mathbin{\mathsf{mod}} \text{table capacity} → \text{index}
+      \]
+    </p>
+    <p>this takes constant time!</p>
+    <p>properties of hash functions and maps:</p>
+    <ul>
+      <li>the hash function returns the same number for the same key (it's <b>deterministic</b>)</li>
+      <li>ideally, indices are unique, otherwise we get a <b>collision</b></li>
+    </ul>
+    <p>suppose the parking lot is a hashmap from student id to parking spot. you get to your assigned parking spot and a car is already there. now what you'd like to do is just stack the cars, right. or you can try to park somewhere else</p>
+    <h2 id="hash-maps--separate-chaining">separate chaining</h2>
+    <p>when a collision occurs, we stack the elements at the location. so we need to maintain an array of linked lists. aaaaaaa</p>
+    <p>we also want to know the <b>load factor</b> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
+    <pre class="highlit">
+template &lt;class K, class V>
+class HashMap {
+  private:
+    class Node {
+      public:
+        K key;
+        V value;
+        Node *link;
+    };
+    size_t capacity;
+    size_t items;
+    Node **table;
+    size_t h(K k);
+  public:
+    HashMap() {
+      items = 0;
+      capacity = 5;
+      table = new Node*[capacity];
+      for (size_t i = 0; i < capacity; i++)
+        table[i] = nullptr;
+    }
+    void insert(K k, V v) {
+      size_t index = h(k) % capacity;
+      for (Node *i = table[index]; i != nullptr; i = i->link)
+        if (i->key == k)
+          return;
+      // insert a new Node into table[index]
+      items++;
+    }
+    bool find(K k) {
+      size_t index = h(k) % capacity;
+      for (Node *i = table[index]; i != nullptr; i = i->link)
+        if (i->key == k)
+          return true;
+      return false;
+    }
+};</pre>
+    <h2 id="hash-maps--expected-runtime">expected runtime</h2>
+    <p>hashing takes constant time. it does scale to the length of the key, but not the table. \(\mathsf{mod}\) is also constant time. so computing the index is \(O(1)\)</p>
+    <p>it is expected that <code class="highlit">table[index]</code> has zero or few nodes. so searching this also doesn't depend on table size</p>
+    <p>the tradeoff is you need a very big sparse table to minimize collision risk (capacity \(⋙\) items), and most of the locations will be empty</p>
+    <p>the worst-but-very-unlikely case is everything gets mapped to the same index. we can fix this by resizing the table when the load factor becomes too high</p>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust:true});</script>
+  </body>
+</html>

@@ -4,18 +4,16 @@ pub mod selector;
 pub mod session;
 pub mod tui;
 
-use std::{fs, io, path::Path};
+use std::{io, path::Path};
 
 use elements::{apply_spans, find};
 use session::Session;
 use tui::TuiResult;
 
-use crate::colors::{GREEN, RESET};
-
-pub fn process_file(path: &Path, html: &str) -> io::Result<bool> {
+pub fn process_file(path: &Path, html: &str) -> io::Result<String> {
     let elements = find(html);
     if elements.is_empty() {
-        return Ok(false);
+        return Ok(html.to_string());
     }
     let mut result = html.to_owned();
     for (i, element) in elements.iter().rev().enumerate() {
@@ -30,10 +28,5 @@ pub fn process_file(path: &Path, html: &str) -> io::Result<bool> {
         let replacement = apply_spans(element, &spans);
         result.replace_range(element.start..element.end, &replacement);
     }
-    if result == html {
-        return Ok(false);
-    }
-    fs::write(path, &result)?;
-    println!("  {GREEN}done{RESET}");
-    Ok(true)
+    Ok(result)
 }

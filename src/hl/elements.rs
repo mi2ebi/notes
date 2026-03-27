@@ -62,6 +62,7 @@ fn find_elements_of_kind(html: &str, kind: &ElementKind) -> Vec<Element> {
                 let s = strip_tags(&content);
                 s.strip_prefix('\n').unwrap_or(&s).to_owned()
             };
+            eprintln!("{stripped_content:?}");
             elements.push(Element {
                 kind: kind.clone(),
                 start,

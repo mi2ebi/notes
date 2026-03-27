@@ -7,7 +7,7 @@ use std::{
 use glob::glob;
 use notes::{
     colors::{CYAN, GREEN, RED, RESET, YELLOW},
-    hl, math,
+    entities, hl, math,
     tex::{
         self,
         accents::COMBINING,
@@ -35,41 +35,69 @@ impl Pipeline {
             return false;
         }
         let original = match std::fs::read_to_string(path) {
-            Ok(s) => s,
+            Ok(s) => s.replace("\r\n", "\n"),
             Err(e) => {
                 println!("  {RED}reading error:{RESET} {e}");
                 return false;
             }
         };
-        let (mut converted, math_regions) = math::process(
-            &original,
+        let mut converted = original.clone();
+        let mut changed = false;
+        let mut okay = true;
+        let entities_result = entities::replace(&converted);
+        if entities_result != converted {
+            println!("  {GREEN}entities done{RESET}");
+            converted = entities_result;
+            changed = true;
+        }
+        let (math_result, math_regions) = math::process(
+            &converted,
             &self.font_maps,
             &self.unicode.superscripts,
             &self.unicode.subscripts,
             &self.unicode.negations,
         );
-        math::warn_unknown(&converted, &math_regions);
-        if let Some(with_toc) = toc::process(&converted) {
-            converted = with_toc;
+        math::warn_unknown(&math_result, &math_regions);
+        if math_result != converted {
+            println!("  {GREEN}math done{RESET}");
+            converted = math_result;
+            changed = true;
         }
-        if converted == original {
-            return false;
+        let toc_result = toc::process(&converted);
+        if toc_result != converted {
+            println!("  {GREEN}toc done{RESET}");
+            converted = toc_result;
+            changed = true;
         }
         if check {
-            println!("  {CYAN}possible{RESET}");
-            return true;
+            if changed {
+                println!("  {CYAN}not writing the file due to `--check`{RESET}");
+            }
+            return changed;
         }
-        if std::fs::write(path, &converted).is_err() {
-            println!("  {RED}writing error{RESET}");
-            return false;
+        if !self.no_hl {
+            match hl::process_file(path, &converted) {
+                Ok(hl_result) => {
+                    if hl_result != converted {
+                        converted = hl_result;
+                        changed = true;
+                    }
+                }
+                Err(e) => {
+                    println!("  {RED}highlighting error:{RESET} {e}");
+                    okay = false;
+                }
+            }
         }
-        println!("  {GREEN}done{RESET}");
-        if !self.no_hl
-            && let Err(e) = hl::process_file(path, &converted)
-        {
-            println!("  {RED}error:{RESET} {e}");
+        if changed {
+            if std::fs::write(path, &converted).is_ok() {
+                println!("  {GREEN}file written{RESET}");
+            } else {
+                println!("  {RED}writing error{RESET}");
+                okay = false;
+            }
         }
-        false
+        changed && okay
     }
 }
 
@@ -82,10 +110,13 @@ fn hash_bytes(data: &[u8]) -> u64 {
 fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
     let check = args.iter().any(|a| a == "--check");
-    let no_hl = args.iter().any(|a| a == "--no-hl");
     let watch = args.iter().any(|a| a == "--watch");
-    let paths: Vec<PathBuf> =
-        args.iter().filter(|a| !a.starts_with("--")).map(PathBuf::from).collect();
+    let no_hl = args.iter().any(|a| a == "--no-hl") || watch;
+    let paths: Vec<PathBuf> = args
+        .iter()
+        .filter(|a| !a.starts_with("--"))
+        .map(PathBuf::from)
+        .collect();
     let files: Vec<PathBuf> = if paths.is_empty() {
         match glob("**/*.html") {
             Err(e) => {
@@ -132,7 +163,11 @@ fn main() {
             println!("{YELLOW}duplicate:{RESET} '{alias}' is in both FONT_ALIASES and STRUCTURAL");
         }
     }
-    let pipeline = Pipeline { font_maps, unicode, no_hl };
+    let pipeline = Pipeline {
+        font_maps,
+        unicode,
+        no_hl,
+    };
     let mut any_changes = false;
     for path in &files {
         println!("{}", path.display());
@@ -149,13 +184,17 @@ fn main() {
         let mut last_seen: HashMap<PathBuf, u64> = HashMap::new();
         let mut debouncer = new_debouncer(std::time::Duration::from_secs(1), None, tx).unwrap();
         for path in &files {
-            debouncer.watch(path, notify::RecursiveMode::NonRecursive).unwrap();
+            debouncer
+                .watch(path, notify::RecursiveMode::NonRecursive)
+                .unwrap();
         }
         for events in rx.into_iter().flatten() {
             for DebouncedEvent { event, .. } in events {
                 if matches!(event.kind, EventKind::Modify(ModifyKind::Data(_))) {
                     for path in &event.paths {
-                        let Ok(content) = std::fs::read(path) else { continue };
+                        let Ok(content) = std::fs::read(path) else {
+                            continue;
+                        };
                         let hash = hash_bytes(&content);
                         if last_seen.get(path) == Some(&hash) {
                             continue;

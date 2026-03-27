@@ -158,8 +158,11 @@ fn build_nav(entries: &[Entry]) -> String {
     out
 }
 
-pub fn process(html: &str) -> Option<String> {
-    let toc_m = TOC_HERE_RE.find(html)?;
+pub fn process(html: &str) -> String {
+    if TOC_HERE_RE.find(html).is_none() {
+        return html.to_owned();
+    }
+    let toc_m = TOC_HERE_RE.find(html).unwrap();
     let toc_range = toc_m.start()..toc_m.end();
     let mut entries = collect_entries(html, &toc_range);
     assign_slugs(&mut entries);
@@ -182,5 +185,5 @@ pub fn process(html: &str) -> Option<String> {
     for (start, end, replacement) in edits.into_iter().rev() {
         result.replace_range(start..end, &replacement);
     }
-    Some(result)
+    result
 }
