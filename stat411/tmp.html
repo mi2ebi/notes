@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <title>stat 411</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+     dt.procedure {
+       color: var(--green-warmer);
+     }
+     .example {
+       color: var(--magenta-warmer);
+     }
+    </style>
+  </head>
+  <body>
+    \(
+      \gdef\var{\operatorname{var}}
+      \gdef\cov{\operatorname{cov}}
+      \gdef\corr{\operatorname{corr}}
+      \gdef\Ber{\operatorname{Ber}}
+      \gdef\bin{\operatorname{bin}}
+      \gdef\NB{\operatorname{NB}}
+      \gdef\Geo{\operatorname{Geo}}
+      \gdef\HG{\operatorname{HG}}
+      \gdef\Poi{\operatorname{Poi}}
+      \gdef\M{\operatorname{M}}
+    \)
+    <h1 class="h0">stat 411</h1>
+    <h1>
+      ch5 discrete probability distributions
+    </h1>
+    <h2>5.7 poisson distribution</h2>
+    <p>
+      we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\), and take the limit:
+    </p>
+    <p>
+      \[
+      \def\thelim{\lim_{\substack{n → ∞ \\ p → 0}}}
+      \begin{align*}
+      \thelim p(x)
+      &= \thelim {n \choose x} pˣ (1 - p)ⁿ⁻ˣ \\
+      &= \thelim {n \choose x} \left(\fracλ n\right)ˣ \left(1 - \fracλ n\right)ⁿ⁻ˣ \\
+      …
+      &= \frac{λˣ}{x!}e^{-λ}
+      \end{align*}
+      \]
+    </p>
+    <h2>giant distribution list</h2>
+    <table>
+      <tr>
+        <th>distribution</th>
+        <th>pmf \(p(\mathord·)\)</th>
+        <th>domain / params</th>
+        <th>mean \(E(X)\)</th>
+        <th>variance \(\var(X) = E[(X - μ)²]\)</th>
+      </tr>
+      <tr>
+        <td>bernoulli<br />\(\Ber(p)\)</td>
+        <td>\(p(x) = pˣ(1 - p)¹⁻ˣ\)</td>
+        <td>\(x = 0, 1\\ 0 ≤ p ≤ 1\)</td>
+        <td>\(p\)</td>
+        <td>\(p(1 - p)\)</td>
+      </tr>
+      <tr>
+        <td>binomial<br />\(\bin(n, p)\)</td>
+        <td>\(p(x) = {n \choose x} pˣ(1 - p)ⁿ⁻ˣ\)</td>
+        <td>\(x = 0, 1, …, n \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(np\)</td>
+        <td>\(np(1 - p)\)</td>
+      </tr>
+      <tr>
+        <td>negative binomial<br />\(\NB(r, p)\)</td>
+        <td>\(p(y) = {y - 1 \choose r - 1} pʳ(1 - p)ʸ⁻ʳ\)</td>
+        <td>\(y = r, r + 1, … \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(\frac rp\)</td>
+        <td>\(\frac {r(1 - p)}{p²}\)</td>
+      </tr>
+      <tr>
+        <td>geometric<br />\(\Geo(p)\)</td>
+        <td>\(p(y) = (1 - p)ʸ⁻¹p\)</td>
+        <td>\(y = 1, 2, … \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(\frac1p\)</td>
+        <td>\(\frac{1 - p}{p²}\)</td>
+      </tr>
+      <tr>
+        <td>hypergeometric<br />\(\HG(N, n, r)\)</td>
+        <td>\(p(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</td>
+        <td>\(x = 0, 1, …, n \\ x ≤ r \\ n - x ≤ N - r\)</td>
+        <td>\(\frac{nr}N\)</td>
+        <td>\(\frac{nr}N \frac{N - r}N \frac{N - n}{N - 1}\)</td>
+      </tr>
+      <tr>
+        <td>poisson<br />\(\Poi(λ)\)</td>
+        <td>\(p(x) = \frac{e^{-λ} λˣ}{x!}\)</td>
+        <td>\(x = 0, 1, … \\ λ > 0\)</td>
+        <td>\(λ\)</td>
+        <td>\(λ\)</td>
+      </tr>
+      <tr>
+        <td>multinomial<br />\(\M(n; pᵢ)\)</td>
+        <td>\(p(x₁, …, xₖ) = \frac{n!}{∏ᵢ₌₁ᵏ xᵢ!} ∏ᵢ₌₁ᵏ pᵢ^{xᵢ}\)</td>
+        <td>\(∑ᵢ₌₁ᵏ xᵢ = n \\ ∑ᵢ₌₁ᵏ pᵢ = 1\)</td>
+        <td>\(E(Xᵢ) = npᵢ\)</td>
+        <td>
+          \(
+          \var(Xᵢ) = npᵢ(1 - pᵢ) \\
+          \cov(Xᵢ, Xⱼ) = -npᵢpⱼ, i ≠ j \\
+          \corr(Xᵢ, Xⱼ) = \frac{\cov(Xᵢ, Xⱼ)}{\sqrt{σ²₁}\sqrt{σ²₂}}
+          \)
+        </td>
+      </tr>
+    </table>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true, wrap: "tex"});</script>
+  </body>
+</html>

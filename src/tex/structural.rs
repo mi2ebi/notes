@@ -122,6 +122,13 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set! {
     "xleftarrow",
     "xrightarrow",
     // defined by me
+    "Ber",
+    "HG",
+    "Geo",
+    "M",
+    "NB",
+    "Poi",
+    "bin",
     "corr",
     "cov",
     "stdev",
