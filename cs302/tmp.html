@@ -12,8 +12,14 @@
 <nav class="toc">
 <ul>
 <li><a href="#hash-maps">hash maps</a><ul>
-<li><a href="#hash-maps--separate-chaining">separate chaining</a></li>
-<li><a href="#hash-maps--expected-runtime">expected runtime</a></li>
+<li><a href="#hash-maps--separate-chaining">separate chaining</a><ul>
+<li><a href="#hash-maps--separate-chaining--expected-runtime">expected runtime</a></li>
+</ul>
+</li>
+<li><a href="#hash-maps--open-addressing">open addressing</a><ul>
+<li><a href="#hash-maps--open-addressing--expected-runtime">expected runtime</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -36,48 +42,110 @@
     <p>when a collision occurs, we stack the elements at the location. so we need to maintain an array of linked lists. aaaaaaa</p>
     <p>we also want to know the <b>load factor</b> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
     <pre class="highlit">
-template &lt;class K, class V>
-class HashMap {
-  private:
-    class Node {
-      public:
-        K key;
-        V value;
-        Node *link;
-    };
-    size_t capacity;
-    size_t items;
-    Node **table;
-    size_t h(K k);
-  public:
-    HashMap() {
-      items = 0;
-      capacity = 5;
-      table = new Node*[capacity];
-      for (size_t i = 0; i < capacity; i++)
-        table[i] = nullptr;
-    }
-    void insert(K k, V v) {
-      size_t index = h(k) % capacity;
-      for (Node *i = table[index]; i != nullptr; i = i->link)
-        if (i->key == k)
-          return;
-      // insert a new Node into table[index]
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
+<span class="keyword">class</span> <span class="type">HashMap</span> <span class="rainbow0">{</span>
+  <span class="keyword">private</span>:
+    <span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow1">{</span>
+      <span class="keyword">public</span>:
+        <span class="type">K</span> <span class="variable">key</span>;
+        <span class="type">V</span> <span class="keyword">value</span>;
+        <span class="type">Node *</span><span class="variable">link</span>;
+    <span class="rainbow1">}</span>;
+    <span class="type">size_t</span> <span class="variable">capacity</span>;
+    <span class="type">size_t</span> <span class="variable">items</span>;
+    <span class="type">Node **</span><span class="variable">table</span>;
+    <span class="type">size_t</span> <span class="function">h</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span>;
+  <span class="keyword">public</span>:
+    <span class="type">HashMap</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
+      items = <span class="constant">0</span>;
+      capacity = <span class="constant">5</span>;
+      table = <span class="keyword">new</span> <span class="type">Node*</span><span class="rainbow2">[</span>capacity<span class="rainbow2">]</span>;
+      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>; i < capacity; i++<span class="rainbow2">)</span>
+        table<span class="rainbow3">[</span>i<span class="rainbow3">]</span> = <span class="constant">nullptr</span>;
+    <span class="rainbow1">}</span>
+    <span class="type">void</span> <span class="function">insert</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">V</span> <span class="variable">v</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
+      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">Node *</span><span class="variable">i</span> = table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>; i != <span class="constant">nullptr</span>; i = i->link<span class="rainbow2">)</span>
+        <span class="keyword">if</span> <span class="rainbow3">(</span>i->key == k<span class="rainbow3">)</span>
+          <span class="keyword">return</span>;
+      <span class="comment">// insert a new Node into table[index]</span>
       items++;
-    }
-    bool find(K k) {
-      size_t index = h(k) % capacity;
-      for (Node *i = table[index]; i != nullptr; i = i->link)
-        if (i->key == k)
-          return true;
-      return false;
-    }
-};</pre>
-    <h2 id="hash-maps--expected-runtime">expected runtime</h2>
+    <span class="rainbow1">}</span>
+    <span class="type">bool</span> <span class="function">find</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
+      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">Node *</span>i = table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>; i != <span class="constant">nullptr</span>; i = i->link<span class="rainbow2">)</span>
+        <span class="keyword">if</span> <span class="rainbow3">(</span>i->key == k<span class="rainbow3">)</span>
+          <span class="keyword">return</span> <span class="constant">true</span>;
+      <span class="keyword">return</span> <span class="constant">false</span>;
+    <span class="rainbow1">}</span>
+<span class="rainbow0">}</span>;</pre>
+    <h3 id="hash-maps--separate-chaining--expected-runtime">expected runtime</h3>
     <p>hashing takes constant time. it does scale to the length of the key, but not the table. \(\mathsf{mod}\) is also constant time. so computing the index is \(O(1)\)</p>
     <p>it is expected that <code class="highlit">table[index]</code> has zero or few nodes. so searching this also doesn't depend on table size</p>
     <p>the tradeoff is you need a very big sparse table to minimize collision risk (capacity \(⋙\) items), and most of the locations will be empty</p>
     <p>the worst-but-very-unlikely case is everything gets mapped to the same index. we can fix this by resizing the table when the load factor becomes too high</p>
+    <h2 id="hash-maps--open-addressing">open addressing</h2>
+    <p>if we have a collision, we try a different location. a simple version is called <b>linear probing</b>. to compute the index,</p>
+    <p>
+      \[
+      \text{index} = \left((h(\text{key}) \mathbin{\mathsf{mod}} \text{capacity}) + i\right) \mathbin{\mathsf{mod}} \text{capacity}
+      \]
+    </p>
+    <p>\(i\) is the collision counter, starting at 0.</p>
+    <pre class="highlit">
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
+<span class="keyword">class</span> <span class="type">HashMap</span> <span class="rainbow0">{</span>
+  <span class="keyword">private</span>:
+    <span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow1">{</span>
+      <span class="keyword">public</span>:
+        <span class="type">K</span> <span class="variable">key</span>;
+        <span class="type">V</span> <span class="variable">value</span>;
+        <span class="comment">// no link!</span>
+    <span class="rainbow1">}</span>;
+    <span class="type">size_t</span> <span class="variable">capacity</span>;
+    <span class="type">size_t</span> <span class="variable">items</span>;
+    <span class="type">Node **</span><span class="variable">table</span>;
+    <span class="type">size_t</span> <span class="function">h</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span>;
+  <span class="keyword">public</span>:
+    <span class="type">HashMap</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
+      capacity = <span class="constant">10</span>;
+      items = <span class="constant">0</span>;
+      table = <span class="keyword">new</span> <span class="type">Node*</span><span class="rainbow2">[</span>capacity<span class="rainbow2">]</span>;
+      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < capacity; i++<span class="rainbow2">)</span>
+        table<span class="rainbow3">[</span>i<span class="rainbow3">]</span> = <span class="constant">nullptr</span>;
+    <span class="rainbow1">}</span>
+    <span class="type">void</span> <span class="function">insert</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">V</span> <span class="variable">v</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
+      <span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>;
+      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> == <span class="constant">nullptr</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
+        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> = <span class="keyword">new</span> <span class="type">Node</span><span class="rainbow3">()</span>;
+        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key = k;
+        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->value = v;
+        items++;
+        <span class="keyword">return</span>;
+      <span class="rainbow2">}</span>
+      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key == k<span class="rainbow2">)</span>
+        <span class="keyword">return</span>;
+      i++;
+      index = <span class="rainbow2">(</span>index + <span class="constant">1</span><span class="rainbow2">)</span> % capacity;
+      <span class="comment">// loop</span>
+    <span class="rainbow1">}</span>
+    <span class="type">V</span> <span class="function">getValue</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
+      <span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>;
+      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> == <span class="constant">nullptr</span><span class="rainbow2">)</span>
+        <span class="keyword">return</span> <span class="type">V</span><span class="rainbow3">()</span>; <span class="comment">// meh whatever</span>
+      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key == k<span class="rainbow2">)</span>
+        <span class="keyword">return</span> table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->value;
+      i++;
+      index = <span class="rainbow2">(</span>index + <span class="constant">1</span><span class="rainbow2">)</span> % capacity;
+      <span class="comment">// loop</span>
+    <span class="rainbow1">}</span>
+<span class="rainbow0">}</span>;</pre>
+    <h3 id="hash-maps--open-addressing--expected-runtime">expected runtime</h3>
+    <p>constant again! ideally, we're not supposed to do any linear probing</p>
+    <p>resizing the table is likely to spread the nodes apart. should happen around \(α = 20\%\)</p>
+    <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

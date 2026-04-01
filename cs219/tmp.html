@@ -9,8 +9,21 @@
     <!-- toc skip -->
     <h1 class="h0">cs 219</h1>
     <!-- toc here -->
+<nav class="toc">
+<ul>
+<li>the processor, cont'd<ul>
+<li><a href="#pipelining">pipelining</a><ul>
+<li><a href="#pipelining--hazards">hazards</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<!-- toc fake label: the processor, cont'd -->
 <!-- toc skip -->
     <h1>2026 03 26</h1>
+    <h2 id="pipelining">pipelining</h2>
     <p>multi cycle implementation is not always faster than single cycle!</p>
     <p>but we can try something else...</p>
     <dl>
@@ -31,6 +44,7 @@
     </ul>
     <p>buuuuut moving stuff between the washer and dryer takes time! (<b>overhead</b>)</p>
     <p>we want CPI to be as close to 1 as possible</p>
+    <h3 id="pipelining--hazards">hazards</h3>
     <p>pipelining does come with <b>hazards</b>, eg the same processor unit can't be used twice in the same cycle</p>
     <dl>
       <dt>control hazard</dt>
@@ -46,6 +60,43 @@
       <dd>resource conflicts</dd>
     </dl>
     <!-- toc skip -->
-    <h1>2026 03 31 <span style="color: var(--magenta-cooler)">test 2 review</span></h1>
+    <h1>2026 03 31</h1>
+    <p>
+      to prevent overlapping stages, the result of each stage is stored into a <b>buffer</b> until the clock says "hey do the next part now"
+    </p>
+    <p>mips has 32 registers but usually we only need up to 19 of them (s0-7, t0-9, zero)</p>
+    <p>if you have eg</p>
+    <pre class="highlit">
+<span class="function">lw</span> <span class="constant">$t0</span>, <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$t1</span><span class="rainbow0">)</span>
+<span class="function">add</span> <span class="constant">$t3</span>, <span class="constant">$t0</span>, <span class="constant">$s0</span></pre>
+    <p>then with pipelining...</p>
+    <pre class="highlit">
+     1 2 3 4 5 6
+lw:  F D E M W
+add:   F D E M W</pre>
+    <p>in cycle 5, <code class="function highlit">lw</code> is writing into <code class="constant highlit">$t0</code>. but <code class="function highlit">add</code> reads the <b>garbage</b> value of the register in cycle 3! this is a <b>RaW data hazard</b></p>
+    <p>or:</p>
+    <pre class="highlit">
+<span class="function">sub</span> <span class="constant">$t4</span>, <span class="constant">$t5</span>, <span class="constant">$t3</span>
+<span class="function">add</span> <span class="constant">$t5</span>, <span class="constant">$t2</span>, <span class="constant">$t3</span></pre>
+    <p><code class="constant highlit">$t3</code> is being read both times, which isn't a problem. RaR isn't a hazard</p>
+    <pre class="highlit">
+     1 2 3 4 5 6
+sub: F D E M W
+add:   F D E M W</pre>
+    <p><code class="function highlit">sub</code> cycle 2 needs to read <code class="constant highlit">$t5</code>. <code class="function highlit">add</code> cycle 6 needs to write to it. this isn't a problem for either of these instructions. but if there's a third instruction it might be! it's not a <b>threat</b> but it is a <b>WaR hazard</b></p>
+    <p>or:</p>
+    <pre class="highlit">
+<span class="function">sub</span> <span class="constant">$t6</span>, <span class="constant">$t5</span>, <span class="constant">$t3</span>
+<span class="function">add</span> <span class="constant">$t6</span>, <span class="constant">$t2</span>, <span class="constant">$t3</span></pre>
+    <p>again <code class="constant highlit">$t3</code> is being read both times which is ok.</p>
+    <pre class="highlit">
+     1 2 3 4 5 6
+sub: F D E M W
+add:   F D E M W</pre>
+    <p>this is also not a threat, but it is a <b>WaW hazard</b></p>
+    <p>the rest of class was a review for test2</p>
+    <p>reference sheet covers: r/i/j format instructions; alu opcodes (<code class="highlit">10</code> for <code class="function highlit">addi</code> etc); formulas for ET and IL; some number prefixes</p>
   </body>
 </html>
+ 
