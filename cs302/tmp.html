@@ -4,6 +4,13 @@
     <title>cs 302</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      img.emoji {
+        display: inline;
+        height: 1em;
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
     <!-- toc skip -->
@@ -20,6 +27,10 @@
 <li><a href="#hash-maps--open-addressing--expected-runtime">expected runtime</a></li>
 </ul>
 </li>
+<li><a href="#hash-maps--deletion">deletion</a></li>
+<li><a href="#hash-maps--resizing">resizing</a></li>
+<li><a href="#hash-maps--other-open-addressing-methods">other open addressing methods</a></li>
+<li><a href="#hash-maps--comparisons">comparisons</a></li>
 </ul>
 </li>
 </ul>
@@ -144,8 +155,65 @@
 <span class="rainbow0">}</span>;</pre>
     <h3 id="hash-maps--open-addressing--expected-runtime">expected runtime</h3>
     <p>constant again! ideally, we're not supposed to do any linear probing</p>
-    <p>resizing the table is likely to spread the nodes apart. should happen around \(α = 20\%\)</p>
-    <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones</p>
+    <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones <img class="emoji" src="traffic-cone.png" /></p>
+    <h2 id="hash-maps--deletion">deletion</h2>
+    <p>for separate chaining we can just find the matching node and delete it</p>
+    <p>for open addressing, we need to mark the node "deleted" with some flag, or put a dummy node there</p>
+    <h2 id="hash-maps--resizing">resizing</h2>
+    <p>the cs202 method to resize stuff is making a bigger thing and copying everything over. that's not gonna work here because the indices depend on the table size. we need to <u>re-<code class="function highlit">insert</code></u> all the elements</p>
+    <p>we perform a resize when, say, \(α ≥ 20\%\). we don't remap the traffic cone entries</p>
+    <pre class="highlit">
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < old_capacity; i++<span class="rainbow0">)</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>old_table<span class="rainbow2">[</span>i<span class="rainbow2">]</span> != <span class="constant">nullptr</span><span class="rainbow1">)</span>
+    this->insert<span class="rainbow2">(</span>old_table<span class="rainbow3">[</span>i<span class="rainbow3">]</span>->key, old_table<span class="rainbow3">[</span>i<span class="rainbow3">]</span>->value<span class="rainbow2">)</span>;
+<span class="comment">// deallocate each node of old_table</span>
+<span class="comment">// deallocate old_table</span></pre>
+    <p>resizing is \(O(n)\)! scary! everything else is constant time! so we want to resize as infrequently as possible</p>
+    <p>(tangent: procrastination is ok dont feel bad about it)</p>
+    <dl>
+      <dt>amortization</dt>
+      <dd>spreading work out over a longer period of time</dd>
+    </dl>
+    <h2 id="hash-maps--other-open-addressing-methods">other open addressing methods</h2>
+    <dl>
+      <dt>quadratic probing</dt>
+      <dd>\(\text{index} = \left((h(\text{key}) \mathbin{\mathsf{mod}} \text{capacity}) + i²\right) \mathbin{\mathsf{mod}} \text{capacity}\)</dd>
+      <dt>double hashing</dt>
+      <dd>\(\text{index} = \left(h₁(\text{key}) + i\,h₂(\text{key})\right) \mathbin{\mathsf{mod}} \text{capacity}\)</dd>
+    </dl>
+    <h2 id="hash-maps--comparisons">comparisons</h2>
+    <style>.pro{color:var(--green)}.con{color:var(--red)}</style>
+    <table>
+      <tr>
+        <th>separate chaining</th>
+        <th>open addressing</th>
+      </tr>
+      <tr>
+        <td class="pro">easy to maintain</td>
+        <td class="pro">many ways to handle collisions</td>
+      </tr>
+      <tr>
+        <td class="con">few ways to handle collisions</td>
+        <td class="con">more complex to maintain</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td class="noborder"></td>
+        <th>hashmap</th>
+        <th>avl tree</th>
+      </tr>
+      <tr>
+        <th scope="row">expected runtime for <code class="highlit">insert</code>/<code class="highlit">find</code></th>
+        <td>\(Θ(1)\)</td>
+        <td>\(Θ(\log n)\)</td>
+      </tr>
+      <tr>
+        <th scope="row">space needed</th>
+        <td>way more than \(n\). mostly empty!</td>
+        <td>enough for all the \(n\) nodes</td>
+      </tr>
+    </table>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

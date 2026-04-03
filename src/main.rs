@@ -175,6 +175,7 @@ fn main() {
             any_changes = true;
         }
     }
+    println!("{GREEN}done{RESET}");
     if check && any_changes {
         std::process::exit(1);
     }

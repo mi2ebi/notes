@@ -30,6 +30,8 @@
     <h1>
       ch5 discrete probability distributions
     </h1>
+    <h2>5.5  negative binomial distribution</h2>
+    <p>this helps us find the number of trials needed for a certain amount of successes.</p>
     <h2>5.7 poisson distribution</h2>
     <p>
       we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\), and take the limit:
@@ -46,6 +48,8 @@
       \end{align*}
       \]
     </p>
+    <p>remember \(\lim\limits_{n → ∞}\left(1 + \frac xn\right)ⁿ = eˣ\)</p>
+    <p>workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents are unlikely</p>
     <h2>giant distribution list</h2>
     <table>
       <tr>
@@ -111,6 +115,32 @@
         </td>
       </tr>
     </table>
+    <h1>ch6 continuous probability distributions</h1>
+    <h2>6.1 uniform distribution</h2>
+    <p>
+      a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its pdf looks like
+      \[
+      f(x) = \begin{cases}
+      \frac1{b - a}, & a ≤ x ≤ b \\
+      0, & \text{otherwise}
+      \end{cases}
+      \]
+    </p>
+    <p>
+      \[
+      E(X) = \frac{a + b}2 \qquad \var(X) = \frac1{12} (b - a)²
+      \]
+    </p>
+    <h2>6.2 normal distribution</h2>
+    <p>the bell shaped one!</p>
+    <p>
+      \[
+      f(x)
+      = \frac1{σ\sqrt{2π}} e^{-\frac1{2σ²} (x - μ)²}
+      = \frac{e^{-z²/2}}{σ\sqrt{2π}}
+      \]
+    </p>
+    <p>we write \(X ∼ N(μ, σ²)\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
