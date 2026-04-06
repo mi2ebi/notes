@@ -61,6 +61,8 @@
 <li>hardware?<ul>
 <li><a href="#the-processor">the processor</a></li>
 <li><a href="#control-signals">control signals</a></li>
+<li><a href="#single-cycle-implementation">single cycle implementation</a></li>
+<li><a href="#multi-cycle-implementation">multi cycle implementation</a></li>
 </ul>
 </li>
 </ul>
@@ -840,6 +842,61 @@ Clk -|≥__|</pre>
     <h2 id="control-signals">control signals</h2>
     <!-- toc skip -->
     <h1>2026-03-12</h1>
-    
+    <!-- toc skip -->
+    <h1>2026-03-24</h1>
+    <h2 id="single-cycle-implementation">single cycle implementation</h2>
+    <pre class="highlit">
+ ________
+|        |________
+<---- single ----></pre>
+    <p>advantages:</p>
+    <ul>
+      <li>simple design</li>
+      <li>efficient cpu</li>
+      <li></li>
+    </ul>
+    <p>disadvantages:</p>
+    <ul>
+      <li>more latency or ET</li>
+    </ul>
+    <p>suppose</p>
+    <table>
+      <tr>
+        <th>IF</th>
+        <th>ID</th>
+        <th>IE</th>
+        <th>DM</th>
+        <th>WB</th>
+      </tr>
+      <tr>
+        <td>150</td>
+        <td>30</td>
+        <td>100</td>
+        <td>200</td>
+        <td>30</td>
+        <td class="noborder">ns</td>
+      </tr>
+    </table>
+    <p><code class="function highlit">lw</code> uses IF + ID + IE + DW + WB so it'd be 510 ns</p>
+    <p>from here you can find clock cycles, cycle time, execution time, instruction latency, and throughput (in the-other-mips = million instructions per second)</p>
+    <p>throughput = IC/ET = 1/IL</p>
+    <p>if we have a program with 100 instrs and those↑ latencies,</p>
+    <ul>
+      <li>CC = 100</li>
+      <li>CT = 510 ns</li>
+      <li>ET = 100 × 510 ns = 51000 ns = 51 µs</li>
+      <li>IL = 51 µs / 100 = 510 ns</li>
+      <li>throughput = 100 / (51 µs) = 1.96 &times 10<sup>6</sup> = 1.96 mips</li>
+    </ul>
+    <p>
+      it's impossible to cut down on wasted time by having multiple clock rates. in multiprocessor
+      computers they're all the same clock rate
+    </p>
+    <h2 id="multi-cycle-implementation">multi cycle implementation</h2>
+    <pre class="highlit">
+ __    __    __    __    __
+|  |__|  |__|  |__|  |__|  |__
+ fetch  dec  exec  dmem  write</pre>
+    <p>here we target the longest unit time</p>
   </body>
 </html>

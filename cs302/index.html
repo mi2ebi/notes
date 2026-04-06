@@ -52,6 +52,7 @@
 <li><a href="#avl-trees">avl trees</a></li>
 <li><a href="#maps">maps</a><ul>
 <li><a href="#maps--unordered-maps">unordered maps</a></li>
+<li><a href="#maps--counting-duplicates">counting duplicates</a></li>
 </ul>
 </li>
 </ul>
@@ -609,7 +610,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <pre class="highlit">
 <span class="comment">// `it` is a map&lt;string, int>::iterator</span>
 <span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span> = people.begin<span class="rainbow1">()</span>; it != people.end<span class="rainbow1">()</span>; it++<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="constant">// first = key, second = value</span>
+  <span class="comment">// first = key, second = value</span>
   <span class="builtin">cout</span> << first second << <span class="builtin">endl</span>;
 <span class="rainbow0">}</span>
 
@@ -620,6 +621,23 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <h2 id="maps--unordered-maps">unordered maps</h2>
     <p><code class="highlit">unordered_map</code>, uses a hash table instead of a tree</p>
     <p>insert and find are \(O(1)\)!</p>
+    <p>
+      <code class="highlit">map.find<span class="rainbow0">(</span>key<span class="rainbow0">)</span></code> returns an iterator pointing to the item with some <code class="rainbow0 highlit">key</code>, or
+      <code class="highlit">map.end<span class="rainbow0">()</span></code>
+      if it's not found.
+    </p>
+    <h2 id="maps--counting-duplicates">counting duplicates</h2>
+    <pre class="highlit">
+<span class="type">vector</span><span class="rainbow0">&lt;</span><span class="type">string</span><span class="rainbow0">></span> <span class="variable">names</span> = <span class="rainbow0">{</span><span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"violet"</span>, <span class="string">"matt"</span>, <span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"luci"</span><span class="rainbow0">}</span>;
+<span class="type">unordered_map</span><span class="rainbow0">&lt;</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow0">></span> <span class="variable">condensed</span>;
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">name</span>: names<span class="rainbow0">)</span>
+  condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> = condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> + <span class="constant">1</span>;
+<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">uniq</span>: condensed<span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="builtin">cout</span> << uniq.first;
+  <span class="keyword">if</span> <span class="rainbow1">(</span>uniq.second > <span class="constant">1</span><span class="rainbow1">)</span>
+    <span class="builtin">cout</span> << <span class="string">" [duplicates]"</span>;
+  <span class="builtin">cout</span> << <span class="builtin">endl</span>;
+<span class="rainbow0">}</span></pre>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

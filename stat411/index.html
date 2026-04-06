@@ -786,6 +786,61 @@
       <li>if they're independent \(E(XY) = E(X)E(Y)\)</li>
     </ul>
     <h1>ch5 discrete probability distributions</h1>
+    \(
+    \gdef\Ber{\operatorname{Ber}}
+    \gdef\bin{\operatorname{bin}}
+    \)
+    <h2>5.1 discrete uniform distribution</h2>
+    <p>
+      a random variable has a <b>discrete uniform distribution</b> if its pmf is given by \[
+      P(X = x) = p(x) = \frac1k, \quad x = x₁, x₂, …, xₖ
+      \]
+    </p>
+    <p>then \(E(X) = \frac1k ∑ᵢ₌₁ᵏ xₖ\) and \(\var(X) = \frac1k ∑ᵢ₌₁ᵏ (x - μ)²\)</p>
+    <h2>5.2 binomial distribution</h2>
+    <p>
+      if we have two mutually exclusive events with \(P(\text{success}) = p\) and
+      \(P(\text{failure}) = 1 - p\). let \(X = 1\) if success and 0 otherwise. then the
+      probability distribution is \[p(x) = pˣ (1 - p)¹⁻ˣ\]
+    </p>
+    <p>\(X\) is called a <b>bernoulli random variable</b> with parameter \(p\), and its distribution is denoted \(X∼\Ber(X)\)</p>
+    <p>here \(E(X) = p\) and \(\var(X) = p(1 - p) = pq\)</p>
+    <p>tossing a coin is a bernoulli random variable with \(p = \frac12\)</p>
+    <p>what if we repeat the bernoulli trials \(n\) times?</p>
+    <dl>
+      <dt>binomial experiment</dt>
+      <dd>if all of these are met:
+        <ol>
+          <li>each trial has exactly 2 possible outcomes</li>
+          <li>\(P(\text{outcome}) = p\) remains the same</li>
+          <li>total number of trials \(n\) is fixed</li>
+          <li>each trial is identical and independent</li>
+        </ol>
+      </dd>
+    </dl>
+    <p>
+      suppose we are interested in \(x\) successes among \(n\) trials, and \(X\) denotes the number of
+      successes. then the probability distribution of \(X\) is \[
+      p(x) = {n \choose x} pˣ (1 - p)ⁿ⁻ˣ, \quad x = 0, 1, 2, …, n
+      \]
+    </p>
+    <p>
+      this is the <b>binomial probability distribution</b>. \(E(X) = np\) and \(\var(X) = np(1 - p)\).
+      we write this one as \(X∼\bin(n, p)\)
+    </p>
+    <ul>
+      <li>if \(X ∼ bin(n, p)\) then for the failures \((n - X) ∼ bin(n, 1 - p)\)</li>
+      <li>\(X∼\bin(1, p) = X∼\Ber(p)\)</li>
+    </ul>
+    <p style="color: var(--green-faint)">cdfs are on book pp726-731</p>
+    <p>what if there are more than 2 categories?...</p>
+    <h2>5.3 multinominal distribution</h2>
+    <!--
+    <h2>5.4 hypergeometric distribution</h2>
+    <h2>5.5 negative binomial distribution</h2>
+    <h2>5.6 geometric distribution</h2>
+    <h2>5.7 poisson distribution</h2>
+    -->
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
