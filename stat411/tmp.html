@@ -24,15 +24,35 @@
       \gdef\Geo{\operatorname{Geo}}
       \gdef\HG{\operatorname{HG}}
       \gdef\Poi{\operatorname{Poi}}
-      \gdef\M{\operatorname{M}}
+      \gdef\Exp{\operatorname{Exp}}
+      \gdef\Ga{\operatorname{Ga}}
+      \gdef\Be{\operatorname{Be}}
+      \gdef\LN{\operatorname{LN}}
     \)
-    <h1 class="h0">stat 411</h1>
-    <h1>
-      ch5 discrete probability distributions
-    </h1>
-    <h2>5.5  negative binomial distribution</h2>
+    <h1 id="stat-411" class="h0">stat 411</h1>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li><a href="#stat-411">stat 411</a></li>
+<li><a href="#ch5-discrete-probability-distributions">ch5 discrete probability distributions</a><ul>
+<li><a href="#ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5  negative binomial distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--giant-distribution-list">giant distribution list</a></li>
+</ul>
+</li>
+<li><a href="#ch6-continuous-probability-distributions">ch6 continuous probability distributions</a><ul>
+<li><a href="#ch6-continuous-probability-distributions--6-1-uniform-distribution">6.1 uniform distribution</a></li>
+<li><a href="#ch6-continuous-probability-distributions--6-2-normal-distribution">6.2 normal distribution</a></li>
+<li><a href="#ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using N to approximate bin</a></li>
+<li><a href="#ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
+    <h2 id="ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5  negative binomial distribution</h2>
     <p>this helps us find the number of trials needed for a certain amount of successes.</p>
-    <h2>5.7 poisson distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</h2>
     <p>
       we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\), and take the limit:
     </p>
@@ -50,7 +70,7 @@
     </p>
     <p>remember \(\lim\limits_{n → ∞}\left(1 + \frac xn\right)ⁿ = eˣ\)</p>
     <p>workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents are unlikely</p>
-    <h2>giant distribution list</h2>
+    <h2 id="ch5-discrete-probability-distributions--giant-distribution-list">giant distribution list</h2>
     <table>
       <tr>
         <th>distribution</th>
@@ -102,7 +122,7 @@
         <td>\(λ\)</td>
       </tr>
       <tr>
-        <td>multinomial<br />\(\M(n; pᵢ)\)</td>
+        <td>multinomial<br />\(M(n; pᵢ)\)</td>
         <td>\(p(x₁, …, xₖ) = \frac{n!}{∏ᵢ₌₁ᵏ xᵢ!} ∏ᵢ₌₁ᵏ pᵢ^{xᵢ}\)</td>
         <td>\(∑ᵢ₌₁ᵏ xᵢ = n \\ ∑ᵢ₌₁ᵏ pᵢ = 1\)</td>
         <td>\(E(Xᵢ) = npᵢ\)</td>
@@ -115,8 +135,8 @@
         </td>
       </tr>
     </table>
-    <h1>ch6 continuous probability distributions</h1>
-    <h2>6.1 uniform distribution</h2>
+    <h1 id="ch6-continuous-probability-distributions">ch6 continuous probability distributions</h1>
+    <h2 id="ch6-continuous-probability-distributions--6-1-uniform-distribution">6.1 uniform distribution</h2>
     <p>
       a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its pdf looks like
       \[
@@ -131,7 +151,7 @@
       E(X) = \frac{a + b}2 \qquad \var(X) = \frac1{12} (b - a)²
       \]
     </p>
-    <h2>6.2 normal distribution</h2>
+    <h2 id="ch6-continuous-probability-distributions--6-2-normal-distribution">6.2 normal distribution</h2>
     <p>the bell shaped one!</p>
     <p>
       \[
@@ -140,7 +160,50 @@
       = \frac{e^{-z²/2}}{σ\sqrt{2π}}
       \]
     </p>
-    <p>we write \(X ∼ N(μ, σ²)\)</p>
+    <p>\(x\) can be any real number. we write \(X ∼ N(μ, σ²)\). \(E(X) = μ\) and \(\var(X) = σ²\)</p>
+    <p>the area under the curve is 1 (but the function has no closed-form integral) and there are points of inflection at \(x = μ ± σ\)</p>
+    <p>
+      <small>
+        digit contest:<br />
+        \(π = 3.14159265358979323...\)<br />
+        \(e = 2.718281828459045...\)
+      </small>
+    </p>
+    <p>
+      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <b>standard normal probability distribution</b>. the pdf of \(Z\) is 
+      \[
+      φ(Z) = \frac1{\sqrt{2π}}e^{-x²/2}
+      \]
+    </p>
+    <p>since it's not feasible to have tables for every possible normal distribution, we just have the one table for \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)</p>
+    <h2 id="ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
+    <p>if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when \(np > 5\) and \(npq > 5\)</p>
+    <p>you might need a <b>continuity correction</b> of adding/subtracting 0.5</p>
+    <h2 id="ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</h2>
+    <p>for random phonemena involving time, eg device lifespan</p>
+    <p>
+      \[
+      f(x) = \frac1θ e^{-x/θ} , \quad θ > 0
+      \]
+    </p>
+    <p>if \(X\) follows this we write \(X ∼ \Exp(θ)\)</p>
+    <p>this is also called a <b>laplace distribution</b></p>
+    <p>\(E(X) = θ\) and \(\var(X) = θ²\). the standard deviation is the mean! and mean > median</p>
+    <p>
+      \[
+      F(X) = \begin{cases}
+      1 - e^{-x/θ}, & x ≥ 0 \\
+      0, & x < 0
+      \end{cases}
+      \]
+    </p>
+    <p>after <b>reparameterization</b> \(λ = \frac1θ\) we can write \(f(x) = λ\exp(-λx)\)</p>
+    <p>
+      the <b>survival function / reliability</b> is \(1 - F(x) =\)
+      \[
+      F̄(x) = S(x) = ∫ₓ^∞ f(t) \;\mathrm dt = \exp(-λt)
+      \]
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
