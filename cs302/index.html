@@ -654,7 +654,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <p><small>\(\lfloor a/b\rfloor\) is integer division of \(a\) and \(b\)</small></p>
     <p>here the capacity is 9 and the heap size is 8</p>
     <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0">&lt;</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
 <span class="keyword">class</span> <span class="type">PriorityQ</span> <span class="rainbow0">{</span>
   <span class="keyword">private</span>:
     <span class="keyword">class</span> <span class="type">PriorityType</span> <span class="rainbow1">{</span>
@@ -665,7 +665,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <span class="type">size_t</span> <span class="variable">capacity</span>;
     <span class="type">size_t</span> <span class="variable">heapsize</span>;
     <span class="type">PriorityType *</span><span class="variable">heap</span>;
-    <span class="type">unordered_map</span><span class="rainbow1">&lt;</span><span class="type">K</span>, <span class="type">size_t</span><span class="rainbow1">></span> <span class="variable">key2index</span>;
+    <span class="type">unordered_map</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">size_t</span><span class="rainbow1">></span> <span class="variable">key2index</span>;
     <span class="type">size_t</span> <span class="function">bubbleUp</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
     <span class="type">size_t</span> <span class="function">bubbleDown</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
   <span class="keyword">public</span>:

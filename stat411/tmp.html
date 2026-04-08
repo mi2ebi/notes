@@ -45,6 +45,7 @@
 <li><a href="#ch6-continuous-probability-distributions--6-2-normal-distribution">6.2 normal distribution</a></li>
 <li><a href="#ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using N to approximate bin</a></li>
 <li><a href="#ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</a></li>
+<li><a href="#ch6-continuous-probability-distributions--6-5-gamma-distribution">6.5 gamma distribution</a></li>
 </ul>
 </li>
 </ul>
@@ -54,7 +55,8 @@
     <p>this helps us find the number of trials needed for a certain amount of successes.</p>
     <h2 id="ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</h2>
     <p>
-      we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\), and take the limit:
+      we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\),
+      and take the limit:
     </p>
     <p>
       \[
@@ -69,7 +71,10 @@
       \]
     </p>
     <p>remember \(\lim\limits_{n → ∞}\left(1 + \frac xn\right)ⁿ = eˣ\)</p>
-    <p>workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents are unlikely</p>
+    <p>
+      workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents
+      are unlikely
+    </p>
     <h2 id="ch5-discrete-probability-distributions--giant-distribution-list">giant distribution list</h2>
     <table>
       <tr>
@@ -138,7 +143,8 @@
     <h1 id="ch6-continuous-probability-distributions">ch6 continuous probability distributions</h1>
     <h2 id="ch6-continuous-probability-distributions--6-1-uniform-distribution">6.1 uniform distribution</h2>
     <p>
-      a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its pdf looks like
+      a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its
+      pdf looks like
       \[
       f(x) = \begin{cases}
       \frac1{b - a}, & a ≤ x ≤ b \\
@@ -161,7 +167,10 @@
       \]
     </p>
     <p>\(x\) can be any real number. we write \(X ∼ N(μ, σ²)\). \(E(X) = μ\) and \(\var(X) = σ²\)</p>
-    <p>the area under the curve is 1 (but the function has no closed-form integral) and there are points of inflection at \(x = μ ± σ\)</p>
+    <p>
+      the area under the curve is 1 (but the function has no closed-form integral) and there are points of inflection
+      at \(x = μ ± σ\)
+    </p>
     <p>
       <small>
         digit contest:<br />
@@ -170,14 +179,21 @@
       </small>
     </p>
     <p>
-      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <b>standard normal probability distribution</b>. the pdf of \(Z\) is 
+      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <b>standard normal probability
+      distribution</b>. the pdf of \(Z\) is 
       \[
       φ(Z) = \frac1{\sqrt{2π}}e^{-x²/2}
       \]
     </p>
-    <p>since it's not feasible to have tables for every possible normal distribution, we just have the one table for \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)</p>
+    <p>
+      since it's not feasible to have tables for every possible normal distribution, we just have the one table for
+      \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)
+    </p>
     <h2 id="ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
-    <p>if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when \(np > 5\) and \(npq > 5\)</p>
+    <p>
+      if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when
+      \(np > 5\) and \(npq > 5\)
+    </p>
     <p>you might need a <b>continuity correction</b> of adding/subtracting 0.5</p>
     <h2 id="ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</h2>
     <p>for random phonemena involving time, eg device lifespan</p>
@@ -197,13 +213,58 @@
       \end{cases}
       \]
     </p>
-    <p>after <b>reparameterization</b> \(λ = \frac1θ\) we can write \(f(x) = λ\exp(-λx)\)</p>
+    <p>
+      after <b>reparameterization</b> \(λ = \frac1θ\) we can write \(f(x) = λe^{-λx}\). \(θ\) represents the
+      mean time between events and \(λ\) represents the number of events per unit of time
+    </p>
     <p>
       the <b>survival function / reliability</b> is \(1 - F(x) =\)
       \[
-      F̄(x) = S(x) = ∫ₓ^∞ f(t) \;\mathrm dt = \exp(-λt)
+      F̄(x) = S(x) = ∫ₓ^∞ f(t) \;\mathrm dt = \exp(-λx)
       \]
     </p>
+    <p>
+      a random variable is <b>memoryless</b> if \(P(X > s + t \mathbin| X > t) = P(X > s)\) for all \(s, t ≥ 0\)
+    </p>
+    <h2 id="ch6-continuous-probability-distributions--6-5-gamma-distribution">6.5 gamma distribution</h2>
+    <p>the <b>gamma function</b> is \(Γ(k) = ∫₀^∞ yᵏ⁻¹e⁻ʸ \;dy\) and has properties</p>
+    <ul>
+      <li>\(Γ(k) = (k - 1)!\) for \(k ∈ ℕ₁\)</li>
+      <li>\(Γ(k + 1) = kΓ(k) = k!\)</li>
+      <li>\(Γ(1) = 0! = 1\) and \(Γ\left(\frac12\right) = \sqrtπ\)</li>
+    </ul>
+    <p>
+      the \(E(X)\) for the exponential distribution is, by definition,
+      \[
+      ∫₀^∞ x\frac1θ e^{-x/θ} \;dx
+      \]
+    </p>
+    <p>
+      if we let \(y = \frac xθ\), then \(x = yθ\) and \(dx = θ dy\), and therefore
+      \[
+      \begin{align*}
+      E(X)
+      &= ∫ₒ^∞ θ y \frac1θ e⁻ʸ θ \;dy \\
+      &= θ ∫₀^∞ ye⁻ʸ \;dy \\
+      &= θ ∫₀^∞ y²⁻¹e⁻ʸ \;dy \\
+      &= θ Γ(2) = θ
+      \end{align*}
+      \]
+    </p>
+    <p>
+      a random variable follows the <b>gamma distribution</b> \(\Ga(α, β)\) if \(x ≥ 0\)
+      \[
+      f(x) = \frac1{Γ(α)β^α} x^{α - 1} e^{-x/β}
+      \]
+    </p>
+    <p>\(\Ga(1, β) = \Exp(β)\)</p>
+    <p>
+      <small>
+        on the wikipedia page for gamma distribution, this is the "shape-and-scale" gamma distribution;
+        we are using \(β\) for scale but wikipedia uses \(β\) for rate and \(θ = 1/β\) for scale
+      </small>
+    </p>
+    <p>\(E(X) = αβ\) and \(\var(X) = αβ²\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
