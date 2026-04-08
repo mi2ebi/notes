@@ -55,6 +55,7 @@
 <li><a href="#maps--counting-duplicates">counting duplicates</a></li>
 </ul>
 </li>
+<li><a href="#priority-queues">priority queues</a></li>
 </ul>
 </nav>
 <h1 id="c-recap">c++ recap</h1>
@@ -628,8 +629,8 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     </p>
     <h2 id="maps--counting-duplicates">counting duplicates</h2>
     <pre class="highlit">
-<span class="type">vector</span><span class="rainbow0">&lt;</span><span class="type">string</span><span class="rainbow0">></span> <span class="variable">names</span> = <span class="rainbow0">{</span><span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"violet"</span>, <span class="string">"matt"</span>, <span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"luci"</span><span class="rainbow0">}</span>;
-<span class="type">unordered_map</span><span class="rainbow0">&lt;</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow0">></span> <span class="variable">condensed</span>;
+<span class="type">vector</span><span class="rainbow0"><</span><span class="type">string</span><span class="rainbow0">></span> <span class="variable">names</span> = <span class="rainbow0">{</span><span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"violet"</span>, <span class="string">"matt"</span>, <span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"luci"</span><span class="rainbow0">}</span>;
+<span class="type">unordered_map</span><span class="rainbow0"><</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow0">></span> <span class="variable">condensed</span>;
 <span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">name</span>: names<span class="rainbow0">)</span>
   condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> = condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> + <span class="constant">1</span>;
 <span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">uniq</span>: condensed<span class="rainbow0">)</span> <span class="rainbow0">{</span>
@@ -638,6 +639,61 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <span class="builtin">cout</span> << <span class="string">" [duplicates]"</span>;
   <span class="builtin">cout</span> << <span class="builtin">endl</span>;
 <span class="rainbow0">}</span></pre>
+    <hr /> <!-- TODO incorporate?# */tmp.html -->
+    <h1 id="priority-queues">priority queues</h1>
+    <p>uses a <b>binary min heap</b> which is like a binary tree that we squish into an array. a binary min heap is valid if each node's priority value is \(≤\) that of both its children</p>
+    <pre class="highlit">
+            3
+       7 ---'--- 5
+    8 -'- 10  6 -'- 12
+11 -'</pre>
+    <p>gets listified as</p>
+    <pre class="highlit">
+[, 3, 7, 5, 8, 10, 6, 12, 11, ]</pre>
+    <p>the first element is empty! the root node is at index 1. for each element at index \(i\), the left child is at index \(2i\),the right child is at \(2i + 1\), and the parent is at index \(\left\lfloor\frac i2\right\rfloor\)</p>
+    <p><small>\(\lfloor a/b\rfloor\) is integer division of \(a\) and \(b\)</small></p>
+    <p>here the capacity is 9 and the heap size is 8</p>
+    <pre class="highlit">
+<span class="keyword">template</span> <span class="rainbow0">&lt;</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
+<span class="keyword">class</span> <span class="type">PriorityQ</span> <span class="rainbow0">{</span>
+  <span class="keyword">private</span>:
+    <span class="keyword">class</span> <span class="type">PriorityType</span> <span class="rainbow1">{</span>
+      <span class="keyword">public</span>:
+        <span class="type">K</span> <span class="variable">key</span>;
+        <span class="type">P</span> <span class="variable">priority</span>;
+    <span class="rainbow1">}</span>;
+    <span class="type">size_t</span> <span class="variable">capacity</span>;
+    <span class="type">size_t</span> <span class="variable">heapsize</span>;
+    <span class="type">PriorityType *</span><span class="variable">heap</span>;
+    <span class="type">unordered_map</span><span class="rainbow1">&lt;</span><span class="type">K</span>, <span class="type">size_t</span><span class="rainbow1">></span> <span class="variable">key2index</span>;
+    <span class="type">size_t</span> <span class="function">bubbleUp</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
+    <span class="type">size_t</span> <span class="function">bubbleDown</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
+  <span class="keyword">public</span>:
+    <span class="type">PriorityQ</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
+      heapSize = 0;
+      capacity = 10;
+      heap = <span class="keyword">new</span> <span class="type">PriorityType</span><span class="rainbow2">[</span>capacity + 1<span class="rainbow2">]</span>;
+    <span class="rainbow1">}</span>
+    <span class="type">void</span> <span class="function">pushBack</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">P</span> <span class="variable">p</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+      <span class="comment">// resize heap if needed</span>
+      heap<span class="rainbow2">[</span>heapSize + 1<span class="rainbow2">]</span>.key = k;
+      heap<span class="rainbow2">[</span>heapSize + 1<span class="rainbow2">]</span>.priority = p;
+      heapSize++;
+      bubbleUp<span class="rainbow2">(</span>heapSize<span class="rainbow2">)</span>;
+    <span class="rainbow1">}</span>
+<span class="rainbow0">}</span></pre>
+    <ul>
+      <li>assigning the element to index <code class="highlit">heapSize</code> + 1 takes \(O(1)\)</li>
+      <li><code class="highlit">bubbleUp</code> does
+        <ul>
+          <li>compute the parent index – \(O(1)\)</li>
+          <li>compare priorities – \(O(1)\)</li>
+          <li>swap – \(O(1)\)</li>
+        </ul>
+        up to [height of the tree] times. the tree is always balanced so this takes \(\log₂ n\) time
+      </li>
+    </ul>
+    <p>so <code class="highlit">insert</code> is \(Θ(\log n)\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
