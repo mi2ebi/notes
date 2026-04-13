@@ -112,11 +112,8 @@ fn main() {
     let check = args.iter().any(|a| a == "--check");
     let watch = args.iter().any(|a| a == "--watch");
     let no_hl = args.iter().any(|a| a == "--no-hl") || watch;
-    let paths: Vec<PathBuf> = args
-        .iter()
-        .filter(|a| !a.starts_with("--"))
-        .map(PathBuf::from)
-        .collect();
+    let paths: Vec<PathBuf> =
+        args.iter().filter(|a| !a.starts_with("--")).map(PathBuf::from).collect();
     let files: Vec<PathBuf> = if paths.is_empty() {
         match glob("**/*.html") {
             Err(e) => {
@@ -163,11 +160,7 @@ fn main() {
             println!("{YELLOW}duplicate:{RESET} '{alias}' is in both FONT_ALIASES and STRUCTURAL");
         }
     }
-    let pipeline = Pipeline {
-        font_maps,
-        unicode,
-        no_hl,
-    };
+    let pipeline = Pipeline { font_maps, unicode, no_hl };
     let mut any_changes = false;
     for path in &files {
         println!("{}", path.display());
@@ -185,9 +178,7 @@ fn main() {
         let mut last_seen: HashMap<PathBuf, u64> = HashMap::new();
         let mut debouncer = new_debouncer(std::time::Duration::from_secs(1), None, tx).unwrap();
         for path in &files {
-            debouncer
-                .watch(path, notify::RecursiveMode::NonRecursive)
-                .unwrap();
+            debouncer.watch(path, notify::RecursiveMode::NonRecursive).unwrap();
         }
         for events in rx.into_iter().flatten() {
             for DebouncedEvent { event, .. } in events {

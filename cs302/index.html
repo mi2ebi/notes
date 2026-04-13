@@ -693,7 +693,22 @@ h -'- i j -'- k l -'- m n -'- o</pre>
         up to [height of the tree] times. the tree is always balanced so this takes \(\log₂ n\) time
       </li>
     </ul>
-    <p>so <code class="highlit">insert</code> is \(Θ(\log n)\)</p>
+    <p>so <code class="highlit">pushBack</code> is \(Θ(\log n)\)</p>
+    <p>updating:</p>
+    <pre class="highlit">
+heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<span class="rainbow1">]</span><span class="rainbow0">]</span>.priority = ...;</pre>
+    <pre class="highlit">
+<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
+<span class="keyword">class</span> <span class="type">PriorityQ</span> <span class="rainbow0">{</span>
+  <span class="comment">// ...</span>
+  <span class="keyword">public</span>:
+    <span class="type">void</span> <span class="function">popFront</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
+      heap<span class="rainbow2">[</span>1<span class="rainbow2">]</span> = heap<span class="rainbow2">[</span>heapSize<span class="rainbow2">]</span>;
+      heapSize--;
+      bubbleDown<span class="rainbow2">(</span>1<span class="rainbow2">)</span>;
+    <span class="rainbow1">}</span>
+<span class="rainbow0">}</span>;</pre>
+    <p><code class="highlit">popFront</code> is also \(Θ(\log n)\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

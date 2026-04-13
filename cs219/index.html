@@ -63,9 +63,12 @@
 <li><a href="#control-signals">control signals</a></li>
 <li><a href="#single-cycle-implementation">single cycle implementation</a></li>
 <li><a href="#multi-cycle-implementation">multi cycle implementation</a></li>
+<li><a href="#pipelining">pipelining</a><ul>
+<li><a href="#pipelining--forwarding">forwarding</a></li>
 </ul>
 </li>
-<li><a href="#2026-04-07">2026-04-07</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 <!-- toc skip -->
@@ -900,8 +903,53 @@ Clk -|≥__|</pre>
  fetch  dec  exec  dmem  write</pre>
     <p>here we target the longest unit time</p>
     <hr /> <!-- TODO incorporate?# */tmp.html  -->
-    <h1 id="2026-04-07">2026-04-07</h1>
+    <!-- toc skip -->
+    <h1>2026-04-07</h1>
     <p><code class="highlit">nop</code> is an operation that does nothing</p>
     <p>we can sove the hazards in pipeling by inserting it when needed. this is called <b>stalling</b>. a <b>dead cycle</b> is a cycle with some stalling (but possibly not <i>just</i> stalling</p>
+    <!-- toc skip -->
+    <h1>2026-04-09</h1>
+    <h2 id="pipelining">pipelining</h2>
+    <h3 id="pipelining--forwarding">forwarding</h3>
+    <p>instead of stalling we can <b>forward</b> data directly to where it is needed, so we do less waiting</p>
+    <ul>
+      <li>exe buffer to exe</li>
+      <li>mem buffer to mem</li>
+      <li>mem buffer to exe</li>
+    </ul>
+    <pre class="highlit">
+     1   2   3   4   5   6   7
+ i₁: F   D   E b┐M b W
+nop:     S   S  │S   S   S
+ i₂:         F  └D   E b M b W</pre>
+    <pre class="highlit">
+     1   2   3   4   5   6
+ i₁: F   D   E b┐M b┐W
+ i₂:     F   D  └E b│M b W
+ i₃:         F   D  └E b M b W</pre>
+    <p>can't fix everything though</p>
+    <pre class="highlit">
+lw <span class="builtin">$t0</span>, 4<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span>
+add <span class="builtin">$t2</span>, <span class="builtin">$t0</span>, <span class="builtin">$t3</span></pre>
+    <pre class="highlit">
+     1   2   3   4   5   6   7
+ lw: F   D   E b M b┐W
+                ┌─×─┘
+add:     F   D  └E b M b W</pre>
+    <pre class="highlit">
+lw <span class="builtin">$t0</span>, 4<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span>
+sw <span class="builtin">$t0</span>, 8<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span></pre>
+    <pre class="highlit">
+no forwarding:
+     1 2 3 4 5 6 7 8
+ lw: F D E M W
+nop:   S S S S S
+nop:     S S S S S
+ sw:       F D E M W</pre>
+    <pre class="highlit">
+forwarding:
+     1   2   3   4   5   6
+ lw: F   D   E b M b┐W
+ sw:     F   D   E b└M b W</pre>
   </body>
 </html>
