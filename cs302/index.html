@@ -56,6 +56,10 @@
 </ul>
 </li>
 <li><a href="#priority-queues">priority queues</a></li>
+<li><a href="#graph-theory">graph theory</a><ul>
+<li><a href="#graph-theory--depth-first-search-dfs">depth-first search / dfs</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 <h1 id="c-recap">c++ recap</h1>
@@ -709,6 +713,56 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
     <span class="rainbow1">}</span>
 <span class="rainbow0">}</span>;</pre>
     <p><code class="highlit">popFront</code> is also \(Θ(\log n)\)</p>
+    <h1 id="graph-theory">graph theory</h1>
+    <p>a <b>graph</b> \(G\) is a pair of</p>
+    <ul>
+      <li>a set \(V\) of vertices that look like \(vᵢ\)</li>
+      <li>a set \(E\) of edges that look like \(\set{vᵢ, vⱼ}\) between them</li>
+    </ul>
+    <p>it's a <b>directed graph</b> if \(E\) is instead a set of tuples \((vᵢ, vⱼ)\)</p>
+    <img src="digraph.png" />
+    <p>
+      for this graph, \[
+      \begin{align*}
+      V &= \set{0, 1, 2, 3, 4, 5, 6, 7}\\
+      E &= \set{(0, 1), (0, 2), (1, 6), (2, 3), (3, 4), (3, 5), (4, 0), (5, 6), (5, 7), (6, 3)}
+      \end{align*}
+      \]
+    </p>
+    <p>
+      a graph is <b>connected</b> if between any two nodes there is a path between them, and <b>unconnected</b> if
+      not
+    </p>
+    <p>
+      a graph is <b>sparse</b> if "it doesn't have many edges": \(\#E = Θ(\#V)\). if \(\#E = Θ\left((\#V)²\right)\)
+      it's <b>dense</b>
+    </p>
+    <p>there are two ways to store a graph</p>
+    <b>adjacency matrix</b>
+    <p>
+      \[
+      \begin{bmatrix}
+      - & 1 & 1 & 0 & 0 & 0 & 0 & 0\\
+      0 & - & 0 & 0 & 0 & 0 & 1 & 0\\
+      0 & 0 & - & 1 & 0 & 0 & 0 & 0\\
+      0 & 0 & 0 & - & 1 & 1 & 0 & 0\\
+      1 & 0 & 0 & 0 & - & 0 & 0 & 0\\
+      0 & 0 & 0 & 0 & 1 & - & 1 & 1\\
+      0 & 0 & 0 & 1 & 0 & 0 & - & 0\\
+      0 & 0 & 0 & 0 & 0 & 0 & 0 & -
+      \end{bmatrix}
+      \]
+    </p>
+    <dl>
+      <dt>adjacency list</dt>
+      <dd>a vector of linked lists</dd>
+    </dl>
+    <h2 id="graph-theory--depth-first-search-dfs">depth-first search / dfs</h2>
+    <p>this is like pre/post order traversal but for graphs</p>
+    <p>
+      when you arrive at a node, pick a neighbor (doesn't matter which) and go there. if there's a dead end, back up
+      to the last node you were at and try a different neighbor
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

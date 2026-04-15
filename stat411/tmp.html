@@ -48,6 +48,7 @@
 <li><a href="#ch6-continuous-probability-distributions--6-5-gamma-distribution">6.5 gamma distribution</a></li>
 </ul>
 </li>
+<li><a href="#ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</a></li>
 </ul>
 </nav>
 <h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
@@ -265,6 +266,48 @@
       </small>
     </p>
     <p>\(E(X) = αβ\) and \(\var(X) = αβ²\)</p>
+    <h1 id="ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</h1>
+    <dl>
+      <dt>random sample</dt>
+      <dd>
+        a sample of size \(n\) (\(X₁, X₂, …, Xₙ\)) with probability function \(f(x)\) where each \(Xᵢ\) are
+        independent and identically distributed (<b>iid</b>) with the population distribution
+      </dd>
+      <dt>statistic</dt>
+      <dd>function of random variables in a sample. since it varies from sample to sample, it's a random variable</dd>
+      <dt>sampling distribution</dt>
+      <dd>probability distibution of a statistic</dd>
+      <dt>law of large mnumbers (LLN)</dt>
+      <dd>
+        as \(n\) gets "large", a statistic approaches the parameter. eg \(x̄ → μ\) or
+        \(\lim_{n → ∞} \left|x̄ - μ\right| = 0\)
+      </dd>
+    </dl>
+    <p>\(\left|x̄ - μ\right|\) specifically is the <b>sampling error</b>, controllable by the sample size \(n\)</p>
+    <p>
+      for a sample \(X₁, X₂, …, Xₙ\) from a normal distribution \(N(μ, σ²)\), then the <i>sample mean</i> \(X̄\) is
+      normally distributed with \(E(X̄) ≡ μ_X̄ = μ\) and \(\var(X̄) ≡ σ_X̄² = \frac{σ²}n\)
+    </p>
+    <p>the <b>standard error</b> \(σ_X̄ = \fracσ{\sqrt n}\)</p>
+    <p>
+      if the population size is finite, we need to multiple the finite population correction, ie \(\var(X̄) =
+      \frac{σ²}n\left(\frac{N - n}{N - 1}\right)\)
+    </p>
+    <p>
+      for <i>any</i> random sample with sufficiently large \(n ≥ 25\), \(X̄\) is approximately normally distributed
+      with \(E(X̄) = μ_X̄ = μ\) and \(\var(X̄) = σ_X̄² = \frac{σ²}n\)
+    </p>
+    <p>
+      this is true no matter what the population distribution may be!!<br /><small>well as long as \(σ² < ∞\)</small>
+    </p>
+    <dl>
+      <dt>central limit theorem (CLT)</dt>
+      <dd>
+        \[
+        \lim_{n → ∞} P\left(\frac{X̄ - μ}{σ / \sqrt n}\right) = Φ(z)
+        \]
+      </dd>
+    </dl>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
