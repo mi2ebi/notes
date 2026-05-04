@@ -70,6 +70,10 @@
 </li>
 </ul>
 </li>
+<li>memory<ul>
+<li><a href="#cache">cache</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 <!-- toc skip -->
@@ -953,8 +957,49 @@ forwarding:
  lw: F   D   E b M b┐W
  sw:     F   D   E b└M b W</pre>
     <!-- toc skip -->
-    <h1>2026 04 14</h1>
+    <h1>2026-04-14</h1>
     <h3 id="pipelining--scheduling">scheduling</h3>
     <p>here we try to rearrange the instructions and add temporary registers</p>
+    <!-- toc skip -->
+    <h1>2026-04-21</h1>
+    <!-- toc fake label: memory -->
+    <p><b>volatile</b> memory is temporary</p>
+    <h2 id="cache">cache</h2>
+    <p>
+      to make common accesses faster we can <b>cache</b> them. what should get cached? things that are <i>spatially
+      local</i> and <i>temporally local</i>
+    </p>
+    <p>the cache's hit time should be ≪ the miss penalty</p>
+    <!-- toc skip -->
+    <h1>2026-04-28</h1>
+    <p>given a memory address which cache lines/blocks can it live in? types of cache:</p>
+    <ul>
+      <li>direct mapped with 1 word/block</li>
+      <li>direct mapped with multiword/block</li>
+      <li>set associativity: 2-way, 4-way, 8-way = fully associative</li>
+    </ul>
+    <p>
+      <b>set associative</b>: split the cache into sets each with <i>n</i> ways. an address maps to exactly one set
+      but can go in any of the <i>n</i> ways within it
+    </p>
+    <p>
+      <b>direct mapped</b>: each memory address maps to exactly 1 cache line. take some bits from th addr as an index
+      into the cache and thats where it lives. no searching, but suffers from conflict misses / <b>thrashing</b>.
+      this is set associative with <i>n</i> = 1
+    </p>
+    <p>
+      <b>fully associative</b>: set associative with <i>n</i> = total lines. a block can go in any cache line. on
+      lookup you need to compare the tag agianst every single line at the same time. no conflict misses, but really
+      expensive
+    </p>
+    <p>for 1 word/block dm a cache address is 32 bits and looks like</p>
+    <pre class="highlit">tag | index | byte offset</pre>
+    <p>byte offset is always 2 bits. tag and index size vary based on cache design</p>
+    <p>for multiword/block dm</p>
+    <pre class="highlit">tag | index | block offset | byte offset</pre>
+    <p>2<sup>block offset</sup> = # words/block. byte offset is log<sub>2</sub>(# bytes/block)</p>
+    <!-- toc skip -->
+    <h1>2026-04-30</h1>
+    <p>set associative cache is always 1 word/block</p>
   </body>
 </html>

@@ -49,6 +49,8 @@
 </ul>
 </li>
 <li><a href="#ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</a></li>
+<li><a href="#ch9-estimation">ch9 estimation</a></li>
+<li><a href="#ch10-testing">ch10 testing</a></li>
 </ul>
 </nav>
 <h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
@@ -129,8 +131,8 @@
       </tr>
       <tr>
         <td>multinomial<br />\(M(n; pᵢ)\)</td>
-        <td>\(p(x₁, …, xₖ) = \frac{n!}{∏ᵢ₌₁ᵏ xᵢ!} ∏ᵢ₌₁ᵏ pᵢ^{xᵢ}\)</td>
-        <td>\(∑ᵢ₌₁ᵏ xᵢ = n \\ ∑ᵢ₌₁ᵏ pᵢ = 1\)</td>
+        <td>\(p(x₁, …, xₖ) = \frac{n!}{∏\limitsᵢ₌₁ᵏ xᵢ!} ∏\limitsᵢ₌₁ᵏ pᵢ^{xᵢ}\)</td>
+        <td>\(∑\limitsᵢ₌₁ᵏ xᵢ = n \\ ∑\limitsᵢ₌₁ᵏ pᵢ = 1\)</td>
         <td>\(E(Xᵢ) = npᵢ\)</td>
         <td>
           \(
@@ -245,7 +247,7 @@
       \[
       \begin{align*}
       E(X)
-      &= ∫ₒ^∞ θ y \frac1θ e⁻ʸ θ \;dy \\
+      &= ∫₀^∞ θ y \frac1θ e⁻ʸ θ \;dy \\
       &= θ ∫₀^∞ ye⁻ʸ \;dy \\
       &= θ ∫₀^∞ y²⁻¹e⁻ʸ \;dy \\
       &= θ Γ(2) = θ
@@ -280,7 +282,7 @@
       <dt>law of large mnumbers (LLN)</dt>
       <dd>
         as \(n\) gets "large", a statistic approaches the parameter. eg \(x̄ → μ\) or
-        \(\lim_{n → ∞} \left|x̄ - μ\right| = 0\)
+        \({\lim\limits_{n → ∞} \left|x̄ - μ\right|} = 0\)
       </dd>
     </dl>
     <p>\(\left|x̄ - μ\right|\) specifically is the <b>sampling error</b>, controllable by the sample size \(n\)</p>
@@ -308,6 +310,94 @@
         \]
       </dd>
     </dl>
+    <h1 id="ch9-estimation">ch9 estimation</h1>
+    <dl>
+      <dt>estimator</dt>
+      <dd>formula used to estimate a parameter</dd>
+      <dt>estimate</dt>
+      <dd>a numerical value produced by an estimator. eg if a sample has \(X̄ = 162\) then \(μ̂ = 162\)</dd>
+    </dl>
+    <p>
+      a single numerical value is called a <b>point estimate</b>. the accuracy is evaluated by the
+      <i>margin of error</i>
+    </p>
+    <dl>
+      <dt>margin of error</dt>
+      <dd>\(±1.96σ\) or \(±1.96s\)</dd>
+    </dl>
+    <p>an estimator \(θ̂\) is <b>unbiased</b> for the parameter \(θ\) if \(E(θ̃) = θ\)</p>
+    <p>an estimator \(θ̂\) is more <b>efficient</b> than another estimator \(θ̃\) if \(\var(θ̂) ≤ {\var(θ̃)}\)</p>
+    <p>
+      we can also construct an interval around the point estimate that's likely to contain the real parameter.
+      for a \(N(μ, σ²)\),
+    </p>
+    <p>
+      \[
+      P\left(-z_{α/2} < \frac{X̄ - μ}{σ/\sqrt n} ≤ z_{α/2}\right) = 1 - α
+      \]\[
+      ⇔
+      P\left(X̄ - z_{α/2}\fracσ{\sqrt n} < μ ≤ X̄ + z_{α/2}\fracσ{\sqrt n}\right) = 1 - α
+      \]
+    </p>
+    <p>
+      when the sample is drawn from a population the interval is not random anymore. it it called the
+      \((1 - α) · 100\%\) <b>confidence interval</b> for \(μ\)
+      and given by
+    </p>
+    <p>
+      \[
+      \left]x̄ - z_{α/2} \fracσ{\sqrt n}, x̄ + z_{α/2} \fracσ{\sqrt n}\right[
+      \]
+    </p>
+    <p><mark>todo! slides!</mark></p>
+    <h1 id="ch10-testing">ch10 testing</h1>
+    <p>q: does a sample eg \(x̄ = μ̂\) show enough evidence to believe some statement about \(μ\)?</p>
+    <dl>
+      <dt>null hypothesis (\(H₀\))</dt>
+      <dd>the assumed-until-proven-otherwise fact that a hypothesis is false</dd>
+      <dt>alternative hypothesis (\(Hₐ\) or \(H₁\))</dt>
+      <dd>new evidence based on data about \(μ\)</dd>
+      <dt>type i error</dt>
+      <dd>\(α = P\left(\text{reject }H₀ \mathbin| H₀\text{ is true}\right)\)</dd>
+      <dd>false positive rate / <b>level of significance</b>. we want this as small as possible</dd>
+      <dt>type ii error</dt>
+      <dd>\(β = P\left(\text{¬reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
+      <dd>false negative rate</dd>
+      <dt>power of the test</dt>
+      <dd>\(1 - β = P\left(\text{reject} H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
+    </dl>
+    <p>how to test stuff:</p>
+    <ol>
+      <li><b>two hypotheses</b> \(H₀\) and \(H₁\)</li>
+      <li><b>test statistics</b>: use the statistic to find \(z\) orr \(t\)</li>
+      <li><b>critical value & rejection region</b> from \(α\)</li>
+      <li><b>make a statistical decision</b></li>
+      <li><b>draw a conclusion</b></li>
+    </ol>
+    <table>
+      <tr>
+        <th>test form</th>
+        <th><i>H</i><sub>0</sub></th>
+        <th><i>H</i><sub>1</sub></th>
+        <th>CV & RR</th>
+      </tr>
+      <tr>
+        <th scope="row">left-tailed</th>
+        <td rowspan="3">\(μ = μ₀\)</td>
+        <td>\(μ < μ₀\)</td>
+        <td>\(z < -z_α\)</td>
+      </tr>
+      <tr>
+        <th scope="row">right-tailed</th>
+        <td>\(μ > μ₀\)</td>
+        <td>\(z > z_α\)</td>
+      </tr>
+      <tr>
+        <th scope="row">two-tailed</th>
+        <td>\(μ ≠ μ₀\)</td>
+        <td>\(z < -z_{α/2}\) or \(z > z_{α/2}\)</td>
+      </tr>
+    </table>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

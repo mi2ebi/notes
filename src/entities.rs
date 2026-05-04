@@ -41,6 +41,7 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
     "&deg;" => '°',
     "&delta;" => 'δ',
     "&divide;" => '÷',
+    "&ell;" => 'ℓ',
     "&empty;" => '∅',
     "&epsilon;" => 'ε',
     "&equiv;" => '≡',

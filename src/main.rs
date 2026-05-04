@@ -41,7 +41,7 @@ impl Pipeline {
                 return false;
             }
         };
-        let mut converted = original.clone();
+        let mut converted = original;
         let mut changed = false;
         let mut okay = true;
         let entities_result = entities::replace(&converted);

@@ -58,6 +58,13 @@
 <li><a href="#priority-queues">priority queues</a></li>
 <li><a href="#graph-theory">graph theory</a><ul>
 <li><a href="#graph-theory--depth-first-search-dfs">depth-first search / dfs</a></li>
+<li><a href="#graph-theory--breadth-first-search-bfs">breadth-first search / bfs</a></li>
+<li><a href="#graph-theory--dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</a></li>
+<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</a><ul>
+<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm--union-find-structure">union-find structure</a></li>
+<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm--the-algorithm">the algorithm</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -734,7 +741,7 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
       not
     </p>
     <p>
-      a graph is <b>sparse</b> if "it doesn't have many edges": \(\#E = Θ(\#V)\). if \(\#E = Θ\left((\#V)²\right)\)
+      a graph is <b>sparse</b> if "it doesn't have many edges": \(e = Θ(v)\). if \(\#E = Θ\left(v²\right)\)
       it's <b>dense</b>
     </p>
     <p>there are two ways to store a graph</p>
@@ -763,6 +770,158 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
       when you arrive at a node, pick a neighbor (doesn't matter which) and go there. if there's a dead end, back up
       to the last node you were at and try a different neighbor
     </p>
+    <pre class="highlit">
+<span class="type">void</span> <span class="function">dfs</span><span class="rainbow0">(</span>
+  <span class="type">int</span> <span class="variable">current</span>,
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span>,
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">bool</span><span class="rainbow1">></span> <span class="type">&</span><span class="variable">visited</span>,
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="type">&</span><span class="variable">predecessors</span>
+<span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">if</span> <span class="rainbow1">(</span>visited<span class="rainbow2">[</span>current<span class="rainbow2">]</span><span class="rainbow1">)</span>
+    <span class="keyword">return</span>;
+  visited<span class="rainbow1">[</span>current<span class="rainbow1">]</span> = true;
+  cout << current << endl; <span class="comment">// preorder</span>
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">neighbor</span>: adjlist<span class="rainbow2">[</span>current<span class="rainbow2">]</span><span class="rainbow1">)</span>
+    <span class="keyword">if</span> <span class="rainbow2">(</span>!visited<span class="rainbow3">[</span>neighbor<span class="rainbow3">]</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
+      predecessors<span class="rainbow3">[</span>neighbor<span class="rainbow3">]</span> = current;
+      dfs<span class="rainbow3">(</span>neighbor, adjlist, visited, predecessors<span class="rainbow3">)</span>;
+    <span class="rainbow2">}</span>
+  <span class="keyword">return</span>; <span class="comment">// or postorder</span>
+<span class="rainbow0">}</span>
+<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
+  <span class="type">int</span> <span class="variable">v</span>;
+  cin >> v;
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">visited</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">predecessors</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
+  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = 0; i < v; i++<span class="rainbow1">)</span>
+    dfs<span class="rainbow2">(</span>i, adjlist, visited, predecessors<span class="rainbow2">)</span>;
+  <span class="keyword">return</span> 0;
+<span class="rainbow0">}</span></pre>
+    <p>
+      dfs will not find very good paths and is \(Θ(e + v) = Θ(e)\). can you🫵 see why?
+    </p>
+    <h2 id="graph-theory--breadth-first-search-bfs">breadth-first search / bfs</h2>
+    <p>wheee no recursion! finds all of the shortest paths between two nodes</p>
+    <p>since there's no recursion here we need a fifo queue to track what nodes we've looked at</p>
+    <pre class="highlit">
+<span class="type">void</span> <span class="function">bfs</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">s</span>, <span class="type">int</span> <span class="variable">v</span>, <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">predecessors</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">bool</span><span class="rainbow1">></span> <span class="variable">visited</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
+  <span class="type">queue</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">bfsq</span>;
+  visited<span class="rainbow1">[</span>s<span class="rainbow1">]</span> = true;
+  bfsq.push_back<span class="rainbow1">(</span>s<span class="rainbow1">)</span>;
+  <span class="keyword">while</span> <span class="rainbow1">(</span>!bfsq.empty<span class="rainbow2">()</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
+    <span class="type">int</span> <span class="variable">x</span> = bfsq.front<span class="rainbow2">()</span>;
+    bfsq.pop_front<span class="rainbow2">()</span>;
+    cout << x << endl;
+    <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">int</span> <span class="variable">y</span>: adjlist<span class="rainbow3">[</span>x<span class="rainbow3">]</span><span class="rainbow2">)</span>
+      <span class="keyword">if</span> <span class="rainbow3">(</span>!visited<span class="rainbow4">[</span>y<span class="rainbow4">]</span><span class="rainbow3">)</span> <span class="rainbow3">{</span>
+        visited<span class="rainbow4">[</span>y<span class="rainbow4">]</span> = true;
+        predecessors<span class="rainbow4">[</span>y<span class="rainbow4">]</span> = x;
+        bfsq.push_back<span class="rainbow4">(</span>y<span class="rainbow4">)</span>;
+      <span class="rainbow3">}</span>
+  <span class="rainbow1">}</span>
+<span class="rainbow0">}</span>
+<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
+  <span class="type">int</span> <span class="variable">v</span>;
+  cin >> v;
+  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span>;
+  bfs<span class="rainbow1">(</span>0, adjlist<span class="rainbow1">)</span>;
+  <span class="keyword">return</span> 0;
+<span class="rainbow0">}</span></pre>
+    <p>
+      putting each node on the queue takes \(Θ(e)\) time and examining each neighbor takes \(Θ(e)\) time. so bfs
+      is also \(Θ(e)\)
+    </p>
+    <h2 id="graph-theory--dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</h2>
+    <p>here we are given a graph with <b>weights</b>. and we do bfs on it!</p>
+    <pre class="highlit">
+<span class="function">dijkstra</span>(s, adjlist)
+  <span class="keyword">init</span> pq
+  <span class="keyword">init</span> π array
+  <span class="keyword">init</span> w array with ∞ for each element
+  push s.0 onto the pq
+  <span class="keyword">while</span> pq is not empty
+    pop x.v off the queue
+    <span class="keyword">for</span> each neighbor y of x
+      relax(x, y, π, pq)
+<span class="function">relax</span>(x, y, π, pq)
+  <span class="keyword">if</span> x.v + edgeweight(x, y) < y.v
+    y.v = x.v + edgeweight(x, y)
+    π[y] = x
+    update y in the pq</pre>
+    <p>
+      if there are any negative edge weights, dijkstra's doesn't work, because it is too greedy. even worse are
+      negative cycles because then the weight to get everywhere is \(-∞\) and <i>nothing</i> can solve that
+    </p>
+    <p>
+      runtime depends on how we implement the priority queue.
+    </p>
+    <ol>
+      <li>use an unsorted vector/umap as the pq:
+        <ul>
+          <li>popping the pq takes \(Θ(v)\) to linear search and it happens \(v\) times, so it's \(Θ(v²)\)</li>
+          <li>relaxing a neighbor is constant and there are \(e\) neighbors so this is \(Θ(e)\)</li>
+          <li>so \(Θ(v²)\) overall</li>
+        </ul>
+      </li>
+      <li>
+        using a binary min heap as the pq:
+        <ul>
+          <li>popping the pq takes \(Θ(\log v)\) and it's done \(Θ(v)\) times, so it's \(Θ(v\log v)\)</li>
+          <li>
+            relaxing a neighbor takes \(Θ(\log v)\) and there are \(e\) neighbors so this is \(Θ(e\log v)\)
+          </li>
+          <li>so \(Θ\left(e\log v\right)\) overall, because \(e = Ω(v)\)</li>
+        </ul>
+      </li>
+      <li>
+        using a fibonacci heap (only bubble up when popping) as the pq:
+        <ul>
+          <li>popping the pq is \(Θ(v\log v)\) again</li>
+          <li>relaxing a neighbor takes constant time and there are \(e\) neighbor so this is \(Θ(e)\)</li>
+          <li>so \(Θ(e + v \log v)\). best of both worlds!</li>
+        </ul>
+      </li>
+    </ol>
+    <h2 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</h2>
+    <p>also greedy. but what's a minimum spanning tree?</p>
+    <dl>
+      <dt>tree</dt>
+      <dd>a graph with exactly \(v - 1\) edges total where all the nodes are connected</dd>
+      <dt>spanning tree</dt>
+      <dd>a tree that spans a graph: goes through all the nodes and has no redundant edges</dd>
+      <dt>minimum spanning tree</dt>
+      <dd>given an undirected weighted graph, the spanning tree with minimal total weight</dd>
+    </dl>
+    <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--union-find-structure">union-find structure</h3>
+    <p>we have a predecessor array used to determine the leader of a group</p>
+    <pre>
+fn find(x) {leader[x] == x ? return x : return leader[x] = find(leader[x])} // compresses the path
+fn union(x, y) {
+  if x is in the bigger group
+    leader[y] = leader[x];
+  else
+    leader[x] = leader[y];
+}</pre>
+    <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--the-algorithm">the algorithm</h3>
+    <p>given a set \(E\) of weighted undirected edges</p>
+    <ul>
+      <li>insert the edges into a pq (binary min heap)</li>
+      <li>while the pq isn't empty:
+        <ul>
+          <li>pop edge \((x, y)\) off the pq</li>
+          <li>if \(\mathsf{find}(x) ≠ \mathsf{find}(y)\):
+            <ul>
+              <li>\(\mathsf{union}(x, y)\)</li>
+              <li>add \((x, y)\) to mst</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <p>this is \(O(e \log v)\) for some reason</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

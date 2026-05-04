@@ -14,9 +14,60 @@
     </style>
   </head>
   <body>
+    <!-- toc skip -->
     <h1 class="h0">stat 411</h1>
-    <h1>ch1 basics</h1>
-    <h2>1.1 intro/overview</h2>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li><a href="#ch1-basics">ch1 basics</a><ul>
+<li><a href="#ch1-basics--1-1-intro-overview">1.1 intro/overview</a><ul>
+<li><a href="#ch1-basics--1-1-intro-overview--history">history</a></li>
+</ul>
+</li>
+<li><a href="#ch1-basics--1-3-experiments-and-data">1.3 experiments and data</a></li>
+<li><a href="#ch1-basics--1-4-inferences">1.4 inferences</a></li>
+<li><a href="#ch1-basics--1-5-data">1.5 data</a><ul>
+<li><a href="#ch1-basics--1-5-data--places-to-get-data-from">places to get data from</a></li>
+</ul>
+</li>
+<li><a href="#ch1-basics--1-6-types-of-variables">1.6 types of variables</a></li>
+<li><a href="#ch1-basics--1-3-measures-of-central-tendency">1.3 measures of central tendency</a></li>
+<li><a href="#ch1-basics--1-4-measures-of-variability">1.4 measures of variability</a></li>
+<li><a href="#ch1-basics--1-10-empirical-rule-z-score">1.10 empirical rule & z-score</a></li>
+</ul>
+</li>
+<li><a href="#ch2-probability">ch2 probability</a><ul>
+<li><a href="#ch2-probability--2-1-intro">2.1 intro</a></li>
+<li><a href="#ch2-probability--2-2-set-operations">2.2 set operations</a></li>
+<li><a href="#ch2-probability--2-4-counting-sample-points">2.4 counting sample points</a></li>
+<li><a href="#ch2-probability--2-4-conditional-probability">2.4 conditional probability</a></li>
+<li><a href="#ch2-probability--2-6-contingency-table">2.6 contingency table</a></li>
+<li><a href="#ch2-probability--2-7-bayes-theorem">2.7 bayes' theorem</a></li>
+</ul>
+</li>
+<li><a href="#ch3-random-variables-and-their-probability-distributions">ch3 random variables and their probability distributions</a></li>
+<li><a href="#ch4-expectation-not-on-test">ch4 expectation (not on test!)</a><ul>
+<li><a href="#ch4-expectation-not-on-test--4-1-expected-value-of-random-variable">4.1 expected value of random variable</a></li>
+<li><a href="#ch4-expectation-not-on-test--4-2-expected-value-of-linear-combinations">4.2 expected value of linear combinations</a></li>
+<li><a href="#ch4-expectation-not-on-test--4-3-variance-of-random-variable">4.3 variance of random variable</a></li>
+<li><a href="#ch4-expectation-not-on-test--4-5-chebyshev-s-inequality">4.5 chebyshev's inequality</a></li>
+<li><a href="#ch4-expectation-not-on-test--3-4-joint-probability-distributions">3.4 joint probability distributions</a></li>
+</ul>
+</li>
+<li><a href="#ch5-discrete-probability-distributions">ch5 discrete probability distributions</a><ul>
+<li><a href="#ch5-discrete-probability-distributions--5-1-discrete-uniform-distribution">5.1 discrete uniform distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-2-binomial-distribution">5.2 binomial distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-3-multinominal-distribution">5.3 multinominal distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-4-hypergeometric-distribution">5.4 hypergeometric distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5 negative binomial distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-6-geometric-distribution">5.6 geometric distribution</a></li>
+<li><a href="#ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h1 id="ch1-basics">ch1 basics</h1>
+    <h2 id="ch1-basics--1-1-intro-overview">1.1 intro/overview</h2>
     <dl>
       <dt>statistics</dt>
       <dd>methods to collect/analyse/present/interpret data <i>inductively</i></dd>
@@ -34,7 +85,7 @@
       </li>
     </ol>
     <p>the generalisation from sample to population is <b>statistical inference</b></p>
-    <h3>history</h3>
+    <h3 id="ch1-basics--1-1-intro-overview--history">history</h3>
     <p>aristotle combined empiricism and rationalism</p>
     <p>see also <i lang="la">cōgitō ergō sum</i></p>
     <p>
@@ -46,9 +97,9 @@
       <cite>– popularised by mark twain</cite>
     </blockquote>
     <p>book rec: <i>how to lie with statistics</i></p>
-    <h2>1.3 experiments and data</h2>
+    <h2 id="ch1-basics--1-3-experiments-and-data">1.3 experiments and data</h2>
     <p>no two measurements are ever exactly the same</p>
-    <h2>1.4 inferences</h2>
+    <h2 id="ch1-basics--1-4-inferences">1.4 inferences</h2>
     <dl>
       <dt>population</dt>
       <dd>
@@ -75,7 +126,7 @@
       </ol></dd>
     </dl>
     <p><img src="sampling.png" /></p>
-    <h2>1.5 data</h2>
+    <h2 id="ch1-basics--1-5-data">1.5 data</h2>
     <dl>
       <dt>element/object/subject</dt>
       <dd>something we collect data about</dd>
@@ -84,7 +135,7 @@
       <dt>observation/measurement</dt>
       <dd>numerical values of a variable for an element</dd>
     </dl>
-    <h3>places to get data from</h3>
+    <h3 id="ch1-basics--1-5-data--places-to-get-data-from">places to get data from</h3>
     <p>census, survey, experiment, simulation, ...</p>
     <p>but to get scientific data we need 2 <b>statistical studies</b></p>
     <dl>
@@ -108,7 +159,7 @@
         <b>replication</b>, <b>randomization</b>, <b>blocking/blinding</b>
       </dd>
     </dl>
-    <h2>1.6 types of variables</h2>
+    <h2 id="ch1-basics--1-6-types-of-variables">1.6 types of variables</h2>
     <dl>
       <dt>quantitative variables</dt>
       <dd><b>discrete</b> – countable</dd>
@@ -128,7 +179,7 @@
       </li>
       <li><b>ratio</b> – there is a possible absolute zero</li>
     </ul>
-    <h2>1.3 measures of central tendency</h2>
+    <h2 id="ch1-basics--1-3-measures-of-central-tendency">1.3 measures of central tendency</h2>
     <p>if we have a random sample \(x₁, x₂, …, xₙ\) of size \(n\)</p>
     <dl>
       <dt>measure of central tendency</dt>
@@ -158,7 +209,7 @@
     <p>if the histogram is skewed to (has a longer tail on) the right, \(
       \text{mode} < x̃ < x̄
     \)</p>
-    <h2>1.4 measures of variability</h2>
+    <h2 id="ch1-basics--1-4-measures-of-variability">1.4 measures of variability</h2>
     <dl>
       <dt>range</dt>
       <dd>difference in the max and min of the dataset</dd>
@@ -213,7 +264,7 @@
       <dd>figure out what percentile an observation is</dd>
       <dd>\(100 · (\text{\# observations} < xᵢ) / n\)</dd>
     </dl>
-    <h2>1.10 empirical rule & z-score</h2>
+    <h2 id="ch1-basics--1-10-empirical-rule-z-score">1.10 empirical rule & z-score</h2>
     <dl>
       <dt>empirical rule</dt>
       <dd>
@@ -232,8 +283,8 @@
       <dd>converting \(xᵢ\) to \(zᵢ\) is called <b>standardization</b></dd>
       <dd>and \(xᵢ = x̄ + zᵢs\) for <b>destandardization</b></dd>
     </dl>
-    <h1>ch2 probability</h1>
-    <h2>2.1 intro</h2>
+    <h1 id="ch2-probability">ch2 probability</h1>
+    <h2 id="ch2-probability--2-1-intro">2.1 intro</h2>
     <dl>
       <dt>statistical experiment</dt>
       <dd>process of generating outcomes that cannot be predicted in advance</dd>
@@ -262,7 +313,7 @@
       <dt>tree diagram</dt>
       <dd>(pp37-38)</dd>
     </dl>
-    <h2>2.2 set operations</h2>
+    <h2 id="ch2-probability--2-2-set-operations">2.2 set operations</h2>
     <dl>
       <dt>empty set</dt>
       <dd>\(∅\), the set with nothing in it. \(P(∅) = 0\)</dd>
@@ -291,7 +342,7 @@
       <dd>\(\frac{P(A)}{P(A^∁)}\)</dd>
       <dd>result between 0 and \(∞\) exclusive</dd>
     </dl>
-    <h2>2.4 counting sample points</h2>
+    <h2 id="ch2-probability--2-4-counting-sample-points">2.4 counting sample points</h2>
     <dl>
       <dt>combinatorics</dt>
       <dd>study of enumeration</dd>
@@ -334,7 +385,7 @@
       eg there are \({11 \choose 4, 4, 2, 1} = 34650\) ways to rearrange the letters in
       "mississippi"
     </p>
-    <h2>2.4 conditional probability</h2>
+    <h2 id="ch2-probability--2-4-conditional-probability">2.4 conditional probability</h2>
     <p>the probability that \(A\) happens <b>given</b> \(B\) is \(
       P(A \mathbin| B) = \frac{P(A ∩ B)}{P(B)}
     \)</p>
@@ -353,7 +404,7 @@
     <p>two mutually exclusive events are always dependent</p>
     <img src="given-even.png" />
     <img src="given-leq7.png" />
-    <h2>2.6 contingency table</h2>
+    <h2 id="ch2-probability--2-6-contingency-table">2.6 contingency table</h2>
     <dl>
       <dt>contingency table</dt>
       <dd>a table containing all contingent events or categories</dd>
@@ -388,7 +439,7 @@
       P\left(\text{smoking} \middle| \text{bronchitis}^∁\right) = \frac12
     \)</p>
     <p>smoking and bronchitis are dependent because \(P(S) ≠ P(S \mathbin| B)\)</p>
-    <h2>2.7 bayes' theorem</h2>
+    <h2 id="ch2-probability--2-7-bayes-theorem">2.7 bayes' theorem</h2>
     <p>the events \(B₁, B₂, …, Bₖ\) <b>partition</b> a sample space \(S\) if</p>
     <ul>
       <li>\(Bᵢ ∩ Bⱼ = ∅\) for all \(i ≠ j\)</li>
@@ -407,7 +458,7 @@
       and \(P(Bᵢ)\) is the <b>prior</b> probability
     </p>
     <p>this tells us how to <b>update</b> \(P(Bᵢ)\) given the new information \(P(A)\)</p>
-    <h1>ch3 random variables and their probability distributions</h1>
+    <h1 id="ch3-random-variables-and-their-probability-distributions">ch3 random variables and their probability distributions</h1>
     <dl>
       <dt>random variable</dt>
       <dd>
@@ -529,8 +580,8 @@
       = \frac7{64}
       \]
     </p>
-    <h1>ch4 expectation <span style="color:var(--magenta-cooler)">(not on test!)</span></h1>
-    <h2>4.1 expected value of random variable</h2>
+    <h1 id="ch4-expectation-not-on-test">ch4 expectation <span style="color:var(--magenta-cooler)">(not on test!)</span></h1>
+    <h2 id="ch4-expectation-not-on-test--4-1-expected-value-of-random-variable">4.1 expected value of random variable</h2>
     <dl>
       <dt>expected value</dt>
       <dd>
@@ -558,7 +609,7 @@
       <dt><i>n</i>th moment</dt>
       <dd>\(E(Xⁿ) ≔ E\set{g(x)}\) where \(g : x ↦ xⁿ\)</dd>
     </dl>
-    <h2>4.2 expected value of linear combinations</h2>
+    <h2 id="ch4-expectation-not-on-test--4-2-expected-value-of-linear-combinations">4.2 expected value of linear combinations</h2>
     <p>
       let \(X\) and \(Y\) be random variables and \(a\) and \(b\) be any real constants. then
     </p>
@@ -568,7 +619,7 @@
       <li>\(E\set{g(X) ± h(Y)} = E\set{g(X)} ± E\set{h(Y)}\)</li>
     </ul>
     <p>expected value is another measure of central tendency</p>
-    <h2>4.3 variance of random variable</h2>
+    <h2 id="ch4-expectation-not-on-test--4-3-variance-of-random-variable">4.3 variance of random variable</h2>
     \(\gdef\var{\operatorname{var}}\gdef\stdev{\operatorname{stdev}}\)
     <p>
       the variance of a random variable \(X\) is given by
@@ -634,7 +685,7 @@
       \var(Y) = E(Y²) - μ² = \frac85 - \left(\frac76\right)² = \frac{43}{180} = 0.238̄
       \]
     </p>
-    <h2>4.5 chebyshev's inequality</h2>
+    <h2 id="ch4-expectation-not-on-test--4-5-chebyshev-s-inequality">4.5 chebyshev's inequality</h2>
     <p>
       for any random variable \(X\) having mean \(μ\) and variance \(σ²\),
       \[
@@ -652,7 +703,7 @@
       this provides the minimum probability that the random variable is within \(k\) standard deviations
       of \(μ\).
     </p>
-    <h2><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h2>
+    <h2 id="ch4-expectation-not-on-test--3-4-joint-probability-distributions"><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h2>
     <p>
       when a random variable indicates a single numerical response it is called <b>univariate</b>.
       when it could have more than one response it's called <b>multivariate</b>.
@@ -785,19 +836,19 @@
       <li>\(\var(aX ± bY) = a²\var(X) + b²\var(Y) ± 2ab\cov(X, Y)\)</li>
       <li>if they're independent \(E(XY) = E(X)E(Y)\)</li>
     </ul>
-    <h1>ch5 discrete probability distributions</h1>
+    <h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
     \(
     \gdef\Ber{\operatorname{Ber}}
     \gdef\bin{\operatorname{bin}}
     \)
-    <h2>5.1 discrete uniform distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-1-discrete-uniform-distribution">5.1 discrete uniform distribution</h2>
     <p>
       a random variable has a <b>discrete uniform distribution</b> if its pmf is given by \[
       P(X = x) = p(x) = \frac1k, \quad x = x₁, x₂, …, xₖ
       \]
     </p>
     <p>then \(E(X) = \frac1k ∑ᵢ₌₁ᵏ xₖ\) and \(\var(X) = \frac1k ∑ᵢ₌₁ᵏ (x - μ)²\)</p>
-    <h2>5.2 binomial distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-2-binomial-distribution">5.2 binomial distribution</h2>
     <p>
       if we have two mutually exclusive events with \(P(\text{success}) = p\) and
       \(P(\text{failure}) = 1 - p\). let \(X = 1\) if success and 0 otherwise. then the
@@ -834,12 +885,12 @@
     </ul>
     <p style="color: var(--green-faint)">cdfs are on book pp726-731</p>
     <p>what if there are more than 2 categories?...</p>
-    <h2>5.3 multinominal distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-3-multinominal-distribution">5.3 multinominal distribution</h2>
     <!--
-    <h2>5.4 hypergeometric distribution</h2>
-    <h2>5.5 negative binomial distribution</h2>
-    <h2>5.6 geometric distribution</h2>
-    <h2>5.7 poisson distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-4-hypergeometric-distribution">5.4 hypergeometric distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5 negative binomial distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-6-geometric-distribution">5.6 geometric distribution</h2>
+    <h2 id="ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</h2>
     -->
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
