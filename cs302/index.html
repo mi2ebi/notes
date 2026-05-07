@@ -67,6 +67,7 @@
 </li>
 </ul>
 </li>
+<li><a href="#final-review">final review</a></li>
 </ul>
 </nav>
 <h1 id="c-recap">c++ recap</h1>
@@ -897,14 +898,14 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
     </dl>
     <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--union-find-structure">union-find structure</h3>
     <p>we have a predecessor array used to determine the leader of a group</p>
-    <pre>
-fn find(x) {leader[x] == x ? return x : return leader[x] = find(leader[x])} // compresses the path
-fn union(x, y) {
-  if x is in the bigger group
-    leader[y] = leader[x];
-  else
-    leader[x] = leader[y];
-}</pre>
+    <pre class="highlit">
+<span class="keyword">fn</span> <span class="function">find</span><span class="rainbow0">(</span>x<span class="rainbow0">)</span> <span class="rainbow0">{</span>leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> == x ? <span class="keyword">return</span> x : <span class="keyword">return</span> leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> = find<span class="rainbow1">(</span>leader<span class="rainbow2">[</span>x<span class="rainbow2">]</span><span class="rainbow1">)</span><span class="rainbow0">}</span> <span class="comment">// compresses the path</span>
+<span class="keyword">fn</span> <span class="function">union</span><span class="rainbow0">(</span>x, y<span class="rainbow0">)</span> <span class="rainbow0">{</span>
+  <span class="keyword">if</span> x is in the bigger group
+    leader<span class="rainbow1">[</span>y<span class="rainbow1">]</span> = leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span>;
+  <span class="keyword">else</span>
+    leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> = leader<span class="rainbow1">[</span>y<span class="rainbow1">]</span>;
+<span class="rainbow0">}</span></pre>
     <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--the-algorithm">the algorithm</h3>
     <p>given a set \(E\) of weighted undirected edges</p>
     <ul>
@@ -922,6 +923,48 @@ fn union(x, y) {
       </li>
     </ul>
     <p>this is \(O(e \log v)\) for some reason</p>
+    <h1 id="final-review">final review</h1>
+    <ul>
+      <li>mostly t/f + short answer
+        <ul>
+          <li>lower bound for sorting and what it means</li>
+          <li>hashing
+            <ul>
+              <li>separate chaining vs open addressing</li>
+              <li>find/insert runtime</li>
+              <li>load factor, when to resize</li>
+              <li>compare to avl tree</li>
+            </ul>
+          </li>
+          <li>priority queues
+            <ul>
+              <li>push_back and pop_front runtimes</li>
+              <li>the tree is always balanced</li>
+              <li>why we use umaps for update()</li>
+              <li>binary min heaps need not be sorted arrays</li>
+            </ul>
+          </li>
+          <li>graph theory
+            <ul>
+              <li>sparse vs dense graphs</li>
+              <li>adjacency list vs matrix</li>
+              <li>dfs and bfs</li>
+              <li>how to use the predecessor array</li>
+              <li>dijkstra's: runtimes, negative edges/cycles</li>
+              <li>kruskal's: runtime, purpose</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>tracing things out
+        <ul>
+          <li>separate chaining or linear probing</li>
+          <li>push_back and pop_front for pq</li>
+          <li>dijkstra's</li>
+          <li>kruskal's</li>
+        </ul>
+      </li>
+    </ul>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
