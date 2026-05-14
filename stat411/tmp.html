@@ -50,7 +50,10 @@
 </li>
 <li><a href="#ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</a></li>
 <li><a href="#ch9-estimation">ch9 estimation</a></li>
-<li><a href="#ch10-testing">ch10 testing</a></li>
+<li><a href="#ch10-testing">ch10 testing</a><ul>
+<li><a href="#ch10-testing--testing-qualitative-categorical-data">testing qualitative/categorical data</a></li>
+</ul>
+</li>
 </ul>
 </nav>
 <h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
@@ -364,12 +367,12 @@
       <dd>\(β = P\left(\text{¬reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
       <dd>false negative rate</dd>
       <dt>power of the test</dt>
-      <dd>\(1 - β = P\left(\text{reject} H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
+      <dd>\(1 - β = P\left(\text{reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
     </dl>
     <p>how to test stuff:</p>
     <ol>
       <li><b>two hypotheses</b> \(H₀\) and \(H₁\)</li>
-      <li><b>test statistics</b>: use the statistic to find \(z\) orr \(t\)</li>
+      <li><b>test statistics</b>: use the statistic to find \(z\) or \(t\)</li>
       <li><b>critical value & rejection region</b> from \(α\)</li>
       <li><b>make a statistical decision</b></li>
       <li><b>draw a conclusion</b></li>
@@ -398,6 +401,28 @@
         <td>\(z < -z_{α/2}\) or \(z > z_{α/2}\)</td>
       </tr>
     </table>
+    <dl>
+      <dt><i>p</i>-value</dt>
+      <dd><u>observed</u> level of significance. = tail probability</dd>
+      <dd>small \(p\) value is evidence against the null hypothesis</dd>
+    </dl>
+    <h2 id="ch10-testing--testing-qualitative-categorical-data">testing qualitative/categorical data</h2>
+    <p>we want to count the frequencies of things! since all we have is just the \(k\) categories</p>
+    <p>
+      in 1900 karl pearson introduced the <b>chi-squared test</b>
+      \[
+      χ² = ∑ᵢ₌₁ᵏ \frac{\left(Oᵢ - Eᵢ\right)²}{Eᵢ}
+      \]
+      where \(Oᵢ\) is the observed frequency and \(Eᵢ\) is the expected frequency 
+    </p>
+    <p>it's small if it fits the expectation/model and large when it doesn't</p>
+    <p>\(χ²\) tests are <b>distribution-free</b></p>
+    <p>
+      we can test indpendence given an \(r\mathord× c\) contingency table. let<br />
+      \(fᵢⱼ =\) <u>observed</u> frequency for \(i\)th row and \(j\)th column<br />
+      \(eᵢⱼ =\) <u>expected</u> frequency<br />
+      d.f. \(= (r - 1)(c - 1)\)
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
