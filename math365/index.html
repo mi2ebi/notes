@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title>evie's notes</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+     .example{color:var(--magenta-warmer)}
+     math[display=block]{text-align:left;margin-left:40px}
+    </style>
+  </head>
+  <body>
+    <!-- toc skip -->
+    <h1 class="h0">math 365</h1>
+    <!-- toc here -->
+<nav class="toc">
+<ul>
+<li><a href="#ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</a><ul>
+<li><a href="#ch1-matrices-and-systems-of-linear-equations--motivation">motivation</a></li>
+<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+<h1 id="ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</h1>
+    <h2 id="ch1-matrices-and-systems-of-linear-equations--motivation">motivation</h2>
+    <p>solve for \(x\): \[10x + 20 = 15 → 10x = -5 → x = -\frac12\]</p>
+    <p>
+      solve for \(x, y\): \[
+      \left\{
+      \begin{align*}
+      2x + 10y &= 10\\
+      3x - y &= 25
+      \end{align*}
+      \right.
+      \]
+    </p>
+    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</h2>
+    <dl>
+      <dt>linear equation</dt>
+      <dd>
+        in \(n\) unknowns, an equaiton (that can be written) in the form \[a₁x₁ + a₂x₂ + … + aₙxₙ = b\]
+        where \(aᵢ\) and \(b\) are the given <b>coefficients</b>, and \(xᵢ\) are the <b>unknowns</b>
+      </dd>
+      <dt>system of linear equations</dt>
+      <dd>
+        a set of linear equations. an \((m × n)\) system has \(m\) linear equations and \(n\) unknowns
+        \[
+        \left\{
+        \begin{align*}
+        a₁₁x₁₁ + a₁₂x₁₂ + … + a₁ₙx₁ₙ &= b₁ \\
+        a₂₁x₂₁ + a₂₂x₂₂ + … + a₂ₙx₂ₙ &= b₂ \\
+        …& \\
+        aₘ₁xₘ₁ + aₘ₂xₘ₂ + … + aₘₙxₘₙ &= bₘ \\
+        \end{align*}
+        \right.
+        \]
+      </dd>
+    </dl>
+    <p>
+      <b class="example">ex.</b>
+      find two different solutions of \(3x₁ + ex₂ = 10\) and describe the solution set
+    </p>
+    <p>solving for \(x₁\) gives us \[x₁ = \frac{10}3 - \frac e3 x₂\]</p>
+    <p>for \(x₂ = 0\) we get \(x₁ = \frac{10}3\)</p>
+    <p>for \(x₂ = \frac{10}e\) we get \(x₁ = 0\)</p>
+    <p>the solution set is a line! with slope \(-\frac e3\) and “\(x₂\)-intercept” \(\frac{10}3\)</p>
+    <p>given a \((2 × 2)\) system of equations there are three possibilities:</p>
+    <ul>
+      <li>there's exactly 1 solution</li>
+      <li>there aren't any solutions (parallel)</li>
+      <li>there are infinitely many solutions (exact same line)</li>
+    </ul>
+    <p>a system is <b>consistent</b> if it has at least one solution and <b>inconsistent</b> if not</p>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true});</script>
+  </body>
+</html>
