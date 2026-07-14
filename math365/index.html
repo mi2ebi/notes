@@ -7,6 +7,7 @@
     <style>
      .example{color:var(--magenta-warmer)}
      math[display=block]{text-align:left;margin-left:40px}
+     dt,b{color:var(--blue-warmer)}
     </style>
   </head>
   <body>
@@ -16,42 +17,30 @@
 <nav class="toc">
 <ul>
 <li><a href="#ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</a><ul>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--motivation">motivation</a></li>
 <li><a href="#ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</a></li>
+<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</a></li>
 </ul>
 </li>
 </ul>
 </nav>
 <h1 id="ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</h1>
-    <h2 id="ch1-matrices-and-systems-of-linear-equations--motivation">motivation</h2>
-    <p>solve for \(x\): \[10x + 20 = 15 → 10x = -5 → x = -\frac12\]</p>
-    <p>
-      solve for \(x, y\): \[
-      \left\{
-      \begin{align*}
-      2x + 10y &= 10\\
-      3x - y &= 25
-      \end{align*}
-      \right.
-      \]
-    </p>
     <h2 id="ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</h2>
     <dl>
       <dt>linear equation</dt>
       <dd>
         in \(n\) unknowns, an equaiton (that can be written) in the form \[a₁x₁ + a₂x₂ + … + aₙxₙ = b\]
-        where \(aᵢ\) and \(b\) are the given <b>coefficients</b>, and \(xᵢ\) are the <b>unknowns</b>
+        where \(aᵢ\) are the given coefficients, \(xᵢ\) are the unknowns, \(b\) is the constant
       </dd>
-      <dt>system of linear equations</dt>
+      <dt>system of linear equations <span class="dbold">(also</span> linear system<span class="dbold">)</span></dt>
       <dd>
         a set of linear equations. an \((m × n)\) system has \(m\) linear equations and \(n\) unknowns
         \[
         \left\{
         \begin{align*}
-        a₁₁x₁₁ + a₁₂x₁₂ + … + a₁ₙx₁ₙ &= b₁ \\
-        a₂₁x₂₁ + a₂₂x₂₂ + … + a₂ₙx₂ₙ &= b₂ \\
+        a₁₁x₁ + a₁₂x₂ + … + a₁ₙxₙ &= b₁ \\
+        a₂₁x₁ + a₂₂x₂ + … + a₂ₙxₙ &= b₂ \\
         …& \\
-        aₘ₁xₘ₁ + aₘ₂xₘ₂ + … + aₘₙxₘₙ &= bₘ \\
+        aₘ₁x₁ + aₘ₂x₂ + … + aₘₙxₙ &= bₘ \\
         \end{align*}
         \right.
         \]
@@ -65,13 +54,120 @@
     <p>for \(x₂ = 0\) we get \(x₁ = \frac{10}3\)</p>
     <p>for \(x₂ = \frac{10}e\) we get \(x₁ = 0\)</p>
     <p>the solution set is a line! with slope \(-\frac e3\) and “\(x₂\)-intercept” \(\frac{10}3\)</p>
-    <p>given a \((2 × 2)\) system of equations there are three possibilities:</p>
+    <p>given a \((2 × 2)\) linear system of equations there are three possibilities:</p>
     <ul>
       <li>there's exactly 1 solution</li>
       <li>there aren't any solutions (parallel)</li>
       <li>there are infinitely many solutions (exact same line)</li>
     </ul>
     <p>a system is <b>consistent</b> if it has at least one solution and <b>inconsistent</b> if not</p>
+    <p>our goal is to write a system as something like \(ax = b\)</p>
+    <dl>
+      <dt>matrix</dt>
+      <dd>
+        an \((m × n)\) matrix is a rectangular array of the form
+        \[
+        \begin{bmatrix}
+        a₁₁ & a₁₂ & … & a₁ₙ\\
+        a₂₁ & a₂₂ & … & a₂ₙ\\
+        …\\
+        aₘ₁ & aₘ₂ & … & aₘₙ\\
+        \end{bmatrix}
+        \]
+        i.e. with \(m\) rows and \(n\) columns, where the \(aᵢⱼ\) are real numbers
+      </dd>
+    </dl>
+    <p>
+      <b class="example">ex.</b>
+      \(𝐀 = \begin{bmatrix}2 & 7 & 3\\ 5 & 6 & 4\end{bmatrix}\) is a \((2 × 3)\) matrix
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      display the \((2 × 3)\) matrix with coefficients \(a₁₁ = 6, a₁₂ = 3, a₁₃ = 7, a₂₁ = 0, a₂₂ = 2, a₂₃ = 4\)
+      \[𝐀 = \begin{bmatrix}6 & 3 & 7\\ 0 & 2 & 4\end{bmatrix}\]
+    </p>
+    <p>we can use matrices to represent linear systems!</p>
+    <p>
+      consider the system
+      \[
+      \left\{
+      \begin{align*}
+      x₁ + 3x₂ &= 6\\
+      2x₁ - x₂ &= 5
+      \end{align*}
+      \right.
+      \]
+    </p>
+    <p>let's just keep the coefficients and the constants</p>
+    <p>
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & 3 & 6\\
+      2 & -1 & 5
+      \end{array}
+      \right]
+      \]
+    </p>
+    <p>
+      the matrix just on the left of the line is the <b>coefficient matrix</b>. together with the other side it's an
+      <b>augmented matrix</b>
+    </p>
+    <p>
+      we want to rewrite the matrices so it's easy for us to solve. we'll need some <b>row operations</b> to use on
+      augmented matrices
+    </p>
+    <ol>
+      <li><b>\(Rᵢ ↔ Rⱼ\)</b> interchange two rows</li>
+      <li><b>\(kRᵢ\)</b> multiply a row by a nonzero scalar (real number)</li>
+      <li><b>\(Rᵢ + kRⱼ\)</b> add a constant multiple of row \(j\) to row \(i\)</li>
+    </ol>
+    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</h2>
+    <p>an \((m × n)\) matrix is in <b>echelon form</b> if</p>
+    <ol>
+      <li>all rows consisting entirely of zeros are grouped together at the bottom of the matrix</li>
+      <li>if every nonzero row, the leftmost nonzero entry is 1</li>
+      <li>
+        the leading entry (i.e. leftmost nonzero entry) of every nonzero row is to the right of the leading entry of
+        every row above
+      </li>
+    </ol>
+    <p>tl;dr “it looks like a staircase”</p>
+    <p>
+      there are multiple ways to get matrices into echelon form, and at-least-sometimes multiple echelon forms for a
+      given matrix
+    </p>
+    <p>
+      a matrix is in <b>reduced echelon form</b> if it's in echelon form <i>and</i> each column contiaining a leading
+      1 has zeros in all entries above that 1. <b class="example">eg</b>
+      \[
+      \left[
+      \begin{array}{ccc|c}
+      1 & 2 & 0 & 5\\
+      0 & 0 & 1 & 0\\
+      0 & 0 & 0 & 0
+      \end{array}
+      \right]
+      \]
+      corresponds to the consistent linear system
+      \[
+      \left\{
+      \begin{align*}
+      x₁ + 2x₂ &= 5\\
+      x₃ &= 0
+      \end{align*}
+      \right.
+      \]
+    </p>
+    <p>
+      now a system is inconsistent iff in reduced echelon form its last nonzero row is \(
+      \left[
+      \begin{array}{ccc|c}
+      \dots & 0 & 0 & 1
+      \end{array}
+      \right]
+      \)
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
