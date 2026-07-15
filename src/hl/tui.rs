@@ -4,13 +4,12 @@ use crossterm::{
     cursor,
     event::{self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers},
     execute, queue,
-    style::{self, Color, Print, SetBackgroundColor, SetForegroundColor},
-    terminal::{self, Clear, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
+    style::{Color, Print, SetBackgroundColor, SetForegroundColor},
+    terminal::{self, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
 };
 
 use crate::hl::{
     classes::{self, CLASSES},
-    selector::parse_selector,
     session::{Session, SpanKind},
 };
 
@@ -34,14 +33,13 @@ enum Action {
     Advance,
     Commit(SpanKind),
     Undo,
-    Tag,
     SaveBlock,
     DiscardBlock,
     QuitFile,
 }
 
 fn cursor_line(session: &Session) -> usize {
-    session.chars[..session.cursor()].iter().filter(|&&c| c == '\n').count()
+    session.chars[.. session.cursor()].iter().filter(|&&c| c == '\n').count()
 }
 
 fn run_inner(
@@ -70,13 +68,6 @@ fn run_inner(
                 }
             }
             Action::Undo => session.undo(),
-            Action::Tag => {
-                let input = prompt(stdout, "\\")?;
-                prev_cells.clear();
-                if let Some((open, tag_name)) = input.as_deref().and_then(parse_selector) {
-                    session.commit(SpanKind::Tag(open, tag_name));
-                }
-            }
             Action::SaveBlock => break,
             Action::DiscardBlock => {
                 return Ok(TuiResult::Discard);
@@ -97,10 +88,21 @@ fn read_event() -> io::Result<Action> {
         let action = match (code, modifiers) {
             (KeyCode::Right, _) => Action::Advance,
             (KeyCode::Char('u'), KeyModifiers::NONE) => Action::Undo,
-            (KeyCode::Char('\\'), KeyModifiers::NONE) => Action::Tag,
             (KeyCode::Enter, _) => Action::SaveBlock,
             (KeyCode::Char('c'), KeyModifiers::CONTROL) => Action::DiscardBlock,
             (KeyCode::Char(' '), KeyModifiers::NONE) => Action::Commit(SpanKind::Skip),
+            (KeyCode::Char('R' | 'r'), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
+                match read_prefixed_char()?.and_then(classes::rainbow_by_key) {
+                    Some(info) => Action::Commit(SpanKind::Styled(info)),
+                    None => continue,
+                }
+            }
+            (KeyCode::Char('H' | 'h'), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
+                match read_prefixed_char()?.and_then(classes::heading_by_key) {
+                    Some(info) => Action::Commit(SpanKind::Styled(info)),
+                    None => continue,
+                }
+            }
             (KeyCode::Char(ch), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
                 if let Some(info) = classes::by_key(ch) {
                     Action::Commit(SpanKind::Styled(info))
@@ -115,23 +117,32 @@ fn read_event() -> io::Result<Action> {
     }
 }
 
+fn read_prefixed_char() -> io::Result<Option<char>> {
+    loop {
+        let Event::Key(KeyEvent { code, kind: KeyEventKind::Press, .. }) = event::read()? else {
+            continue;
+        };
+        return Ok(match code {
+            KeyCode::Char(c) => Some(c),
+            _ => None,
+        });
+    }
+}
+
 #[derive(Clone, PartialEq)]
 enum CharStyle {
     Plain,
     Open,
     Bg(u8, u8, u8),
-    Tag(String),
     Cursor,
 }
 
 const TRAILING_C: (u8, u8, u8) = (0x98, 0x98, 0x98);
 const SELECTED_C: (u8, u8, u8) = (0x55, 0x5a, 0x66);
-const TAG_C: (u8, u8, u8) = (0x55, 0x2f, 0x5f);
 const CURSOR_C: (u8, u8, u8) = (0xff, 0x66, 0xff);
 const CURSOR_WS_C: (u8, u8, u8) = (0xff, 0x59, 0x59);
 const STATUS_C: (u8, u8, u8) = (0x83, 0xd7, 0xac);
 const KEYBINDS_C: (u8, u8, u8) = (0xb6, 0xa0, 0xff);
-const PROMPT_C: (u8, u8, u8) = (0x4a, 0xe2, 0xf0);
 
 #[derive(Clone, PartialEq)]
 struct Cell {
@@ -148,7 +159,6 @@ const fn style_bg(style: &CharStyle) -> Color {
     match style {
         CharStyle::Open => Color::Rgb { r: SELECTED_C.0, g: SELECTED_C.1, b: SELECTED_C.2 },
         CharStyle::Bg(r, g, b) => Color::Rgb { r: *r, g: *g, b: *b },
-        CharStyle::Tag(_) => Color::Rgb { r: TAG_C.0, g: TAG_C.1, b: TAG_C.2 },
         _ => Color::Reset,
     }
 }
@@ -177,8 +187,7 @@ const fn char_to_cell(ch: char, style: &CharStyle, trailing: bool) -> Cell {
         _ => Cell {
             ch,
             fg: match style {
-                CharStyle::Bg(_, _, _) => Color::Black,
-                CharStyle::Tag(_) => Color::White,
+                CharStyle::Bg(..) => Color::Black,
                 CharStyle::Cursor => Color::Rgb { r: CURSOR_C.0, g: CURSOR_C.1, b: CURSOR_C.2 },
                 _ => Color::Reset,
             },
@@ -235,8 +244,10 @@ fn build_frame(
         }
     }
     let keys = CLASSES.iter().map(|c| c.key).collect::<String>();
-    let bar =
-        format!("[{keys}]  [spc]r.skip [\\]tag  [u]undo  [ret]b.save  [^c]b.discard [^q]f.quit");
+    let bar = format!(
+        "[{keys}] [R0-8]rainbow [H1-6]heading  [spc]r.skip  [u]undo  [ret]b.save  [^c]b.discard \
+         [^q]f.quit"
+    );
     let bar_row = content_height as usize;
     for (col, ch) in bar.chars().take(width as usize).enumerate() {
         cells[bar_row * width as usize + col] = Cell {
@@ -256,7 +267,7 @@ fn build_frame(
     cells
 }
 
-#[allow(clippy::similar_names)]
+#[allow(clippy::similar_names, reason = "fg/bg")]
 fn emit_diff(
     stdout: &mut impl Write,
     new_cells: &[Cell],
@@ -308,10 +319,9 @@ fn render(
 ) -> io::Result<()> {
     let (width, height) = terminal::size()?;
     let mut char_styles = vec![CharStyle::Plain; session.chars.len()];
-    for span in &session.spans[..session.current] {
+    for span in &session.spans[.. session.current] {
         let style = match &span.kind {
             Some(SpanKind::Styled(c)) => CharStyle::Bg(c.bg.0, c.bg.1, c.bg.2),
-            Some(SpanKind::Tag(_, tag_name)) => CharStyle::Tag(tag_name.clone()),
             Some(SpanKind::Skip) | None => continue,
         };
         for cs in char_styles.iter_mut().take(span.end).skip(span.start) {
@@ -353,40 +363,4 @@ fn render(
         build_frame(session, &char_styles, &trailing, scroll_offset, width, height, status);
     emit_diff(stdout, &new_cells, prev_cells, width)?;
     stdout.flush()
-}
-
-fn prompt(stdout: &mut impl Write, prefix: &str) -> io::Result<Option<String>> {
-    let (_, height) = terminal::size()?;
-    let row = height - 1;
-    let mut input = String::new();
-    loop {
-        queue!(stdout, cursor::MoveTo(0, row), Clear(ClearType::CurrentLine))?;
-        queue!(
-            stdout,
-            SetForegroundColor(Color::Rgb { r: PROMPT_C.0, g: PROMPT_C.1, b: PROMPT_C.2 }),
-            style::Print(prefix),
-            SetForegroundColor(Color::Reset),
-            style::Print(&input),
-        )?;
-        queue!(stdout, cursor::Show)?;
-        stdout.flush()?;
-        let Event::Key(KeyEvent { code, .. }) = event::read()? else {
-            continue;
-        };
-        match code {
-            KeyCode::Enter => {
-                queue!(stdout, cursor::Hide)?;
-                return Ok(Some(input));
-            }
-            KeyCode::Esc => {
-                queue!(stdout, cursor::Hide)?;
-                return Ok(None);
-            }
-            KeyCode::Backspace => {
-                input.pop();
-            }
-            KeyCode::Char(c) => input.push(c),
-            _ => {}
-        }
-    }
 }

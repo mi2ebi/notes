@@ -19,7 +19,7 @@ static HEADING_RE: LazyLock<Regex> =
 static TOC_COMMENT_RE: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?s)<!--\s*toc\b(.*?)-->").unwrap());
 
-#[allow(clippy::struct_excessive_bools)]
+#[allow(clippy::struct_excessive_bools, reason = "flags")]
 pub struct Entry {
     pub effective_level: u8,
     pub display_text: String,
@@ -100,7 +100,7 @@ fn collect_entries(html: &str, toc_range: &std::ops::Range<usize>) -> Vec<Entry>
                 let slug_segment = d.id_segment.unwrap_or_else(|| slugify(&text));
                 let effective_level = d.level.unwrap_or(level);
                 let existing_id = ID_ATTR_RE
-                    .find(&html[attrs_start..attrs_end])
+                    .find(&html[attrs_start .. attrs_end])
                     .map(|id_m| (attrs_start + id_m.start(), attrs_start + id_m.end()));
                 entries.push(Entry {
                     effective_level,
@@ -163,7 +163,7 @@ pub fn process(html: &str) -> String {
         return html.to_owned();
     }
     let toc_m = TOC_HERE_RE.find(html).unwrap();
-    let toc_range = toc_m.start()..toc_m.end();
+    let toc_range = toc_m.start() .. toc_m.end();
     let mut entries = collect_entries(html, &toc_range);
     assign_slugs(&mut entries);
     let nav = build_nav(&entries);
@@ -183,7 +183,7 @@ pub fn process(html: &str) -> String {
     edits.sort_by_key(|e| e.0);
     let mut result = html.to_owned();
     for (start, end, replacement) in edits.into_iter().rev() {
-        result.replace_range(start..end, &replacement);
+        result.replace_range(start .. end, &replacement);
     }
     result
 }

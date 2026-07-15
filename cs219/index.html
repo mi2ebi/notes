@@ -4,6 +4,7 @@
     <title>cs 219</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
@@ -29,10 +30,10 @@
 <li><a href="#j-format-instructions">j-format instructions</a></li>
 <li><a href="#mips-to-hex">mips to hex</a></li>
 <li><a href="#logical-instructions">logical instructions</a><ul>
-<li><a href="#logical-instructions--and">and</a></li>
-<li><a href="#logical-instructions--or">or</a></li>
-<li><a href="#logical-instructions--nor">nor</a></li>
-<li><a href="#logical-instructions--not">not</a></li>
+<li><a href="#and">and</a></li>
+<li><a href="#or">or</a></li>
+<li><a href="#nor">nor</a></li>
+<li><a href="#not">not</a></li>
 </ul>
 </li>
 <li><a href="#32-bit-constants">32-bit constants</a></li>
@@ -43,7 +44,7 @@
 <li><a href="#multiplication">multiplication</a><ul>
 <li><a href="#multiplication--algorithm-1">algorithm 1</a></li>
 <li><a href="#multiplication--optimized-algorithm">optimized algorithm</a></li>
-<li><a href="#multiplication--booths-algorithm">booth's algorithm (signed!)</a></li>
+<li><a href="#booths-algorithm">booth's algorithm (signed!)</a></li>
 </ul>
 </li>
 <li><a href="#division">division</a><ul>
@@ -52,8 +53,8 @@
 </ul>
 </li>
 <li><a href="#floats">floats</a><ul>
-<li><a href="#floats--fp-addition-subtraction">fp addition/subtraction</a></li>
-<li><a href="#floats--fp-multiplication">fp multiplication</a></li>
+<li><a href="#fp-addition-subtraction">fp addition/subtraction</a></li>
+<li><a href="#fp-multiplication">fp multiplication</a></li>
 </ul>
 </li>
 </ul>
@@ -64,8 +65,8 @@
 <li><a href="#single-cycle-implementation">single cycle implementation</a></li>
 <li><a href="#multi-cycle-implementation">multi cycle implementation</a></li>
 <li><a href="#pipelining">pipelining</a><ul>
-<li><a href="#pipelining--forwarding">forwarding</a></li>
-<li><a href="#pipelining--scheduling">scheduling</a></li>
+<li><a href="#forwarding">forwarding</a></li>
+<li><a href="#scheduling">scheduling</a></li>
 </ul>
 </li>
 </ul>
@@ -80,12 +81,13 @@
 <h1>2026-01-20</h1>
 <!-- toc fake label: basic stuff -->
     <p>computers and brains are very similar!</p>
-    <pre class="highlit">        program
+    <pre class="highlit" id="hl-40d4cf8f94ca9c3c">        program
            v
 input > process > output
            v
         storage
 </pre>
+<script>color("hl-40d4cf8f94ca9c3c", [["        program\n           v\ninput > process > output\n           v\n        storage\n", null]]);</script>
     <h2 id="parts-of-computers">parts of computers</h2>
     <ul>
       <li>input eg keyboard/mouse</li>
@@ -225,9 +227,10 @@ input > process > output
       add <a href="https://www.felixcloutier.com/x86/add">tons of types of thing</a>
       with the same instruction. in risc there's just
     </p>
-<pre class="highlit"><span class="comment"># rd = rs + rt</span>
-<span class="function">add</span> <span class="variable">rd</span>, <span class="variable">rs</span>, <span class="variable">rt</span>
+<pre class="highlit" id="hl-b36a3c725a7c000f"># rd = rs + rt
+add rd, rs, rt
 </pre>
+<script>color("hl-b36a3c725a7c000f", [["# rd = rs + rt", "comment"],["\n", null],["add", "function"],[" ", null],["rd", "variable"],[", ", null],["rs", "variable"],[", ", null],["rt", "variable"],["\n", null]]);</script>
     <ol start="2">
       <li>smaller is faster</li>
     </ol>
@@ -239,10 +242,11 @@ input > process > output
       <li>make the common case fast</li>
     </ol>
     <p>storing stuff in registers is faster than going to main memory every time</p>
-<pre class="highlit"><span class="function">move</span> <span class="constant">$t0</span>, <span class="constant">$t1</span>
-<span class="comment"># is secretly</span>
-<span class="function">add</span> <span class="constant">$t0</span>, <span class="constant">$0</span>, <span class="constant">$t1</span>
+<pre class="highlit" id="hl-38c17c170379d1ea">move $t0, $t1
+# is secretly
+add $t0, $0, $t1
 </pre>
+<script>color("hl-38c17c170379d1ea", [["move", "function"],[" ", null],["$t0", "constant"],[", ", null],["$t1", "constant"],["\n", null],["# is secretly", "comment"],["\n", null],["add", "function"],[" ", null],["$t0", "constant"],[", ", null],["$0", "constant"],[", ", null],["$t1", "constant"],["\n", null]]);</script>
     <aside>
       <p>see also <a href="../cs218">cs218</a> for mips</p>
     </aside>
@@ -252,70 +256,88 @@ input > process > output
     <p>i) every instruction is 32 bits<br/>ii) minimal changes btwn instr formats</p>
     <h2 id="r-format-instructions">r-format instructions</h2>
     <p>used by the ALU</p>
-<pre class="highlit">6      5     5     5     5     6
+<pre class="highlit" id="hl-8139a0c60dafb2d2">6      5     5     5     5     6
 000000 00000 00000 00000 00000 000000
 opcode rs    rt    rd    shamt funct
 </pre>
+<script>color("hl-8139a0c60dafb2d2", [["6      5     5     5     5     6\n000000 00000 00000 00000 00000 000000\nopcode rs    rt    rd    shamt funct\n", null]]);</script>
     <p>risc has 32 registers so the registers each take up 5 bits</p>
-    <p><code class="highlit">shamt</code> is 'shift amount', used only for shl/shr, also 5 bits</p>
+    <p><code class="highlit" id="hl-7ee4c1c0b52f91e1">shamt</code>
+<script>color("hl-7ee4c1c0b52f91e1", [["shamt", null]]);</script> is 'shift amount', used only for shl/shr, also 5 bits</p>
     <h2 id="i-format-instructions">i-format instructions</h2>
-<pre class="highlit">6      5     5     16
+<pre class="highlit" id="hl-f794399e4a4fa0f6">6      5     5     16
 000000 00000 00000 0000000000000000
 opcode rs    rt    imm
 </pre>
-    <p><code class="highlit">rt</code> is sometimes a source and sometimes a destination</p>
+<script>color("hl-f794399e4a4fa0f6", [["6      5     5     16\n000000 00000 00000 0000000000000000\nopcode rs    rt    imm\n", null]]);</script>
+    <p><code class="highlit" id="hl-bc784e2372bc4a45-2">rt</code>
+<script>color("hl-bc784e2372bc4a45-2", [["rt", null]]);</script> is sometimes a source and sometimes a destination</p>
     <p>eg</p>
-<pre class="highlit"><span class="function">lw</span> <span class="constant">$s0</span>, <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$s2</span><span class="rainbow0">)</span>
+<pre class="highlit" id="hl-4f554cda0abfa105">lw $s0, 4($s2)
 </pre>
+<script>color("hl-4f554cda0abfa105", [["lw", "function"],[" ", null],["$s0", "constant"],[", ", null],["4", "constant"],["(", "rainbow0"],["$s2", "constant"],[")", "rainbow0"],["\n", null]]);</script>
     <ul>
-      <li><code class="constant">$s2</code> is <code class="highlit">rs</code>
-      <li><code class="constant">$s0</code> is <code class="highlit">rt</code>
-      <li><code class="constant">4</code> is the <i>offset</i> and goes in <code class="highlit">imm</code>
+      <li><code class="constant">$s2</code> is <code class="highlit" id="hl-669c9a3ab715610c">rs</code>
+<script>color("hl-669c9a3ab715610c", [["rs", null]]);</script>
+      <li><code class="constant">$s0</code> is <code class="highlit" id="hl-bc784e2372bc4a45">rt</code>
+<script>color("hl-bc784e2372bc4a45", [["rt", null]]);</script>
+      <li><code class="constant">4</code> is the <i>offset</i> and goes in <code class="highlit" id="hl-263502f225d03fa3">imm</code>
+<script>color("hl-263502f225d03fa3", [["imm", null]]);</script>
     </ul>
     <h2 id="j-format-instructions">j-format instructions</h2>
-<pre class="highlit">6      26
+<pre class="highlit" id="hl-7035835d9f04b902">6      26
 000000 00000000000000000000000000
 opcode imm/addr
 </pre>
+<script>color("hl-7035835d9f04b902", [["6      26\n000000 00000000000000000000000000\nopcode imm/addr\n", null]]);</script>
     <!-- toc skip -->
     <h1>2026-02-09</h1>
     <h2 id="mips-to-hex">mips to hex</h2>
     <!-- toc skip -->
-    <h3><code class="highlit">      <span class="function">add</span>
-      <span class="constant">$t2</span>,
-      <span class="constant">$t0</span>,
-      <span class="constant">$t1</span>
-    </code></h3>
+    <h3><code class="highlit" id="hl-df6f0c3e7adb8b34">      add
+      $t2,
+      $t0,
+      $t1
+    </code>
+<script>color("hl-df6f0c3e7adb8b34", [["      ", null],["add", "function"],["\n      ", null],["$t2", "constant"],[",\n      ", null],["$t0", "constant"],[",\n      ", null],["$t1", "constant"],["\n    ", null]]);</script></h3>
     <p>
       the opcode is always 0 for r-format instructions. instead every r-format
       instruction has a function number. <code class="function">add</code>'s is 32
     </p>
     <p><code class="constant">$t0</code> has a register number of 8 etc</p>
     <p>so our instruction in binary is</p>
-<pre class="highlit">000000 01000 01001 01010 00000 100000
+<pre class="highlit" id="hl-01651066ea3b4b03">000000 01000 01001 01010 00000 100000
 0      8     9     10    0     32
 </pre>
+<script>color("hl-01651066ea3b4b03", [["000000 01000 01001 01010 00000 100000\n0      8     9     10    0     32\n", null]]);</script>
     <p>and in hex this is</p>
-<pre class="highlit">0000 0001 0000 1001 0101 0000 0010 0000
+<pre class="highlit" id="hl-8901ba9ccbfd0227">0000 0001 0000 1001 0101 0000 0010 0000
 0    1    0    9    5    0    2    0
 </pre>
-    <p> = <code class="highlit">0x01095020</code></p>
+<script>color("hl-8901ba9ccbfd0227", [["0000 0001 0000 1001 0101 0000 0010 0000\n0    1    0    9    5    0    2    0\n", null]]);</script>
+    <p> = <code class="highlit" id="hl-74588cc5d20bcbdb">0x01095020</code>
+<script>color("hl-74588cc5d20bcbdb", [["0x01095020", null]]);</script></p>
     <!-- toc skip -->
-    <h3><code class="highlit">      <span class="function">sw</span>
-      <span class="constant">$s7</span>,
-      <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$t0</span><span class="rainbow0">)</span>
-    </code></h3>
+    <h3><code class="highlit" id="hl-d49ff08548cef63f">      sw
+      $s7,
+      4($t0)
+    </code>
+<script>color("hl-d49ff08548cef63f", [["      ", null],["sw", "function"],["\n      ", null],["$s7", "constant"],[",\n      ", null],["4", "constant"],["(", "rainbow0"],["$t0", "constant"],[")", "rainbow0"],["\n    ", null]]);</script></h3>
     <p><code class="function">sw</code>'s opcode is 43
-<pre class="highlit">101011 01000 10111 0000000000000100
+<pre class="highlit" id="hl-4356a51cc68b29be">101011 01000 10111 0000000000000100
 43     8     23    4
 </pre>
-<pre class="highlit">1010 1101 0001 0111 0000 0000 0000 0100
+<script>color("hl-4356a51cc68b29be", [["101011 01000 10111 0000000000000100\n43     8     23    4\n", null]]);</script>
+<pre class="highlit" id="hl-e1e446cf7c23f99b">1010 1101 0001 0111 0000 0000 0000 0100
 a    c    1    7    0    0    0    4
 </pre>
-    <p>= <code class="highlit">0xac170004</code></p>
+<script>color("hl-e1e446cf7c23f99b", [["1010 1101 0001 0111 0000 0000 0000 0100\na    c    1    7    0    0    0    4\n", null]]);</script>
+    <p>= <code class="highlit" id="hl-4329cb0d7ecdec01">0xac170004</code>
+<script>color("hl-4329cb0d7ecdec01", [["0xac170004", null]]);</script></p>
     <!-- toc skip -->
-    <h3><code class="highlit">      <span class="function">j</span> <span class="constant">0x10000</span>
-    </code></h3>
+    <h3><code class="highlit" id="hl-6c483c2dcea0b3d2">      j 0x10000
+    </code>
+<script>color("hl-6c483c2dcea0b3d2", [["      ", null],["j", "function"],[" ", null],["0x10000", "constant"],["\n    ", null]]);</script></h3>
     <p>how do you fit a 32 bit address into 26 bits? you don't!</p>
     <p>
       offset address = (label address − <code class="constant">$pc</code>) / 4
@@ -328,8 +350,9 @@ a    c    1    7    0    0    0    4
     <h1>2026-02-10</h1>
     <h2 id="logical-instructions">logical instructions</h2>
     <p>useful for extracting and inserting certain groups of bits</p>
-    <h3 id="logical-instructions--and" class="smcp">and</h3>
-    <p><code class="highlit"><span class="function">and</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
+    <h3 id="and" class="smcp">and</h3>
+    <p><code class="highlit" id="hl-eb0d6a7b5d659eb9">and rd, rs, rt</code>
+<script>color("hl-eb0d6a7b5d659eb9", [["and", "function"],[" ", null],["rd", "variable"],[", ", null],["rs", "variable"],[", rt", null]]);</script></p>
     <table>
       <tr>
         <th>A</th>
@@ -357,8 +380,9 @@ a    c    1    7    0    0    0    4
         <td>1</td>
       </tr>
     </table>
-    <h3 id="logical-instructions--or" class="smcp">or</h3>
-    <p><code class="highlit"><span class="function">or</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
+    <h3 id="or" class="smcp">or</h3>
+    <p><code class="highlit" id="hl-5f6ac697bdce5dff">or rd, rs, rt</code>
+<script>color("hl-5f6ac697bdce5dff", [["or", "function"],[" ", null],["rd", "variable"],[", ", null],["rs", "variable"],[", rt", null]]);</script></p>
     <table>
       <tr>
         <th>A</th>
@@ -386,8 +410,9 @@ a    c    1    7    0    0    0    4
         <td>1</td>
       </tr>
     </table>
-    <h3 id="logical-instructions--nor" class="smcp">nor</h3>
-    <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, rt</code></p>
+    <h3 id="nor" class="smcp">nor</h3>
+    <p><code class="highlit" id="hl-3cda9cf9a8fae70c">nor rd, rs, rt</code>
+<script>color("hl-3cda9cf9a8fae70c", [["nor", "function"],[" ", null],["rd", "variable"],[", ", null],["rs", "variable"],[", rt", null]]);</script></p>
     <p>= 1s complement of <span class="smcp">or</span></p>
     <table>
       <tr>
@@ -416,8 +441,9 @@ a    c    1    7    0    0    0    4
         <td>0</td>
       </tr>
     </table>
-    <h3 id="logical-instructions--not" class="smcp">not</h3>
-    <p><code class="highlit"><span class="function">nor</span> <span class="variable">rd</span>, <span class="variable">rs</span>, $0</code></p>
+    <h3 id="not" class="smcp">not</h3>
+    <p><code class="highlit" id="hl-c3a7d04a72742121">nor rd, rs, $0</code>
+<script>color("hl-c3a7d04a72742121", [["nor", "function"],[" ", null],["rd", "variable"],[", ", null],["rs", "variable"],[", $0", null]]);</script></p>
     <p>for integers ¬<i>x</i> = -<i>x</i> − 1</p>
     <table>
       <tr>
@@ -435,26 +461,35 @@ a    c    1    7    0    0    0    4
     </table>
     <!-- toc skip -->
     <h3 id="logical-instructions--logical-left-shift">logical left shift</h3>
-    <p><code class="highlit"><span class="function">sll</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
-    <p>eg <code class="highlit">0b00001001</code> ≪ 2 = <code class="highlit">0b00100100</code></p>
+    <p><code class="highlit" id="hl-194385148eda506f">sll rd, rt, shamt</code>
+<script>color("hl-194385148eda506f", [["sll", "function"],[" ", null],["rd", "variable"],[", ", null],["rt", "variable"],[", shamt", null]]);</script></p>
+    <p>eg <code class="highlit" id="hl-625542c27d38e8c0">0b00001001</code>
+<script>color("hl-625542c27d38e8c0", [["0b00001001", null]]);</script> ≪ 2 = <code class="highlit" id="hl-f41837a78415c98e-2">0b00100100</code>
+<script>color("hl-f41837a78415c98e-2", [["0b00100100", null]]);</script></p>
     <p>
       for unsigned integers this produces <i>rs</i> × 2<sup><i>shamt</i></sup>
     </p>
     <!-- toc skip -->
     <h3 id="logical-instructions--logical-right-shift">logical right shift</h3>
-    <p><code class="highlit"><span class="function">srl</span> <span class="variable">rd</span>, <span class="variable">rt</span>, shamt</code></p>
-    <p>eg <code class="highlit">0b10010001</code> ≫ 2 = <code class="highlit">0b00100100</code></p>
+    <p><code class="highlit" id="hl-3648ca1bf67c552e">srl rd, rt, shamt</code>
+<script>color("hl-3648ca1bf67c552e", [["srl", "function"],[" ", null],["rd", "variable"],[", ", null],["rt", "variable"],[", shamt", null]]);</script></p>
+    <p>eg <code class="highlit" id="hl-563c50d7567607a7">0b10010001</code>
+<script>color("hl-563c50d7567607a7", [["0b10010001", null]]);</script> ≫ 2 = <code class="highlit" id="hl-f41837a78415c98e">0b00100100</code>
+<script>color("hl-f41837a78415c98e", [["0b00100100", null]]);</script></p>
     <p>for unsigned integers this produces <i>rs</i> / 2<sup><i>shamt</i></sup></p>
     <h2 id="32-bit-constants">32-bit constants</h2>
     <p>
       most constants are small. i-format instructions can only handle 16-bit immediates
     </p>
-    <p>to put <code class="highlit">0x12345678</code> into <code class="highlit">$t0</code>, you write</p>
-<pre class="highlit"><span class="function">li</span> <span class="constant">$t0</span>, <span class="constant">0x12345678</span>
-<span class="comment"># is assembled into</span>
-<span class="function">lui</span> <span class="constant">$at</span>, <span class="constant">0x1234</span>       <span class="comment"># Load Upper Immediate</span>
-<span class="function">ori</span> <span class="constant">$t0</span>, <span class="constant">$at</span>, <span class="constant">0x5678</span>
+    <p>to put <code class="highlit" id="hl-3b0cdd7a33726b19">0x12345678</code>
+<script>color("hl-3b0cdd7a33726b19", [["0x12345678", null]]);</script> into <code class="highlit" id="hl-ff5c918fd5acf214">$t0</code>
+<script>color("hl-ff5c918fd5acf214", [["$t0", null]]);</script>, you write</p>
+<pre class="highlit" id="hl-890b22f185585d54">li $t0, 0x12345678
+# is assembled into
+lui $at, 0x1234       # Load Upper Immediate
+ori $t0, $at, 0x5678
 </pre>
+<script>color("hl-890b22f185585d54", [["li", "function"],[" ", null],["$t0", "constant"],[", ", null],["0x12345678", "constant"],["\n", null],["# is assembled into", "comment"],["\n", null],["lui", "function"],[" ", null],["$at", "constant"],[", ", null],["0x1234", "constant"],["       ", null],["# Load Upper Immediate", "comment"],["\n", null],["ori", "function"],[" ", null],["$t0", "constant"],[", ", null],["$at", "constant"],[", ", null],["0x5678", "constant"],["\n", null]]);</script>
     <!-- toc skip -->
 <h1>2026-02-12</h1>
 <!-- toc fake label: numbers and math algorithms -->
@@ -470,7 +505,9 @@ a    c    1    7    0    0    0    4
     <p>adding a positive and negative number will never overflow</p>
     <h2 id="multiplication">multiplication</h2>
     <p>multipying two <i>n</i>-digit number gives an up-to-(2<i>n</i>)-digit number! whatever will we do!</p>
-    <p>mips has 2 bonus registers <code class="highlit">hi</code> and <code class="highlit">lo</code> which together store a 64-bit number</p>
+    <p>mips has 2 bonus registers <code class="highlit" id="hl-ca23b62e9a832359">hi</code>
+<script>color("hl-ca23b62e9a832359", [["hi", null]]);</script> and <code class="highlit" id="hl-489cf11f0a40ed34">lo</code>
+<script>color("hl-489cf11f0a40ed34", [["lo", null]]);</script> which together store a 64-bit number</p>
     <p>multiplying individual bits is like an <span class="smcp">and</span> gate</p>
     <!-- toc skip -->
     <h1>2026-02-17</h1>
@@ -511,7 +548,7 @@ a    c    1    7    0    0    0    4
       <tr><td>4</td><td>0000'0110</td></tr>
     </table>
     <!-- toc id: booths-algorithm -->
-    <h3 id="multiplication--booths-algorithm">booth's algorithm (signed!)</h3>
+    <h3 id="booths-algorithm">booth's algorithm (signed!)</h3>
     <p>product is 2n bits, multiplicand and multiplier are n bits, plus a "booth bit" (bb)</p>
     <ol>
       <li>place the multiplier in the right half of the product, set bb = 0</li>
@@ -675,7 +712,9 @@ a    c    1    7    0    0    0    4
         </ol>
       </li>
     </ol>
-    <p>eg 6 ÷ 3 = <code class="highlit">0b0000'0110</code> ÷ <code class="highlit">0b0011</code>, expected quotient 2 remainder 0:</p>
+    <p>eg 6 ÷ 3 = <code class="highlit" id="hl-912831ad09d6488d">0b0000'0110</code>
+<script>color("hl-912831ad09d6488d", [["0b0000'0110", null]]);</script> ÷ <code class="highlit" id="hl-e8f0475452723284">0b0011</code>
+<script>color("hl-e8f0475452723284", [["0b0011", null]]);</script>, expected quotient 2 remainder 0:</p>
     <table>
       <tr><th>iter#</th><th>quotient</th><th>remainder</th></tr>
       <tr><td>0</td><td>0000</td><td>0000'0110</td></tr>
@@ -700,15 +739,17 @@ a    c    1    7    0    0    0    4
       <dd>64 bit (<code class="type">double</code>) → 16 decimal digit precision</dd>
     </dl>
     <p>single precision:</p>
-    <pre class="highlit">1    8          23
+    <pre class="highlit" id="hl-5dd4db34d06e90f4">1    8          23
 0    000'0000'0 000'0000'0000'0000'0000'0000
 sign exponent   mantissa</pre>
+<script>color("hl-5dd4db34d06e90f4", [["1    8          23\n0    000'0000'0 000'0000'0000'0000'0000'0000\nsign exponent   mantissa", null]]);</script>
     <p><i>x</i> = (-1)<sup><i>s</i></sup> × (1. ⧺ mantissa) × 2<sup>exp − bias</sup></p>
     <p>the exponents 00000000 and 11111111 are reserved</p>
     <p>the bias for single precision is 127</p>
     <p>eg -0.75 = -1.1 × 2<sup>-1</sup> so exp = 126</p>
-    <pre class="highlit">1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
-    <h3 id="floats--fp-addition-subtraction">fp addition/subtraction</h3>
+    <pre class="highlit" id="hl-0928fd36db7eb617">1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000</pre>
+<script>color("hl-0928fd36db7eb617", [["1 011'1111'0 100'0000'0000'0000'0000'0000 = 0x'bf40'0000", null]]);</script>
+    <h3 id="fp-addition-subtraction">fp addition/subtraction</h3>
     <ol>
       <li>align exponents: shift the significand of the smaller-exponent operand right until both exponents match</li>
       <li>add/subtract the significands</li>
@@ -722,7 +763,7 @@ sign exponent   mantissa</pre>
       <li>add: 1.000 + (-0.111) = 0.001 × 2<sup>-1</sup></li>
       <li>normalize: 0.001 × 2<sup>-1</sup> = 1.000 × 2<sup>-4</sup></li>
     </ol>
-    <h3 id="floats--fp-multiplication">fp multiplication</h3>
+    <h3 id="fp-multiplication">fp multiplication</h3>
     <ol>
       <li>add the biased exponents, then subtract the bias once since both already have it baked in: e<sub>1</sub> + e<sub>2</sub> − 127</li>
       <li>multiply the significands (including the implicit leading 1) as unsigned integers</li>
@@ -794,11 +835,12 @@ sign exponent   mantissa</pre>
       <dt>flipflop</dt>
       <dd>circuit with 2 possible states</dd>
     </dl>
-    <pre class="highlit">D flipflop: only triggers during the rising edge of the clock
+    <pre class="highlit" id="hl-be13d0c3dc8e9708">D flipflop: only triggers during the rising edge of the clock
       ___
   D -|   |- Q (output)
      |   |
 Clk -|≥__|</pre>
+<script>color("hl-be13d0c3dc8e9708", [["D flipflop: only triggers during the rising edge of the clock\n      ___\n  D -|   |- Q (output)\n     |   |\nClk -|≥__|", null]]);</script>
     <table>
       <tr>
         <th>D</th>
@@ -854,10 +896,11 @@ Clk -|≥__|</pre>
     <!-- toc skip -->
     <h1>2026-03-24</h1>
     <h2 id="single-cycle-implementation">single cycle implementation</h2>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-98c7f5e6913b3543">
  ________
 |        |________
 <---- single ----></pre>
+<script>color("hl-98c7f5e6913b3543", [[" ________\n|        |________\n\u003c---- single ---->", null]]);</script>
     <p>advantages:</p>
     <ul>
       <li>simple design</li>
@@ -902,63 +945,72 @@ Clk -|≥__|</pre>
       computers they're all the same clock rate
     </p>
     <h2 id="multi-cycle-implementation">multi cycle implementation</h2>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-56d1b8ee2e9c7493">
  __    __    __    __    __
 |  |__|  |__|  |__|  |__|  |__
  fetch  dec  exec  dmem  write</pre>
+<script>color("hl-56d1b8ee2e9c7493", [[" __    __    __    __    __\n|  |__|  |__|  |__|  |__|  |__\n fetch  dec  exec  dmem  write", null]]);</script>
     <p>here we target the longest unit time</p>
     <hr /> <!-- TODO incorporate?# */tmp.html  -->
     <!-- toc skip -->
     <h1>2026-04-07</h1>
-    <p><code class="highlit">nop</code> is an operation that does nothing</p>
+    <p><code class="highlit" id="hl-e17b668faa6beb61">nop</code>
+<script>color("hl-e17b668faa6beb61", [["nop", null]]);</script> is an operation that does nothing</p>
     <p>we can sove the hazards in pipeling by inserting it when needed. this is called <b>stalling</b>. a <b>dead cycle</b> is a cycle with some stalling (but possibly not <i>just</i> stalling</p>
     <!-- toc skip -->
     <h1>2026-04-09</h1>
     <h2 id="pipelining">pipelining</h2>
-    <h3 id="pipelining--forwarding">forwarding</h3>
+    <h3 id="forwarding">forwarding</h3>
     <p>instead of stalling we can <b>forward</b> data directly to where it is needed, so we do less waiting</p>
     <ul>
       <li>exe buffer to exe</li>
       <li>mem buffer to mem</li>
       <li>mem buffer to exe</li>
     </ul>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-cad18d42ce383d32">
      1   2   3   4   5   6   7
  i₁: F   D   E b┐M b W
 nop:     S   S  │S   S   S
  i₂:         F  └D   E b M b W</pre>
-    <pre class="highlit">
+<script>color("hl-cad18d42ce383d32", [["     1   2   3   4   5   6   7\n i₁: F   D   E b┐M b W\nnop:     S   S  │S   S   S\n i₂:         F  └D   E b M b W", null]]);</script>
+    <pre class="highlit" id="hl-e991e7bf448e2d8a">
      1   2   3   4   5   6
  i₁: F   D   E b┐M b┐W
  i₂:     F   D  └E b│M b W
  i₃:         F   D  └E b M b W</pre>
+<script>color("hl-e991e7bf448e2d8a", [["     1   2   3   4   5   6\n i₁: F   D   E b┐M b┐W\n i₂:     F   D  └E b│M b W\n i₃:         F   D  └E b M b W", null]]);</script>
     <p>can't fix everything though</p>
-    <pre class="highlit">
-lw <span class="builtin">$t0</span>, 4<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span>
-add <span class="builtin">$t2</span>, <span class="builtin">$t0</span>, <span class="builtin">$t3</span></pre>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-e89ea6609caf81ff">
+lw $t0, 4($t1)
+add $t2, $t0, $t3</pre>
+<script>color("hl-e89ea6609caf81ff", [["lw ", null],["$t0", "builtin"],[", 4", null],["(", "rainbow0"],["$t1", "builtin"],[")", "rainbow0"],["\nadd ", null],["$t2", "builtin"],[", ", null],["$t0", "builtin"],[", ", null],["$t3", "builtin"]]);</script>
+    <pre class="highlit" id="hl-62c773027e073202">
      1   2   3   4   5   6   7
  lw: F   D   E b M b┐W
                 ┌─×─┘
 add:     F   D  └E b M b W</pre>
-    <pre class="highlit">
-lw <span class="builtin">$t0</span>, 4<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span>
-sw <span class="builtin">$t0</span>, 8<span class="rainbow0">(</span><span class="builtin">$t1</span><span class="rainbow0">)</span></pre>
-    <pre class="highlit">
+<script>color("hl-62c773027e073202", [["     1   2   3   4   5   6   7\n lw: F   D   E b M b┐W\n                ┌─×─┘\nadd:     F   D  └E b M b W", null]]);</script>
+    <pre class="highlit" id="hl-ef5b8bf95a2c389b">
+lw $t0, 4($t1)
+sw $t0, 8($t1)</pre>
+<script>color("hl-ef5b8bf95a2c389b", [["lw ", null],["$t0", "builtin"],[", 4", null],["(", "rainbow0"],["$t1", "builtin"],[")", "rainbow0"],["\nsw ", null],["$t0", "builtin"],[", 8", null],["(", "rainbow0"],["$t1", "builtin"],[")", "rainbow0"]]);</script>
+    <pre class="highlit" id="hl-891b6d705e48c456">
 no forwarding:
      1 2 3 4 5 6 7 8
  lw: F D E M W
 nop:   S S S S S
 nop:     S S S S S
  sw:       F D E M W</pre>
-    <pre class="highlit">
+<script>color("hl-891b6d705e48c456", [["no forwarding:\n     1 2 3 4 5 6 7 8\n lw: F D E M W\nnop:   S S S S S\nnop:     S S S S S\n sw:       F D E M W", null]]);</script>
+    <pre class="highlit" id="hl-91d043aa3439b51a">
 forwarding:
      1   2   3   4   5   6
  lw: F   D   E b M b┐W
  sw:     F   D   E b└M b W</pre>
+<script>color("hl-91d043aa3439b51a", [["forwarding:\n     1   2   3   4   5   6\n lw: F   D   E b M b┐W\n sw:     F   D   E b└M b W", null]]);</script>
     <!-- toc skip -->
     <h1>2026-04-14</h1>
-    <h3 id="pipelining--scheduling">scheduling</h3>
+    <h3 id="scheduling">scheduling</h3>
     <p>here we try to rearrange the instructions and add temporary registers</p>
     <!-- toc skip -->
     <h1>2026-04-21</h1>
@@ -993,10 +1045,12 @@ forwarding:
       expensive
     </p>
     <p>for 1 word/block dm a cache address is 32 bits and looks like</p>
-    <pre class="highlit">tag | index | byte offset</pre>
+    <pre class="highlit" id="hl-56540ee7b7c02595">tag | index | byte offset</pre>
+<script>color("hl-56540ee7b7c02595", [["tag | index | byte offset", null]]);</script>
     <p>byte offset is always 2 bits. tag and index size vary based on cache design</p>
     <p>for multiword/block dm</p>
-    <pre class="highlit">tag | index | block offset | byte offset</pre>
+    <pre class="highlit" id="hl-6212ee6d2620e87a">tag | index | block offset | byte offset</pre>
+<script>color("hl-6212ee6d2620e87a", [["tag | index | block offset | byte offset", null]]);</script>
     <p>2<sup>block offset</sup> = # words/block. byte offset is log<sub>2</sub>(# bytes/block)</p>
     <!-- toc skip -->
     <h1>2026-04-30</h1>

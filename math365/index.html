@@ -25,11 +25,11 @@
 <nav class="toc">
 <ul>
 <li><a href="#ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</a><ul>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</a></li>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</a></li>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-3-consistent-linear-systems">1.3 consistent linear systems</a></li>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-5-matrix-operations">1.5 matrix operations</a><ul>
-<li><a href="#ch1-matrices-and-systems-of-linear-equations--1-5-matrix-operations--matrix-multiplication">matrix multiplication</a></li>
+<li><a href="#1-1-intro-to-matrices">1.1 intro to matrices</a></li>
+<li><a href="#1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</a></li>
+<li><a href="#1-3-consistent-linear-systems">1.3 consistent linear systems</a></li>
+<li><a href="#1-5-matrix-operations">1.5 matrix operations</a><ul>
+<li><a href="#matrix-multiplication">matrix multiplication</a></li>
 </ul>
 </li>
 </ul>
@@ -37,7 +37,7 @@
 </ul>
 </nav>
 <h1 id="ch1-matrices-and-systems-of-linear-equations">ch1 matrices and systems of linear equations</h1>
-    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-1-intro-to-matrices">1.1 intro to matrices</h2>
+    <h2 id="1-1-intro-to-matrices">1.1 intro to matrices</h2>
     <dl>
       <dt>linear equation</dt>
       <dd>
@@ -135,7 +135,7 @@
       <li><b>\(kRᵢ\)</b> multiply a row by a nonzero scalar (real number)</li>
       <li><b>\(Rᵢ + kRⱼ\)</b> add a constant multiple of row \(j\) to row \(i\)</li>
     </ol>
-    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</h2>
+    <h2 id="1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</h2>
     <p>an \((m × n)\) matrix is in <b>echelon form</b> if</p>
     <ol>
       <li>all rows consisting entirely of zeros are grouped together at the bottom of the matrix</li>
@@ -212,7 +212,7 @@
       if we treat this as an augmented matrix for a linear system, it's super easy to find the solution!
       \(x₁ = \frac12\), \(x₂ = -\frac12\), \(x₃ = 2\)
     </p>
-    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-3-consistent-linear-systems">1.3 consistent linear systems</h2>
+    <h2 id="1-3-consistent-linear-systems">1.3 consistent linear systems</h2>
     <p>here our goal is to find out as much information about the system as possible without actually solving it</p>
     <p>if \(m < n\) the linear system either is inconsistent or has infinitely many solutions</p>
     <dl>
@@ -223,7 +223,7 @@
       because \(x₁ = x₂ = ⋯ = xₘ = 0\) is always a solution to that, homogeneous linear systems are always
       consistent
     </p>
-    <h2 id="ch1-matrices-and-systems-of-linear-equations--1-5-matrix-operations">1.5 matrix operations</h2>
+    <h2 id="1-5-matrix-operations">1.5 matrix operations</h2>
     <p>
       two matrices \(𝐀\) and \(𝐁\) are equal if they have the same size \(m × n\) and all the entries \(aᵢⱼ\) and
       \(bᵢⱼ\) are the same
@@ -264,13 +264,13 @@
       + x₄\begin{bmatrix} 3\\ -1\\ 0\\ 1 \end{bmatrix}
       \]
     </p>
-    <h3 id="ch1-matrices-and-systems-of-linear-equations--1-5-matrix-operations--matrix-multiplication">matrix multiplication</h3>
+    <h3 id="matrix-multiplication">matrix multiplication</h3>
     <p>
       let \(𝐱 ∈ ℝⁿ\) and \(𝐀\) be an \(m × n\) matrix. we define the product \(𝐀𝐱\) to be the vector \[
       𝐀𝐱 = \begin{bmatrix}
       ∑ᵢ₌₁ⁿ a₁ᵢxᵢ\\
       ∑ᵢ₌₁ⁿ a₂ᵢxᵢ\\
-      \vdots\\
+      ⋮\\
       ∑ᵢ₌₁ⁿ aₘᵢxᵢ\\
       \end{bmatrix}
       \]

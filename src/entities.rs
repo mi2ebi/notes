@@ -1,7 +1,7 @@
 use std::sync::LazyLock;
 
 use fancy_regex::Regex as FancyRegex;
-use phf::phf_map;
+use phf::{phf_map, phf_set};
 use regex::Regex;
 
 pub static ENTITIES: phf::Map<&str, char> = phf_map! {
@@ -65,10 +65,10 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
     "&larr;" => '←',
     "&le;" => '≤',
     "&lsquo;" => '‘',
-
     "&ll;" => '≪',
     "&mdash;" => '—',
     "&micro;" => 'µ',
+    "&middot;" => '·',
     "&minus;" => '−',
     "&mu;" => 'μ',
     "&nabla;" => '∇',
@@ -114,19 +114,42 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
     "&zeta;" => 'ζ',
 };
 
+pub static STRUCTURAL: phf::Set<&str> =
+    phf_set!["&shy;", "&ensp;", "&emsp;", "&thinsp;", "&lt;", "&gt;", "&amp;"];
+
 static LT_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/!])").unwrap());
 static AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&amp;(?![a-zA-Z0-9#])").unwrap());
+static RAW_LT_RE: LazyLock<FancyRegex> =
+    LazyLock::new(|| FancyRegex::new("<(?=[a-zA-Z0-9/!])").unwrap());
+static RAW_AMP_RE: LazyLock<FancyRegex> =
+    LazyLock::new(|| FancyRegex::new("&(?=[a-zA-Z0-9#])").unwrap());
 
 static ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&[a-zA-Z]+;").unwrap());
+
+pub fn decode_basic(text: &str) -> String {
+    let text = text.replace("&gt;", ">");
+    let text = LT_RE.replace_all(&text, "<");
+    AMP_RE.replace_all(&text, "&").into_owned()
+}
+
+pub fn encode_basic(text: &str) -> String {
+    let text = RAW_AMP_RE.replace_all(text, "&amp;");
+    RAW_LT_RE.replace_all(&text, "&lt;").into_owned()
+}
+
+pub fn decode_basic_unconditional(text: &str) -> String {
+    text.replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&")
+}
 
 pub fn replace(text: &str) -> String {
     let text = ENTITY_RE.replace_all(text, |caps: &regex::Captures| {
         let entity = caps.get(0).unwrap().as_str();
+        if STRUCTURAL.contains(entity) {
+            return entity.to_owned();
+        }
         ENTITIES.get(entity).map_or_else(|| entity.to_owned(), |&c| c.to_string())
     });
-    let text = text.replace("&gt;", ">");
-    let text = LT_RE.replace_all(&text, "<");
-    AMP_RE.replace_all(&text, "&").into_owned()
+    decode_basic(&text)
 }

@@ -5,6 +5,7 @@ use regex::Regex;
 
 use crate::{
     colors::{RESET, YELLOW},
+    entities,
     tex::{self, fonts::FontMaps},
 };
 
@@ -48,21 +49,42 @@ pub fn process(
 static UNKNOWN_ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&([a-zA-Z]+);").unwrap());
 static UNCONVERTED_MACRO_RE: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"\\([a-zA-Z]+)").unwrap());
+static DEFINE_RE: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"\\(?:g?def|(?:re)?newcommand)\s*\{?\\([a-zA-Z]+)\}?").unwrap());
 
-pub fn warn_unknown(processed: &str, math_regions: &[String]) {
-    for caps in UNKNOWN_ENTITY_RE.captures_iter(processed) {
-        let entity = caps.get(0).unwrap().as_str();
-        if !matches!(entity, "&lt;" | "&gt;" | "&amp;") {
-            println!("  {YELLOW}unknown entity:{RESET} {entity}");
+fn locally_defined(math_regions: &[String]) -> std::collections::HashSet<String> {
+    let mut defined = std::collections::HashSet::new();
+    for content in math_regions {
+        for caps in DEFINE_RE.captures_iter(content) {
+            defined.insert(caps.get(1).unwrap().as_str().to_owned());
         }
     }
+    defined
+}
+
+pub fn warn_unknown(processed: &str, math_regions: &[String]) -> bool {
+    let mut warned = false;
+    for caps in UNKNOWN_ENTITY_RE.captures_iter(processed) {
+        let entity = caps.get(1).unwrap().as_str();
+        let full = format!("&{entity};");
+        if !entities::ENTITIES.contains_key(&full) && !entities::STRUCTURAL.contains(&full) {
+            println!("  {YELLOW}unknown entity:{RESET} {entity}");
+            warned = true;
+        }
+    }
+    let defined = locally_defined(math_regions);
     let mut seen = std::collections::HashSet::new();
     for content in math_regions {
         for caps in UNCONVERTED_MACRO_RE.captures_iter(content) {
             let name = caps.get(1).unwrap().as_str();
-            if !tex::STRUCTURAL.contains(name) && seen.insert(name.to_owned()) {
+            if !tex::STRUCTURAL.contains(name)
+                && !defined.contains(name)
+                && seen.insert(name.to_owned())
+            {
                 println!("  {YELLOW}unknown macro:{RESET} \\{name}");
+                warned = true;
             }
         }
     }
+    warned
 }

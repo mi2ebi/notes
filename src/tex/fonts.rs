@@ -87,7 +87,7 @@ static DIGIT: phf::Map<&str, char> = phf_map! {
 
 type Pred = fn(&str) -> bool;
 pub const FONT_PREDICATES: &[(&str, Pred)] = &[
-    ("boldsymbol", |n| n.contains("MATHEMATICAL BOLD ITALIC") && !n.contains("SANS-SERIF")),
+    ("mathbfit", |n| n.contains("MATHEMATICAL BOLD ITALIC") && !n.contains("SANS-SERIF")),
     ("mathbb", |n| n.contains("DOUBLE-STRUCK") && !n.contains("ITALIC")),
     ("mathfrak", |n| {
         (n.contains("MATHEMATICAL FRAKTUR") || n.contains("BLACK-LETTER")) && !n.contains("BOLD")
@@ -111,7 +111,7 @@ pub const FONT_PREDICATES: &[(&str, Pred)] = &[
 
 pub static FONT_ALIASES: phf::Map<&str, &str> = phf_map! {
     "Bbb" => "mathbb",
-    "bm" => "boldsymbol",
+    "bm" => "mathbfit",
     "bold" => "mathbf",
     "frak" => "mathfrak",
     "textbf" => "mathbf",
@@ -119,6 +119,7 @@ pub static FONT_ALIASES: phf::Map<&str, &str> = phf_map! {
     "textsf" => "mathsf",
     "texttt" => "mathtt",
 };
+
 fn extract_base_char(name: &str) -> Option<char> {
     let words: Vec<&str> = name.split_whitespace().collect();
     let last = *words.last()?;
@@ -171,20 +172,28 @@ static MATH_FONT_RE: LazyLock<FancyRegex> = LazyLock::new(|| {
     cmds.sort_by_key(|s| -s.len().cast_signed());
     let alts = cmds.iter().map(|c| regex::escape(c)).collect::<Vec<_>>().join("|");
     let char_class = r"[A-Za-z0-9\u{0391}-\u{03ff}\u{2202}\u{2207}]";
-    FancyRegex::new(&format!(r"\\({alts})\s*(?:\{{({char_class})\}}|({char_class})(?![A-Za-z]))"))
+    FancyRegex::new(&format!(r"\\({alts})\s*(?:\{{({char_class}+)\}}|({char_class})(?![A-Za-z]))"))
         .unwrap()
 });
 
 pub fn replace(text: &str, maps: &FontMaps) -> String {
     MATH_FONT_RE
         .replace_all(text, |caps: &FancyCaptures| {
-            let cmd = caps.get(1).unwrap();
-            let cmd = cmd.as_str();
+            let cmd = caps.get(1).unwrap().as_str();
             let canonical = FONT_ALIASES.get(cmd).copied().unwrap_or(cmd);
-            let ch = caps.get(2).or_else(|| caps.get(3)).unwrap().as_str().chars().next().unwrap();
-            maps.get(canonical)
-                .and_then(|m| m.get(&ch))
-                .map_or_else(|| caps.get(0).unwrap().as_str().to_owned(), |&s| s.to_string())
+            let whole = || caps.get(0).unwrap().as_str().to_owned();
+            let Some(map) = maps.get(canonical) else { return whole() };
+            caps.get(2).map_or_else(
+                || {
+                    let ch = caps.get(3).unwrap().as_str().chars().next().unwrap();
+                    map.get(&ch).map_or_else(whole, |&s| s.to_string())
+                },
+                |braced| {
+                    let converted: Option<String> =
+                        braced.as_str().chars().map(|c| map.get(&c).copied()).collect();
+                    converted.unwrap_or_else(whole)
+                },
+            )
         })
         .into_owned()
 }

@@ -1,6 +1,6 @@
 use phf::phf_set;
 
-pub static STRUCTURAL: phf::Set<&str> = phf_set! {
+pub static STRUCTURAL: phf::Set<&str> = phf_set![
     "Big",
     "Bigg",
     "Biggl",
@@ -34,6 +34,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set! {
     "def",
     "dfrac",
     "displaystyle",
+    "dprime",
     "end",
     "exp",
     "frac",
@@ -84,7 +85,9 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set! {
     "overset",
     "phantom",
     "pmatrix",
+    "prime",
     "quad",
+    "qprime",
     "qquad",
     "rangle",
     "rceil",
@@ -110,6 +113,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set! {
     "textrm",
     "textstyle",
     "tfrac",
+    "trprime",
     "underbrace",
     "underbracket",
     "underline",
@@ -122,18 +126,4 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set! {
     "widetilde",
     "xleftarrow",
     "xrightarrow",
-    // defined by me
-    "Be",
-    "Ber",
-    "Exp",
-    "Ga",
-    "HG",
-    "Geo","LN",
-    "NB",
-    "Poi",
-    "bin",
-    "corr",
-    "cov",
-    "stdev",
-    "var"
-};
+];

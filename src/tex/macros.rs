@@ -112,6 +112,7 @@ pub static MACROS: phf::Map<&str, char> = phf_map! {
     "varnothing" => '∅',
     "varsigma" => 'ς',
     "vartheta" => 'ϑ',
+    "vdots" => '⋮',
     "xi" => 'ξ',
     "zeta" => 'ζ',
 };

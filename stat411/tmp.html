@@ -35,31 +35,31 @@
 <ul>
 <li><a href="#stat-411">stat 411</a></li>
 <li><a href="#ch5-discrete-probability-distributions">ch5 discrete probability distributions</a><ul>
-<li><a href="#ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5  negative binomial distribution</a></li>
-<li><a href="#ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</a></li>
-<li><a href="#ch5-discrete-probability-distributions--giant-distribution-list">giant distribution list</a></li>
+<li><a href="#5-5-negative-binomial-distribution">5.5  negative binomial distribution</a></li>
+<li><a href="#5-7-poisson-distribution">5.7 poisson distribution</a></li>
+<li><a href="#giant-distribution-list">giant distribution list</a></li>
 </ul>
 </li>
 <li><a href="#ch6-continuous-probability-distributions">ch6 continuous probability distributions</a><ul>
-<li><a href="#ch6-continuous-probability-distributions--6-1-uniform-distribution">6.1 uniform distribution</a></li>
-<li><a href="#ch6-continuous-probability-distributions--6-2-normal-distribution">6.2 normal distribution</a></li>
-<li><a href="#ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using N to approximate bin</a></li>
-<li><a href="#ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</a></li>
-<li><a href="#ch6-continuous-probability-distributions--6-5-gamma-distribution">6.5 gamma distribution</a></li>
+<li><a href="#6-1-uniform-distribution">6.1 uniform distribution</a></li>
+<li><a href="#6-2-normal-distribution">6.2 normal distribution</a></li>
+<li><a href="#6-3-using-n-to-approximate-bin">6.3 using N to approximate bin</a></li>
+<li><a href="#6-4-exponential-distribution">6.4 exponential distribution</a></li>
+<li><a href="#6-5-gamma-distribution">6.5 gamma distribution</a></li>
 </ul>
 </li>
 <li><a href="#ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</a></li>
 <li><a href="#ch9-estimation">ch9 estimation</a></li>
 <li><a href="#ch10-testing">ch10 testing</a><ul>
-<li><a href="#ch10-testing--testing-qualitative-categorical-data">testing qualitative/categorical data</a></li>
+<li><a href="#testing-qualitative-categorical-data">testing qualitative/categorical data</a></li>
 </ul>
 </li>
 </ul>
 </nav>
 <h1 id="ch5-discrete-probability-distributions">ch5 discrete probability distributions</h1>
-    <h2 id="ch5-discrete-probability-distributions--5-5-negative-binomial-distribution">5.5  negative binomial distribution</h2>
+    <h2 id="5-5-negative-binomial-distribution">5.5  negative binomial distribution</h2>
     <p>this helps us find the number of trials needed for a certain amount of successes.</p>
-    <h2 id="ch5-discrete-probability-distributions--5-7-poisson-distribution">5.7 poisson distribution</h2>
+    <h2 id="5-7-poisson-distribution">5.7 poisson distribution</h2>
     <p>
       we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\),
       and take the limit:
@@ -81,7 +81,7 @@
       workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents
       are unlikely
     </p>
-    <h2 id="ch5-discrete-probability-distributions--giant-distribution-list">giant distribution list</h2>
+    <h2 id="giant-distribution-list">giant distribution list</h2>
     <table>
       <tr>
         <th>distribution</th>
@@ -147,7 +147,7 @@
       </tr>
     </table>
     <h1 id="ch6-continuous-probability-distributions">ch6 continuous probability distributions</h1>
-    <h2 id="ch6-continuous-probability-distributions--6-1-uniform-distribution">6.1 uniform distribution</h2>
+    <h2 id="6-1-uniform-distribution">6.1 uniform distribution</h2>
     <p>
       a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its
       pdf looks like
@@ -163,7 +163,7 @@
       E(X) = \frac{a + b}2 \qquad \var(X) = \frac1{12} (b - a)²
       \]
     </p>
-    <h2 id="ch6-continuous-probability-distributions--6-2-normal-distribution">6.2 normal distribution</h2>
+    <h2 id="6-2-normal-distribution">6.2 normal distribution</h2>
     <p>the bell shaped one!</p>
     <p>
       \[
@@ -195,13 +195,13 @@
       since it's not feasible to have tables for every possible normal distribution, we just have the one table for
       \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)
     </p>
-    <h2 id="ch6-continuous-probability-distributions--6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
+    <h2 id="6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
     <p>
       if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when
       \(np > 5\) and \(npq > 5\)
     </p>
     <p>you might need a <b>continuity correction</b> of adding/subtracting 0.5</p>
-    <h2 id="ch6-continuous-probability-distributions--6-4-exponential-distribution">6.4 exponential distribution</h2>
+    <h2 id="6-4-exponential-distribution">6.4 exponential distribution</h2>
     <p>for random phonemena involving time, eg device lifespan</p>
     <p>
       \[
@@ -232,7 +232,7 @@
     <p>
       a random variable is <b>memoryless</b> if \(P(X > s + t \mathbin| X > t) = P(X > s)\) for all \(s, t ≥ 0\)
     </p>
-    <h2 id="ch6-continuous-probability-distributions--6-5-gamma-distribution">6.5 gamma distribution</h2>
+    <h2 id="6-5-gamma-distribution">6.5 gamma distribution</h2>
     <p>the <b>gamma function</b> is \(Γ(k) = ∫₀^∞ yᵏ⁻¹e⁻ʸ \;dy\) and has properties</p>
     <ul>
       <li>\(Γ(k) = (k - 1)!\) for \(k ∈ ℕ₁\)</li>
@@ -406,7 +406,7 @@
       <dd><u>observed</u> level of significance. = tail probability</dd>
       <dd>small \(p\) value is evidence against the null hypothesis</dd>
     </dl>
-    <h2 id="ch10-testing--testing-qualitative-categorical-data">testing qualitative/categorical data</h2>
+    <h2 id="testing-qualitative-categorical-data">testing qualitative/categorical data</h2>
     <p>we want to count the frequencies of things! since all we have is just the \(k\) categories</p>
     <p>
       in 1900 karl pearson introduced the <b>chi-squared test</b>

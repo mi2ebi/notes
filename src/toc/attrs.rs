@@ -1,5 +1,5 @@
 #[derive(Default)]
-#[allow(clippy::struct_excessive_bools)]
+#[allow(clippy::struct_excessive_bools, reason = "flags")]
 pub struct TocAttrs {
     pub fake: bool,
     pub nolink: bool,
@@ -29,22 +29,22 @@ pub fn parse_attrs(s: &str) -> TocAttrs {
         }
         let key_end =
             rest.find(|c: char| c.is_ascii_whitespace() || c == ':').unwrap_or(rest.len());
-        let key = &rest[..key_end];
+        let key = &rest[.. key_end];
         if key.is_empty() {
             break;
         }
-        rest = &rest[key_end..];
+        rest = &rest[key_end ..];
         if rest.starts_with(':') {
-            rest = &rest[1..];
+            rest = &rest[1 ..];
             if rest.starts_with(' ') {
-                rest = &rest[1..];
+                rest = &rest[1 ..];
                 let (val, remaining) = parse_multiword(rest);
                 set_value_attr(&mut attrs, key, val);
                 rest = remaining;
             } else {
                 let val_end = rest.find(|c: char| c.is_ascii_whitespace()).unwrap_or(rest.len());
-                set_value_attr(&mut attrs, key, &rest[..val_end]);
-                rest = &rest[val_end..];
+                set_value_attr(&mut attrs, key, &rest[.. val_end]);
+                rest = &rest[val_end ..];
             }
         } else {
             match key {
@@ -75,7 +75,7 @@ pub fn parse_multiword(s: &str) -> (&str, &str) {
         if bytes[i] == b' ' && i + 1 < s.len() && bytes[i + 1] == b';' {
             let after = i + 2;
             if after >= s.len() || bytes[after] != b' ' {
-                return (&s[..i], &s[after..]);
+                return (&s[.. i], &s[after ..]);
             }
         }
         i += 1;

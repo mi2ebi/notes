@@ -6,8 +6,9 @@ use std::{
 
 use glob::glob;
 use notes::{
+    aside, boilerplate,
     colors::{CYAN, GREEN, RED, RESET, YELLOW},
-    entities, hl, math,
+    entities, hl, html, math,
     tex::{
         self,
         accents::COMBINING,
@@ -28,22 +29,30 @@ struct Pipeline {
     no_hl: bool,
 }
 
+struct RunResult {
+    changed: bool,
+    okay: bool,
+    had_warnings: bool,
+}
+
 impl Pipeline {
-    fn run(&self, path: &PathBuf, check: bool) -> bool {
+    fn run(&self, path: &PathBuf, check: bool) -> RunResult {
         if !path.exists() {
             println!("  {YELLOW}skipping:{RESET} doesn't exist");
-            return false;
+            return RunResult { changed: false, okay: false, had_warnings: true };
         }
         let original = match std::fs::read_to_string(path) {
             Ok(s) => s.replace("\r\n", "\n"),
             Err(e) => {
                 println!("  {RED}reading error:{RESET} {e}");
-                return false;
+                return RunResult { changed: false, okay: false, had_warnings: true };
             }
         };
         let mut converted = original;
         let mut changed = false;
         let mut okay = true;
+        let mut had_warnings = false;
+
         let entities_result = entities::replace(&converted);
         if entities_result != converted {
             println!("  {GREEN}entities done{RESET}");
@@ -57,10 +66,17 @@ impl Pipeline {
             &self.unicode.subscripts,
             &self.unicode.negations,
         );
-        math::warn_unknown(&math_result, &math_regions);
+        had_warnings |= math::warn_unknown(&math_result, &math_regions);
         if math_result != converted {
             println!("  {GREEN}math done{RESET}");
             converted = math_result;
+            changed = true;
+        }
+        if let Some(new_html) =
+            boilerplate::ensure_temml(&converted, path, !math_regions.is_empty())
+        {
+            println!("  {GREEN}temml include added{RESET}");
+            converted = new_html;
             changed = true;
         }
         let toc_result = toc::process(&converted);
@@ -69,17 +85,32 @@ impl Pipeline {
             converted = toc_result;
             changed = true;
         }
+        let aside_result = aside::process(&converted);
+        if aside_result != converted {
+            println!("  {GREEN}aside done{RESET}");
+            converted = aside_result;
+            changed = true;
+        }
+        had_warnings |= html::warn_missing_alt(&converted);
         if check {
             if changed {
                 println!("  {CYAN}not writing the file due to `--check`{RESET}");
             }
-            return changed;
+            return RunResult { changed, okay, had_warnings };
         }
         if !self.no_hl {
             match hl::process_file(path, &converted) {
                 Ok(hl_result) => {
                     if hl_result != converted {
                         converted = hl_result;
+                        changed = true;
+                    }
+                    let needs_color = converted.contains("<script>color(");
+                    if let Some(new_html) =
+                        boilerplate::ensure_highlight_js(&converted, path, needs_color)
+                    {
+                        println!("  {GREEN}highlight.js include added{RESET}");
+                        converted = new_html;
                         changed = true;
                     }
                 }
@@ -97,7 +128,7 @@ impl Pipeline {
                 okay = false;
             }
         }
-        changed && okay
+        RunResult { changed, okay, had_warnings }
     }
 }
 
@@ -105,6 +136,15 @@ fn hash_bytes(data: &[u8]) -> u64 {
     let mut h = DefaultHasher::new();
     data.hash(&mut h);
     h.finish()
+}
+
+fn is_build_artifact(path: &std::path::Path) -> bool {
+    path.components().any(|c| match c {
+        std::path::Component::Normal(s) => {
+            s == "target" || s.to_str().is_some_and(|s| s.starts_with('.'))
+        }
+        _ => false,
+    })
 }
 
 fn main() {
@@ -120,7 +160,7 @@ fn main() {
                 println!("{RED}glob error:{RESET} {e}");
                 std::process::exit(1);
             }
-            Ok(paths) => paths.filter_map(Result::ok).collect(),
+            Ok(paths) => paths.filter_map(Result::ok).filter(|p| !is_build_artifact(p)).collect(),
         }
     } else {
         paths
@@ -164,8 +204,12 @@ fn main() {
     let mut any_changes = false;
     for path in &files {
         println!("{}", path.display());
-        if pipeline.run(path, check) {
+        let result = pipeline.run(path, check);
+        if result.changed && result.okay {
             any_changes = true;
+        }
+        if !result.changed && !result.had_warnings && result.okay {
+            print!("\x1b[A\r\x1b[K");
         }
     }
     println!("{GREEN}done{RESET}");
@@ -193,7 +237,10 @@ fn main() {
                         }
                         last_seen.insert(path.clone(), hash);
                         println!("{}", path.display());
-                        pipeline.run(path, false);
+                        let result = pipeline.run(path, false);
+                        if !result.changed && !result.had_warnings && result.okay {
+                            print!("\x1b[A\r\x1b[K");
+                        }
                         if let Ok(new_content) = std::fs::read(path) {
                             last_seen.insert(path.clone(), hash_bytes(&new_content));
                         }

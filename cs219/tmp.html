@@ -4,6 +4,7 @@
     <title>cs 219</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
@@ -13,7 +14,7 @@
 <ul>
 <li>the processor, cont'd<ul>
 <li><a href="#pipelining">pipelining</a><ul>
-<li><a href="#pipelining--hazards">hazards</a></li>
+<li><a href="#hazards">hazards</a></li>
 </ul>
 </li>
 </ul>
@@ -44,7 +45,7 @@
     </ul>
     <p>buuuuut moving stuff between the washer and dryer takes time! (<b>overhead</b>)</p>
     <p>we want CPI to be as close to 1 as possible</p>
-    <h3 id="pipelining--hazards">hazards</h3>
+    <h3 id="hazards">hazards</h3>
     <p>pipelining does come with <b>hazards</b>, eg the same processor unit can't be used twice in the same cycle</p>
     <dl>
       <dt>control hazard</dt>
@@ -66,37 +67,44 @@
     </p>
     <p>mips has 32 registers but usually we only need up to 19 of them (s0-7, t0-9, zero)</p>
     <p>if you have eg</p>
-    <pre class="highlit">
-<span class="function">lw</span> <span class="constant">$t0</span>, <span class="constant">4</span><span class="rainbow0">(</span><span class="constant">$t1</span><span class="rainbow0">)</span>
-<span class="function">add</span> <span class="constant">$t3</span>, <span class="constant">$t0</span>, <span class="constant">$s0</span></pre>
+    <pre class="highlit" id="hl-61fc1a476d957220">
+lw $t0, 4($t1)
+add $t3, $t0, $s0</pre>
+<script>color("hl-61fc1a476d957220", [["lw", "function"],[" ", null],["$t0", "constant"],[", ", null],["4", "constant"],["(", "rainbow0"],["$t1", "constant"],[")", "rainbow0"],["\n", null],["add", "function"],[" ", null],["$t3", "constant"],[", ", null],["$t0", "constant"],[", ", null],["$s0", "constant"]]);</script>
     <p>then with pipelining...</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-ab694ade107cde9f">
      1 2 3 4 5 6
 lw:  F D E M W
 add:   F D E M W</pre>
+<script>color("hl-ab694ade107cde9f", [["     1 2 3 4 5 6\nlw:  F D E M W\nadd:   F D E M W", null]]);</script>
     <p>in cycle 5, <code class="function highlit">lw</code> is writing into <code class="constant highlit">$t0</code>. but <code class="function highlit">add</code> reads the <b>garbage</b> value of the register in cycle 3! this is a <b>RaW data hazard</b></p>
     <p>or:</p>
-    <pre class="highlit">
-<span class="function">sub</span> <span class="constant">$t4</span>, <span class="constant">$t5</span>, <span class="constant">$t3</span>
-<span class="function">add</span> <span class="constant">$t5</span>, <span class="constant">$t2</span>, <span class="constant">$t3</span></pre>
+    <pre class="highlit" id="hl-80e1d12799b3f239">
+sub $t4, $t5, $t3
+add $t5, $t2, $t3</pre>
+<script>color("hl-80e1d12799b3f239", [["sub", "function"],[" ", null],["$t4", "constant"],[", ", null],["$t5", "constant"],[", ", null],["$t3", "constant"],["\n", null],["add", "function"],[" ", null],["$t5", "constant"],[", ", null],["$t2", "constant"],[", ", null],["$t3", "constant"]]);</script>
     <p><code class="constant highlit">$t3</code> is being read both times, which isn't a problem. RaR isn't a hazard</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-84fd0eba05be1a80-2">
      1 2 3 4 5 6
 sub: F D E M W
 add:   F D E M W</pre>
+<script>color("hl-84fd0eba05be1a80-2", [["     1 2 3 4 5 6\nsub: F D E M W\nadd:   F D E M W", null]]);</script>
     <p><code class="function highlit">sub</code> cycle 2 needs to read <code class="constant highlit">$t5</code>. <code class="function highlit">add</code> cycle 6 needs to write to it. this isn't a problem for either of these instructions. but if there's a third instruction it might be! it's not a <b>threat</b> but it is a <b>WaR hazard</b></p>
     <p>or:</p>
-    <pre class="highlit">
-<span class="function">sub</span> <span class="constant">$t6</span>, <span class="constant">$t5</span>, <span class="constant">$t3</span>
-<span class="function">add</span> <span class="constant">$t6</span>, <span class="constant">$t2</span>, <span class="constant">$t3</span></pre>
+    <pre class="highlit" id="hl-c0be59edcc280400">
+sub $t6, $t5, $t3
+add $t6, $t2, $t3</pre>
+<script>color("hl-c0be59edcc280400", [["sub", "function"],[" ", null],["$t6", "constant"],[", ", null],["$t5", "constant"],[", ", null],["$t3", "constant"],["\n", null],["add", "function"],[" ", null],["$t6", "constant"],[", ", null],["$t2", "constant"],[", ", null],["$t3", "constant"]]);</script>
     <p>again <code class="constant highlit">$t3</code> is being read both times which is ok.</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-84fd0eba05be1a80">
      1 2 3 4 5 6
 sub: F D E M W
 add:   F D E M W</pre>
+<script>color("hl-84fd0eba05be1a80", [["     1 2 3 4 5 6\nsub: F D E M W\nadd:   F D E M W", null]]);</script>
     <p>this is also not a threat, but it is a <b>WaW hazard</b></p>
     <p>the rest of class was a review for test2</p>
-    <p>reference sheet covers: r/i/j format instructions; alu opcodes (<code class="highlit">10</code> for <code class="function highlit">addi</code> etc); formulas for ET and IL; some number prefixes</p>
+    <p>reference sheet covers: r/i/j format instructions; alu opcodes (<code class="highlit" id="hl-265b950d8d18f451">10</code>
+<script>color("hl-265b950d8d18f451", [["10", null]]);</script> for <code class="function highlit">addi</code> etc); formulas for ET and IL; some number prefixes</p>
   </body>
 </html>
  

@@ -4,6 +4,7 @@
     <title>cs 302</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
@@ -12,37 +13,37 @@
 <nav class="toc">
 <ul>
 <li><a href="#c-recap">c++ recap</a><ul>
-<li><a href="#c-recap--linked-lists">linked lists</a></li>
+<li><a href="#linked-lists">linked lists</a></li>
 </ul>
 </li>
 <li><a href="#algorithms">algorithms</a><ul>
-<li><a href="#algorithms--asymptotic-complexity-classes">asymptotic complexity classes</a><ul>
-<li><a href="#algorithms--asymptotic-complexity-classes--big-o">big O</a></li>
-<li><a href="#algorithms--asymptotic-complexity-classes--big-ω">big Ω</a></li>
-<li><a href="#algorithms--asymptotic-complexity-classes--big-θ">big Θ</a></li>
-<li><a href="#algorithms--asymptotic-complexity-classes--logs">logs</a></li>
-<li><a href="#algorithms--asymptotic-complexity-classes--calculus">calculus</a></li>
+<li><a href="#asymptotic-complexity-classes">asymptotic complexity classes</a><ul>
+<li><a href="#big-o">big O</a></li>
+<li><a href="#big-ω">big Ω</a></li>
+<li><a href="#big-θ">big Θ</a></li>
+<li><a href="#logs">logs</a></li>
+<li><a href="#calculus">calculus</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="#searching">searching</a><ul>
-<li><a href="#searching--linear-search">linear search</a></li>
-<li><a href="#searching--binary-search">binary search</a></li>
+<li><a href="#linear-search">linear search</a></li>
+<li><a href="#binary-search">binary search</a></li>
 </ul>
 </li>
 <li><a href="#some-loops">some loops</a></li>
 <li><a href="#sorting">sorting</a><ul>
-<li><a href="#sorting--insertion-sort">insertion sort</a></li>
-<li><a href="#sorting--merge-sort">merge sort</a></li>
-<li><a href="#sorting--quicksort">quicksort</a></li>
-<li><a href="#sorting--lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</a></li>
+<li><a href="#insertion-sort">insertion sort</a></li>
+<li><a href="#merge-sort">merge sort</a></li>
+<li><a href="#quicksort">quicksort</a></li>
+<li><a href="#lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</a></li>
 </ul>
 </li>
 <li><a href="#binary-trees">binary trees</a><ul>
-<li><a href="#binary-trees--traversing">traversing</a></li>
+<li><a href="#traversing">traversing</a></li>
 <li><a href="#binary-trees--searching">searching</a></li>
-<li><a href="#binary-trees--height">height</a></li>
+<li><a href="#height">height</a></li>
 </ul>
 </li>
 <li><a href="#binary-search-trees">binary search trees</a><ul>
@@ -51,33 +52,33 @@
 </li>
 <li><a href="#avl-trees">avl trees</a></li>
 <li><a href="#maps">maps</a><ul>
-<li><a href="#maps--unordered-maps">unordered maps</a></li>
-<li><a href="#maps--counting-duplicates">counting duplicates</a></li>
+<li><a href="#unordered-maps">unordered maps</a></li>
+<li><a href="#counting-duplicates">counting duplicates</a></li>
 </ul>
 </li>
 <li><a href="#hash-maps">hash maps</a><ul>
-<li><a href="#hash-maps--separate-chaining">separate chaining</a><ul>
-<li><a href="#hash-maps--separate-chaining--expected-runtime">expected runtime</a></li>
+<li><a href="#separate-chaining">separate chaining</a><ul>
+<li><a href="#separate-chaining--expected-runtime">expected runtime</a></li>
 </ul>
 </li>
-<li><a href="#hash-maps--open-addressing">open addressing</a><ul>
-<li><a href="#hash-maps--open-addressing--expected-runtime">expected runtime</a></li>
+<li><a href="#open-addressing">open addressing</a><ul>
+<li><a href="#open-addressing--expected-runtime">expected runtime</a></li>
 </ul>
 </li>
-<li><a href="#hash-maps--deletion">deletion</a></li>
-<li><a href="#hash-maps--resizing">resizing</a></li>
-<li><a href="#hash-maps--other-open-addressing-methods">other open addressing methods</a></li>
-<li><a href="#hash-maps--comparisons">comparisons</a></li>
+<li><a href="#deletion">deletion</a></li>
+<li><a href="#resizing">resizing</a></li>
+<li><a href="#other-open-addressing-methods">other open addressing methods</a></li>
+<li><a href="#comparisons">comparisons</a></li>
 </ul>
 </li>
 <li><a href="#priority-queues">priority queues</a></li>
 <li><a href="#graph-theory">graph theory</a><ul>
-<li><a href="#graph-theory--depth-first-search-dfs">depth-first search / dfs</a></li>
-<li><a href="#graph-theory--breadth-first-search-bfs">breadth-first search / bfs</a></li>
-<li><a href="#graph-theory--dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</a></li>
-<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</a><ul>
-<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm--union-find-structure">union-find structure</a></li>
-<li><a href="#graph-theory--kruskal-s-minimum-spanning-tree-algorithm--the-algorithm">the algorithm</a></li>
+<li><a href="#depth-first-search-dfs">depth-first search / dfs</a></li>
+<li><a href="#breadth-first-search-bfs">breadth-first search / bfs</a></li>
+<li><a href="#dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</a></li>
+<li><a href="#kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</a><ul>
+<li><a href="#union-find-structure">union-find structure</a></li>
+<li><a href="#the-algorithm">the algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -86,7 +87,7 @@
 </ul>
 </nav>
 <h1 id="c-recap">c++ recap</h1>
-    <h2 id="c-recap--linked-lists">linked lists</h2>
+    <h2 id="linked-lists">linked lists</h2>
     <p>each node of a (doubly) linked list has</p>
     <ul>
       <li>pointer to the previous element</li>
@@ -98,35 +99,40 @@
       of the list, and likewise for <code class="variable">tail</code> pointing to the
       end
     </p>
-    <pre class="highlit">
-<span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow0">{</span>
-  <span class="keyword">public</span>:
-    <span class="type">int</span> <span class="variable">data</span>;
-    <span class="type">Node *</span><span class="variable">prev</span>;
-    <span class="type">Node *</span><span class="variable">next</span>;
-<span class="rainbow0">}</span>;</pre>
-    <p>tail insert / <code class="highlit">push_back(x)</code></p>
-    <pre class="highlit">
-<span class="type">Node *</span><span class="variable">tmp</span>;
-tmp = <span class="keyword">new</span> <span class="type">Node</span>;
-tmp->data = x; <span class="comment">// (*tmp).data = x;</span>
+    <pre class="highlit" id="hl-31992e9fca6fbf7b">
+class Node {
+  public:
+    int data;
+    Node *prev;
+    Node *next;
+};</pre>
+<script>color("hl-31992e9fca6fbf7b", [["class", "keyword"],[" ", null],["Node", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["Node *", "type"],["prev", "variable"],[";\n    ", null],["Node *", "type"],["next", "variable"],[";\n", null],["}", "rainbow0"],[";", null]]);</script>
+    <p>tail insert / <code class="highlit" id="hl-e1912e10f6dc4cf8">push_back(x)</code>
+<script>color("hl-e1912e10f6dc4cf8", [["push_back(x)", null]]);</script></p>
+    <pre class="highlit" id="hl-475283050a08c44c">
+Node *tmp;
+tmp = new Node;
+tmp->data = x; // (*tmp).data = x;
 tail->next = tmp;
 tmp->prev = tail;
-tmp->next = <span class="constant">nullptr</span>;
+tmp->next = nullptr;
 tail = tmp;</pre>
-    <p>head remove / <code class="highlit">pop_front()</code></p>
-    <pre class="highlit">
-<span class="type">Node *</span><span class="variable">tmp</span>;
+<script>color("hl-475283050a08c44c", [["Node *", "type"],["tmp", "variable"],[";\ntmp = ", null],["new", "keyword"],[" ", null],["Node", "type"],[";\ntmp->data = x; ", null],["// (*tmp).data = x;", "comment"],["\ntail->next = tmp;\ntmp->prev = tail;\ntmp->next = ", null],["nullptr", "constant"],[";\ntail = tmp;", null]]);</script>
+    <p>head remove / <code class="highlit" id="hl-5ee51cb67b64b453">pop_front()</code>
+<script>color("hl-5ee51cb67b64b453", [["pop_front()", null]]);</script></p>
+    <pre class="highlit" id="hl-6d05e6bd685b4cc9">
+Node *tmp;
 tmp = head;
 head = head->next;
-<span class="keyword">delete</span> tmp; <span class="comment">// deällocate</span>
-head->prev = <span class="constant">nullptr</span>;</pre>
+delete tmp; // deällocate
+head->prev = nullptr;</pre>
+<script>color("hl-6d05e6bd685b4cc9", [["Node *", "type"],["tmp", "variable"],[";\ntmp = head;\nhead = head->next;\n", null],["delete", "keyword"],[" tmp; ", null],["// deällocate", "comment"],["\nhead->prev = ", null],["nullptr", "constant"],[";", null]]);</script>
     <p>swap, assuming pointers <code class="variable">i</code> and <code class="variable">j</code></p>
-    <pre class="highlit">
-<span class="type">Node *</span><span class="variable">i_left</span>  = i->prev;
-<span class="type">Node *</span><span class="variable">i_right</span> = i->next;
-<span class="type">Node *</span><span class="variable">j_left</span>  = j->prev;
-<span class="type">Node *</span><span class="variable">j_right</span> = j->next;
+    <pre class="highlit" id="hl-dd0506b16ceec871">
+Node *i_left  = i->prev;
+Node *i_right = i->next;
+Node *j_left  = j->prev;
+Node *j_right = j->next;
 i_left->next  = j;
 i_right->prev = j;
 j_left->next  = i;
@@ -135,9 +141,10 @@ i->prev = j_left;
 j->prev = i_left;
 i->next = j_right;
 j->next = i_right;
-<span class="type">Node *</span><span class="variable">t</span> = i;
+Node *t = i;
 i = j;
 j = t;</pre>
+<script>color("hl-dd0506b16ceec871", [["Node *", "type"],["i_left", "variable"],["  = i->prev;\n", null],["Node *", "type"],["i_right", "variable"],[" = i->next;\n", null],["Node *", "type"],["j_left", "variable"],["  = j->prev;\n", null],["Node *", "type"],["j_right", "variable"],[" = j->next;\ni_left->next  = j;\ni_right->prev = j;\nj_left->next  = i;\nj_right->prev = i;\ni->prev = j_left;\nj->prev = i_left;\ni->next = j_right;\nj->next = i_right;\n", null],["Node *", "type"],["t", "variable"],[" = i;\ni = j;\nj = t;", null]]);</script>
     <p>we could also just swap the <code class="variable">data</code>s</p>
     <h1 id="algorithms">algorithms</h1>
     <dl>
@@ -160,8 +167,8 @@ j = t;</pre>
         to some function of input size \(n\))
       </li>
     </ul>
-    <h2 id="algorithms--asymptotic-complexity-classes">asymptotic complexity classes</h2>
-    <h3 id="algorithms--asymptotic-complexity-classes--big-o">big O</h3>
+    <h2 id="asymptotic-complexity-classes">asymptotic complexity classes</h2>
+    <h3 id="big-o">big O</h3>
     <p>
       \(g(n) = O(f(n))\)<br />
       iff \(g(n) ≤ cf(n)\) for some \(c > 0\) and \(n ≥ n₀ > 0\)
@@ -184,7 +191,7 @@ j = t;</pre>
       <li>\(\sqrt n = O(n)\) ...this is sort of weak</li>
     </ul>
     <p>big O gives an <i>upper bound</i></p>
-    <h3 id="algorithms--asymptotic-complexity-classes--big-ω">big Ω</h3>
+    <h3 id="big-ω">big Ω</h3>
     <p>
       \(g(n) = Ω(f(n))\)<br />
       iff \(g(n) ≥ cf(n)\) for some \(c > 0\) and \(n ≥ nₒ > 0\)
@@ -196,7 +203,7 @@ j = t;</pre>
       <li>\(3n = Ω(n)\)</li>
       <li>\(5n² = Ω(n)\) ...this is also weak</li>
     </ul>
-    <h3 id="algorithms--asymptotic-complexity-classes--big-θ">big Θ</h3>
+    <h3 id="big-θ">big Θ</h3>
     <p>
       \(g(n) = Θ(f(n))\)<br />
       iff \(g(n) = O(f(n))\) and \(g(n) = Ω(f(n))\)
@@ -207,14 +214,14 @@ j = t;</pre>
       <li>\(7n = Θ(n)\)</li>
       <li>\(3n² ≠ Θ(n)\) because it's \(Ω(n)\) but not \(O(n)\)</li>
     </ul>
-    <h3 id="algorithms--asymptotic-complexity-classes--logs">logs</h3>
+    <h3 id="logs">logs</h3>
     <p>
       for time complexity the log base doesn't matter. even though in Real Math
       \(\log x = \log₁₀ x\) or \(\ln x\) depending who you ask
     </p>
     <p>\(\logₐ n = Θ(\log n)\) regardless of \(a\)</p>
     <p>\[\logₐ n = \frac{\log_b n}{\log_b a}\]</p>
-    <h3 id="algorithms--asymptotic-complexity-classes--calculus">calculus</h3>
+    <h3 id="calculus">calculus</h3>
     <p>\[\lim_{n → ∞} \frac{g(n)}{f(n)}\]</p>
     <p>this could</p>
     <ul>
@@ -261,70 +268,78 @@ j = t;</pre>
     <p><span class="no">no</span></p>
     <p>logs are very nice for runtime</p>
     <h1 id="searching">searching</h1>
-    <h2 id="searching--linear-search">linear search</h2>
-    <pre class="highlit">
-<span class="comment">// a : array
+    <h2 id="linear-search">linear search</h2>
+    <pre class="highlit" id="hl-949193fc3c525c2a">
+// a : array
 // n : size
-// s : searchee</span>
-<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow1">)</span> <span class="comment">// O(n)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> == s<span class="rainbow2">)</span> <span class="comment">// O(1)</span>    <span class="comment">//</span>
-      <span class="keyword">return</span> <span class="constant">true</span>; <span class="comment">//</span>         <span class="comment">//</span>
-  <span class="keyword">return</span> <span class="constant">false</span>;
-<span class="rainbow0">}</span></pre>
+// s : searchee
+bool find(int a[], int n, int s) {
+  for (int i = 0; i < n; i++) // O(n)
+    if (a[i] == s) // O(1)    //
+      return true; //         //
+  return false;
+}</pre>
+<script>color("hl-949193fc3c525c2a", [["// a : array\n// n : size\n// s : searchee", "comment"],["\n", null],["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["// O(n)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],[" ", null],["// O(1)", "comment"],["    ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],["; ", null],["//", "comment"],["         ", null],["//", "comment"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>worst case, <code class="variable">s</code> isn't in the array at all.</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
-    <p>best case, <code class="highlit">s == a[0]</code></p>
+    <p>best case, <code class="highlit" id="hl-09a37b1aa64a647e">s == a[0]</code>
+<script>color("hl-09a37b1aa64a647e", [["s == a[0]", null]]);</script></p>
     <p>\(O(1)\), \(Ω(1)\), \(Θ(1)\)</p>
     <p>average case, <code class="variable">s</code> is in the middle</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
-    <h2 id="searching--binary-search">binary search</h2>
-    <pre class="highlit">
-<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="type">int</span> <span class="variable">l</span> = <span class="constant">0</span>;
-  <span class="type">int</span> <span class="variable">r</span> = n - <span class="constant">1</span>;
-  <span class="type">int</span> <span class="variable">m</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>l <= r<span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    m = l + <span class="rainbow2">(</span>r - l<span class="rainbow2">)</span> / <span class="constant">2</span>; <span class="comment">// O(1)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>m<span class="rainbow3">]</span> == s<span class="rainbow2">)</span>       <span class="comment">//</span>
-      <span class="keyword">return</span> <span class="constant">true</span>;       <span class="comment">//</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>m<span class="rainbow3">]</span> < s<span class="rainbow2">)</span>        <span class="comment">//</span>
-      l = m + <span class="constant">1</span>;         <span class="comment">//</span>
-    <span class="keyword">else</span>                 <span class="comment">//</span>
-      r = m - <span class="constant">1</span>;         <span class="comment">//</span>
-  <span class="rainbow1">}</span>
-  <span class="keyword">return</span> <span class="constant">false</span>;
-<span class="rainbow0">}</span></pre>
+    <h2 id="binary-search">binary search</h2>
+    <pre class="highlit" id="hl-d3603344fbcfb810">
+bool find(int a[], int n, int s) {
+  int l = 0;
+  int r = n - 1;
+  int m;
+  while (l <= r) {
+    m = l + (r - l) / 2; // O(1)
+    if (a[m] == s)       //
+      return true;       //
+    if (a[m] < s)        //
+      l = m + 1;         //
+    else                 //
+      r = m - 1;         //
+  }
+  return false;
+}</pre>
+<script>color("hl-d3603344fbcfb810", [["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["l", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["r", "variable"],[" = n - ", null],["1", "constant"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["l \u003c= r", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    m = l + ", null],["(", "rainbow2"],["r - l", null],[")", "rainbow2"],[" / ", null],["2", "constant"],["; ", null],["// O(1)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],["       ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],[";       ", null],["//", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" \u003c s", null],[")", "rainbow2"],["        ", null],["//", "comment"],["\n      l = m + ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n    ", null],["else", "keyword"],["                 ", null],["//", "comment"],["\n      r = m - ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
     <p>\(O(\log n)\), \(Ω(\log n)\), \(Θ(\log n)\)</p>
     <h1 id="some-loops">some loops</h1>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i += <span class="constant">3</span><span class="rainbow0">)</span>
-  <span class="builtin">cout</span> << <span class="string">"..."</span>;</pre>
+    <pre class="highlit" id="hl-bec99ecbad9a234d">
+for (int i = 0; i < n; i += 3)
+  cout << "...";</pre>
+<script>color("hl-bec99ecbad9a234d", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i += ", null],["3", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ", null],["\"...\"", "string"],[";", null]]);</script>
     <p>\(
       \frac13 ∑\limitsᵢ₌₀ⁿ⁻¹ 1 = \frac n3 = Θ(n)
     \)</p>
     <p>the counter updater bit is a big clue as to the complexity</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = n; i > <span class="constant">0</span>; i /= <span class="constant">2</span><span class="rainbow0">)</span>
-  <span class="builtin">cout</span> << ...;</pre>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; i < n; i *= <span class="constant">2</span><span class="rainbow0">)</span>
-  <span class="builtin">cout</span> << ...;</pre>
+    <pre class="highlit" id="hl-e1f556e808ac93c8">
+for (int i = n; i > 0; i /= 2)
+  cout << ...;</pre>
+<script>color("hl-e1f556e808ac93c8", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = n; i > ", null],["0", "constant"],["; i /= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
+    <pre class="highlit" id="hl-ccf100a6b0502b1c">
+for (int i = 1; i < n; i *= 2)
+  cout << ...;</pre>
+<script>color("hl-ccf100a6b0502b1c", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i *= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>these are both \(\log₂ n = Θ(\log n)\)</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; j < n; j++<span class="rainbow1">)</span>
-    <span class="builtin">cout</span> << ...;</pre>
+    <pre class="highlit" id="hl-0ed742583286181c">
+for (int i = 0; i < n; i++)
+  for (int j = 0; j < n; j++)
+    cout << ...;</pre>
+<script>color("hl-0ed742583286181c", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c n; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁿ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ n
       = n² = Θ(n²)
     \)</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">0</span>; j < i; j++<span class="rainbow1">)</span>
-    <span class="builtin">cout</span> << ...;</pre>
+    <pre class="highlit" id="hl-0d5ca48fcf5ba425">
+for (int i = 0; i < n; i++)
+  for (int j = 0; j < i; j++)
+    cout << ...;</pre>
+<script>color("hl-0d5ca48fcf5ba425", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c i; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁱ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ i
@@ -332,18 +347,20 @@ j = t;</pre>
       = \frac{n²}2 - \frac n2
       = Θ(n²)
     \)</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; j < n; j *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="builtin">cout</span> << ...;
+    <pre class="highlit" id="hl-19d8df9321096013">
+for (int i = 0; i < n; i++)
+  for (int j = 1; j < n; j *= 2)
+    cout << ...;
 </pre>
+<script>color("hl-19d8df9321096013", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c n; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
 
     <p>\(Θ(n\log n)\)</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < n; i++<span class="rainbow0">)</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">j</span> = <span class="constant">1</span>; j < i; j *= <span class="constant">2</span><span class="rainbow1">)</span>
-    <span class="builtin">cout</span> << ...;
+    <pre class="highlit" id="hl-7dd9200a6485af37">
+for (int i = 0; i < n; i++)
+  for (int j = 1; j < i; j *= 2)
+    cout << ...;
 </pre>
+<script>color("hl-7dd9200a6485af37", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c i; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
     <p>since \(\log 0\) is undefined we can cheat and do \(
       ∑\limitsᵢ₌₁ⁿ \log₂ i
       = \log₂(n!)
@@ -357,25 +374,27 @@ j = t;</pre>
       = Θ(n \log n)
     \]</p>
     <h1 id="sorting">sorting</h1>
-    <h2 id="sorting--insertion-sort">insertion sort</h2>
-    <pre class="highlit">
-<span class="type">void</span> <span class="function">insertionSort</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">n</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">1</span>; i < n; i++<span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    <span class="type">int</span> <span class="variable">key</span> = a<span class="rainbow2">[</span>i<span class="rainbow2">]</span>;
-    <span class="type">int</span> <span class="variable">j</span> = i - <span class="constant">1</span>;
-    <span class="keyword">while</span> <span class="rainbow2">(</span>j >= <span class="constant">0</span> && a<span class="rainbow3">[</span>j<span class="rainbow3">]</span> > key<span class="rainbow2">)</span> <span class="rainbow2">{</span>
-      a<span class="rainbow3">[</span>j + <span class="constant">1</span><span class="rainbow3">]</span> = a<span class="rainbow3">[</span>j<span class="rainbow3">]</span>;
+    <h2 id="insertion-sort">insertion sort</h2>
+    <pre class="highlit" id="hl-69f8b59c5acb618d">
+void insertionSort(int a[], int n) {
+  for (int i = 1; i < n; i++) {
+    int key = a[i];
+    int j = i - 1;
+    while (j >= 0 && a[j] > key) {
+      a[j + 1] = a[j];
       j--;
-    <span class="rainbow2">}</span>
-    a<span class="rainbow2">[</span>j + <span class="constant">1</span><span class="rainbow2">]</span> = key;
-  <span class="rainbow1">}</span>
-<span class="rainbow0">}</span>
+    }
+    a[j + 1] = key;
+  }
+}
 </pre>
+<script>color("hl-69f8b59c5acb618d", [["void", "type"],[" ", null],["insertionSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["int", "type"],[" ", null],["key", "variable"],[" = a", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[";\n    ", null],["int", "type"],[" ", null],["j", "variable"],[" = i - ", null],["1", "constant"],[";\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["j >= ", null],["0", "constant"],[" && a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > key", null],[")", "rainbow2"],[" ", null],["{", "rainbow2"],["\n      a", null],["[", "rainbow3"],["j + ", null],["1", "constant"],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[";\n      j--;\n    ", null],["}", "rainbow2"],["\n    a", null],["[", "rainbow2"],["j + ", null],["1", "constant"],["]", "rainbow2"],[" = key;\n  ", null],["}", "rainbow1"],["\n", null],["}", "rainbow0"],["\n", null]]);</script>
     <p>
       after every iteration of the outer loop, the slice of the array from
       <code class="constant">0</code>
       to
-      <code class="highlit">i - 1</code>
+      <code class="highlit" id="hl-49fff7c537a1e7eb">i - 1</code>
+<script>color("hl-49fff7c537a1e7eb", [["i - 1", null]]);</script>
       is always sorted
     </p>
     <p>the inner loop makes room for the key to be inserted</p>
@@ -388,7 +407,7 @@ j = t;</pre>
     </p>
     <p>best case, it's already sorted and the inner loop never runs</p>
     <p>then it's just \(Θ(n)\)</p>
-    <h2 id="sorting--merge-sort">merge sort</h2>
+    <h2 id="merge-sort">merge sort</h2>
     <p>'divide and conquer' algorithm, which unfortunately necessitates recursion</p>
     <ul>
       <li>split the array into 2 pieces (the left side and the right side)</li>
@@ -398,34 +417,35 @@ j = t;</pre>
       </li>
       <li>merge the halves</li>
     </ul>
-    <pre class="highlit">
-<span class="type">void</span> <span class="function">mergeSort</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>l >= r<span class="rainbow1">)</span>
-    <span class="keyword">return</span>;
-  <span class="type">int</span> <span class="variable">m</span> = l + <span class="rainbow1">(</span>r - l<span class="rainbow1">)</span> / <span class="constant">2</span>;
-  mergeSort<span class="rainbow1">(</span>a, l, m<span class="rainbow1">)</span>;
-  mergeSort<span class="rainbow1">(</span>a, m + <span class="constant">1</span>, r<span class="rainbow1">)</span>;
-  merge<span class="rainbow1">(</span>a, l, m, r<span class="rainbow1">)</span>;
-<span class="rainbow0">}</span>
-<span class="type">void</span> <span class="function">merge</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">m</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="type">int</span> <span class="variable">i</span> = <span class="constant">l</span>, <span class="variable">j</span> = m + <span class="constant">1</span>, <span class="variable">k</span> = <span class="constant">0</span>;
-  <span class="type">int</span> <span class="variable">b</span><span class="rainbow1">[</span>r - l + <span class="constant">1</span><span class="rainbow1">]</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m ** j <= r<span class="rainbow1">)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> <= a<span class="rainbow3">[</span>j<span class="rainbow3">]</span><span class="rainbow2">)</span>
-      b<span class="rainbow3">[</span>k++<span class="rainbow3">]</span> = a<span class="rainbow3">[</span>j++<span class="rainbow3">]</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= m<span class="rainbow1">)</span>
-    b<span class="rainbow2">[</span>k++<span class="rainbow2">]</span> = a<span class="rainbow2">[</span>i++<span class="rainbow2">]</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>j <= r<span class="rainbow1">)</span>
-    b<span class="rainbow2">[</span>k++<span class="rainbow2">]</span> = a<span class="rainbow2">[</span>j++<span class="rainbow2">]</span>;
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">x</span> = <span class="constant">0</span>; x < r - l + <span class="constant">1</span>; x++<span class="rainbow1">)</span>
-    a<span class="rainbow2">[</span>l + x<span class="rainbow2">]</span> = b<span class="rainbow2">[</span>x<span class="rainbow2">]</span>;
-<span class="rainbow0">}</span></pre>
+    <pre class="highlit" id="hl-7c9fbfe5e2784424">
+void mergeSort(int a[], int l, int r) {
+  if (l >= r)
+    return;
+  int m = l + (r - l) / 2;
+  mergeSort(a, l, m);
+  mergeSort(a, m + 1, r);
+  merge(a, l, m, r);
+}
+void merge(int a[], int l, int m, int r) {
+  int i = l, j = m + 1, k = 0;
+  int b[r - l + 1];
+  while (i <= m ** j <= r)
+    if (a[i] <= a[j])
+      b[k++] = a[j++];
+  while (i <= m)
+    b[k++] = a[i++];
+  while (j <= r)
+    b[k++] = a[j++];
+  for (int x = 0; x < r - l + 1; x++)
+    a[l + x] = b[x];
+}</pre>
+<script>color("hl-7c9fbfe5e2784424", [["void", "type"],[" ", null],["mergeSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["l >= r", null],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[" = l + ", null],["(", "rainbow1"],["r - l", null],[")", "rainbow1"],[" / ", null],["2", "constant"],[";\n  mergeSort", null],["(", "rainbow1"],["a, l, m", null],[")", "rainbow1"],[";\n  mergeSort", null],["(", "rainbow1"],["a, m + ", null],["1", "constant"],[", r", null],[")", "rainbow1"],[";\n  merge", null],["(", "rainbow1"],["a, l, m, r", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["merge", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["m", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["l", "constant"],[", ", null],["j", "variable"],[" = m + ", null],["1", "constant"],[", ", null],["k", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["b", "variable"],["[", "rainbow1"],["r - l + ", null],["1", "constant"],["]", "rainbow1"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m ** j \u003c= r", null],[")", "rainbow1"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c= a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[")", "rainbow2"],["\n      b", null],["[", "rainbow3"],["k++", null],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j++", null],["]", "rainbow3"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["i++", null],["]", "rainbow2"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["j \u003c= r", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["j++", null],["]", "rainbow2"],[";\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["x", "variable"],[" = ", null],["0", "constant"],["; x \u003c r - l + ", null],["1", "constant"],["; x++", null],[")", "rainbow1"],["\n    a", null],["[", "rainbow2"],["l + x", null],["]", "rainbow2"],[" = b", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>
       merging all the arrays at a given level together is \(Θ(n)\), and there are
       around \(\log₂ n\) levels
     </p>
     <p>which means it's better than insertion sort!</p>
-    <h2 id="sorting--quicksort">quicksort</h2>
+    <h2 id="quicksort">quicksort</h2>
     <p>another recursive one</p>
     <ul>
       <li>choose a pivot (any element of the array)</li>
@@ -435,18 +455,19 @@ j = t;</pre>
       </li>
       <li>call <code class="function">quickSort</code> on each side</li>
     </ul>
-    <pre class="highlit">
-<span class="type">int</span> <span class="function">partition</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">a</span><span class="rainbow1">[]</span>, <span class="type">int</span> <span class="variable">l</span>, <span class="type">int</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow1">{</span>
-  <span class="type">int</span> <span class="variable">pivot</span> = a<span class="rainbow1">[</span>l<span class="rainbow1">]</span>; <span class="comment">// easy</span>
-  <span class="type">int</span> <span class="variable">i</span> = l + 1, <span class="variable">j</span> = r;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>i <= j<span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    <span class="keyword">while</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>i<span class="rainbow3">]</span> < pivot<span class="rainbow2">)</span> i++;
-    <span class="keyword">while</span> <span class="rainbow2">(</span>a<span class="rainbow3">[</span>j<span class="rainbow3">]</span> > pivot<span class="rainbow2">)</span> j--;
-    <span class="comment">// if i and j both didn't move</span>
-      <span class="comment">// swap a[i++] and a[j--]</span>
-  <span class="rainbow1">}</span>
-  <span class="keyword">return</span> j;
+    <pre class="highlit" id="hl-feec3f691443cd7a">
+int partition(int a[], int l, int r) {
+  int pivot = a[l]; // easy
+  int i = l + 1, j = r;
+  while (i <= j) {
+    while (a[i] < pivot) i++;
+    while (a[j] > pivot) j--;
+    // if i and j both didn't move
+      // swap a[i++] and a[j--]
+  }
+  return j;
 }</pre>
+<script>color("hl-feec3f691443cd7a", [["int", "type"],[" ", null],["partition", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow1"],["\n  ", null],["int", "type"],[" ", null],["pivot", "variable"],[" = a", null],["[", "rainbow1"],["l", null],["]", "rainbow1"],["; ", null],["// easy", "comment"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = l + 1, ", null],["j", "variable"],[" = r;\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= j", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c pivot", null],[")", "rainbow2"],[" i++;\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > pivot", null],[")", "rainbow2"],[" j--;\n    ", null],["// if i and j both didn't move", "comment"],["\n      ", null],["// swap a[i++] and a[j--]", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" j;\n}", null]]);</script>
     <p>worst case, the list is already sorted: \(O(n²)\)</p>
     <p>best case the pivot is the median: \(O(n\log n)\)</p>
     <p>methods to avoid worst case:</p>
@@ -456,7 +477,7 @@ j = t;</pre>
       <li>find the median of an unsorted array without sorting it...?</li>
     </ul>
     <aside style="background:var(--bg-green-nuanced)">
-    <h2 id="sorting--lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</h2>
+    <h2 id="lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</h2>
     <p>
       suppose in the worst case the lower bound is \(Ω(n)\). then we <i>could</i> run faster than
       \(O(n \log n)\) in the worst case. problem is we don't know of any sorting algorithm better than
@@ -480,58 +501,64 @@ j = t;</pre>
     <h1 id="binary-trees">binary trees</h1>
     <p>honestly not very useful in and of themselves</p>
     <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-0396cdaac2979f3d">
        a
    b --'-- c
 d -'- e f -'- g</pre>
-    <pre class="highlit">
-<span class="keyword">class</span> <span class="type">BinTreeNode</span> <span class="rainbow0">{</span>
-  <span class="keyword">public</span>:
-    <span class="type">int</span> <span class="variable">data</span>;
-    <span class="type">BinTreeNode*</span> <span class="variable">left</span>;
-    <span class="type">BinTreeNode*</span> <span class="variable">right</span>;
+<script>color("hl-0396cdaac2979f3d", [["       a\n   b --'-- c\nd -'- e f -'- g", null]]);</script>
+    <pre class="highlit" id="hl-fe4d736ccebe6de7">
+class BinTreeNode {
+  public:
+    int data;
+    BinTreeNode* left;
+    BinTreeNode* right;
 }</pre>
-    <h2 id="binary-trees--traversing">traversing</h2>
+<script>color("hl-fe4d736ccebe6de7", [["class", "keyword"],[" ", null],["BinTreeNode", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["left", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["right", "variable"],[";\n}", null]]);</script>
+    <h2 id="traversing">traversing</h2>
     <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
     <p>there are a couple different ways to traverse a tree</p>
-    <pre class="highlit">
-<span class="type">void</span> <span class="function">preorder</span><span class="rainbow0">(</span><span class="type">BinTreeNode*</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span>
-    <span class="keyword">return</span>;
-  <span class="builtin">cout</span> << data; <span class="comment">// preorder process</span>
-  preorder<span class="rainbow1">(</span>r->left<span class="rainbow1">)</span>;
-  preorder<span class="rainbow1">(</span>r->right<span class="rainbow1">)</span>;
-<span class="rainbow0">}</span>
-<span class="type">void</span> <span class="function">postorder</span><span class="rainbow0">(</span><span class="type">BinTreeNode*</span> <span class="variable">r</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span>
-    <span class="keyword">return</span>;
-  postorder<span class="rainbow1">(</span>r->left<span class="rainbow1">)</span>;
-  postorder<span class="rainbow1">(</span>r->right<span class="rainbow1">)</span>;
-  <span class="builtin">cout</span> << data;
+    <pre class="highlit" id="hl-6e1b4858e5571797">
+void preorder(BinTreeNode* r) {
+  if (r == nullptr)
+    return;
+  cout << data; // preorder process
+  preorder(r->left);
+  preorder(r->right);
+}
+void postorder(BinTreeNode* r) {
+  if (r == nullptr)
+    return;
+  postorder(r->left);
+  postorder(r->right);
+  cout << data;
 }</pre>
+<script>color("hl-6e1b4858e5571797", [["void", "type"],[" ", null],["preorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data; ", null],["// preorder process", "comment"],["\n  preorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  preorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["postorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  postorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  postorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data;\n}", null]]);</script>
     <h2 id="binary-trees--searching">searching</h2>
-    <pre class="highlit">
-<span class="type">binTreeNode*</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">binTreeNode*</span> <span class="variable">r</span>, <span class="type">int</span> <span class="variable">s</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-    <span class="keyword">if</span> <span class="rainbow1">(</span>!r || r->data == s<span class="rainbow1">)</span> <span class="keyword">return</span> r;
-    <span class="type">binTreeNode*</span> <span class="variable">left</span> = find(r->left, s);
-    <span class="keyword">if</span> <span class="rainbow1">(</span>left<span class="rainbow1">)</span> <span class="keyword">return</span> left;
-    <span class="keyword">return</span> find(r->right, s);
+    <pre class="highlit" id="hl-9b77e2a2ddf11847">
+binTreeNode* find(binTreeNode* r, int s) {
+    if (!r || r->data == s) return r;
+    binTreeNode* left = find(r->left, s);
+    if (left) return left;
+    return find(r->right, s);
 }</pre>
+<script>color("hl-9b77e2a2ddf11847", [["binTreeNode*", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["binTreeNode*", "type"],[" ", null],["r", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["!r || r->data == s", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" r;\n    ", null],["binTreeNode*", "type"],[" ", null],["left", "variable"],[" = find(r->left, s);\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["left", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" left;\n    ", null],["return", "keyword"],[" find(r->right, s);\n}", null]]);</script>
     <p>runtime for pre/post order:</p>
     <p>each function body runs \(Θ(1)\) times, and there are \(n\) nodes</p>
-    <h2 id="binary-trees--height">height</h2>
+    <h2 id="height">height</h2>
     <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-b287ec70166d66cb">
 a
 '- b
    '- c
       '- d</pre>
+<script>color("hl-b287ec70166d66cb", [["a\n'- b\n   '- c\n      '- d", null]]);</script>
     <p>the height of this tree is 3 and there are 4 nodes. this is the best case despite the tree looking absolutely fucking stupid</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-5fbc7ff4176db39f">
                a
        b ------'------ c
    d --'-- e       f --'-- g
 h -'- i j -'- k l -'- m n -'- o</pre>
+<script>color("hl-5fbc7ff4176db39f", [["               a\n       b ------'------ c\n   d --'-- e       f --'-- g\nh -'- i j -'- k l -'- m n -'- o", null]]);</script>
     <p>
       this has \(h\) levels and \(n = 2ʰ⁺¹ - 1\) nodes. now we can solve for h: \[
       \begin{align*}
@@ -548,30 +575,34 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       <dd>helps find elements quickly, but overhead to maintain</dd>
     </dl>
     <p>a bit like having folders!</p>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
-<span class="keyword">class</span> <span class="type">BinTreeNode</span> <span class="rainbow0">{</span>
-  <span class="keyword">public</span>:
-    <span class="type">K</span> <span class="variable">key</span>;
-    <span class="type">V</span> <span class="variable">value</span>;
-    <span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">left</span>;
-    <span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">right</span>;
+    <pre class="highlit" id="hl-492f6f287e656579">
+template &lt;class K, class V>
+class BinTreeNode {
+  public:
+    K key;
+    V value;
+    BinTreeNode&amp;lt;K, V>* left;
+    BinTreeNode&amp;lt;K, V>* right;
 }</pre>
+<script>color("hl-492f6f287e656579", [["template \u003cclass K, class V>\nclass BinTreeNode {\n  public:\n    K key;\n    V value;\n    BinTreeNode&lt;K, V>* left;\n    BinTreeNode&lt;K, V>* right;\n}", null]]);</script>
     <p>for each node \(r\):</p>
     <ul>
-      <li><code class="highlit">r->left</code>'s key is less than r's key</li>
-      <li><code class="highlit">r->right</code>'s key is larger than r's key</li>
+      <li><code class="highlit" id="hl-3f0226ca12a954a8">r->left</code>
+<script>color("hl-3f0226ca12a954a8", [["r->left", null]]);</script>'s key is less than r's key</li>
+      <li><code class="highlit" id="hl-345773d9f5a59de3">r->right</code>
+<script>color("hl-345773d9f5a59de3", [["r->right", null]]);</script>'s key is larger than r's key</li>
     </ul>
     <h2 id="binary-search-trees--searching">searching</h2>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
-<span class="type">bool</span> <span class="function">find</span><span class="rainbow0">(</span><span class="type">BinTreeNode</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">V</span><span class="rainbow1">></span><span class="type">*</span> <span class="variable">r</span>, <span class="type">K</span> <span class="variable">k</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>r == <span class="constant">nullptr</span><span class="rainbow1">)</span> <span class="keyword">return</span> <span class="constant">false</span>;
-  <span class="keyword">if</span> <span class="rainbow1">(</span>k == r->key<span class="rainbow1">)</span> <span class="keyword">return</span> <span class="constant">true</span>;
-  <span class="keyword">if</span> <span class="rainbow1">(</span>k < r->key<span class="rainbow1">)</span>
-    <span class="keyword">return</span> find<span class="rainbow2">(</span>r->left, k<span class="rainbow2">)</span>;
-  <span class="keyword">return</span> find<span class="rainbow1">(</span>r->right, k<span class="rainbow1">)</span>;
+    <pre class="highlit" id="hl-3069bc114c4914ae">
+template &lt;class K, class V>
+bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
+  if (r == nullptr) return false;
+  if (k == r->key) return true;
+  if (k < r->key)
+    return find(r->left, k);
+  return find(r->right, k);
 }</pre>
+<script>color("hl-3069bc114c4914ae", [["template \u003cclass K, class V>\nbool find(BinTreeNode&lt;K, V>* r, K k) {\n  if (r == nullptr) return false;\n  if (k == r->key) return true;\n  if (k \u003c r->key)\n    return find(r->left, k);\n  return find(r->right, k);\n}", null]]);</script>
     <p>the function body is constant time. for here we only have to check one node per height level at most</p>
     <p>best case the runtime is \(Θ(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
     <p>the insertion order determines the height of the tree</p>
@@ -579,7 +610,8 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     <h1 id="avl-trees">avl trees</h1>
     <p>this is a self-balancing binary search tree. when we insert or delete we balance the tree if needed</p>
     <p>how do we know if a tree is balanced? for each node the difference in its left and right subtree heights cannot exceed 1</p>
-    <p>this requires adding a <code class="highlit"><span class="type">size_t</span> height</code> into <code class="type">BinTreeNode</code></p>
+    <p>this requires adding a <code class="highlit" id="hl-1ff5d3ad536f5643">size_t height</code>
+<script>color("hl-1ff5d3ad536f5643", [["size_t", "type"],[" height", null]]);</script> into <code class="type">BinTreeNode</code></p>
     <p>the empty tree has a height of -1. for every node \(r\) its height is
       \(
       \max(
@@ -593,7 +625,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
      .rotate {display: inline-block; animation: spin 3s linear infinite;}
      @keyframes spin {from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
     </style>
-    <img src="rotation.png"  />
+    <img src="rotation.png" alt="diagram of tree rotation" />
     <p>
       if the tree still isn't balanced, via a zigzag, we need to
       <b class="rotate">
@@ -626,51 +658,57 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       stl has a type called <code class="type">Map</code> for an ordered map, which is basically an
       avl tree
     </p>
-    <pre class="highlit">
-<span class="preprocessor">#include</span> <span class="string">&lt;map></span>
-<span class="keyword">using</span> <span class="constant">std</span>::<span class="type">map</span>;
-<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
-  <span class="type">map</span><span class="rainbow1"><</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow1">></span> <span class="variable">people</span>;
-  people<span class="rainbow1">[</span><span class="string">"Dan"</span><span class="rainbow1">]</span> = <span class="constant">13</span>;
-  people.insert<span class="rainbow1">(</span><span class="rainbow2">{</span><span class="string">"Tom"</span>, <span class="constant">12</span><span class="rainbow2">}</span><span class="rainbow1">)</span>;
+    <pre class="highlit" id="hl-61596dc0f24a78cc">
+#include &amp;lt;map>
+using std::map;
+int main() {
+  map&amp;lt;string, int> people;
+  people["Dan"] = 13;
+  people.insert({"Tom", 12});
 }</pre>
+<script>color("hl-61596dc0f24a78cc", [["#include &lt;map>\nusing std::map;\nint main() {\n  map&lt;string, int> people;\n  people[\"Dan\"] = 13;\n  people.insert({\"Tom\", 12});\n}", null]]);</script>
     <p>ways to do stuff to every element:</p>
-    <pre class="highlit">
-<span class="comment">// `it` is a map&lt;string, int>::iterator</span>
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span> = people.begin<span class="rainbow1">()</span>; it != people.end<span class="rainbow1">()</span>; it++<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="comment">// first = key, second = value</span>
-  <span class="builtin">cout</span> << first second << <span class="builtin">endl</span>;
-<span class="rainbow0">}</span>
+    <pre class="highlit" id="hl-c52a652a9477eb2a">
+// `it` is a map&amp;lt;string, int>::iterator
+for (auto it = people.begin(); it != people.end(); it++) {
+  // first = key, second = value
+  cout << first second << endl;
+}
 
-<span class="comment">// `it` is the actual node object</span>
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">it</span>: people<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="builtin">cout</span> << it.first << <span class="string">":"</span> << it.second << <span class="builtin">endl</span>;
+// `it` is the actual node object
+for (auto it: people) {
+  cout << it.first << ":" << it.second << endl;
 }</pre>
-    <h2 id="maps--unordered-maps">unordered maps</h2>
-    <p><code class="highlit">unordered_map</code>, uses a hash table instead of a tree</p>
+<script>color("hl-c52a652a9477eb2a", [["// `it` is a map&lt;string, int>::iterator\nfor (auto it = people.begin(); it != people.end(); it++) {\n  // first = key, second = value\n  cout \u003c\u003c first second \u003c\u003c endl;\n}\n\n// `it` is the actual node object\nfor (auto it: people) {\n  cout \u003c\u003c it.first \u003c\u003c \":\" \u003c\u003c it.second \u003c\u003c endl;\n}", null]]);</script>
+    <h2 id="unordered-maps">unordered maps</h2>
+    <p><code class="highlit" id="hl-16cc50a89e3673ef">unordered_map</code>
+<script>color("hl-16cc50a89e3673ef", [["unordered_map", null]]);</script>, uses a hash table instead of a tree</p>
     <p>insert and find are \(O(1)\)!</p>
     <p>
-      <code class="highlit">map.find<span class="rainbow0">(</span>key<span class="rainbow0">)</span></code> returns an iterator pointing to the item with some <code class="rainbow0 highlit">key</code>, or
-      <code class="highlit">map.end<span class="rainbow0">()</span></code>
+      <code class="highlit" id="hl-fbe42e4a4eccfa52">map.find(key)</code>
+<script>color("hl-fbe42e4a4eccfa52", [["map.find", null],["(", "rainbow0"],["key", null],[")", "rainbow0"]]);</script> returns an iterator pointing to the item with some <code class="rainbow0 highlit">key</code>, or
+      <code class="highlit" id="hl-83a139017fad5e2d">map.end()</code>
+<script>color("hl-83a139017fad5e2d", [["map.end", null],["()", "rainbow0"]]);</script>
       if it's not found.
     </p>
-    <h2 id="maps--counting-duplicates">counting duplicates</h2>
-    <pre class="highlit">
-<span class="type">vector</span><span class="rainbow0"><</span><span class="type">string</span><span class="rainbow0">></span> <span class="variable">names</span> = <span class="rainbow0">{</span><span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"violet"</span>, <span class="string">"matt"</span>, <span class="string">"evie"</span>, <span class="string">"luci"</span>, <span class="string">"luci"</span><span class="rainbow0">}</span>;
-<span class="type">unordered_map</span><span class="rainbow0"><</span><span class="type">string</span>, <span class="type">int</span><span class="rainbow0">></span> <span class="variable">condensed</span>;
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">name</span>: names<span class="rainbow0">)</span>
-  condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> = condensed<span class="rainbow1">[</span>name<span class="rainbow1">]</span> + <span class="constant">1</span>;
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">auto</span> <span class="variable">uniq</span>: condensed<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="builtin">cout</span> << uniq.first;
-  <span class="keyword">if</span> <span class="rainbow1">(</span>uniq.second > <span class="constant">1</span><span class="rainbow1">)</span>
-    <span class="builtin">cout</span> << <span class="string">" [duplicates]"</span>;
-<span class="builtin">cout</span> << <span class="builtin">endl</span>;
-<span class="rainbow0">}</span></pre>
+    <h2 id="counting-duplicates">counting duplicates</h2>
+    <pre class="highlit" id="hl-32afeb15bd59c75b">
+vector&amp;lt;string> names = {"evie", "luci", "violet", "matt", "evie", "luci", "luci"};
+unordered_map&amp;lt;string, int> condensed;
+for (auto name: names)
+  condensed[name] = condensed[name] + 1;
+for (auto uniq: condensed) {
+  cout << uniq.first;
+  if (uniq.second > 1)
+    cout << " [duplicates]";
+cout << endl;
+}</pre>
+<script>color("hl-32afeb15bd59c75b", [["vector&lt;string> names = {\"evie\", \"luci\", \"violet\", \"matt\", \"evie\", \"luci\", \"luci\"};\nunordered_map&lt;string, int> condensed;\nfor (auto name: names)\n  condensed[name] = condensed[name] + 1;\nfor (auto uniq: condensed) {\n  cout \u003c\u003c uniq.first;\n  if (uniq.second > 1)\n    cout \u003c\u003c \" [duplicates]\";\ncout \u003c\u003c endl;\n}", null]]);</script>
     <h1 id="hash-maps">hash maps</h1>
     <p>we maintain a very large table and have a hash function that helps us locate elements in the table</p>
     <p>
       \[
-      h(\text{key}) \mathbin{\mathsf{mod}} \text{table capacity} → \text{index}
+      h(\text{key}) \mathbin{𝗆𝗈𝖽} \text{table capacity} → \text{index}
       \]
     </p>
     <p>this takes constant time!</p>
@@ -680,139 +718,143 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       <li>ideally, indices are unique, otherwise we get a <b>collision</b></li>
     </ul>
     <p>suppose the parking lot is a hashmap from student id to parking spot. you get to your assigned parking spot and a car is already there. now what you'd like to do is just stack the cars, right. or you can try to park somewhere else</p>
-    <h2 id="hash-maps--separate-chaining">separate chaining</h2>
+    <h2 id="separate-chaining">separate chaining</h2>
     <p>when a collision occurs, we stack the elements at the location. so we need to maintain an array of linked lists. aaaaaaa</p>
     <p>we also want to know the <b>load factor</b> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
-<span class="keyword">class</span> <span class="type">HashMap</span> <span class="rainbow0">{</span>
-  <span class="keyword">private</span>:
-    <span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow1">{</span>
-      <span class="keyword">public</span>:
-        <span class="type">K</span> <span class="variable">key</span>;
-        <span class="type">V</span> <span class="keyword">value</span>;
-        <span class="type">Node *</span><span class="variable">link</span>;
-    <span class="rainbow1">}</span>;
-    <span class="type">size_t</span> <span class="variable">capacity</span>;
-    <span class="type">size_t</span> <span class="variable">items</span>;
-    <span class="type">Node **</span><span class="variable">table</span>;
-    <span class="type">size_t</span> <span class="function">h</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span>;
-  <span class="keyword">public</span>:
-    <span class="type">HashMap</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
-      items = <span class="constant">0</span>;
-      capacity = <span class="constant">5</span>;
-      table = <span class="keyword">new</span> <span class="type">Node*</span><span class="rainbow2">[</span>capacity<span class="rainbow2">]</span>;
-      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>; i < capacity; i++<span class="rainbow2">)</span>
-        table<span class="rainbow3">[</span>i<span class="rainbow3">]</span> = <span class="constant">nullptr</span>;
-    <span class="rainbow1">}</span>
-    <span class="type">void</span> <span class="function">insert</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">V</span> <span class="variable">v</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
-      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">Node *</span><span class="variable">i</span> = table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>; i != <span class="constant">nullptr</span>; i = i->link<span class="rainbow2">)</span>
-        <span class="keyword">if</span> <span class="rainbow3">(</span>i->key == k<span class="rainbow3">)</span>
-          <span class="keyword">return</span>;
-      <span class="comment">// insert a new Node into table[index]</span>
+    <pre class="highlit" id="hl-a9d8e8b9303eede4">
+template &lt;class K, class V>
+class HashMap {
+  private:
+    class Node {
+      public:
+        K key;
+        V value;
+        Node *link;
+    };
+    size_t capacity;
+    size_t items;
+    Node **table;
+    size_t h(K k);
+  public:
+    HashMap() {
+      items = 0;
+      capacity = 5;
+      table = new Node*[capacity];
+      for (size_t i = 0; i < capacity; i++)
+        table[i] = nullptr;
+    }
+    void insert(K k, V v) {
+      size_t index = h(k) % capacity;
+      for (Node *i = table[index]; i != nullptr; i = i->link)
+        if (i->key == k)
+          return;
+      // insert a new Node into table[index]
       items++;
-    <span class="rainbow1">}</span>
-    <span class="type">bool</span> <span class="function">find</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
-      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">Node *</span>i = table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>; i != <span class="constant">nullptr</span>; i = i->link<span class="rainbow2">)</span>
-        <span class="keyword">if</span> <span class="rainbow3">(</span>i->key == k<span class="rainbow3">)</span>
-          <span class="keyword">return</span> <span class="constant">true</span>;
-      <span class="keyword">return</span> <span class="constant">false</span>;
-    <span class="rainbow1">}</span>
-<span class="rainbow0">}</span>;</pre>
-    <h3 id="hash-maps--separate-chaining--expected-runtime">expected runtime</h3>
-    <p>hashing takes constant time. it does scale to the length of the key, but not the table. \(\mathsf{mod}\) is also constant time. so computing the index is \(O(1)\)</p>
-    <p>it is expected that <code class="highlit">table[index]</code> has zero or few nodes. so searching this also doesn't depend on table size</p>
+    }
+    bool find(K k) {
+      size_t index = h(k) % capacity;
+      for (Node *i = table[index]; i != nullptr; i = i->link)
+        if (i->key == k)
+          return true;
+      return false;
+    }
+};</pre>
+<script>color("hl-a9d8e8b9303eede4", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        Node *link;\n    };\n    size_t capacity;\n    size_t items;\n    Node **table;\n    size_t h(K k);\n  public:\n    HashMap() {\n      items = 0;\n      capacity = 5;\n      table = new Node*[capacity];\n      for (size_t i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return;\n      // insert a new Node into table[index]\n      items++;\n    }\n    bool find(K k) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return true;\n      return false;\n    }\n};", null]]);</script>
+    <h3 id="separate-chaining--expected-runtime">expected runtime</h3>
+    <p>hashing takes constant time. it does scale to the length of the key, but not the table. \(𝗆𝗈𝖽\) is also constant time. so computing the index is \(O(1)\)</p>
+    <p>it is expected that <code class="highlit" id="hl-ab46fb1419428b91">table[index]</code>
+<script>color("hl-ab46fb1419428b91", [["table[index]", null]]);</script> has zero or few nodes. so searching this also doesn't depend on table size</p>
     <p>the tradeoff is you need a very big sparse table to minimize collision risk (capacity \(⋙\) items), and most of the locations will be empty</p>
     <p>the worst-but-very-unlikely case is everything gets mapped to the same index. we can fix this by resizing the table when the load factor becomes too high</p>
-    <h2 id="hash-maps--open-addressing">open addressing</h2>
+    <h2 id="open-addressing">open addressing</h2>
     <p>if we have a collision, we try a different location. a simple version is called <b>linear probing</b>. to compute the index,</p>
     <p>
       \[
-      \text{index} = \left((h(\text{key}) \mathbin{\mathsf{mod}} \text{capacity}) + i\right) \mathbin{\mathsf{mod}} \text{capacity}
+      \text{index} = \left((h(\text{key}) \mathbin{𝗆𝗈𝖽} \text{capacity}) + i\right) \mathbin{𝗆𝗈𝖽} \text{capacity}
       \]
     </p>
     <p>\(i\) is the collision counter, starting at 0.</p>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">V</span><span class="rainbow0">></span>
-<span class="keyword">class</span> <span class="type">HashMap</span> <span class="rainbow0">{</span>
-  <span class="keyword">private</span>:
-    <span class="keyword">class</span> <span class="type">Node</span> <span class="rainbow1">{</span>
-      <span class="keyword">public</span>:
-        <span class="type">K</span> <span class="variable">key</span>;
-        <span class="type">V</span> <span class="variable">value</span>;
-        <span class="comment">// no link!</span>
-      <span class="rainbow1">}</span>;
-      <span class="type">size_t</span> <span class="variable">capacity</span>;
-      <span class="type">size_t</span> <span class="variable">items</span>;
-      <span class="type">Node **</span><span class="variable">table</span>;
-      <span class="type">size_t</span> <span class="function">h</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span>;
-    <span class="keyword">public</span>:
-      <span class="type">HashMap</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
-        capacity = <span class="constant">10</span>;
-        items = <span class="constant">0</span>;
-        table = <span class="keyword">new</span> <span class="type">Node*</span><span class="rainbow2">[</span>capacity<span class="rainbow2">]</span>;
-      <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < capacity; i++<span class="rainbow2">)</span>
-        table<span class="rainbow3">[</span>i<span class="rainbow3">]</span> = <span class="constant">nullptr</span>;
-    <span class="rainbow1">}</span>
-    <span class="type">void</span> <span class="function">insert</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">V</span> <span class="variable">v</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
-      <span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>;
-      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> == <span class="constant">nullptr</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
-        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> = <span class="keyword">new</span> <span class="type">Node</span><span class="rainbow3">()</span>;
-        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key = k;
-        table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->value = v;
+    <pre class="highlit" id="hl-3f06af6aee82ea25">
+template &lt;class K, class V>
+class HashMap {
+  private:
+    class Node {
+      public:
+        K key;
+        V value;
+        // no link!
+      };
+      size_t capacity;
+      size_t items;
+      Node **table;
+      size_t h(K k);
+    public:
+      HashMap() {
+        capacity = 10;
+        items = 0;
+        table = new Node*[capacity];
+      for (int i = 0; i < capacity; i++)
+        table[i] = nullptr;
+    }
+    void insert(K k, V v) {
+      size_t index = h(k) % capacity;
+      size_t i = 0;
+      if (table[index] == nullptr) {
+        table[index] = new Node();
+        table[index]->key = k;
+        table[index]->value = v;
         items++;
-        <span class="keyword">return</span>;
-      <span class="rainbow2">}</span>
-      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key == k<span class="rainbow2">)</span>
-        <span class="keyword">return</span>;
+        return;
+      }
+      if (table[index]->key == k)
+        return;
       i++;
-      index = <span class="rainbow2">(</span>index + <span class="constant">1</span><span class="rainbow2">)</span> % capacity;
-      <span class="comment">// loop</span>
-    <span class="rainbow1">}</span>
-    <span class="type">V</span> <span class="function">getValue</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-      <span class="type">size_t</span> <span class="variable">index</span> = h<span class="rainbow2">(</span>k<span class="rainbow2">)</span> % capacity;
-      <span class="type">size_t</span> <span class="variable">i</span> = <span class="constant">0</span>;
-      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span> == <span class="constant">nullptr</span><span class="rainbow2">)</span>
-        <span class="keyword">return</span> <span class="type">V</span><span class="rainbow3">()</span>; <span class="comment">// meh whatever</span>
-      <span class="keyword">if</span> <span class="rainbow2">(</span>table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->key == k<span class="rainbow2">)</span>
-        <span class="keyword">return</span> table<span class="rainbow3">[</span>index<span class="rainbow3">]</span>->value;
+      index = (index + 1) % capacity;
+      // loop
+    }
+    V getValue(K k) {
+      size_t index = h(k) % capacity;
+      size_t i = 0;
+      if (table[index] == nullptr)
+        return V(); // meh whatever
+      if (table[index]->key == k)
+        return table[index]->value;
       i++;
-      index = <span class="rainbow2">(</span>index + <span class="constant">1</span><span class="rainbow2">)</span> % capacity;
-      <span class="comment">// loop</span>
-    <span class="rainbow1">}</span>
-<span class="rainbow0">}</span>;</pre>
-    <h3 id="hash-maps--open-addressing--expected-runtime">expected runtime</h3>
+      index = (index + 1) % capacity;
+      // loop
+    }
+};</pre>
+<script>color("hl-3f06af6aee82ea25", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        // no link!\n      };\n      size_t capacity;\n      size_t items;\n      Node **table;\n      size_t h(K k);\n    public:\n      HashMap() {\n        capacity = 10;\n        items = 0;\n        table = new Node*[capacity];\n      for (int i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr) {\n        table[index] = new Node();\n        table[index]->key = k;\n        table[index]->value = v;\n        items++;\n        return;\n      }\n      if (table[index]->key == k)\n        return;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n    V getValue(K k) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr)\n        return V(); // meh whatever\n      if (table[index]->key == k)\n        return table[index]->value;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n};", null]]);</script>
+    <h3 id="open-addressing--expected-runtime">expected runtime</h3>
     <p>constant again! ideally, we're not supposed to do any linear probing</p>
-    <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones <img class="emoji" src="traffic-cone.png" /></p>
-    <h2 id="hash-maps--deletion">deletion</h2>
+    <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones <img class="emoji" src="traffic-cone.png" alt="traffic cone emoji i drew" /></p>
+    <h2 id="deletion">deletion</h2>
     <p>for separate chaining we can just find the matching node and delete it</p>
     <p>for open addressing, we need to mark the node "deleted" with some flag, or put a dummy node there</p>
-    <h2 id="hash-maps--resizing">resizing</h2>
+    <h2 id="resizing">resizing</h2>
     <p>the cs202 method to resize stuff is making a bigger thing and copying everything over. that's not gonna work here because the indices depend on the table size. we need to <u>re-<code class="function highlit">insert</code></u> all the elements</p>
     <p>we perform a resize when, say, \(α ≥ 20\%\). we don't remap the traffic cone entries</p>
-    <pre class="highlit">
-<span class="keyword">for</span> <span class="rainbow0">(</span><span class="type">int</span> <span class="variable">i</span> = <span class="constant">0</span>; i < old_capacity; i++<span class="rainbow0">)</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>old_table<span class="rainbow2">[</span>i<span class="rainbow2">]</span> != <span class="constant">nullptr</span><span class="rainbow1">)</span>
-    this->insert<span class="rainbow2">(</span>old_table<span class="rainbow3">[</span>i<span class="rainbow3">]</span>->key, old_table<span class="rainbow3">[</span>i<span class="rainbow3">]</span>->value<span class="rainbow2">)</span>;
-<span class="comment">// deallocate each node of old_table</span>
-<span class="comment">// deallocate old_table</span></pre>
+    <pre class="highlit" id="hl-df7096f757aa61c2">
+for (int i = 0; i < old_capacity; i++)
+  if (old_table[i] != nullptr)
+    this->insert(old_table[i]->key, old_table[i]->value);
+// deallocate each node of old_table
+// deallocate old_table</pre>
+<script>color("hl-df7096f757aa61c2", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c old_capacity; i++", null],[")", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["old_table", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[" != ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    this->insert", null],["(", "rainbow2"],["old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->key, old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->value", null],[")", "rainbow2"],[";\n", null],["// deallocate each node of old_table", "comment"],["\n", null],["// deallocate old_table", "comment"]]);</script>
     <p>resizing is \(O(n)\)! scary! everything else is constant time! so we want to resize as infrequently as possible</p>
     <p>(tangent: procrastination is ok dont feel bad about it)</p>
     <dl>
       <dt>amortization</dt>
       <dd>spreading work out over a longer period of time</dd>
     </dl>
-    <h2 id="hash-maps--other-open-addressing-methods">other open addressing methods</h2>
+    <h2 id="other-open-addressing-methods">other open addressing methods</h2>
     <dl>
       <dt>quadratic probing</dt>
-      <dd>\(\text{index} = \left((h(\text{key}) \mathbin{\mathsf{mod}} \text{capacity}) + i²\right) \mathbin{\mathsf{mod}} \text{capacity}\)</dd>
+      <dd>\(\text{index} = \left((h(\text{key}) \mathbin{𝗆𝗈𝖽} \text{capacity}) + i²\right) \mathbin{𝗆𝗈𝖽} \text{capacity}\)</dd>
       <dt>double hashing</dt>
-      <dd>\(\text{index} = \left(h₁(\text{key}) + i\,h₂(\text{key})\right) \mathbin{\mathsf{mod}} \text{capacity}\)</dd>
+      <dd>\(\text{index} = \left(h₁(\text{key}) + i\,h₂(\text{key})\right) \mathbin{𝗆𝗈𝖽} \text{capacity}\)</dd>
     </dl>
-    <h2 id="hash-maps--comparisons">comparisons</h2>
+    <h2 id="comparisons">comparisons</h2>
     <style>.pro{color:var(--green)}.con{color:var(--red)}</style>
     <table>
       <tr>
@@ -835,7 +877,9 @@ h -'- i j -'- k l -'- m n -'- o</pre>
         <th>avl tree</th>
       </tr>
       <tr>
-        <th scope="row">expected runtime for <code class="highlit">insert</code>/<code class="highlit">find</code></th>
+        <th scope="row">expected runtime for <code class="highlit" id="hl-ca057d6174568380">insert</code>
+<script>color("hl-ca057d6174568380", [["insert", null]]);</script>/<code class="highlit" id="hl-a5c24fed12b1f6da">find</code>
+<script>color("hl-a5c24fed12b1f6da", [["find", null]]);</script></th>
         <td>\(Θ(1)\)</td>
         <td>\(Θ(\log n)\)</td>
       </tr>
@@ -847,49 +891,54 @@ h -'- i j -'- k l -'- m n -'- o</pre>
     </table>
     <h1 id="priority-queues">priority queues</h1>
     <p>uses a <b>binary min heap</b> which is like a binary tree that we squish into an array. a binary min heap is valid if each node's priority value is \(≤\) that of both its children</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-f4fa406bac7ad889">
             3
        7 ---'--- 5
     8 -'- 10  6 -'- 12
 11 -'</pre>
+<script>color("hl-f4fa406bac7ad889", [["            3\n       7 ---'--- 5\n    8 -'- 10  6 -'- 12\n11 -'", null]]);</script>
     <p>gets listified as</p>
-    <pre class="highlit">
+    <pre class="highlit" id="hl-33f268441d056d66">
 [, 3, 7, 5, 8, 10, 6, 12, 11, ]</pre>
+<script>color("hl-33f268441d056d66", [["[, 3, 7, 5, 8, 10, 6, 12, 11, ]", null]]);</script>
     <p>the first element is empty! the root node is at index 1. for each element at index \(i\), the left child is at index \(2i\),the right child is at \(2i + 1\), and the parent is at index \(\left\lfloor\frac i2\right\rfloor\)</p>
     <p><small>\(\lfloor a/b\rfloor\) is integer division of \(a\) and \(b\)</small></p>
     <p>here the capacity is 9 and the heap size is 8</p>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
-<span class="keyword">class</span> <span class="type">PriorityQ</span> <span class="rainbow0">{</span>
-  <span class="keyword">private</span>:
-    <span class="keyword">class</span> <span class="type">PriorityType</span> <span class="rainbow1">{</span>
-      <span class="keyword">public</span>:
-        <span class="type">K</span> <span class="variable">key</span>;
-        <span class="type">P</span> <span class="variable">priority</span>;
-    <span class="rainbow1">}</span>;
-    <span class="type">size_t</span> <span class="variable">capacity</span>;
-    <span class="type">size_t</span> <span class="variable">heapsize</span>;
-    <span class="type">PriorityType *</span><span class="variable">heap</span>;
-    <span class="type">unordered_map</span><span class="rainbow1"><</span><span class="type">K</span>, <span class="type">size_t</span><span class="rainbow1">></span> <span class="variable">key2index</span>;
-    <span class="type">size_t</span> <span class="function">bubbleUp</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
-    <span class="type">size_t</span> <span class="function">bubbleDown</span><span class="rainbow1">(</span><span class="type">size_t</span><span class="rainbow1">)</span>;
-  <span class="keyword">public</span>:
-    <span class="type">PriorityQ</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
+    <pre class="highlit" id="hl-2afede3548c89817">
+template &amp;lt;class K, class P>
+class PriorityQ {
+  private:
+    class PriorityType {
+      public:
+        K key;
+        P priority;
+    };
+    size_t capacity;
+    size_t heapsize;
+    PriorityType *heap;
+    unordered_map&amp;lt;K, size_t> key2index;
+    size_t bubbleUp(size_t);
+    size_t bubbleDown(size_t);
+  public:
+    PriorityQ() {
       heapSize = 0;
       capacity = 10;
-      heap = <span class="keyword">new</span> <span class="type">PriorityType</span><span class="rainbow2">[</span>capacity + 1<span class="rainbow2">]</span>;
-    <span class="rainbow1">}</span>
-    <span class="type">void</span> <span class="function">pushBack</span><span class="rainbow1">(</span><span class="type">K</span> <span class="variable">k</span>, <span class="type">P</span> <span class="variable">p</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-      <span class="comment">// resize heap if needed</span>
-      heap<span class="rainbow2">[</span>heapSize + 1<span class="rainbow2">]</span>.key = k;
-      heap<span class="rainbow2">[</span>heapSize + 1<span class="rainbow2">]</span>.priority = p;
+      heap = new PriorityType[capacity + 1];
+    }
+    void pushBack(K k, P p) {
+      // resize heap if needed
+      heap[heapSize + 1].key = k;
+      heap[heapSize + 1].priority = p;
       heapSize++;
-      bubbleUp<span class="rainbow2">(</span>heapSize<span class="rainbow2">)</span>;
-    <span class="rainbow1">}</span>
-<span class="rainbow0">}</span></pre>
+      bubbleUp(heapSize);
+    }
+}</pre>
+<script>color("hl-2afede3548c89817", [["template &lt;class K, class P>\nclass PriorityQ {\n  private:\n    class PriorityType {\n      public:\n        K key;\n        P priority;\n    };\n    size_t capacity;\n    size_t heapsize;\n    PriorityType *heap;\n    unordered_map&lt;K, size_t> key2index;\n    size_t bubbleUp(size_t);\n    size_t bubbleDown(size_t);\n  public:\n    PriorityQ() {\n      heapSize = 0;\n      capacity = 10;\n      heap = new PriorityType[capacity + 1];\n    }\n    void pushBack(K k, P p) {\n      // resize heap if needed\n      heap[heapSize + 1].key = k;\n      heap[heapSize + 1].priority = p;\n      heapSize++;\n      bubbleUp(heapSize);\n    }\n}", null]]);</script>
     <ul>
-      <li>assigning the element to index <code class="highlit">heapSize</code> + 1 takes \(O(1)\)</li>
-      <li><code class="highlit">bubbleUp</code> does
+      <li>assigning the element to index <code class="highlit" id="hl-df793a00aca843c4">heapSize</code>
+<script>color("hl-df793a00aca843c4", [["heapSize", null]]);</script> + 1 takes \(O(1)\)</li>
+      <li><code class="highlit" id="hl-54ed97e75efecb57">bubbleUp</code>
+<script>color("hl-54ed97e75efecb57", [["bubbleUp", null]]);</script> does
         <ul>
           <li>compute the parent index – \(O(1)\)</li>
           <li>compare priorities – \(O(1)\)</li>
@@ -898,22 +947,26 @@ h -'- i j -'- k l -'- m n -'- o</pre>
         up to [height of the tree] times. the tree is always balanced so this takes \(\log₂ n\) time
       </li>
     </ul>
-    <p>so <code class="highlit">pushBack</code> is \(Θ(\log n)\)</p>
+    <p>so <code class="highlit" id="hl-05fc485a653eaf92">pushBack</code>
+<script>color("hl-05fc485a653eaf92", [["pushBack", null]]);</script> is \(Θ(\log n)\)</p>
     <p>updating:</p>
-    <pre class="highlit">
-heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<span class="rainbow1">]</span><span class="rainbow0">]</span>.priority = ...;</pre>
-    <pre class="highlit">
-<span class="keyword">template</span> <span class="rainbow0"><</span><span class="keyword">class</span> <span class="type">K</span>, <span class="keyword">class</span> <span class="type">P</span><span class="rainbow0">></span>
-<span class="keyword">class</span> <span class="type">PriorityQ</span> <span class="rainbow0">{</span>
-  <span class="comment">// ...</span>
-  <span class="keyword">public</span>:
-    <span class="type">void</span> <span class="function">popFront</span><span class="rainbow1">()</span> <span class="rainbow1">{</span>
-      heap<span class="rainbow2">[</span>1<span class="rainbow2">]</span> = heap<span class="rainbow2">[</span>heapSize<span class="rainbow2">]</span>;
+    <pre class="highlit" id="hl-14c4d5afdcec3547">
+heap[key2index[...]].priority = ...;</pre>
+<script>color("hl-14c4d5afdcec3547", [["heap", null],["[", "rainbow0"],["key2index", null],["[", "rainbow1"],["...", null],["]", "rainbow1"],["]", "rainbow0"],[".priority = ...;", null]]);</script>
+    <pre class="highlit" id="hl-db4aa8fa917d0780">
+template &amp;lt;class K, class P>
+class PriorityQ {
+  // ...
+  public:
+    void popFront() {
+      heap[1] = heap[heapSize];
       heapSize--;
-      bubbleDown<span class="rainbow2">(</span>1<span class="rainbow2">)</span>;
-    <span class="rainbow1">}</span>
-<span class="rainbow0">}</span>;</pre>
-    <p><code class="highlit">popFront</code> is also \(Θ(\log n)\)</p>
+      bubbleDown(1);
+    }
+};</pre>
+<script>color("hl-db4aa8fa917d0780", [["template &lt;class K, class P>\nclass PriorityQ {\n  // ...\n  public:\n    void popFront() {\n      heap[1] = heap[heapSize];\n      heapSize--;\n      bubbleDown(1);\n    }\n};", null]]);</script>
+    <p><code class="highlit" id="hl-e104961ae41aed27">popFront</code>
+<script>color("hl-e104961ae41aed27", [["popFront", null]]);</script> is also \(Θ(\log n)\)</p>
     <h1 id="graph-theory">graph theory</h1>
     <p>a <b>graph</b> \(G\) is a pair of</p>
     <ul>
@@ -921,7 +974,7 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
       <li>a set \(E\) of edges that look like \(\set{vᵢ, vⱼ}\) between them</li>
     </ul>
     <p>it's a <b>directed graph</b> if \(E\) is instead a set of tuples \((vᵢ, vⱼ)\)</p>
-    <img src="digraph.png" />
+    <img src="digraph.png" alt="a sample directed graph" />
     <p>
       for this graph, \[
       \begin{align*}
@@ -958,93 +1011,96 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
       <dt>adjacency list</dt>
       <dd>a vector of linked lists</dd>
     </dl>
-    <h2 id="graph-theory--depth-first-search-dfs">depth-first search / dfs</h2>
+    <h2 id="depth-first-search-dfs">depth-first search / dfs</h2>
     <p>this is like pre/post order traversal but for graphs</p>
     <p>
       when you arrive at a node, pick a neighbor (doesn't matter which) and go there. if there's a dead end, back up
       to the last node you were at and try a different neighbor
     </p>
-    <pre class="highlit">
-<span class="type">void</span> <span class="function">dfs</span><span class="rainbow0">(</span>
-  <span class="type">int</span> <span class="variable">current</span>,
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span>,
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">bool</span><span class="rainbow1">></span> <span class="type">&</span><span class="variable">visited</span>,
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="type">&</span><span class="variable">predecessors</span>
-<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> <span class="rainbow1">(</span>visited<span class="rainbow2">[</span>current<span class="rainbow2">]</span><span class="rainbow1">)</span>
-    <span class="keyword">return</span>;
-  visited<span class="rainbow1">[</span>current<span class="rainbow1">]</span> = true;
-  cout << current << endl; <span class="comment">// preorder</span>
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">neighbor</span>: adjlist<span class="rainbow2">[</span>current<span class="rainbow2">]</span><span class="rainbow1">)</span>
-    <span class="keyword">if</span> <span class="rainbow2">(</span>!visited<span class="rainbow3">[</span>neighbor<span class="rainbow3">]</span><span class="rainbow2">)</span> <span class="rainbow2">{</span>
-      predecessors<span class="rainbow3">[</span>neighbor<span class="rainbow3">]</span> = current;
-      dfs<span class="rainbow3">(</span>neighbor, adjlist, visited, predecessors<span class="rainbow3">)</span>;
-    <span class="rainbow2">}</span>
-  <span class="keyword">return</span>; <span class="comment">// or postorder</span>
-<span class="rainbow0">}</span>
-<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
-  <span class="type">int</span> <span class="variable">v</span>;
+    <pre class="highlit" id="hl-ce08851231359559">
+void dfs(
+  int current,
+  vector&amp;lt;list&amp;lt;int>> adjlist,
+  vector&amp;lt;bool> &amp;amp;visited,
+  vector&amp;lt;int> &amp;amp;predecessors
+) {
+  if (visited[current])
+    return;
+  visited[current] = true;
+  cout << current << endl; // preorder
+  for (int neighbor: adjlist[current])
+    if (!visited[neighbor]) {
+      predecessors[neighbor] = current;
+      dfs(neighbor, adjlist, visited, predecessors);
+    }
+  return; // or postorder
+}
+int main() {
+  int v;
   cin >> v;
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">visited</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">predecessors</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
-  <span class="keyword">for</span> <span class="rainbow1">(</span><span class="type">int</span> <span class="variable">i</span> = 0; i < v; i++<span class="rainbow1">)</span>
-    dfs<span class="rainbow2">(</span>i, adjlist, visited, predecessors<span class="rainbow2">)</span>;
-  <span class="keyword">return</span> 0;
-<span class="rainbow0">}</span></pre>
+  vector&amp;lt;int> visited(v);
+  vector&amp;lt;int> predecessors(v);
+  vector&amp;lt;list&amp;lt;int>> adjlist(v);
+  for (int i = 0; i < v; i++)
+    dfs(i, adjlist, visited, predecessors);
+  return 0;
+}</pre>
+<script>color("hl-ce08851231359559", [["void dfs(\n  int current,\n  vector&lt;list&lt;int>> adjlist,\n  vector&lt;bool> &amp;visited,\n  vector&lt;int> &amp;predecessors\n) {\n  if (visited[current])\n    return;\n  visited[current] = true;\n  cout \u003c\u003c current \u003c\u003c endl; // preorder\n  for (int neighbor: adjlist[current])\n    if (!visited[neighbor]) {\n      predecessors[neighbor] = current;\n      dfs(neighbor, adjlist, visited, predecessors);\n    }\n  return; // or postorder\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;int> visited(v);\n  vector&lt;int> predecessors(v);\n  vector&lt;list&lt;int>> adjlist(v);\n  for (int i = 0; i \u003c v; i++)\n    dfs(i, adjlist, visited, predecessors);\n  return 0;\n}", null]]);</script>
     <p>
       dfs will not find very good paths and is \(Θ(e + v) = Θ(e)\). can you🫵 see why?
     </p>
-    <h2 id="graph-theory--breadth-first-search-bfs">breadth-first search / bfs</h2>
+    <h2 id="breadth-first-search-bfs">breadth-first search / bfs</h2>
     <p>wheee no recursion! finds all of the shortest paths between two nodes</p>
     <p>since there's no recursion here we need a fifo queue to track what nodes we've looked at</p>
-    <pre class="highlit">
-<span class="type">void</span> <span class="function">bfs</span><span class="rainbow0">(</span><span class="type">int</span> <span class="variable">s</span>, <span class="type">int</span> <span class="variable">v</span>, <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span><span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">predecessors</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">bool</span><span class="rainbow1">></span> <span class="variable">visited</span><span class="rainbow1">(</span>v<span class="rainbow1">)</span>;
-  <span class="type">queue</span><span class="rainbow1"><</span><span class="type">int</span><span class="rainbow1">></span> <span class="variable">bfsq</span>;
-  visited<span class="rainbow1">[</span>s<span class="rainbow1">]</span> = true;
-  bfsq.push_back<span class="rainbow1">(</span>s<span class="rainbow1">)</span>;
-  <span class="keyword">while</span> <span class="rainbow1">(</span>!bfsq.empty<span class="rainbow2">()</span><span class="rainbow1">)</span> <span class="rainbow1">{</span>
-    <span class="type">int</span> <span class="variable">x</span> = bfsq.front<span class="rainbow2">()</span>;
-    bfsq.pop_front<span class="rainbow2">()</span>;
+    <pre class="highlit" id="hl-e8c29ddde18029e0">
+void bfs(int s, int v, vector&amp;lt;list&amp;lt;int>> adjlist) {
+  vector&amp;lt;int> predecessors(v);
+  vector&amp;lt;bool> visited(v);
+  queue&amp;lt;int> bfsq;
+  visited[s] = true;
+  bfsq.push_back(s);
+  while (!bfsq.empty()) {
+    int x = bfsq.front();
+    bfsq.pop_front();
     cout << x << endl;
-    <span class="keyword">for</span> <span class="rainbow2">(</span><span class="type">int</span> <span class="variable">y</span>: adjlist<span class="rainbow3">[</span>x<span class="rainbow3">]</span><span class="rainbow2">)</span>
-      <span class="keyword">if</span> <span class="rainbow3">(</span>!visited<span class="rainbow4">[</span>y<span class="rainbow4">]</span><span class="rainbow3">)</span> <span class="rainbow3">{</span>
-        visited<span class="rainbow4">[</span>y<span class="rainbow4">]</span> = true;
-        predecessors<span class="rainbow4">[</span>y<span class="rainbow4">]</span> = x;
-        bfsq.push_back<span class="rainbow4">(</span>y<span class="rainbow4">)</span>;
-      <span class="rainbow3">}</span>
-  <span class="rainbow1">}</span>
-<span class="rainbow0">}</span>
-<span class="type">int</span> <span class="function">main</span><span class="rainbow0">()</span> <span class="rainbow0">{</span>
-  <span class="type">int</span> <span class="variable">v</span>;
+    for (int y: adjlist[x])
+      if (!visited[y]) {
+        visited[y] = true;
+        predecessors[y] = x;
+        bfsq.push_back(y);
+      }
+  }
+}
+int main() {
+  int v;
   cin >> v;
-  <span class="type">vector</span><span class="rainbow1"><</span><span class="type">list</span><span class="rainbow2"><</span><span class="type">int</span><span class="rainbow2">></span><span class="rainbow1">></span> <span class="variable">adjlist</span>;
-  bfs<span class="rainbow1">(</span>0, adjlist<span class="rainbow1">)</span>;
-  <span class="keyword">return</span> 0;
-<span class="rainbow0">}</span></pre>
+  vector&amp;lt;list&amp;lt;int>> adjlist;
+  bfs(0, adjlist);
+  return 0;
+}</pre>
+<script>color("hl-e8c29ddde18029e0", [["void bfs(int s, int v, vector&lt;list&lt;int>> adjlist) {\n  vector&lt;int> predecessors(v);\n  vector&lt;bool> visited(v);\n  queue&lt;int> bfsq;\n  visited[s] = true;\n  bfsq.push_back(s);\n  while (!bfsq.empty()) {\n    int x = bfsq.front();\n    bfsq.pop_front();\n    cout \u003c\u003c x \u003c\u003c endl;\n    for (int y: adjlist[x])\n      if (!visited[y]) {\n        visited[y] = true;\n        predecessors[y] = x;\n        bfsq.push_back(y);\n      }\n  }\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;list&lt;int>> adjlist;\n  bfs(0, adjlist);\n  return 0;\n}", null]]);</script>
     <p>
       putting each node on the queue takes \(Θ(e)\) time and examining each neighbor takes \(Θ(e)\) time. so bfs
       is also \(Θ(e)\)
     </p>
-    <h2 id="graph-theory--dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</h2>
+    <h2 id="dijkstra-s-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</h2>
     <p>here we are given a graph with <b>weights</b>. and we do bfs on it!</p>
-    <pre class="highlit">
-<span class="function">dijkstra</span>(s, adjlist)
-  <span class="keyword">init</span> pq
-  <span class="keyword">init</span> π array
-  <span class="keyword">init</span> w array with ∞ for each element
+    <pre class="highlit" id="hl-f106b142ca8ce379">
+dijkstra(s, adjlist)
+  init pq
+  init π array
+  init w array with ∞ for each element
   push s.0 onto the pq
-  <span class="keyword">while</span> pq is not empty
+  while pq is not empty
     pop x.v off the queue
-    <span class="keyword">for</span> each neighbor y of x
+    for each neighbor y of x
       relax(x, y, π, pq)
-<span class="function">relax</span>(x, y, π, pq)
-  <span class="keyword">if</span> x.v + edgeweight(x, y) < y.v
+relax(x, y, π, pq)
+  if x.v + edgeweight(x, y) < y.v
     y.v = x.v + edgeweight(x, y)
     π[y] = x
     update y in the pq</pre>
+<script>color("hl-f106b142ca8ce379", [["dijkstra", "function"],["(s, adjlist)\n  ", null],["init", "keyword"],[" pq\n  ", null],["init", "keyword"],[" π array\n  ", null],["init", "keyword"],[" w array with ∞ for each element\n  push s.0 onto the pq\n  ", null],["while", "keyword"],[" pq is not empty\n    pop x.v off the queue\n    ", null],["for", "keyword"],[" each neighbor y of x\n      relax(x, y, π, pq)\n", null],["relax", "function"],["(x, y, π, pq)\n  ", null],["if", "keyword"],[" x.v + edgeweight(x, y) \u003c y.v\n    y.v = x.v + edgeweight(x, y)\n    π[y] = x\n    update y in the pq", null]]);</script>
     <p>
       if there are any negative edge weights, dijkstra's doesn't work, because it is too greedy. even worse are
       negative cycles because then the weight to get everywhere is \(-∞\) and <i>nothing</i> can solve that
@@ -1079,7 +1135,7 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
         </ul>
       </li>
     </ol>
-    <h2 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</h2>
+    <h2 id="kruskal-s-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</h2>
     <p>also greedy. but what's a minimum spanning tree?</p>
     <dl>
       <dt>tree</dt>
@@ -1089,26 +1145,27 @@ heap<span class="rainbow0">[</span>key2index<span class="rainbow1">[</span>...<s
       <dt>minimum spanning tree</dt>
       <dd>given an undirected weighted graph, the spanning tree with minimal total weight</dd>
     </dl>
-    <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--union-find-structure">union-find structure</h3>
+    <h3 id="union-find-structure">union-find structure</h3>
     <p>we have a predecessor array used to determine the leader of a group</p>
-    <pre class="highlit">
-<span class="keyword">fn</span> <span class="function">find</span><span class="rainbow0">(</span>x<span class="rainbow0">)</span> <span class="rainbow0">{</span>leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> == x ? <span class="keyword">return</span> x : <span class="keyword">return</span> leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> = find<span class="rainbow1">(</span>leader<span class="rainbow2">[</span>x<span class="rainbow2">]</span><span class="rainbow1">)</span><span class="rainbow0">}</span> <span class="comment">// compresses the path</span>
-<span class="keyword">fn</span> <span class="function">union</span><span class="rainbow0">(</span>x, y<span class="rainbow0">)</span> <span class="rainbow0">{</span>
-  <span class="keyword">if</span> x is in the bigger group
-    leader<span class="rainbow1">[</span>y<span class="rainbow1">]</span> = leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span>;
-  <span class="keyword">else</span>
-    leader<span class="rainbow1">[</span>x<span class="rainbow1">]</span> = leader<span class="rainbow1">[</span>y<span class="rainbow1">]</span>;
-<span class="rainbow0">}</span></pre>
-    <h3 id="graph-theory--kruskal-s-minimum-spanning-tree-algorithm--the-algorithm">the algorithm</h3>
+    <pre class="highlit" id="hl-f19102e7501e6843">
+fn find(x) {leader[x] == x ? return x : return leader[x] = find(leader[x])} // compresses the path
+fn union(x, y) {
+  if x is in the bigger group
+    leader[y] = leader[x];
+  else
+    leader[x] = leader[y];
+}</pre>
+<script>color("hl-f19102e7501e6843", [["fn", "keyword"],[" ", null],["find", "function"],["(", "rainbow0"],["x", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" == x ? ", null],["return", "keyword"],[" x : ", null],["return", "keyword"],[" leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = find", null],["(", "rainbow1"],["leader", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[")", "rainbow1"],["}", "rainbow0"],[" ", null],["// compresses the path", "comment"],["\n", null],["fn", "keyword"],[" ", null],["union", "function"],["(", "rainbow0"],["x, y", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" x is in the bigger group\n    leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[";\n  ", null],["else", "keyword"],["\n    leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[";\n", null],["}", "rainbow0"]]);</script>
+    <h3 id="the-algorithm">the algorithm</h3>
     <p>given a set \(E\) of weighted undirected edges</p>
     <ul>
       <li>insert the edges into a pq (binary min heap)</li>
       <li>while the pq isn't empty:
         <ul>
           <li>pop edge \((x, y)\) off the pq</li>
-          <li>if \(\mathsf{find}(x) ≠ \mathsf{find}(y)\):
+          <li>if \(𝖿𝗂𝗇𝖽(x) ≠ 𝖿𝗂𝗇𝖽(y)\):
             <ul>
-              <li>\(\mathsf{union}(x, y)\)</li>
+              <li>\(𝗎𝗇𝗂𝗈𝗇(x, y)\)</li>
               <li>add \((x, y)\) to mst</li>
             </ul>
           </li>
