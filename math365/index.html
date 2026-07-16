@@ -13,7 +13,7 @@
        margin-left: 40px;
        margin-block: 4px;
      }
-     dt, b {
+     dt, p > b {
        color: var(--magenta);
      }
     </style>
@@ -29,7 +29,18 @@
 <li><a href="#1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</a></li>
 <li><a href="#1-3-consistent-linear-systems">1.3 consistent linear systems</a></li>
 <li><a href="#1-5-matrix-operations">1.5 matrix operations</a><ul>
+<li><a href="#vectors-in-ℝⁿ">vectors in \(ℝⁿ\)</a></li>
 <li><a href="#matrix-multiplication">matrix multiplication</a></li>
+<li><a href="#other-representations-of-matrices">other representations of matrices</a></li>
+</ul>
+</li>
+<li><a href="#1-6-algebraic-properties-of-matrix-operations">1.6 algebraic properties of matrix operations</a><ul>
+<li><a href="#transpose-matrix">transpose matrix </a></li>
+<li><a href="#identity-matrix">identity matrix</a></li>
+</ul>
+</li>
+<li><a href="#1-7-linear-independence-and-nonsingular-matrices">1.7 linear independence and nonsingular matrices</a><ul>
+<li><a href="#linear-independence">linear independence</a></li>
 </ul>
 </li>
 </ul>
@@ -235,11 +246,27 @@
     <p>
       if \(𝐀\) is a matrix and \(r ∈ ℝ\), the matrix \(r𝐀\) is defined as \((r𝐀)ᵢⱼ = raᵢⱼ\)
     </p>
+    <h3 id="vectors-in-ℝⁿ">vectors in \(ℝⁿ\)</h3>
     <p>
       a <b>vector in \(ℝⁿ\)</b> is of the form
       \[
-      \(x₁\) and \(x₂\) are dependent (because their columns only have leading 1s) and \(x₃\) and \(x₄\) are
-      independent
+      𝐱 = \begin{bmatrix} x₁\\ x₂\\ ⋮\\ xₙ \end{bmatrix}
+      \]
+      where \(x₁, x₂, …, xₙ\) are scalars
+    </p>
+    <p>a vector \(𝐱 ∈ ℝⁿ\) is secretly an \((n × 1)\) matrix</p>
+    <p>
+      <b class="example">ex.</b> suppose the augmented matrix of a system is
+      \[
+      \left[
+      \begin{array}{cccc|c}
+      1 & 0 & -1 & -3 & 0\\
+      0 & 1 & 2 & 1 & 0
+      \end{array}
+      \right]
+      \]
+      \(x₁\) and \(x₂\) are dependent variables (because their columns have leading 1s) and \(x₃\) and \(x₄\) are
+      independent variables.
     </p>
     <p>
       \[
@@ -281,14 +308,143 @@
     </p>
     <p>
       for a matrix \(𝐀\) of size \(m × n\) and \(𝐁\) of size \(n × p\),
-      \(𝐀𝐁\) has entries \[
+      \(𝐀𝐁\) is an \(m × p\) matrix with entries \[
       (𝐀𝐁)ᵢⱼ = ∑ₖ₌₁ⁿ aᵢₖbₖⱼ
       \]
       (<a href="https://www.youtube.com/watch?v=XkY2DOUCWMU">3b1b essence of linalg video</a>)
     </p>
+    <p>
+      <b class="example">ex.</b> let
+      \(
+      𝐀 = \begin{bmatrix}
+      1 & 2 & 3\\
+      1 & 1 & 3
+      \end{bmatrix}
+      \),
+      \(
+      𝐁 = \begin{bmatrix}
+      1 & 1\\
+      2 & 1\\
+      3 & 1
+      \end{bmatrix}
+      \), then
+      \[
+      𝐀𝐁 = \begin{bmatrix}
+      1\mathord·1 + 2\mathord·2 + 3\mathord·3 & 1\mathord·1 + 2\mathord·1 + 3\mathord·1\\
+      1\mathord·1 + 1\mathord·2 + 3\mathord·3 & 1\mathord·1 + 1\mathord·1 + 3\mathord·1\\
+      \end{bmatrix}
+      = \begin{bmatrix}
+      14 & 6\\
+      12 & 5
+      \end{bmatrix}
+      \]
+      and
+      \[
+      𝐁𝐀 = \begin{bmatrix}
+      1\mathord·1 + 1\mathord·1 & 1\mathord·2 + 1\mathord·1 & 1\mathord·3 + 1\mathord·3\\
+      2\mathord·1 + 1\mathord·1 & 2\mathord·2 + 1\mathord·1 & 2\mathord·3 + 1\mathord·3\\
+      3\mathord·1 + 1\mathord·1 & 3\mathord·2 + 1\mathord·1 & 3\mathord·3 + 1\mathord·3
+      \end{bmatrix}
+      = \begin{bmatrix}
+      2 & 3 & 6\\
+      3 & 5 & 9\\
+      4 & 7 & 12
+      \end{bmatrix}
+      \]
+    </p>
+    <p>matrix multiplication isn't commutative but it <i>is</i> associative, i.e. \(𝐀(𝐁𝐂) = (𝐀𝐁)𝐂 ≕ 𝐀𝐁𝐂\)</p>
+    <h3 id="other-representations-of-matrices">other representations of matrices</h3>
+    <p>
+      we can write an \(m × n\) matrix \(𝐀\) as a row vector <i>of</i> its column vectors
+      \[𝐀 = \begin{bmatrix} 𝐀₁ & 𝐀₂ & … & 𝐀ₙ \end{bmatrix}\]
+    </p>
+    <p>then we can define \(𝐀𝐱\) as \[𝐀𝐱 = 𝐱₁𝐀₁ + 𝐱₂𝐀₂ + ⋯ + 𝐱ₙ𝐀ₙ\]</p>
+    <p><mark><b>todo</b> extend to matrix multiplication</mark></p>
+    <h2 id="1-6-algebraic-properties-of-matrix-operations">1.6 algebraic properties of matrix operations</h2>
+    <p>
+      matrix addition is commutative and associative because we're just adding the entries which are all real numbers
+    </p>
+    <p>let \(𝟎\) be the \(m × n\) matrix whose entries are all zero. then \[𝐀 + 𝟎 = 𝟎 + 𝐀 = 𝐀\]</p>
+    <p>
+      there is a unique \(m × n\) matrix \(𝐏\) such that \(𝐀 + 𝐏 = 𝟎\); specifically
+      \(𝐏ᵢⱼ = -𝐀ᵢⱼ\). this is called the opposite/negative matrix
+    </p>
+    <p>
+      matrix multiplication is also distributive i.e. \((𝐀 + 𝐁)𝐌 = 𝐀𝐌 + 𝐁𝐌\)
+    </p>
+    <p>for scalar multiplication:</p>
+    <ul>
+      <li>\((r + s)𝐀 = r𝐀 + s𝐀\)</li>
+      <li>\((rs)𝐀 = r(s𝐀) = s(r𝐀) = rs𝐀\)</li>
+      <li>\(r(𝐀 + 𝐁) = r𝐀 + r𝐁\)</li>
+    </ul>
+    <h3 id="transpose-matrix">transpose matrix </h3>
+    <p>
+      if \(𝐀\) is an \(m × n\) matrix, \(𝐀^⊤\) is an \(n × m\) matrix with entries \((𝐀^⊤)ᵢⱼ = aⱼᵢ\)
+    </p>
+    <p>\(𝐀\) is <b>symmetric</b> if \(𝐀 = 𝐀^⊤\)</p>
+    <p>properties of transpose:</p>
+    <ul>
+      <li>\((𝐀 + 𝐁)^⊤ = 𝐀^⊤ + 𝐁^⊤\)</li>
+      <li>\((𝐀𝐁)^⊤ = 𝐁^⊤ + 𝐀^⊤\)</li>
+      <li>\({𝐀^⊤}^⊤ = 𝐀\)</li>
+      <li></li>
+    </ul>
+    <h3 id="identity-matrix">identity matrix</h3>
+    <p>
+      the \(n × n\) matrix \(𝐈ₙ\) is the zero matrix but with 1s in the diagonal, eg
+      \[
+      𝐈₃ = \begin{bmatrix}
+      1 & 0 & 0\\
+      0 & 1 & 0\\
+      0 & 0 & 1
+      \end{bmatrix}
+      \]
+    </p>
+    <p>if \(𝐀\) is an \(m × n\) matrix, \(𝐈ₘ 𝐀 = 𝐀𝐈ₙ = 𝐀\)</p>
+    <h2 id="1-7-linear-independence-and-nonsingular-matrices">1.7 linear independence and nonsingular matrices</h2>
+    <h3 id="linear-independence">linear independence</h3>
+    <p>
+      let \(𝐀₁ = \begin{bmatrix} 1\\ 2\end{bmatrix}\)
+      and \(𝐀₂ = \begin{bmatrix} 2\\ 1\end{bmatrix}\)
+    </p>
+    <p>can we find \(x₁, x₂ ∈ ℝ\) such that \(x₁𝐀₁ + x₂𝐀 ₂ = 𝟎\) ?</p>
+    <p>
+      i.e.
+      \(
+      x₁ \begin{bmatrix} 1\\ 2 \end{bmatrix}
+      + x₂ \begin{bmatrix} 2\\ 1 \end{bmatrix}
+      = 𝟎
+      \)
+    </p>
+    <p>
+      i.e.
+      \[
+      \left\{
+      \begin{align*}
+      x₁ + 2x₂ &= 0\\
+      2x₁ + x₂ &= 0
+      \end{align*}
+      \right.
+      \]
+      which is a homogeneous system!
+    </p>
+    <p>
+      in reduced echelon form this is
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & 0 & 0\\
+      0 & 1 & 0
+      \end{array}
+      \right]
+      \]
+      so the only solution is \(x₁ = x₂ = 0\)
+    </p>
+    <p><mark><b>tmrw</b> general definition of linear independence</mark></p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
-    <script>temml.renderMathInElement(document.body, {trust: true});</script>
+    <script>temml.renderMathInElement(document.body, {trust: true, wrap: "tex"});</script>
   </body>
 </html>
