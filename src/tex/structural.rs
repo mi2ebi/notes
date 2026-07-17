@@ -119,6 +119,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set![
     "underline",
     "underset",
     "vbmatrix",
+    "vec",
     "vert",
     "vmatrix",
     "vphantom",

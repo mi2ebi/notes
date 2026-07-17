@@ -13,7 +13,6 @@ pub static COMBINING: phf::Map<&str, char> = phf_map! {
     "`" | "grave" => '\u{0300}',
     "u" | "breve" => '\u{0306}',
     "v" | "check" => '\u{030c}',
-    "vec" => '\u{20d7}',
 };
 
 static ACCENT_RE: LazyLock<FancyRegex> = LazyLock::new(|| {
