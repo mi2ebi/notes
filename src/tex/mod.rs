@@ -1,4 +1,5 @@
 pub mod accents;
+pub mod envs;
 pub mod fonts;
 pub mod macros;
 pub mod scripts;
@@ -30,7 +31,8 @@ pub fn process_region(
     subscripts: &HashMap<char, char>,
     negations: &HashMap<char, char>,
 ) -> String {
-    let content = macros::replace(content);
+    let content = envs::replace(content);
+    let content = macros::replace(&content);
     let content = replace_negations(&content, negations);
     let content = fonts::replace(&content, font_maps);
     let content = accents::replace(&content);

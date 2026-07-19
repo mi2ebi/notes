@@ -12,6 +12,8 @@ pub fn slugify(text: &str) -> String {
                 slug.push(lc);
             }
             last_was_sep = false;
+        } else if c == '\'' || c == '’' {
+            // drop
         } else if !last_was_sep {
             slug.push('-');
             last_was_sep = true;

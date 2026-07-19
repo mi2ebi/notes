@@ -27,6 +27,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set![
     "cases",
     "cfrac",
     "choose",
+    "class",
     "color",
     "colorbox",
     "cos",

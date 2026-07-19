@@ -13,6 +13,7 @@ pub mod colors;
 pub mod entities;
 pub mod hl;
 pub mod html;
+pub mod include;
 pub mod math;
 pub mod tex;
 pub mod toc;
