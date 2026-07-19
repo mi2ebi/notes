@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+  <head>
+    <title>extra problems :3</title>
+    <meta name="color-scheme" content="light dark" />
+    <style>
+     body > * { font-family: sans-serif; }
+     math { font-size: 1.15em; }
+     math[display=block] { text-align: left; margin-left: 40px; margin-block: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>1.6</h1>
+    <h2>1.</h2>
+    <p>
+      Let
+      \(𝐀 = \begin{bmatrix}1 & 2\\ 3 & 4\end{bmatrix}\),
+      \(𝐁 = \begin{bmatrix}0 & -1\\ 2 & 1\end{bmatrix}\),
+      \(𝐂 = \begin{bmatrix}2 & 0\\ 1 & 3\end{bmatrix}\).
+    </p>
+    <p>Compute \(𝐀 + 2𝐁\), \(𝐀𝐁 - 𝐁𝐀\), and \((𝐀 + 𝐁)𝐂\).</p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        \(
+        𝐀 + 2𝐁 = \begin{bmatrix}1 & 2\\ 3 & 4\end{bmatrix} + \begin{bmatrix}0 & -2\\ 4 & 2\end{bmatrix}
+        = \begin{bmatrix}1 & 0\\ 7 & 6\end{bmatrix}
+        \)
+      </p>
+      <p>
+        \(𝐀𝐁 = \begin{bmatrix}4 & 1\\ 8 & 1\end{bmatrix}\),
+        \(𝐁𝐀 = \begin{bmatrix}-3 & -2\\ 5 & 8\end{bmatrix}\),
+        \(𝐀𝐁 - 𝐁𝐀 = \begin{bmatrix}7 & 3\\ 3 & -7\end{bmatrix}\)
+      </p>
+      <p>
+        \(
+        (𝐀 + 𝐁)𝐂 = \begin{bmatrix}1 & 1\\ 5 & 5\end{bmatrix}\begin{bmatrix}2 & 0\\ 1 & 3\end{bmatrix}
+        = \begin{bmatrix}3 & 3\\ 15 & 15\end{bmatrix}
+        \)
+      </p>
+    </details>
+    <h2>2.</h2>
+    <p>
+      Let \(𝐀\) be a \(3 × 2\) matrix and \(𝐁\) be a \(2 × 4\) matrix. What are the sizes of
+      \(𝐀^⊤\), \(𝐁^⊤\), \(𝐀𝐁\), and \(𝐁^⊤𝐀^⊤\)?
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        \(𝐀^⊤\) is \(3 × 2\), \(𝐁^⊤\) is \(4 × 2\), \(𝐀𝐁\) is \(3 × 4\), and \(𝐁^⊤𝐀^⊤ = (𝐀𝐁)^⊤\) is \(4 × 3\).
+      </p>
+    </details>
+    <h2>3.</h2>
+    <p>
+      Find all \(2 × 2\) matrices \(𝐀\) such that \(𝐀^⊤ = -𝐀\). Such matrices are called <i>skew-symmetric</i>.
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        Let \(𝐀 = \begin{bmatrix}a & b\\ c & d\end{bmatrix}\). Then
+        \[
+        𝐀^⊤ = \begin{bmatrix}a & c\\ b & d\end{bmatrix} = \begin{bmatrix}-a & -b\\ -c & -d\end{bmatrix} = -𝐀
+        \]
+      </p>
+      <p>
+        \(a = -a\) and \(d = -d\) so those must both be zero, and \(c = -b\). So all skew-symmetric \(2 × 2\) matrices have the form
+        \[
+        𝐀 = \begin{bmatrix}0 & r\\ -r & 0\end{bmatrix},~~r ∈ ℝ
+        \]
+      </p>
+    </details>
+    <h1>1.7</h1>
+    <h2>4.</h2>
+    <p>For each set of vectors, are they linearly independent?</p>
+    <p>
+      (a)
+      \(
+      𝐮 = \begin{bmatrix}1\\ 2\end{bmatrix}, 𝐯 = \begin{bmatrix}3\\ 6\end{bmatrix}
+      \)
+    </p>
+    <p>
+      (b)
+      \(
+      𝐮 = \begin{bmatrix}1\\ 0\\ 2\end{bmatrix}, 𝐯 = \begin{bmatrix}0\\ 1\\ 1\end{bmatrix}, 𝐰 = \begin{bmatrix}2\\ -1\\ 3\end{bmatrix}
+      \)
+    </p>
+    <p>
+      (c)
+      \(
+      𝐮 = \begin{bmatrix}1\\ 1\\ 0\end{bmatrix}, 𝐯 = \begin{bmatrix}0\\ 1\\ 1\end{bmatrix}, 𝐰 = \begin{bmatrix}1\\ 0\\ 1\end{bmatrix}
+      \)
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>(a) Dependent: \(𝐯 = 3𝐮\).</p>
+      <p>
+        (b)
+        The corresponding matrix can be RREFd into
+        \(\begin{bmatrix}1 & 0 & 2\\ 0 & 1 & -1\\ 0 & 0 & 0\end{bmatrix}\),
+        which has 2 pivots (leading 1s), but we have 3 vectors, so they're linearly dependent.
+        Specifically, \(𝐰 = 2𝐮 - 𝐯\).
+      </p>
+      <p>
+        (c)
+        This can be RREFd into \(\bmat{1 & 0 & 1\\ 0 & 1 & -1\\ 0 & 0 & 1}.
+        As there are 3 pivots, the vectors are linearly independent.
+      </p>
+    </details>
+    <h2>5.</h2>
+    <p>
+      Is \(𝐀 = \begin{bmatrix}1 & 2 & 3\\ 0 & 1 & 4\\ 5 & 6 & 0\end{bmatrix}\) nonsingular?
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        The RREF is \(𝐈₃\), the \(3 × 3\) identity matrix, so \(𝐀\) is nonsingular.
+      </p>
+    </details>
+    <h2>6.</h2>
+    <p>
+      True or false: If \(𝐀\) is a quare matrix and its rows are linearly independent, then \(𝐀\) is nonsingular.
+      Briefly justify.
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        True! For a square matrix, linear independence of the rows is equivalent to linear indepence of the columns,
+        which is the definition of nonsingularity. Equivalently, if the rows are independent, RREF has a pivot in
+        every row, and hence in every column (it's a square matrix), which makes it an identity matrix.
+      </p>
+    </details>
+    <h1>1.9</h1>
+    <h2>7.</h2>
+    <p>Invert each matrix, if possible.</p>
+    <p>
+      \(𝐀 = \begin{bmatrix}4 & 7\\ 2 & 6\end{bmatrix}\),
+      \(𝐁 = \begin{bmatrix}2 & 1\\ 4 & 2\end{bmatrix}\),
+      \(𝐂 = \begin{bmatrix}1 & 2 & -1\\ 2 & 5 & 0\\ -1 & -1 & 2\end{bmatrix}\)
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        The determinant of \(𝐀\) (which later we'll write as \(\det 𝐀\)) is
+        \(4(6) - 7(2) = 10 ≠ 0\), so it's invertible.
+        \[
+        𝐀⁻¹ = \frac1{10}\begin{bmatrix}6 & -7\\ -2 & 4\end{bmatrix}
+        = \begin{bmatrix}0.6 & -0.7\\ -0.2 & 0.4\end{bmatrix}
+        \]
+      </p>
+      <p>\(\det 𝐁 = 2(2) - 1(4) = 0\), so we can't invert it.</p>
+      <p>Augment \(𝐂\) with \(𝐈₃\) and row reduce:</p>
+      <p>
+        \[
+        \left[
+        \begin{array}{ccc|ccc}
+        1 & 2 & -1 & 1 & 0 & 0\\
+        2 & 5 & 0 & 0 & 1 & 0\\
+        -1 & -1 & 2 & 0 & 1 & 0
+        \end{array}
+        \right]
+        \]
+      </p>
+      <p>
+        After
+        (1) \(R₂ - 2R₁\)
+        (2) \(R₃ + R₁\)
+        (3) \(R₃ - R₂\)
+        (4) \(-R₃\)
+        (5) \(R₂ - 2R₃\)
+        (6) \(R₁ + R₃\)
+        (7) \(R₁ - 2R₂\),
+        we get
+        \[
+        𝐂⁻¹ = \begin{bmatrix}-10 & 3 & -5\\ 4 & -1 & 2\\ -3 & 1 & -1\end{bmatrix}
+        \]
+      </p>
+    </details>
+    <h2>8.</h2>
+    <p>
+      Use \(𝐀⁻¹\) from the previous problem to solve \(𝐀𝐱 = 𝐛 = \begin{bmatrix}5\\ 4\end{bmatrix}\).
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        \(
+        𝐱 = 𝐀⁻¹𝐛 =
+        \frac1{10}\begin{bmatrix}6 & -7\\ -2 & 4\end{bmatrix}
+        \begin{bmatrix}5\\ 4\end{bmatrix}
+        = \frac1{10}\begin{bmatrix}30 - 28\\ -10 + 16\end{bmatrix}
+        = \frac1{10}\begin{bmatrix}2\\ 6\end{bmatrix}
+        = \begin{bmatrix}0.2\\ 0.6\end{bmatrix}
+        \)
+      </p>
+    </details>
+    <h2>9.</h2>
+    <p>
+      Let \(𝐀\) be an \(n × n\) invertible matrix. Show that if \(𝐀𝐱 = 𝟎\) (the zero vector), then \(𝐱 = 𝟎\).
+    </p>
+    <details>
+      <summary>Solution</summary>
+      <p>
+        Multiply both sides of \(𝐀𝐱 = 𝟎\) on the left by \(𝐀⁻¹\):
+        \[
+        \begin{align*}
+        𝐀⁻¹(𝐀𝐱) &= 𝐀⁻¹𝟎\\
+        (𝐀⁻¹𝐀)𝐱 &= 𝟎\\
+        𝐈ₙ𝐱 &= 𝟎\\
+        𝐱 &= 𝟎
+        \end{align*}
+        \]
+      </p>
+      <p>
+        Since the only solution is the trivial one, the columns of \(𝐀\) are linearly independent, so
+        \(𝐀\) is nonsingular (which we already knew, since it's invertible).
+      </p>
+    </details>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true, wrap: "tex"});</script>
+  </body>
+</html>
