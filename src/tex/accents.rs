@@ -6,7 +6,7 @@ use phf::phf_map;
 pub static COMBINING: phf::Map<&str, char> = phf_map! {
     "=" | "bar" => '\u{0304}',
     "~" | "tilde" => '\u{0303}',
-    "^" | "hat" => '\u{0302}',
+    // "^" | "hat" => '\u{0302}',
     "." | "dot" => '\u{0307}',
     "ddot" => '\u{0308}',
     "'" | "acute" => '\u{0301}',

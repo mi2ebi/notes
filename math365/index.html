@@ -41,6 +41,12 @@
 </li>
 <li><a href="#1-7-linear-independence-and-nonsingular-matrices">1.7 linear independence and nonsingular matrices</a><ul>
 <li><a href="#linear-independence">linear independence</a></li>
+<li><a href="#unit-vectors">unit vectors</a></li>
+<li><a href="#nonsingular-matrices">nonsingular matrices</a></li>
+</ul>
+</li>
+<li><a href="#1-9-matrix-inverses-and-their-properties">1.9 matrix inverses and their properties</a><ul>
+<li><a href="#determinant-of-2-2-matrix">determinant of \(2 × 2\) matrix</a></li>
 </ul>
 </li>
 </ul>
@@ -358,8 +364,13 @@
       we can write an \(m × n\) matrix \(𝐀\) as a row vector <i>of</i> its column vectors
       \[𝐀 = \begin{bmatrix} 𝐀₁ & 𝐀₂ & … & 𝐀ₙ \end{bmatrix}\]
     </p>
-    <p>then we can define \(𝐀𝐱\) as \[𝐀𝐱 = 𝐱₁𝐀₁ + 𝐱₂𝐀₂ + ⋯ + 𝐱ₙ𝐀ₙ\]</p>
-    <p><mark><b>todo</b> extend to matrix multiplication</mark></p>
+    <p>then we can define \(𝐀𝐱\) as \[𝐀𝐱 = x₁𝐀₁ + x₂𝐀₂ + ⋯ + xₙ𝐀ₙ\]</p>
+    <p>
+      if \(𝐀\) is an \(m × n\) matrix and \(𝐁\) is an \(n × p\) matrix, we can write matrix multiplication as
+      \[
+      𝐀𝐁 = \begin{bmatrix} 𝐀𝐁₁ & 𝐀𝐁₂ & … & 𝐀𝐁ₙ \end{bmatrix}
+      \]
+    </p>
     <h2 id="1-6-algebraic-properties-of-matrix-operations">1.6 algebraic properties of matrix operations</h2>
     <p>
       matrix addition is commutative and associative because we're just adding the entries which are all real numbers
@@ -441,7 +452,97 @@
       \]
       so the only solution is \(x₁ = x₂ = 0\)
     </p>
-    <p><mark><b>tmrw</b> general definition of linear independence</mark></p>
+    <p>
+      a set of vectors \(𝐀₁, 𝐀₂, …, 𝐀ₙ ∈ ℝᵐ\) is <b>linearly independent</b> if the only solution to the equation
+      \[x₁𝐀₁ + x₂𝐀₂ + ⋯ + xₙ𝐀ₙ = 𝟎\]
+      is
+      \[x₁ = x₂ = ⋯ = xₘ = 0\]
+    </p>
+    <p>otherwise they're <b>linearly dependent</b></p>
+    <h3 id="unit-vectors">unit vectors</h3>
+    <p>
+      the unit vectors in \(ℝⁿ\) are
+      \[
+      𝐞₁ = \begin{bmatrix} 1\\ 0\\ ⋮\\ 0 \end{bmatrix},
+      𝐞₂ = \begin{bmatrix} 0\\ 1\\ ⋮\\ 0 \end{bmatrix},
+      …
+      𝐞ₙ = \begin{bmatrix} 0\\ 0\\ ⋮\\ 1 \end{bmatrix},
+      \]
+    </p>
+    <p>the set \(\set{𝐞₁, 𝐞₂, …, 𝐞ₙ}\) is linearly independent</p>
+    <p>any vector \(𝐱\) can be written as \(x₁𝐞₁ + x₂𝐞₂ + ⋯ + xₙ𝐞ₙ\)</p>
+    <h3 id="nonsingular-matrices">nonsingular matrices</h3>
+    <p>
+      an \(n × n\) matrix is <b>nonsingular</b> if its column vectors are linearly independent. otherwise it's
+      <b>singular</b>
+    </p>
+    <p>if you can RREF it into being an identity matrix, it's nonsingular</p>
+    <p>
+      if \(𝐀\) is a square matrix and \(𝐛 ∈ ℝⁿ\), \(𝐀\) is nonsingular if
+      \[𝐀𝐱 = 𝐛\]
+      has exactly one solution
+    </p>
+    <p>
+      if \(𝐀\) is nonsingular, so is \(𝐀^⊤\). this means \(𝐀\) is also nonsingular if its <i>row</i>
+      vectors are linearly independent
+    </p>
+    <h2 id="1-9-matrix-inverses-and-their-properties">1.9 matrix inverses and their properties</h2>
+    <p>we can solve \(ax = b\) by doing \(x = a⁻¹b\). can we do the same for matrices?</p>
+    <p>
+      a square nonsingular matrix \(𝐀\) is <b>invertible</b> if we can find another square matrix \(𝐏 ≕ 𝐀⁻¹\) such
+      that
+      \[𝐀⁻¹𝐀 = 𝐀𝐀⁻¹ = 𝐈\]
+    </p>
+    <p>all nonsingular matrices are invertible and vice versa. they mean the same thing</p>
+    <p><b class="example">ex.</b> invert \(𝐀 = \begin{bmatrix} 1 & 3\\ 2 & 1 \end{bmatrix}\).</p>
+    <p>1. augment with \(2 × 2\) identity matrix</p>
+    <p>
+      \[
+      \left[
+      \begin{array}{cc|cc}
+      1 & 3 & 1 & 0\\
+      2 & 1 & 0 & 1
+      \end{array}
+      \right]
+      \]
+    </p>
+    <p>2. find its RREF</p>
+    <p>
+      \[
+      \left[
+      \begin{array}{cc|cc}
+      1 & 0 & -\frac15 & \frac35\\
+      0 & 1 & \frac25 & -\frac15
+      \end{array}
+      \right]
+      \]
+    </p>
+    <p>once the identity matrix is on the left, the right is the inverse matrix</p>
+    <p>
+      now if we want to solve \(𝐀𝐱 = 𝐛\), we just multiply both sides on the left by \(𝐀⁻¹\) to get
+      \[𝐱 = 𝐀⁻¹𝐁\]
+    </p>
+    <p>if \(𝐀\) and \(𝐁\) are invertible \(n × n\) matrices,</p>
+    <ul>
+      <li>\((𝐀⁻¹)⁻¹ = 𝐀\)</li>
+      <li>\((𝐀𝐁)⁻¹ = 𝐁⁻¹𝐀⁻¹\)</li>
+      <li>\(𝐀^⊤\) is invertible and \((𝐀^⊤)⁻¹ = (𝐀⁻¹)^⊤\)</li>
+      <li>\((r𝐀)⁻¹ = \frac1r 𝐀⁻¹\)</li>
+    </ul>
+    <h3 id="determinant-of-2-2-matrix">determinant of \(2 × 2\) matrix</h3>
+    <p>
+      let \(𝐀 = \begin{bmatrix} a & b\\ c & d \end{bmatrix}\). the <b>determinant</b> of \(𝐀\) is defined as
+      \(Δ = ad - bc\)
+    </p>
+    <p>
+      if \(Δ = 0\), \(𝐀\) isn't invertible. if \(Δ ≠ 0\), \(𝐀\) is invertible and
+      \[
+      𝐀⁻¹ = \frac1Δ \begin{bmatrix}
+      d & -b\\
+      -c & a\\
+      \end{bmatrix}
+      \]
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
