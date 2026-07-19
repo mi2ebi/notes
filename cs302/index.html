@@ -10,83 +10,96 @@
     <!-- toc skip -->
     <h1 id="cs-302" class="h0">cs 302</h1>
     <!-- toc here -->
-<nav class="toc">
-<ul>
-<li><a href="#c-recap">c++ recap</a><ul>
-<li><a href="#linked-lists">linked lists</a></li>
-</ul>
-</li>
-<li><a href="#algorithms">algorithms</a><ul>
-<li><a href="#asymptotic-complexity-classes">asymptotic complexity classes</a><ul>
-<li><a href="#big-o">big O</a></li>
-<li><a href="#big-ω">big Ω</a></li>
-<li><a href="#big-θ">big Θ</a></li>
-<li><a href="#logs">logs</a></li>
-<li><a href="#calculus">calculus</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#searching">searching</a><ul>
-<li><a href="#linear-search">linear search</a></li>
-<li><a href="#binary-search">binary search</a></li>
-</ul>
-</li>
-<li><a href="#some-loops">some loops</a></li>
-<li><a href="#sorting">sorting</a><ul>
-<li><a href="#insertion-sort">insertion sort</a></li>
-<li><a href="#merge-sort">merge sort</a></li>
-<li><a href="#quicksort">quicksort</a></li>
-<li><a href="#lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</a></li>
-</ul>
-</li>
-<li><a href="#binary-trees">binary trees</a><ul>
-<li><a href="#traversing">traversing</a></li>
-<li><a href="#binary-trees--searching">searching</a></li>
-<li><a href="#height">height</a></li>
-</ul>
-</li>
-<li><a href="#binary-search-trees">binary search trees</a><ul>
-<li><a href="#binary-search-trees--searching">searching</a></li>
-</ul>
-</li>
-<li><a href="#avl-trees">avl trees</a></li>
-<li><a href="#maps">maps</a><ul>
-<li><a href="#unordered-maps">unordered maps</a></li>
-<li><a href="#counting-duplicates">counting duplicates</a></li>
-</ul>
-</li>
-<li><a href="#hash-maps">hash maps</a><ul>
-<li><a href="#separate-chaining">separate chaining</a><ul>
-<li><a href="#separate-chaining--expected-runtime">expected runtime</a></li>
-</ul>
-</li>
-<li><a href="#open-addressing">open addressing</a><ul>
-<li><a href="#open-addressing--expected-runtime">expected runtime</a></li>
-</ul>
-</li>
-<li><a href="#deletion">deletion</a></li>
-<li><a href="#resizing">resizing</a></li>
-<li><a href="#other-open-addressing-methods">other open addressing methods</a></li>
-<li><a href="#comparisons">comparisons</a></li>
-</ul>
-</li>
-<li><a href="#priority-queues">priority queues</a></li>
-<li><a href="#graph-theory">graph theory</a><ul>
-<li><a href="#depth-first-search-dfs">depth-first search / dfs</a></li>
-<li><a href="#breadth-first-search-bfs">breadth-first search / bfs</a></li>
-<li><a href="#dijkstras-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</a></li>
-<li><a href="#kruskals-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</a><ul>
-<li><a href="#union-find-structure">union-find structure</a></li>
-<li><a href="#the-algorithm">the algorithm</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#final-review">final review</a></li>
-</ul>
-</nav>
-<h1 id="c-recap">c++ recap</h1>
+    <nav class="toc">
+      <ul>
+        <li><a href="#c-recap">c++ recap</a>
+          <ul>
+            <li><a href="#linked-lists">linked lists</a></li>
+          </ul>
+        </li>
+        <li><a href="#algorithms">algorithms</a>
+          <ul>
+            <li><a href="#asymptotic-complexity-classes">asymptotic complexity classes</a>
+              <ul>
+                <li><a href="#big-o">big O</a></li>
+                <li><a href="#big-ω">big Ω</a></li>
+                <li><a href="#big-θ">big Θ</a></li>
+                <li><a href="#logs">logs</a></li>
+                <li><a href="#calculus">calculus</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#searching">searching</a>
+          <ul>
+            <li><a href="#linear-search">linear search</a></li>
+            <li><a href="#binary-search">binary search</a></li>
+          </ul>
+        </li>
+        <li><a href="#some-loops">some loops</a></li>
+        <li><a href="#sorting">sorting</a>
+          <ul>
+            <li><a href="#insertion-sort">insertion sort</a></li>
+            <li><a href="#merge-sort">merge sort</a></li>
+            <li><a href="#quicksort">quicksort</a></li>
+            <li><a href="#lower-bound-for-comparison-based-sorting">lower bound for comparison-based sorting</a></li>
+          </ul>
+        </li>
+        <li><a href="#binary-trees">binary trees</a>
+          <ul>
+            <li><a href="#traversing">traversing</a></li>
+            <li><a href="#binary-trees--searching">searching</a></li>
+            <li><a href="#height">height</a></li>
+          </ul>
+        </li>
+        <li><a href="#binary-search-trees">binary search trees</a>
+          <ul>
+            <li><a href="#binary-search-trees--searching">searching</a></li>
+          </ul>
+        </li>
+        <li><a href="#avl-trees">avl trees</a></li>
+        <li><a href="#maps">maps</a>
+          <ul>
+            <li><a href="#unordered-maps">unordered maps</a></li>
+            <li><a href="#counting-duplicates">counting duplicates</a></li>
+          </ul>
+        </li>
+        <li><a href="#hash-maps">hash maps</a>
+          <ul>
+            <li><a href="#separate-chaining">separate chaining</a>
+              <ul>
+                <li><a href="#separate-chaining--expected-runtime">expected runtime</a></li>
+              </ul>
+            </li>
+            <li><a href="#open-addressing">open addressing</a>
+              <ul>
+                <li><a href="#open-addressing--expected-runtime">expected runtime</a></li>
+              </ul>
+            </li>
+            <li><a href="#deletion">deletion</a></li>
+            <li><a href="#resizing">resizing</a></li>
+            <li><a href="#other-open-addressing-methods">other open addressing methods</a></li>
+            <li><a href="#comparisons">comparisons</a></li>
+          </ul>
+        </li>
+        <li><a href="#priority-queues">priority queues</a></li>
+        <li><a href="#graph-theory">graph theory</a>
+          <ul>
+            <li><a href="#depth-first-search-dfs">depth-first search / dfs</a></li>
+            <li><a href="#breadth-first-search-bfs">breadth-first search / bfs</a></li>
+            <li><a href="#dijkstras-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</a></li>
+            <li><a href="#kruskals-minimum-spanning-tree-algorithm">kruskal's minimum spanning tree algorithm</a>
+              <ul>
+                <li><a href="#union-find-structure">union-find structure</a></li>
+                <li><a href="#the-algorithm">the algorithm</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#final-review">final review</a></li>
+      </ul>
+    </nav>
+    <h1 id="c-recap">c++ recap</h1>
     <h2 id="linked-lists">linked lists</h2>
     <p>each node of a (doubly) linked list has</p>
     <ul>

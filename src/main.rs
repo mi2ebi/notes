@@ -5,10 +5,11 @@ use std::{
 };
 
 use glob::glob;
+use jiff::{Timestamp, tz::TimeZone};
 use notes::{
     aside, boilerplate,
     colors::{CYAN, GREEN, RED, RESET, YELLOW},
-    entities, hl, html, math,
+    entities, hl, html, include, math,
     tex::{
         self,
         accents::COMBINING,
@@ -53,6 +54,12 @@ impl Pipeline {
         let mut okay = true;
         let mut had_warnings = false;
 
+        let include_result = include::process(&converted, path);
+        if include_result != converted {
+            println!("  {GREEN}include done{RESET}");
+            converted = include_result;
+            changed = true;
+        }
         let entities_result = entities::replace(&converted);
         if entities_result != converted {
             println!("  {GREEN}entities done{RESET}");
@@ -169,12 +176,27 @@ fn main() {
         println!("{YELLOW}no html files{RESET}");
         std::process::exit(1);
     }
-    println!("checking for unicode updates");
-    let unicode = match unicode::load() {
-        Ok(u) => u,
-        Err(e) => {
-            println!("{RED}unicode error:{RESET} {e}");
-            std::process::exit(1);
+    let should_check_unicode = {
+        let date = Timestamp::now().to_zoned(TimeZone::UTC).date();
+        let month = date.month();
+        month % 3 == 2 && date.day() == 1
+    };
+    let unicode = if should_check_unicode {
+        println!("checking for unicode updates");
+        match unicode::load() {
+            Ok(u) => u,
+            Err(e) => {
+                println!("{RED}unicode error:{RESET} {e}");
+                std::process::exit(1);
+            }
+        }
+    } else {
+        match unicode::load_local() {
+            Ok(u) => u,
+            Err(e) => {
+                println!("{RED}unicode error:{RESET} {e}");
+                std::process::exit(1);
+            }
         }
     };
     let font_maps = fonts::build(&unicode.letters);
@@ -198,6 +220,11 @@ fn main() {
     for (alias, _) in FONT_ALIASES.entries() {
         if tex::STRUCTURAL.contains(alias) {
             println!("{YELLOW}duplicate:{RESET} '{alias}' is in both FONT_ALIASES and STRUCTURAL");
+        }
+    }
+    for key in tex::envs::ENV_SHORTHANDS.keys() {
+        if tex::STRUCTURAL.contains(key) {
+            println!("{YELLOW}duplicate:{RESET} '{key}' is in both ENV_SHORTHANDS and STRUCTURAL");
         }
     }
     let pipeline = Pipeline { font_maps, unicode, no_hl };

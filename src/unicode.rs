@@ -22,6 +22,17 @@ pub fn load() -> io::Result<UnicodeData> {
     Ok(ud)
 }
 
+pub fn load_local() -> io::Result<UnicodeData> {
+    let path = Path::new(LOCAL_PATH);
+    if path.exists() {
+        let raw = fs::read_to_string(path)?;
+        Ok(parse(&raw))
+    } else {
+        println!("  {YELLOW}no local unicode data, falling back to fetch{RESET}");
+        load()
+    }
+}
+
 pub fn fetch_raw() -> io::Result<String> {
     get(UNICODE_DATA_URL).and_then(reqwest::blocking::Response::text).map_or_else(
         |_| {

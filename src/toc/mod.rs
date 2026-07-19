@@ -10,7 +10,7 @@ use slugs::{assign_slugs, slugify};
 use crate::html::{ID_ATTR_RE, strip_tags};
 
 static TOC_HERE_RE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r#"(?s)<!--\s*toc\s+here\s*-->(\s*<nav class="toc">.*?</nav>)?\s*"#).unwrap()
+    Regex::new(r#"(?s)<!--\s*toc\s+here\s*-->(?:\s*<nav class="toc">.*?</nav>\n?)?"#).unwrap()
 });
 
 static HEADING_RE: LazyLock<Regex> =
@@ -127,34 +127,87 @@ fn build_nav(entries: &[Entry]) -> String {
     }
     let mut out = String::from("<nav class=\"toc\">\n");
     let mut depth: u8 = 0;
-    for e in &visible {
+    let mut prev_had_children = false;
+    for (i, e) in visible.iter().enumerate() {
+        let next_level = visible.get(i + 1).map(|n| n.effective_level);
+        let has_children = next_level > Some(e.effective_level);
         if e.effective_level > depth {
             while depth < e.effective_level {
-                out.push_str("<ul>\n");
                 depth += 1;
+                let list_indent = "  ".repeat((2 * depth as usize).saturating_sub(1));
+                out.push_str(&list_indent);
+                out.push_str("<ul>\n");
             }
         } else {
-            out.push_str("</li>\n");
+            if prev_had_children {
+                let item_indent = "  ".repeat(2 * depth as usize);
+                out.push_str(&item_indent);
+                out.push_str("</li>\n");
+            }
             while depth > e.effective_level {
-                out.push_str("</ul>\n</li>\n");
+                let list_indent = "  ".repeat((2 * depth as usize).saturating_sub(1));
+                out.push_str(&list_indent);
+                out.push_str("</ul>\n");
                 depth -= 1;
+                if depth > 0 {
+                    let item_indent = "  ".repeat(2 * depth as usize);
+                    out.push_str(&item_indent);
+                    out.push_str("</li>\n");
+                }
             }
         }
+        let item_indent = "  ".repeat(2 * depth as usize);
+        out.push_str(&item_indent);
         if e.nolink {
             let _ = write!(out, "<li>{}", e.display_text);
         } else {
             let _ = write!(out, "<li><a href=\"#{}\">{}</a>", e.full_slug, e.display_text);
         }
+        if has_children {
+            out.push('\n');
+        } else {
+            out.push_str("</li>\n");
+        }
+        prev_had_children = has_children;
     }
-    out.push_str("</li>\n");
+    if prev_had_children {
+        let item_indent = "  ".repeat(2 * depth as usize);
+        out.push_str(&item_indent);
+        out.push_str("</li>\n");
+    }
     while depth > 0 {
+        let list_indent = "  ".repeat((2 * depth as usize).saturating_sub(1));
+        out.push_str(&list_indent);
         out.push_str("</ul>\n");
         depth -= 1;
         if depth > 0 {
+            let item_indent = "  ".repeat(2 * depth as usize);
+            out.push_str(&item_indent);
             out.push_str("</li>\n");
         }
     }
     out.push_str("</nav>\n");
+    out
+}
+
+fn line_indent(html: &str, pos: usize) -> &str {
+    let line_start = html[.. pos].rfind('\n').map_or(0, |i| i + 1);
+    let prefix = &html[line_start .. pos];
+    if prefix.chars().all(|c| c == ' ' || c == '\t') { prefix } else { "" }
+}
+
+fn indent_lines(text: &str, prefix: &str) -> String {
+    if prefix.is_empty() {
+        return text.to_owned();
+    }
+    let mut out = String::with_capacity(text.len() + prefix.len() * (text.lines().count() + 1));
+    for line in text.lines() {
+        if !line.is_empty() {
+            out.push_str(prefix);
+        }
+        out.push_str(line);
+        out.push('\n');
+    }
     out
 }
 
@@ -164,9 +217,10 @@ pub fn process(html: &str) -> String {
     }
     let toc_m = TOC_HERE_RE.find(html).unwrap();
     let toc_range = toc_m.start() .. toc_m.end();
+    let base_indent = line_indent(html, toc_m.start());
     let mut entries = collect_entries(html, &toc_range);
     assign_slugs(&mut entries);
-    let nav = build_nav(&entries);
+    let nav = indent_lines(&build_nav(&entries), base_indent);
     let mut edits: Vec<(usize, usize, String)> = Vec::new();
     edits.push((toc_m.start(), toc_m.end(), format!("<!-- toc here -->\n{nav}")));
     for e in &entries {
