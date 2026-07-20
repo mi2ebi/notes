@@ -1,0 +1,9 @@
+{
+  "$schema": "https://renovatebot.com",
+  "extends": [
+    "config:recommended"
+  ],
+  "ignorePaths": [
+    "temml.min.js"
+  ]
+}
