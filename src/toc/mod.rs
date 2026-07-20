@@ -136,7 +136,7 @@ fn build_nav(entries: &[Entry]) -> String {
                 depth += 1;
                 let list_indent = "  ".repeat((2 * depth as usize).saturating_sub(1));
                 out.push_str(&list_indent);
-                out.push_str("<ul>\n");
+                out.push_str("<ul class=\"tight\">\n");
             }
         } else {
             if prev_had_children {
