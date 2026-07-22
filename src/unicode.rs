@@ -108,6 +108,7 @@ fn parse(raw: &str) -> UnicodeData {
         if name.starts_with("MATHEMATICAL")
             || name.contains("DOUBLE-STRUCK")
             || name.contains("BLACK-LETTER")
+            || name.starts_with("SCRIPT")
         {
             letters.entry(cp).or_insert_with(|| name.into());
         }

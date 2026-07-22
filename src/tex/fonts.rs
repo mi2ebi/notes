@@ -92,6 +92,7 @@ pub const FONT_PREDICATES: &[(&str, Pred)] = &[
     ("mathfrak", |n| {
         (n.contains("MATHEMATICAL FRAKTUR") || n.contains("BLACK-LETTER")) && !n.contains("BOLD")
     }),
+    ("mathcal", |n| n.contains("SCRIPT") && !n.contains("BOLD") && n != "SCRIPT CAPITAL P"),
     ("mathsfit", |n| n.contains("MATHEMATICAL SANS-SERIF ITALIC") && !n.contains("BOLD")),
     ("mathsf", |n| {
         n.contains("MATHEMATICAL SANS-SERIF") && !n.contains("BOLD") && !n.contains("ITALIC")

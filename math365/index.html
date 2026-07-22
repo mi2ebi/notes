@@ -8,7 +8,7 @@
      .example {
        color: var(--magenta-warmer);
      }
-     dt, p > b {
+     dt, p > b, b.defn {
        color: var(--magenta);
      }
     </style>
@@ -68,10 +68,31 @@
             <li><a href="#2-3-dot-product-and-cross-product">2.3 dot product and cross product</a>
               <ul class="tight">
                 <li><a href="#dot-product">dot product</a></li>
-                <li><a href="#angle-between-two-vectors">angle between two vectors</a></li>
-                <li><a href="#properties-of-the-dot-product">properties of the dot product</a></li>
                 <li><a href="#projection">projection</a></li>
                 <li><a href="#cross-product">cross product</a></li>
+              </ul>
+            </li>
+            <li><a href="#2-4-lines-and-planes-in-space">2.4 lines and planes in space</a>
+              <ul class="tight">
+                <li><a href="#lines-in-the-xy-plane">lines in the \(xy\)-plane</a></li>
+                <li><a href="#lines-in-space">lines in space</a></li>
+                <li><a href="#planes-in-space">planes in space</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ch3-the-vector-space-ℝⁿ">ch3 the vector space \(ℝⁿ\)</a>
+          <ul class="tight">
+            <li><a href="#3-2-vector-space-properties-of-ℝⁿ">3.2 vector space properties of \(ℝⁿ\)</a>
+              <ul class="tight">
+                <li><a href="#subspaces-of-ℝⁿ">subspaces of \(ℝⁿ\)</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-3-examples-of-subspaces">3.3 examples of subspaces</a>
+              <ul class="tight">
+                <li><a href="#span">span</a></li>
+                <li><a href="#null-space-kernel">null space / kernel</a></li>
+                <li><a href="#range-column-space">range / column space</a></li>
               </ul>
             </li>
           </ul>
@@ -406,7 +427,7 @@
       \(𝐏ᵢⱼ = -𝐀ᵢⱼ\). this is called the opposite/negative matrix
     </p>
     <p>
-      matrix multiplication is also distributive i.e. \((𝐀 + 𝐁)𝐌 = 𝐀𝐌 + 𝐁𝐌\)
+      matrix multiplication is also distributive over matrix addition, i.e. \((𝐀 + 𝐁)𝐌 = 𝐀𝐌 + 𝐁𝐌\)
     </p>
     <p>for scalar multiplication:</p>
     <ul>
@@ -422,7 +443,7 @@
     <p>properties of transpose:</p>
     <ul>
       <li>\((𝐀 + 𝐁)^⊤ = 𝐀^⊤ + 𝐁^⊤\)</li>
-      <li>\((𝐀𝐁)^⊤ = 𝐁^⊤ + 𝐀^⊤\)</li>
+      <li>\((𝐀𝐁)^⊤ = 𝐁^⊤𝐀^⊤\)</li>
       <li>\({𝐀^⊤}^⊤ = 𝐀\)</li>
       <li></li>
     </ul>
@@ -444,7 +465,7 @@
       let \(𝐀₁ = \begin{bmatrix} 1\\ 2\end{bmatrix}\)
       and \(𝐀₂ = \begin{bmatrix} 2\\ 1\end{bmatrix}\)
     </p>
-    <p>can we find \(x₁, x₂ ∈ ℝ\) such that \(x₁𝐀₁ + x₂𝐀 ₂ = 𝟎\) ?</p>
+    <p>can we find \(x₁, x₂ ∈ ℝ\) such that \(x₁𝐀₁ + x₂𝐀₂ = 𝟎\) ?</p>
     <p>
       i.e.
       \(
@@ -481,7 +502,7 @@
       a set of vectors \(𝐀₁, 𝐀₂, …, 𝐀ₙ ∈ ℝᵐ\) is <b>linearly independent</b> if the only solution to the equation
       \[x₁𝐀₁ + x₂𝐀₂ + ⋯ + xₙ𝐀ₙ = 𝟎\]
       is
-      \[x₁ = x₂ = ⋯ = xₘ = 0\]
+      \[x₁ = x₂ = ⋯ = xₙ = 0\]
     </p>
     <p>otherwise they're <b>linearly dependent</b></p>
     <h3 id="unit-vectors">unit vectors</h3>
@@ -558,7 +579,7 @@
     <h3 id="determinant-of-2-2-matrix">determinant of \(2 × 2\) matrix</h3>
     <p>
       let \(𝐀 = \begin{bmatrix} a & b\\ c & d \end{bmatrix}\). the <b>determinant</b> of \(𝐀\) is defined as
-      \(Δ = ad - bc\)
+      \(Δ = \det 𝐀 =  ad - bc\)
     </p>
     <p>
       if \(Δ = 0\), \(𝐀\) isn't invertible. if \(Δ ≠ 0\), \(𝐀\) is invertible and
@@ -582,12 +603,12 @@
       suppose \(A = (a₁, a₂)\) and \(B = (b₁, b₂)\) are points. the directed line segment from \(A\) to \(B\)
       is called \(\overrightarrow{AB}\). \(A\) is the <b>initial point</b> and \(B\) is the <b>terminal point</b>
     </p>
-    <p>the magnitude of the vector, \(\Vert\overrightarrow{AB}\Vert\), is \(\sqrt{(b₂ - a₂)² + (b₁ - a₁)²}\)</p>
+    <p>the magnitude of the vector, \(\left‖\overrightarrow{AB}\right‖\), is \(\sqrt{(b₂ - a₂)² + (b₁ - a₁)²}\)</p>
     <p>two geometric vectors are equal if they have the same magnitude and the same direction</p>
     <p>
       the <b>position vector</b> of a certain vector \(\overrightarrow{AB}\) is the vector \(\overrightarrow{OP}\)
       that equals \(\overrightarrow{AB}\) but starts at the origin. \(P = (b₁ - a₁, b₂ - a₂)\), and the components
-      of both vectors are \(⟨ b₁ - a₁, b₂ - a₂⟩\)
+      of both vectors are \(⟨b₁ - a₁, b₂ - a₂⟩\)
     </p>
     <h3 id="algebraic-vectors-operations-on-vectors">algebraic vectors, operations on vectors</h3>
     <p>
@@ -612,7 +633,7 @@
     <p>we can represent any vector \(𝐯\) as \(v₁𝐢 + v₂𝐣\)</p>
     <p>
       we can make an arbitrary unit vector \(\^𝐯\) from a vector \(𝐯\) by
-      \(\^𝐯 = \frac{𝐯}{\Vert𝐯\Vert}\)
+      \(\^𝐯 = \frac{𝐯}{\left‖𝐯\right‖}\)
     </p>
     <h2 id="2-2-vectors-in-space">2.2 vectors in space</h2>
     <p>
@@ -623,7 +644,7 @@
     <p>
       given two points \(P = (p₁, p₂, p₃)\) and \(Q = (q₁, q₂, q₃)\), the distance between them is
       \[
-      \sqrt{(q₁ - p₁)² + (q₂ - p₂)² + (q₃ + p₃)²}
+      \sqrt{(q₁ - p₁)² + (q₂ - p₂)² + (q₃ - p₃)²}
       \]
     </p>
     <h3 id="unit-vectors-in-space">unit vectors in space</h3>
@@ -653,18 +674,17 @@
       𝐮 ⋅ 𝐯 = 1 ⋅ 2 + 3 ⋅ 9 + (-1) ⋅ 1 = 28
       \]
     </p>
-    <h3 id="angle-between-two-vectors">angle between two vectors</h3>
     <p>
       let \(𝐮, 𝐯\) be two nonzero vectors and \(θ\) be the angle between them. then
       \[
-      𝐮 ⋅ 𝐯 = \Vert𝐮\Vert \Vert𝐯\Vert \cosθ
+      𝐮 ⋅ 𝐯 = \left‖𝐮\right‖ \left‖𝐯\right‖ \cosθ
       \]
     </p>
     <p>two vectors are orthogonal iff their dot product is zero</p>
-    <h3 id="properties-of-the-dot-product">properties of the dot product</h3>
+    <p>properties of dot product:</p>
     <ul>
-      <li>dot product is commutative and distributive</li>
-      <li>\(𝐮 ⋅ 𝐮 = \Vert𝐮\Vert² ≥ 0\)</li>
+      <li>dot product is commutative and distributive over vector addition</li>
+      <li>\(𝐮 ⋅ 𝐮 = \left‖𝐮\right‖² ≥ 0\)</li>
       <li>\((c𝐮) ⋅ 𝐯 = c(𝐮 ⋅ 𝐯)\)</li>
     </ul>
     <h3 id="projection">projection</h3>
@@ -676,7 +696,7 @@
     </p>
     <p>
       the <b>component</b> of \(𝐯\) in the direction of \(𝐮\) is
-      \(\comp_𝐮(𝐯) = \frac{𝐮 ⋅ 𝐯}{\Vert𝐮\Vert}\)
+      \(\comp_𝐮(𝐯) = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖}\)
     </p>
     <p>
       the <b>projection</b> of \(𝐯\) in the direction of \(𝐮\) is the vector
@@ -687,14 +707,223 @@
       suppose we want to find a vector in 3-space orthogonal to both \(𝐮\) and \(𝐯\).
     </p>
     <p>
-      their <b>cross product</b> is
+      their <b>cross product</b> is a new vector, namely
       \[
       𝐮 × 𝐯 = \begin{bmatrix}u₂v₃ - u₃v₂\\ u₃v₁ - u₁v₃\\ u₁v₂ - u₂v₁\end{bmatrix}
       \]
     </p>
+    <p>properties of cross product:</p>
+    <ul>
+      <li><b class="defn">anticommutative</b> i.e. \(𝐮 × 𝐯 = -𝐯 × 𝐮\)</li>
+      <li>distributive over vector addition: \(𝐮 × (𝐯 + 𝐰) = 𝐮 × 𝐯 + 𝐮 × 𝐰\)</li>
+      <li>\(𝐮\) and \(𝐯\) are parallel if their cross product is \(𝟎\)</li>
+      <li>\(c𝐮 × 𝐯 = 𝐮 × c𝐯 = c(𝐮 × 𝐯)\)</li>
+      <li>\(𝐢 × 𝐣 = 𝐤\)</li>
+      <li>\(𝐣 × 𝐤 = 𝐢\)</li>
+      <li>\(𝐤 × 𝐢 = 𝐣\)</li>
+    </ul>
+    <p>we can also use cross product to find angles! \(\left‖𝐮 × 𝐯\right‖ = \left‖𝐮\right‖ \left‖𝐯\right‖ \sin θ\)</p>
     <p>
-      <mark><b>tmrw</b> properties of cross product, 2.4</mark>
+      and area of a parallelogram! if \(AB\) and \(AC\) are two of the sides, the area is
+      \(\left‖\overrightarrow{AB} × \overrightarrow{AC}\right‖\)
     </p>
+    <h2 id="2-4-lines-and-planes-in-space">2.4 lines and planes in space</h2>
+    <h3 id="lines-in-the-xy-plane">lines in the \(xy\)-plane</h3>
+    <p>
+      the point-slope equation of a line in the plane going through \(A = (x₀, y₀)\) with slope \(m\) is
+      \[y = y₀ + m(x - x₀)\]
+    </p>
+    <p>
+      let \(𝐮 = \left⟨u₁, u₂\right⟩\) be a direction vector of the line. given a point \(P(x, y)\) on the line,
+      there is a unique real number \(t\) <abbr title="such that">s.t.</abbr> \(\overrightarrow{AP} = t𝐮\).
+      in particular,
+      \[\overrightarrow{OP} = \overrightarrow{OA} + \overrightarrow{AP} = \overrightarrow{OA} + t𝐮\]
+      this is the <b>vector equation of a line</b>
+    </p>
+    <p>
+      since \(\overrightarrow{OP} = \left⟨x, y\right⟩\) and \(\overrightarrow{OA} = \left⟨x₀, y₀\right⟩\),
+      \[
+      \left\{
+      \begin{align*}
+      x &= x₀ + tu₁\\
+      y &= y₀ + tu₂
+      \end{align*}
+      \right.
+      \]
+      this is the <b>parametric equation</b>
+    </p>
+    <h3 id="lines-in-space">lines in space</h3>
+    <p>same deal just with three axes</p>
+    <h3 id="planes-in-space">planes in space</h3>
+    <p>
+      a plane \(𝒫\) is determined by a point \(A\) and a <b>normal vector</b> \(𝐧\) orthogonal
+      to the entire plane
+    </p>
+    <p>
+      say \(𝐧 = ⟨a, b, c⟩\) and \(A = (x₀, y₀, z₀)\). a point \(P(x, y, z)\) lies in \(𝒫\)
+      exactly when \(\overrightarrow{AP}\) lies in the plane too, i.e. when it's orthogonal to \(𝐧\):
+      \[𝐧 ⋅ \overrightarrow{AP} = 0\]
+      writing \(\overrightarrow{AP} = ⟨x - x₀, y - y₀, z - z₀⟩\) and expanding the dot product gives the
+      <b>scalar equation of the plane</b>
+      \[a(x - x₀) + b(y - y₀) + c(z - z₀) = 0\]
+      (which can be regrouped into the form \(ax + by + cz = d\))
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      find the scalar equation of the plane going through \(A(1, 2, 1)\) with \(𝐧 = 2𝐢 + 3𝐣 - 𝐤\)
+    </p>
+    <p>\(2(x - 1) + 3(y - 2) - (z - 1) = 0\)</p>
+    <p>
+      <b class="example">ex.</b>
+      find the scalar equation of the plane containing \(A(1, 3, 2), B(2, 0, -1), C(4, 5, 1)\)
+    </p>
+    <p>
+      let \(𝐮 = \overrightarrow{AB} = ⟨1, -3, -3⟩\) and \(𝐯 = \overrightarrow{AC} = ⟨3, 2, -1⟩\), then
+      \[
+      𝐧 = 𝐮 × 𝐯 = \begin{bmatrix}(-3)(-1) - (-3)(2)\\ (-3)(3) - (1)(-1)\\ (1)(2) - (-3)(3)\end{bmatrix}
+      = \begin{bmatrix}9\\ -8\\ 11\end{bmatrix}
+      \]
+      so the scalar equation is \(9(x - 1) - 8(y - 3) + 11(z - 2) = 0\)
+    </p>
+    <h1 id="ch3-the-vector-space-ℝⁿ">ch3 the vector space \(ℝⁿ\)</h1>
+    <h2 id="3-2-vector-space-properties-of-ℝⁿ">3.2 vector space properties of \(ℝⁿ\)</h2>
+    <p>recall that \(ℝⁿ\) means ‘\(n\)tuples of real numbers’</p>
+    <h3 id="subspaces-of-ℝⁿ">subspaces of \(ℝⁿ\)</h3>
+    <p>a nonempty subset \(W ⊂ ℝⁿ\) that has all the vector properties</p>
+    <p>\(W\) is a subspace iff:</p>
+    <ul>
+      <li>the zero vector \(𝟎 ∈ W\)</li>
+      <li><b class="defn">closed under addition</b>: \(𝐮 + 𝐯 ∈ W\) if \(𝐮, 𝐯 ∈ W\)</li>
+      <li><b class="defn">closed under scalar multiplication</b>: \(a𝐮 ∈ W\) if \(a ∈ ℝ\) and \(𝐮 ∈ W\)</li>
+    </ul>
+    <p>
+      <b class="example">ex.</b>
+      verify that the set
+      \[
+      Y = \left\{
+      𝐮 = \begin{bmatrix}u₁\\ u₂\\ u₃\end{bmatrix}
+      \middle|
+      u₃ = 2u₂ = 6u₁ ∧ u₁ ∈ ℝ ∧ u₃ ∈ ℝ
+      \right\}
+      \]
+      is a subspace of \(ℝ³\)
+    </p>
+    <ol>
+      <li>is \(𝟎\) in \(Y\)? yes, \(0 = 2 ⋅ 0 = 6 ⋅ 0\)</li>
+      <li>
+        <p>
+          let \(𝐮 = \begin{bmatrix}u₁\\ u₂\\ u₃\end{bmatrix} ∈ Y\)
+          and \(𝐯 = \begin{bmatrix}v₁\\ v₂\\ v₃\end{bmatrix} ∈ Y\)
+        </p>
+        <p>
+          then \(u₃ = 2u₂ = 6u₁\) and \(v₃ = 2v₂ = 6u₁\). if we add them we get
+          \(u₃ + v₃ = 2(u₂ + v₂) = 6(u₁ + v₁)\). therefore \(𝐮 + 𝐯 ∈ Y\)
+      </li>
+      <li>\(au₃ = 2au₂ = 6au₁\)</li>
+    </ol>
+    <h2 id="3-3-examples-of-subspaces">3.3 examples of subspaces</h2>
+    <h3 id="span">span</h3>
+    <p>
+      let \(𝐮₁, …, 𝐮ₖ\) be \(k\) vectors in \(ℝⁿ\).
+      any vector that can be written as \[
+      𝐮 = c₁𝐮₁ + ⋯ + cₖ𝐮ₖ
+      \]
+      where all \(cᵢ ∈ ℝ\) is called a <b>linear combination</b> of the \(𝐮ᵢ\) vectors
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      show that \(𝐮 = \begin{bmatrix}2\\ 3\end{bmatrix}\) is a linear combination of \(𝐚 = ⟨1, 1⟩\) and
+      \(𝐛 = ⟨1, -1⟩\)
+    </p>
+    <p>
+      we want to find \(x₁, x₂\) such that
+      \[
+      x₁𝐚 + x₂𝐛 = 𝐮
+      \]
+      i.e.
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & 1 & 2\\
+      1 & -1 & 3
+      \end{array}
+      \right]
+      \]
+    </p>
+    <p>
+      we can RREF that into
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & 0 & \frac52\\
+      0 & 1 & -\frac12
+      \end{array}
+      \right]
+      \]
+      so \(x₁ = \frac52\) and \(x₂ = -\frac12\)
+    </p>
+    <p>\(𝐮 = \frac12𝐚 - \frac52𝐛\)</p>
+    <p style="height: 0; margin: 0; visibility: hidden;">\(\gdef\Sp{\operatorname{Sp}}\)</p>
+    <p>
+      the <b>span</b> of a set \(S = \{𝐮₁, …, 𝐮ₖ\}\) is the set of all linear combinations of its vectors:
+      \[
+      \Sp\{S\} = \left\{c₁𝐮₁ + ⋯ + cₖ𝐮ₖ \,\middle|\, c₁, …, cₖ ∈ ℝ\right\}
+      \]
+      or more compactly
+      \[
+      \Sp\{S\} = \left\{∑ᵢ₌₁ᵏ cᵢ𝐮ᵢ \,\middle|\, cᵢ ∈ ℝ\right\}
+      \]
+    </p>
+    <p>the span of any set of vectors in \(ℝⁿ\) is a subspace of \(ℝⁿ\)</p>
+    <h3 id="null-space-kernel">null space / kernel</h3>
+    <p>
+      given an \(m × n\) matrix \(𝐀\), the <b>null space</b> or <b>kernel</b> of \(𝐀\), denoted
+      \(𝒩(𝐀)\) or \(\ker 𝐀\), is the set
+      \[
+      \left\{𝐮 ∈ ℝⁿ \,\middle|\, 𝐀𝐮 = 𝟎\right\}
+      \]
+    </p>
+    <p>
+      \(\ker 𝐀\) is always a subspace of \(ℝⁿ\), and you can always characterize a subspace of \(ℝⁿ\) as a
+      kernel of some matrix
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      show that
+      \[
+      Y = \left\{𝐮 = \begin{bmatrix}u₁\\ u₂\\ u₃\end{bmatrix} \,\middle|\, u₃ = -u₂ = u₁\right\}
+      \]
+      is a subspace of \(ℝ³\)
+    </p>
+    <p>
+      \(𝐮 ∈ Y\) iff \(-u₁ + u₃ = 0 = u₂ + u₃\), i.e. iff \(𝐀𝐮 = 𝟎\) where
+      \[𝐀 = \begin{bmatrix}0 & 1 & 1\\ -1 & 0 & 1\end{bmatrix}\]
+    </p>
+    <p>
+      so \(Y = \ker 𝐀\), and since the kernel of a matrix is always a subspace, \(Y\) is a subspace of
+      \(ℝ³\)
+    </p>
+    <h3 id="range-column-space">range / column space</h3>
+    <p>
+      write an \(m × n\) matrix \(𝐀\) in terms of its column vectors:
+      \[
+      𝐀 = \begin{bmatrix}𝐀₁ & 𝐀₂ & ⋯ & 𝐀ₙ\end{bmatrix},~~𝐀ⱼ ∈ ℝᵐ
+      \]
+      then for any \(𝐮 = ⟨u₁, …, uₙ⟩ ∈ ℝⁿ\),
+      \[
+      𝐀𝐮 = u₁𝐀₁ + u₂𝐀₂ + ⋯ + uₙ𝐀ₙ
+      \]
+      so the product \(𝐀𝐮\) is exactly a linear combination of the columns of \(𝐀\)
+    </p>
+    <p>
+      the <b>range</b> (or <b>column space</b>) of \(𝐀\) is therefore
+      \[
+      ℛ(𝐀) = \left\{𝐀𝐮 \,\middle|\, 𝐮 ∈ ℝⁿ\right\}
+      = \Sp\{𝐀₁, 𝐀₂, …, 𝐀ₙ\}
+      \]
+      which is a subspace of \(ℝᵐ\).
+    </p>
+    <p>likewise, the <b>row space</b> is the span of the rows of \(𝐀\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
