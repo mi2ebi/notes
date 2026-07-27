@@ -37,10 +37,11 @@ math * {
   width: 100%;
 }
 
+ /*
 *.mathcal {
-  /* NotoSans */
   font-feature-settings: 'ss01';
 }
+ */
 
 math .mathscr {
   font-family: "Temml";

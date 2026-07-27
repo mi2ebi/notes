@@ -34,6 +34,7 @@ pub static STRUCTURAL: phf::Set<&str> = phf_set![
     "def",
     "det",
     "dfrac",
+    "dim",
     "displaystyle",
     "dprime",
     "end",

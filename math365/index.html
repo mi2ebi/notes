@@ -95,6 +95,19 @@
                 <li><a href="#range-column-space">range / column space</a></li>
               </ul>
             </li>
+            <li><a href="#3-4-bases-for-subspaces">3.4 bases for subspaces</a>
+              <ul class="tight">
+                <li><a href="#span-recap">span recap</a></li>
+                <li><a href="#minimal-spanning-set-basis">minimal spanning set / basis</a></li>
+              </ul>
+            </li>
+            <li><a href="#3-5-dimension">3.5 dimension</a>
+              <ul class="tight">
+                <li><a href="#three-techniques-to-exhibit-a-basis">three techniques to exhibit a basis</a></li>
+                <li><a href="#properties-of-a-k-dimension-subspace">properties of a \(k\)-dimension subspace</a></li>
+                <li><a href="#rank-and-nullity">rank and nullity</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -818,6 +831,7 @@
         <p>
           then \(u₃ = 2u₂ = 6u₁\) and \(v₃ = 2v₂ = 6u₁\). if we add them we get
           \(u₃ + v₃ = 2(u₂ + v₂) = 6(u₁ + v₁)\). therefore \(𝐮 + 𝐯 ∈ Y\)
+        </p>
       </li>
       <li>\(au₃ = 2au₂ = 6au₁\)</li>
     </ol>
@@ -904,6 +918,7 @@
       \(ℝ³\)
     </p>
     <h3 id="range-column-space">range / column space</h3>
+    <p>\(\gdef\im{\operatorname{im}}\)</p>
     <p>
       write an \(m × n\) matrix \(𝐀\) in terms of its column vectors:
       \[
@@ -916,14 +931,211 @@
       so the product \(𝐀𝐮\) is exactly a linear combination of the columns of \(𝐀\)
     </p>
     <p>
-      the <b>range</b> (or <b>column space</b>) of \(𝐀\) is therefore
+      the <b>range</b> or <b>column space</b> or <b>image</b> of \(𝐀\) is therefore
       \[
-      ℛ(𝐀) = \left\{𝐀𝐮 \,\middle|\, 𝐮 ∈ ℝⁿ\right\}
+      ℛ(𝐀) = \im 𝐀 = \left\{𝐀𝐮 \,\middle|\, 𝐮 ∈ ℝⁿ\right\}
       = \Sp\{𝐀₁, 𝐀₂, …, 𝐀ₙ\}
       \]
       which is a subspace of \(ℝᵐ\).
     </p>
     <p>likewise, the <b>row space</b> is the span of the rows of \(𝐀\)</p>
+    <h2 id="3-4-bases-for-subspaces">3.4 bases for subspaces</h2>
+    <h3 id="span-recap">span recap</h3>
+    <p>
+      let \(W\) be a subspace of \(ℝⁿ\), and let \(S = \left\{𝐰₁, …, 𝐰ₘ\right\} ⊂ W\). \(S\) is a
+      <b>spanning set for \(W\)</b> or <b>spans \(W\)</b> if \(W = \Sp\{S\}\), i.e. all elements of \(W\) can be
+      written as a linear combination of vectors in \(S\)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      determine whether \(S = \left\{\begin{bmatrix}1\\ 1\end{bmatrix}, \begin{bmatrix}-1\\ 2\end{bmatrix}\right\}\)
+      is a spanning set for \(ℝ²\)
+    </p>
+    <p>
+      let \(𝐮 = \begin{bmatrix}u₁\\ u₂\end{bmatrix} ∈ ℝ²\).
+      we need to solve
+      \[
+      \begin{bmatrix}1 & -1\\ 1 & 2\end{bmatrix}
+      \begin{bmatrix}x₁\\ x₂\end{bmatrix}
+      = \begin{bmatrix}u₁\\ u₂\end{bmatrix}
+      \]
+    </p>
+    <p>
+      the augmented matrix is
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & -1 & u₁\\
+      1 & 2 & u₂
+      \end{array}
+      \right]
+      \]
+      which we can reduce into
+      \[
+      \left[
+      \begin{array}{cc|c}
+      1 & 0 & \frac23u₁ + \frac13u₂\\
+      0 & 1 & \frac13u₁ + \frac13u₂
+      \end{array}
+      \right]
+      \]
+    </p>
+    <p>therefore \(S\) spans \(ℝ²\)</p>
+    <p>
+      <b class="example">ex.</b>
+      exhibit a spanning set for \(\ker 𝐀\) where
+      \(
+      𝐀 =
+      \begin{bmatrix}
+      1 & 1 & 2\\
+      1 & 1 & 2\\
+      2 & 3 & 5
+      \end{bmatrix}
+      \)
+    </p>
+    <h3 id="minimal-spanning-set-basis">minimal spanning set / basis</h3>
+    <p>
+      a set \(B = \{𝐛₁, …, 𝐛ₘ\} ⊂ ℝⁿ\) is a <b>minimal spanning set</b> or <b>basis</b> for a subspace \(W\) of
+      \(ℝⁿ\) if \(B\)'s elements are all linearly independent and \(W = \Sp\{B\}\)
+    </p>
+    <p>if \(B\) is a basis for \(W\),</p>
+    <ul>
+      <li>\(𝟎 ∉ B\)</li>
+      <li>
+        any vector \(𝐰 ∈ W\) can be uniquely represented in terms of the elements of \(B\). i.e.,
+        there is a unique set of scalars \(cᵢ\) s.t. \(𝐰 = c₁𝐛₁ + ⋯ + cₘ𝐛ₘ\)
+      </li>
+    </ul>
+    <p>
+      <b class="example">ex.</b>
+      show that \(
+      B = \left\{
+      \begin{bmatrix}1\\ 0\\ 0\end{bmatrix},~
+      \begin{bmatrix}0\\ 1\\ 0\end{bmatrix},~
+      \begin{bmatrix}0\\ 0\\ 1\end{bmatrix}
+      \right\}
+      \) is a basis for \(ℝ³\)
+    </p>
+    <p>
+      augment with \(𝐮 = \begin{bmatrix}u₁\\ u₂\\ u₃\end{bmatrix}\). it's already in RREF, so
+      \[
+      𝐮 =
+      u₁\begin{bmatrix}1\\ 0\\ 0\end{bmatrix} +
+      u₂\begin{bmatrix}0\\ 1\\ 0\end{bmatrix} +
+      u₃\begin{bmatrix}0\\ 0\\ 1\end{bmatrix}
+      \]
+      this means \(B\) spans \(ℝ³\)
+    </p>
+    <p>
+      to show they're linearly independent, solve
+      \[
+      \left[
+      \begin{array}{ccc|c}
+      1 & 0 & 0 & 0\\
+      0 & 1 & 0 & 0\\
+      0 & 0 & 1 & 0
+      \end{array}
+      \right]
+      \]
+      easy enough, \(x₁ = x₂ = x₃ = 0\)
+    </p>
+    <p>therefore \(B\) is a basis for \(ℝ³\)</p>
+    <p>
+      <b class="example">ex.</b>
+      find a basis for \(W = \Sp\{S\}\) where
+      \[
+      S = \left\{
+      \begin{bmatrix}1\\ 1\\ 2\\ -1\end{bmatrix},~
+      \begin{bmatrix}1\\ 2\\ 1\\ 1\end{bmatrix},~
+      \begin{bmatrix}1\\ 4\\ -1\\ 5\end{bmatrix},~
+      \begin{bmatrix}1\\ 0\\ 4\\ -1\end{bmatrix},~
+      \begin{bmatrix}2\\ 5\\ 0\\ 2\end{bmatrix}
+      \right\}
+      \]
+    </p>
+    <p><mark><b>todo</b></mark></p>
+    <h2 id="3-5-dimension">3.5 dimension</h2>
+    <p>
+      let \(W\) be a subspace of \(ℝⁿ\) and \(B = \left{𝐛₁, …, 𝐛ₖ\right\}\) be a basis for \(W\).
+    </p>
+    <ul>
+      <li>any set of \(k + 1\) vecotrs in \(W\) must be linearly dependent</li>
+      <li>any other basis for \(W\) must contain \(k\) vectors exactly</li>
+    </ul>
+    <p>i.e. if there are two different bases they must have the same number of elements</p>
+    <p>
+      so! \(W\) is a subspace of \(ℝⁿ\), \(B\) is a basis of \(W\) with \(k\) vectors in it,
+      so the <b>dimension</b> of \(W\) is \(k\). we write \(\dim W = k\)
+    </p>
+    <h3 id="three-techniques-to-exhibit-a-basis">three techniques to exhibit a basis</h3>
+    <p>suppose \(W = \Sp\{𝐮₁, …, 𝐮ₖ\}\)</p>
+    <ol>
+      <li>
+        <span style="color: var(--magenta-cooler)">(book ex 5)</span>
+        let \(𝐮 = \begin{bmatrix}u₁\\ u₂\\ u₃\end{bmatrix} ∈ W\).<br />get the augmented matrix
+        \(
+        \left[
+        \begin{array}{ccc|c}
+        𝐮₁ & … & 𝐮ₖ & 𝐮
+        \end{array}
+        \right]
+        \)
+        to RREF, determine the necessary and sufficient conditions for the result to be consistent, and use them to
+        exhibit a basis
+      </li>
+      <li>
+        <span style="color: var(--magenta-cooler)">(book ex 6)</span>
+        solve the independence relation
+        \[
+        x₁𝐮₁ + ⋯ + xₖ𝐮ₖ = 𝟎
+        \]
+        if \(xᵢ\) is dependent, \(𝐮ᵢ\) can be deleted from the spanning set of \(W\)
+      </li>
+      <li>
+        <span style="color: var(--magenta-cooler)">(book ex 7)</span>
+        form the coefficient matrix
+        \(𝐀 = \begin{bmatrix}𝐮₁ & … & 𝐮ₖ\end{bmatrix}\).
+        reduce its \(𝐀^⊤\) to RREF, call that \(𝐁\). then the nonzero columns of \(𝐁^⊤\) form a basis for \(W\)
+      </li>
+    </ol>
+    <h3 id="properties-of-a-k-dimension-subspace">properties of a \(k\)-dimension subspace</h3>
+    <ol>
+      <li>any set of \(k + 1\) vectors is linearly dependent</li>
+      <li>any set of less than \(k\) vectors in \(W\) doesn't span \(W\)</li>
+      <li>any set of \(k\) linearly independent vectors in \(W\) is a basis for \(W\)</li>
+      <li>any set of \(k\) vectors that spans \(W\) is a basis for \(W\)</li>
+    </ol>
+    <h3 id="rank-and-nullity">rank and nullity</h3>
+    <p>
+      \(
+      \gdef\rank{\operatorname{rank}}
+      \gdef\nullity{\operatorname{nullity}}
+      \)
+    </p>
+    <p><b>\(\rank 𝐀\)</b> \(= \dim \im 𝐀\)</p>
+    <p><b>\(\nullity 𝐀\)</b> \(= \dim \ker 𝐀\)</p>
+    <p>properties of rank and nullity for an \(m × n\) matrix \(𝐀\):</p>
+    <ul>
+      <li>\(\rank 𝐀 = \rank 𝐀^⊤\), i.e. the column space and row space of \(𝐀\) have the same dimension</li>
+      <li>\(n = \rank 𝐀 + \nullity 𝐀\)</li>
+      <li>
+        given a column vector \(𝐛\), the linear system \(𝐀𝐱 = 𝐛\) is consistent iff
+        \({\rank 𝐀} = \rank \left[\begin{array}{c|c}𝐀 & 𝐛\end{array}\right]\)
+      </li>
+      <li>
+        if \(𝐀\) is an \(n × n\) matrix, it's nonsingular/invertible iff \(\rank 𝐀 = n\) or ewuivalently
+        iff \(\nullity 𝐀 = 0\)
+      </li>
+    </ul>
+    <p>
+      <b class="example">ex.</b>
+      find the rank and nullity of \(𝐀 = \begin{bmatrix}1 & 2\\ 3 & 4\end{bmatrix}\)
+    </p>
+    <p>\(𝐀\) in RREF is \(\begin{bmatrix}1 & 0\\ 0 & 1\end{bmatrix}\). there are 2 pivots, so \(\rank 𝐀 = 2\)</p>
+    <p>
+      the system \(𝐀𝐱 = 𝟎\) has only the trivial solution \(𝐱 = 𝟎\), so \(\ker 𝐀 = \{𝟎\}\) and \(\nullity 𝐀 = 0\)
+    </p>
+    <p>alternatively \(\nullity 𝐀 = 2 - \rank 𝐀 = 0\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
