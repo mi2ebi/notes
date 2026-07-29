@@ -23,7 +23,7 @@ pub fn replace(
 }
 
 fn replace_braced(re: &FancyRegex, text: &str, map: &HashMap<char, char>) -> String {
-    re.replace_all(text, |caps: &FancyCaptures| {
+    re.replace_all(text, |caps: &FancyCaptures<str>| {
         let inner = caps.get(1).unwrap().as_str();
         if inner.contains('\\') {
             return caps.get(0).unwrap().as_str().to_owned();
@@ -35,7 +35,7 @@ fn replace_braced(re: &FancyRegex, text: &str, map: &HashMap<char, char>) -> Str
 }
 
 fn replace_bare(re: &FancyRegex, text: &str, map: &HashMap<char, char>) -> String {
-    re.replace_all(text, |caps: &FancyCaptures| {
+    re.replace_all(text, |caps: &FancyCaptures<str>| {
         let ch = caps.get(1).unwrap().as_str().chars().next().unwrap();
         map.get(&ch).map_or_else(|| caps.get(0).unwrap().as_str().to_owned(), |&s| s.to_string())
     })

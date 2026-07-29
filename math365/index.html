@@ -108,6 +108,11 @@
                 <li><a href="#rank-and-nullity">rank and nullity</a></li>
               </ul>
             </li>
+            <li><a href="#3-6-orthogonal-bases-for-subspaces">3.6 orthogonal bases for subspaces</a>
+              <ul class="tight">
+                <li><a href="#coordinates">coordinates</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -1136,6 +1141,28 @@
       the system \(𝐀𝐱 = 𝟎\) has only the trivial solution \(𝐱 = 𝟎\), so \(\ker 𝐀 = \{𝟎\}\) and \(\nullity 𝐀 = 0\)
     </p>
     <p>alternatively \(\nullity 𝐀 = 2 - \rank 𝐀 = 0\)</p>
+    <h2 id="3-6-orthogonal-bases-for-subspaces">3.6 orthogonal bases for subspaces</h2>
+    <p>
+      let \(S = \left\{𝐮₁, …, 𝐮ₖ\right\}\) be a set of vectors in \(ℝⁿ\). it's an <b>orthogonal set</b> if every pair
+      of vectors in \(S\) is orthogonal, i.e. their dot product is zero, and an <b>orthonormal set</b> if
+      additionally every vector is a unit vector
+    </p>
+    <p>
+      if \(S\) is orthonormal, it consists of linearly independent vectors. so if \(S\) is orthonormal and spans
+      \(W\), it's a basis for \(W\)
+    </p>
+    <p>
+      if \(B\) is orthogonal and a basis for \(W\) it's an <b>orthogonal basis</b>. if each vector in \(B\) is also
+      a unit vector it's an <b>orthonormal basis</b>
+    </p>
+    <h3 id="coordinates">coordinates</h3>
+    <p>
+      suppose \(W\) is a subspace of \(ℝⁿ\) and \(B\) is a basis for \(W\). if \(𝐮 ∈ W\), the
+      <b>coordinates</b> of \(𝐮\) wrt \(B\) are the scalars \(x₁, …, xₖ\) s.t.
+      \[
+      𝐮 = x₁𝐮₁ + ⋯ + xₖ𝐮ₖ
+      \]
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

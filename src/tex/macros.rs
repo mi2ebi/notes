@@ -130,7 +130,7 @@ static MACRO_RE: LazyLock<FancyRegex> =
 
 pub fn replace(text: &str) -> String {
     MACRO_RE
-        .replace_all(text, |caps: &FancyCaptures| {
+        .replace_all(text, |caps: &FancyCaptures<str>| {
             let name = caps.get(1).unwrap().as_str();
             MACROS
                 .get(name)

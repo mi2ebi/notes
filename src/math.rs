@@ -22,7 +22,7 @@ fn apply_in_math_regions(
     negations: &HashMap<char, char>,
 ) -> (String, Vec<String>) {
     let mut regions = Vec::new();
-    let mut sub = |caps: &FancyCaptures| {
+    let mut sub = |caps: &FancyCaptures<str>| {
         let open = caps.get(1).unwrap().as_str();
         let content = caps.get(2).unwrap().as_str();
         let close = caps.get(3).unwrap().as_str();

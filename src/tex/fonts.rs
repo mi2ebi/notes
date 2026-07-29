@@ -179,7 +179,7 @@ static MATH_FONT_RE: LazyLock<FancyRegex> = LazyLock::new(|| {
 
 pub fn replace(text: &str, maps: &FontMaps) -> String {
     MATH_FONT_RE
-        .replace_all(text, |caps: &FancyCaptures| {
+        .replace_all(text, |caps: &FancyCaptures<str>| {
             let cmd = caps.get(1).unwrap().as_str();
             let canonical = FONT_ALIASES.get(cmd).copied().unwrap_or(cmd);
             let whole = || caps.get(0).unwrap().as_str().to_owned();

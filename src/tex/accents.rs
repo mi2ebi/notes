@@ -35,7 +35,7 @@ static ACCENT_RE: LazyLock<FancyRegex> = LazyLock::new(|| {
 
 pub fn replace(text: &str) -> String {
     ACCENT_RE
-        .replace_all(text, |caps: &FancyCaptures| {
+        .replace_all(text, |caps: &FancyCaptures<str>| {
             let cmd = caps.get(1).unwrap().as_str();
             let ch = caps.get(2).or_else(|| caps.get(3));
             ch.map_or_else(
