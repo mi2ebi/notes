@@ -111,6 +111,19 @@
             <li><a href="#3-6-orthogonal-bases-for-subspaces">3.6 orthogonal bases for subspaces</a>
               <ul class="tight">
                 <li><a href="#coordinates">coordinates</a></li>
+                <li><a href="#constructing-an-orthogonal-basis">constructing an orthogonal basis</a></li>
+              </ul>
+            </li>
+            <li>3.7 linear transformation from \(ℝⁿ\) to \(ℝᵐ\)</li>
+          </ul>
+        </li>
+        <li><a href="#ch4-the-eigenvalue-problem">ch4 the eigenvalue problem</a>
+          <ul class="tight">
+            <li><a href="#4-1-eigenvalue-problem-for-2-2-matrices">4.1 eigenvalue problem for \(2 × 2\) matrices</a></li>
+            <li><a href="#4-2-determinants-and-the-eigenvalue-problem">4.2 determinants and the eigenvalue problem</a>
+              <ul class="tight">
+                <li><a href="#for-3-3-matrices">for \(3 × 3\) matrices</a></li>
+                <li><a href="#minor-matrices">minor matrices</a></li>
               </ul>
             </li>
           </ul>
@@ -718,7 +731,7 @@
     </p>
     <p>
       the <b>projection</b> of \(𝐯\) in the direction of \(𝐮\) is the vector
-      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) \^𝐮\)
+      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) \^𝐮 = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖²}𝐮\)
     </p>
     <h3 id="cross-product">cross product</h3>
     <p>
@@ -1061,7 +1074,7 @@
     <p><mark><b>todo</b></mark></p>
     <h2 id="3-5-dimension">3.5 dimension</h2>
     <p>
-      let \(W\) be a subspace of \(ℝⁿ\) and \(B = \left{𝐛₁, …, 𝐛ₖ\right\}\) be a basis for \(W\).
+      let \(W\) be a subspace of \(ℝⁿ\) and \(B = \left\{𝐛₁, …, 𝐛ₖ\right\}\) be a basis for \(W\).
     </p>
     <ul>
       <li>any set of \(k + 1\) vecotrs in \(W\) must be linearly dependent</li>
@@ -1162,6 +1175,139 @@
       \[
       𝐮 = x₁𝐮₁ + ⋯ + xₖ𝐮ₖ
       \]
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      find the coordinates of \(𝐛 = \begin{bmatrix}2\\ 3\end{bmatrix}\)
+      wrt the basis \(
+      B = \left\{
+      \begin{bmatrix}1\\ -1\end{bmatrix}, \begin{bmatrix}2\\ 1\end{bmatrix}
+      \right\}
+      \) of \(ℝ²\)
+    </p>
+    <p>
+      we want \(b₁, b₂\) s.t.
+      \[
+      \begin{bmatrix}1 & 2\\ -1 & 1\end{bmatrix}
+      \begin{bmatrix}b₁\\ b₂\end{bmatrix}
+      = 𝐛
+      \]
+    </p>
+    <p>
+      augmented matrix is \(
+      \left[
+      \begin{array}{cc|c}
+      1 & 2 & 2\\
+      -1 & 1 & 3
+      \end{array}
+      \right]
+      \)
+      with RREF \(
+      \left[
+      \begin{array}{cc|c}
+      1 & 0 & -\frac43\\
+      0 & 1 & \frac53
+      \end{array}
+      \right]
+      \)
+    </p>
+    <p>so \(b₁ = -\frac43\) and \(b₂ = \frac53\)</p>
+    <p>
+      if we know \(B\) is an <i>orthogonal</i> basis, then the coordinatws are just
+      \(xᵢ = \frac{𝐮 ⋅ 𝐮ᵢ}{\left‖𝐮ᵢ\right‖}\)
+    </p>
+    <h3 id="constructing-an-orthogonal-basis">constructing an orthogonal basis</h3>
+    <p>
+      <b>gram-schmidt process</b>:
+      suppose \(W\) is a subspace of \(ℝⁿ\) and
+      \(B = \left\{𝐰₁, …, 𝐰ₖ\right\}\)
+      is a basis for \(W\). construct the vectors \(𝐮₁, …, 𝐮ₖ\) inductively as follows:
+    </p>
+    <p>
+      \[
+      \begin{align*}
+      𝐮₁ &= 𝐰₁\\
+      𝐮₂ &= 𝐰₂ - \proj_{𝐮₁}\left(𝐰₂\right)\\
+      𝐮₃ &= 𝐰₃ - \proj_{𝐮₁}\left(𝐰₃\right) - \proj_{𝐮₂}\left(𝐰₃\right)\\
+      ⋮\\
+      𝐮ₖ &= 𝐰ₖ - \proj_{𝐮₁}\left(𝐰ₗ\right) - ⋯ - \proj{𝐮ₖ₋₁}\left(𝐰ₖ\right)
+      \end{align*}
+      \]
+    </p>
+    <p>then \(O = \left\{𝐮₁, …, 𝐮ₖ\right\}\) is an orthogonal basis for \(W\)</p>
+    <!-- toc nolink -->
+    <h2 id="3-7-linear-transformation-from-ℝⁿ-to-ℝᵐ">3.7 linear transformation from \(ℝⁿ\) to \(ℝᵐ\)</h2>
+    might cover if we have time
+    <h1 id="ch4-the-eigenvalue-problem">ch4 the eigenvalue problem</h1>
+    <p>throughout this chapter we are mostly concerned with square matrices</p>
+    <dl>
+      <dt>the eigenvalue problem</dt>
+      <dd>
+        let \(𝐀\) be an \(m × n\) matrix. an <b class="defn">eigenvalue</b> for \(𝐀\) is a scalar \(λ\) for which
+        the matrix \(𝐀 - λ𝐈ₙ\) is singular. in particular, \(λ\) is an eigenvalue of \(𝐀\) iff there is
+        a nonzero <b class="defn">eigenvector</b> \(𝐱 ∈ ℝⁿ\) s.t. \(𝐀𝐱 = λ𝐱\)
+      </dd>
+    </dl>
+    <h2 id="4-1-eigenvalue-problem-for-2-2-matrices">4.1 eigenvalue problem for \(2 × 2\) matrices</h2>
+    <p>
+      remember <a href="#determinant-of-2-2-matrix">determinants for these</a>?
+      <small><i>*whispers*</i> \(ad - bc\)</small>
+    </p>
+    <p>\(𝐀\) is singular iff \(\det 𝐀 = 0\). so \(λ\) is an eigenvalue of \(𝐀\) iff \(\det(𝐀 - λ𝐈₂) = 0\)</p>
+    <p>
+      <b class="example">ex.</b>
+      find all eigenvalues of \(𝐀 = \begin{bmatrix}5 & -2\\ 6 & -2\end{bmatrix}\). for each eigenvalue, find the corresponding eigenvectors
+    </p>
+    <p>
+      we need \(
+      \begin{vmatrix}
+      5 - λ & -2\\
+      6 & -2 - λ
+      \end{vmatrix} = 0
+      \), i.e.
+      \[
+      \begin{align*}
+      (5 - λ)(-2 - λ) + 12 &= λ² - 3λ + 2\\
+      &= (λ - 1)(λ - 2) = 0
+      \end{align*}
+      \]
+    </p>
+    <p>so \(λ = 1\) or \(λ = 2\)</p>
+    <p>
+      eigenvectors for \(λ = 1\): \(𝐀𝐱 = λ𝐱\) i.e. find \(\ker (𝐀 - λ𝐈₂)\)
+      \[
+      \begin{bmatrix}4 & -2\\ 6 & -3\end{bmatrix}𝐱 = 𝟎
+      \]
+    </p>
+    <p><mark><b>todo</b> finish</mark></p>
+    <h2 id="4-2-determinants-and-the-eigenvalue-problem">4.2 determinants and the eigenvalue problem</h2>
+    <h3 id="for-3-3-matrices">for \(3 × 3\) matrices</h3>
+    <p>
+      suppose \(𝐀 = \begin{bmatrix}
+      a & b & c\\
+      d & e & f\\
+      g & h & i
+      \end{bmatrix}\)
+    </p>
+    <p>
+      for each item in the top row:
+      ignore its row and column,
+      find the determinant of what's left,
+      alternate the signs \(+-+⋯\),
+      add
+    </p>
+    <p>
+      so
+      \(\det 𝐀
+      = a \det \begin{bmatrix}e & f\\ h & i\end{bmatrix}
+      - b \det \begin{bmatrix}d & f\\ h & i\end{bmatrix}
+      + c \det \begin{bmatrix}d & e\\ g & h\end{bmatrix}\)
+    </p>
+    <h3 id="minor-matrices">minor matrices</h3>
+    <p>a <b>minor matrix</b> \(𝐌ᵢⱼ\) is \(𝐀\) but with row \(i\) and column \(j\) deleted</p>
+    <p>a <b>cofactor matrix</b> is \(𝐂ᵢⱼ = (-1)ⁱ⁺ʲ\, 𝐌ᵢⱼ\)</p>
+    <p>
+      for an \(n × n\) matrix \(𝐀\), \[\det 𝐀 = ∑ⱼ₌₁ⁿ (-1)¹⁺ʲ\, \det 𝐌ᵢⱼ\]
     </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />

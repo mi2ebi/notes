@@ -27,17 +27,10 @@ pub struct Element {
     pub kind: ElementKind,
     pub start: usize,
     pub end: usize,
-    /// `end`, or the end of a trailing `<script>` block (from a previous
-    /// run) that should be replaced along with the element itself.
     pub full_end: usize,
     pub attrs: String,
     pub content: String,
     pub stripped_content: String,
-    /// `Some(spans)` for a block already fully annotated under the *old*
-    /// inline-`<span>` scheme: it can be converted straight to the new
-    /// id/`color()` form without going through the TUI. `None` means an
-    /// interactive pass is needed (never processed, or its legacy markup
-    /// didn't parse cleanly).
     pub legacy_spans: Option<Vec<FinishedSpan>>,
 }
 
