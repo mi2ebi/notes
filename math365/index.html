@@ -123,9 +123,11 @@
             <li><a href="#4-2-determinants-and-the-eigenvalue-problem">4.2 determinants and the eigenvalue problem</a>
               <ul class="tight">
                 <li><a href="#for-3-3-matrices">for \(3 × 3\) matrices</a></li>
-                <li><a href="#minor-matrices">minor matrices</a></li>
+                <li><a href="#minor-matrices-det-of-n-n">minor matrices, det of \(n × n\)</a></li>
               </ul>
             </li>
+            <li><a href="#4-4-eigenvalues-and-characteristic-polynomial">4.4 eigenvalues and characteristic polynomial</a></li>
+            <li><a href="#4-5-eigenvectors-and-eigenspaces">4.5 eigenvectors and eigenspaces</a></li>
           </ul>
         </li>
       </ul>
@@ -1299,15 +1301,51 @@
     <p>
       so
       \(\det 𝐀
-      = a \det \begin{bmatrix}e & f\\ h & i\end{bmatrix}
-      - b \det \begin{bmatrix}d & f\\ h & i\end{bmatrix}
-      + c \det \begin{bmatrix}d & e\\ g & h\end{bmatrix}\)
+      = a \begin{vmatrix}e & f\\ h & i\end{vmatrix}
+      - b \begin{vmatrix}d & f\\ h & i\end{vmatrix}
+      + c \begin{vmatrix}d & e\\ g & h\end{vmatrix}\)
     </p>
-    <h3 id="minor-matrices">minor matrices</h3>
+    <h3 id="minor-matrices-det-of-n-n">minor matrices, det of \(n × n\)</h3>
     <p>a <b>minor matrix</b> \(𝐌ᵢⱼ\) is \(𝐀\) but with row \(i\) and column \(j\) deleted</p>
     <p>a <b>cofactor matrix</b> is \(𝐂ᵢⱼ = (-1)ⁱ⁺ʲ\, 𝐌ᵢⱼ\)</p>
     <p>
-      for an \(n × n\) matrix \(𝐀\), \[\det 𝐀 = ∑ⱼ₌₁ⁿ (-1)¹⁺ʲ\, \det 𝐌ᵢⱼ\]
+      for an \(n × n\) matrix \(𝐀\), \[\det 𝐀 = ∑ⱼ₌₁ⁿ (-1)ⁱ⁺ʲ\, \det 𝐌ᵢⱼ\] where \(i\) is <u>whatever!</u>
+      maybe pick the row with the most zeros
+    </p>
+    <p>\(\det 𝐀𝐁 = \det 𝐀 ⋅ \det 𝐁\)</p>
+    <h2 id="4-4-eigenvalues-and-characteristic-polynomial">4.4 eigenvalues and characteristic polynomial</h2>
+    <p>
+      let \(𝐀\) be an \(n × n\) polynomial. the \(n\)th degree polynomial
+      \[
+      p(t) = \det (𝐀 - t𝐈ₙ)
+      \]
+      is the <b>characteristic polynomial</b>. iff \(p(t) = 0\), \(t\) is an eigenvalue
+    </p>
+    <p>
+      if \(λ\) is an eigenvalue of \(𝐀\), the number of times \((t - λ)\) appears in the
+      factorization of \(p(t)\) is the <b>algebraic multiplicity \(μ_𝐀(λ)\)</b> of \(λ\)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      find the characteristic polynomial and eigenvalues of \(𝐀 = \begin{bmatrix}1 & 5\\ 3 & 3\end{bmatrix}\)
+    </p>
+    <p>\(p(t) = t² - 4t - 12 = (t + 2)(t - 6) = 0\) <mark><b>todo</b> why</mark></p>
+    <p>so the eigenvalues are \(λ = -2\) or \(λ = 6\)</p>
+    <p>properties:</p>
+    <ul>
+      <li>\(∀ m ∈ ℕ₁: λᵐ\) is an eigenvalue of \(𝐀ᵐ\)</li>
+      <li>\(𝐀\) is invertible iff \(λ = 0\) isn't one of its eigenvalues</li>
+      <li>if \(𝐀\), then \(\frac1λ\) is an eigenvalue of \(𝐀⁻¹\)</li>
+    </ul>
+    <p><a href="https://unlv.instructure.com/courses/211908/files/34156759">ex 2 from lecture</a></p>
+    <h2 id="4-5-eigenvectors-and-eigenspaces">4.5 eigenvectors and eigenspaces</h2>
+    <p>
+      the <b>eigenspace</b> of \(λ\) is \(E_λ ≔ \ker(𝐀 - λ𝐈ₙ)\).
+      \(\dim E_λ\) is the <b>geometric multiplicity \(γ_𝐀(λ)\)</b> of \(λ\)
+    </p>
+    <p>
+      \(γ_𝐀(λ)\) is always \(≤ μ_𝐀(λ)\).
+      if there is an eigenvalue \(λ\) s.t. \(γ_𝐀(λ) < μ_𝐀(λ)\), \(𝐀\) is a <b>defective matrix</b>
     </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />

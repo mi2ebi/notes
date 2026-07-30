@@ -80,6 +80,7 @@ pub static MACROS: phf::Map<&str, char> = phf_map! {
     "ne" => '≠',
     "neg" => '¬',
     "neq" => '≠',
+    "ni" => '∋',
     "notin" => '∉',
     "nu" => 'ν',
     "oint" => '∮',
