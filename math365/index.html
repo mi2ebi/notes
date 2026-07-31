@@ -127,7 +127,24 @@
               </ul>
             </li>
             <li><a href="#4-4-eigenvalues-and-characteristic-polynomial">4.4 eigenvalues and characteristic polynomial</a></li>
-            <li><a href="#4-5-eigenvectors-and-eigenspaces">4.5 eigenvectors and eigenspaces</a></li>
+            <li><a href="#4-5-eigenvectors-and-eigenspaces">4.5 eigenvectors and eigenspaces</a>
+              <ul class="tight">
+                <li><a href="#triangular-matrices">triangular matrices</a></li>
+              </ul>
+            </li>
+            <li><a href="#4-7-similarity-transformations-and-diagonalization">4.7 similarity transformations and diagonalization</a>
+              <ul class="tight">
+                <li><a href="#similar-matrices">similar matrices</a></li>
+                <li><a href="#diagonal-matrices">diagonal matrices</a></li>
+                <li><a href="#orthogonal-matrices">orthogonal matrices</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#ch5-vector-spaces-and-linear-transformations">ch5 vector spaces and linear transformations</a>
+          <ul class="tight">
+            <li><a href="#5-2-vector-spaces">5.2 vector spaces</a></li>
+            <li><a href="#5-3-subspaces">5.3 subspaces</a></li>
           </ul>
         </li>
       </ul>
@@ -665,8 +682,8 @@
     </p>
     <p>we can represent any vector \(𝐯\) as \(v₁𝐢 + v₂𝐣\)</p>
     <p>
-      we can make an arbitrary unit vector \(\^𝐯\) from a vector \(𝐯\) by
-      \(\^𝐯 = \frac{𝐯}{\left‖𝐯\right‖}\)
+      we can make an arbitrary unit vector \(𝐯̂\) from a vector \(𝐯\) by
+      \(𝐯̂ = \frac{𝐯}{\left‖𝐯\right‖}\)
     </p>
     <h2 id="2-2-vectors-in-space">2.2 vectors in space</h2>
     <p>
@@ -733,7 +750,7 @@
     </p>
     <p>
       the <b>projection</b> of \(𝐯\) in the direction of \(𝐮\) is the vector
-      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) \^𝐮 = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖²}𝐮\)
+      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) 𝐮̂ = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖²}𝐮\)
     </p>
     <h3 id="cross-product">cross product</h3>
     <p>
@@ -1346,6 +1363,132 @@
     <p>
       \(γ_𝐀(λ)\) is always \(≤ μ_𝐀(λ)\).
       if there is an eigenvalue \(λ\) s.t. \(γ_𝐀(λ) < μ_𝐀(λ)\), \(𝐀\) is a <b>defective matrix</b>
+    </p>
+    <h3 id="triangular-matrices">triangular matrices</h3>
+    <p>
+      a matrix is <b>upper triangular</b> if everything <i>below</i> the main diagonal is 0, and
+      <b>lower triangular</b> if everything <i>above</i> it is zero. for triangular matrices the eigenvalues are
+      all the diagonal entries!
+    </p>
+    <h2 id="4-7-similarity-transformations-and-diagonalization">4.7 similarity transformations and diagonalization</h2>
+    <h3 id="similar-matrices">similar matrices</h3>
+    <p>
+      let \(𝐀\) and \(𝐁\) be two \(n × n\) matrices. they're <b>similar</b> if there exists an invertible matrix
+      \(𝐒\) such that \(𝐁 = 𝐒⁻¹𝐀𝐒\) (or equivalently \(𝐀 = 𝐒𝐁𝐒⁻¹\))
+    </p>
+    <p>
+      similar matrices have the same characteristic polynomial and the same eigenvalues.
+      (but the converse is not necessarily true)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      \(𝐀 = \begin{bmatrix}1 & 0\\ 1 & 1\end{bmatrix}\) and \(𝐈₂\) have the same eigenvalues!
+      are they similar?
+    </p>
+    <p>
+      assume they are, so there's an \(𝐒\) s.t. \(𝐀 = 𝐒⁻¹𝐈₂𝐒\). but the identity matrix times anything is the
+      identity matrix! and certainly \(𝐀 ≠ 𝐈₂\)... so they're not similar
+    </p>
+    <h3 id="diagonal-matrices">diagonal matrices</h3>
+    <p>a matrix is <b>diagonal</b> if it's both upper triangular and lower triangular</p>
+    <p>
+      a matrix is <b>diagonalizable</b> if it's similar to a diagonal matrix. or if it has \(n\) linearly
+      independent eigenvectors. or if all the eigenvalues are distinct. or iff it's not defective
+    </p>
+    <p>
+      assume \(𝐀\) has \(n\) lineary independent eigenvectors \(𝐮₁, …, 𝐮ₙ\).
+      for each \(k = 1, …, k\) let \(λₖ\) be the eigenvalue corresponding to \(𝐮ₖ\). then construct
+      the matrices
+      \[
+      𝐃 = \begin{bmatrix}
+      λ₁ & 0 & ⋯ & 0\\
+      0 & λ₂ & & 0\\
+      ⋮ & & ⋱ & ⋮\\
+      0 & 0 & ⋯ & λₙ
+      \end{bmatrix}
+      \]
+      and
+      \[
+      𝐒 = \begin{bmatrix}𝐮₁ … 𝐮ₙ\end{bmatrix}
+      \]
+      then \(𝐃 = 𝐒⁻¹𝐀𝐒\)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      show that \(𝐀 = \begin{bmatrix}5 & -6\\ 3 & -4\end{bmatrix}\) is diagonalizable
+    </p>
+    <p><mark><b>todo</b></mark> finish</p>
+    <p>
+      if \(𝐃\) is diagonal and \(𝐀\) and \(𝐃\) are similar,
+      so are \(𝐀ᵏ\) and \(𝐃ᵏ\) for \(k ∈ ℕ₁\) (and \(𝐀ᵏ\) is also diagonalizable)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      compute \(𝐀¹⁵\) of the previous example
+    </p>
+    <h3 id="orthogonal-matrices">orthogonal matrices</h3>
+    <p>
+      an \(n × n\) matrix \(𝐐\) is <b>orthogonal</b> if it's invertible and \(𝐐⁻¹ = 𝐐^⊤\).
+      equivalently if the column vectors are orthonormal
+    </p>
+    <p>any symmetric matrix is diagonalizable</p>
+    <h1 id="ch5-vector-spaces-and-linear-transformations">ch5 vector spaces and linear transformations</h1>
+    <p>this is mostly v similar to ch3</p>
+    <h2 id="5-2-vector-spaces">5.2 vector spaces</h2>
+    <p>
+      a set of elements \(V\) is a <b>vector space</b> over a field \(F\) if an addition operation is defined
+      between any two elements of \(V\), and a scalar multiplication operation is defined between any element of
+      \(F\) and any element of \(V\)
+    </p>
+    <p>for any \(𝐮, 𝐯, 𝐰 ∈ V\) and \(a, b ∈ F\):</p>
+    <ul>
+      <li>\(𝐮 + 𝐯 ∈ V\)</li>
+      <li>\(a𝐯 ∈ V\)</li>
+      <li>\(𝐮 + 𝐯 = 𝐯 + 𝐮\)</li>
+      <li>\((𝐮 + 𝐯) + 𝐰 = 𝐮 + (𝐯 + 𝐰)\)</li>
+      <li>there's a unique \(𝟎 ∈ V\) s.t. \(∀𝐯 ∈ V.\; 𝐯 + 𝟎 = 𝐯\) </li>
+      <li>every vector has an additive inverse s.t. \(𝐯 + -𝐯 = 𝟎\)</li>
+      <li>\(a(b𝐯) = (ab)𝐯\)</li>
+      <li>\(a(𝐮 + 𝐯) = a𝐮 + a𝐯\)</li>
+      <li>\((a + b)𝐯 = a𝐯 + b𝐯\)</li>
+      <li>\(1𝐯 = 𝐯\)</li>
+    </ul>
+    <p>
+      <b class="example">ex.</b>
+      denote by \(C([0, 1])\) the set of real-valued continuous functions on the interval \([0, 1]\).
+      verify that it's a vector space over \(ℝ\)
+    </p>
+    <p>
+      adding two continuous functions gives you another continuous function, and multiplying a continuous function
+      by a scalar also gives you a continuous function, and it satisfies all the properties
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      let \(n\) be a positive integer and define
+      \[
+      𝒫ₙ ≔ \left\{p \,\middle|\, p(x) = a₀ + a₁x + ⋯ + aₙxⁿ\right\}
+      \]
+      is it a vector space?
+    </p>
+    <p>this is isomorphic to \(ℝⁿ⁺¹\), which is definitely a vector space</p>
+    todo cancelation laws
+    <h2 id="5-3-subspaces">5.3 subspaces</h2>
+    <p>
+      if \(V\) and \(W\) are real vector spaces and \(W ⊂ V\), \(W\) is a <b>subspace</b> of \(V\)
+    </p>
+    <ul>
+      <li>\(V\)'s zero vector \(𝟎_V ∈ W\)</li>
+      <li>\(𝐮 + 𝐯 ∈ W\) whenever \(𝐮 ∈ W\) and \(𝐯 ∈ W\)</li>
+      <li>\(a𝐮 ∈ W\) whenever \(𝐮 ∈ W\) and \(a ∈ ℝ\)</li>
+    </ul>
+    <p>
+      <b class="example">ex.</b>
+      let \(W\) be the subspace of \(\mathscr P₂\) defined by
+      define
+      \[
+      W = \left\{ p \,\middle|\, p(x) = a₀ + a₁x + a₂x²,~~ a₁ + a₂ = 3a₀ \right\}
+      \]
+      exhibit a spanning set for \(W\)
     </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />

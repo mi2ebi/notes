@@ -36,6 +36,7 @@ pub static MACROS: phf::Map<&str, char> = phf_map! {
     "cong" => '≅',
     "cross" => '×',
     "cup" => '∪',
+    "ddots" => '⋱',
     "delta" => 'δ',
     "div" => '÷',
     "downarrow" => '↓',
