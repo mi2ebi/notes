@@ -112,17 +112,17 @@
       of the list, and likewise for <code class="variable">tail</code> pointing to the
       end
     </p>
-    <pre class="highlit" id="hl-31992e9fca6fbf7b">
+    <pre class="highlit" id="hl-ecce63c78b4f3b06">
 class Node {
   public:
     int data;
     Node *prev;
     Node *next;
 };</pre>
-<script>color("hl-31992e9fca6fbf7b", [["class", "keyword"],[" ", null],["Node", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["Node *", "type"],["prev", "variable"],[";\n    ", null],["Node *", "type"],["next", "variable"],[";\n", null],["}", "rainbow0"],[";", null]]);</script>
-    <p>tail insert / <code class="highlit" id="hl-e1912e10f6dc4cf8">push_back(x)</code>
-<script>color("hl-e1912e10f6dc4cf8", [["push_back(x)", null]]);</script></p>
-    <pre class="highlit" id="hl-475283050a08c44c">
+<script>color("hl-ecce63c78b4f3b06", [["class", "keyword"],[" ", null],["Node", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["Node *", "type"],["prev", "variable"],[";\n    ", null],["Node *", "type"],["next", "variable"],[";\n", null],["}", "rainbow0"],[";", null]]);</script>
+    <p>tail insert / <code class="highlit" id="hl-3a85cffb7b11d38b">push_back(x)</code>
+<script>color("hl-3a85cffb7b11d38b", [["push_back(x)", null]]);</script></p>
+    <pre class="highlit" id="hl-ac129498f7eef4c2">
 Node *tmp;
 tmp = new Node;
 tmp->data = x; // (*tmp).data = x;
@@ -130,18 +130,18 @@ tail->next = tmp;
 tmp->prev = tail;
 tmp->next = nullptr;
 tail = tmp;</pre>
-<script>color("hl-475283050a08c44c", [["Node *", "type"],["tmp", "variable"],[";\ntmp = ", null],["new", "keyword"],[" ", null],["Node", "type"],[";\ntmp->data = x; ", null],["// (*tmp).data = x;", "comment"],["\ntail->next = tmp;\ntmp->prev = tail;\ntmp->next = ", null],["nullptr", "constant"],[";\ntail = tmp;", null]]);</script>
-    <p>head remove / <code class="highlit" id="hl-5ee51cb67b64b453">pop_front()</code>
-<script>color("hl-5ee51cb67b64b453", [["pop_front()", null]]);</script></p>
-    <pre class="highlit" id="hl-6d05e6bd685b4cc9">
+<script>color("hl-ac129498f7eef4c2", [["Node *", "type"],["tmp", "variable"],[";\ntmp = ", null],["new", "keyword"],[" ", null],["Node", "type"],[";\ntmp->data = x; ", null],["// (*tmp).data = x;", "comment"],["\ntail->next = tmp;\ntmp->prev = tail;\ntmp->next = ", null],["nullptr", "constant"],[";\ntail = tmp;", null]]);</script>
+    <p>head remove / <code class="highlit" id="hl-7ed43656d60e03d9">pop_front()</code>
+<script>color("hl-7ed43656d60e03d9", [["pop_front()", null]]);</script></p>
+    <pre class="highlit" id="hl-36d18c02e2c5b896">
 Node *tmp;
 tmp = head;
 head = head->next;
 delete tmp; // deällocate
 head->prev = nullptr;</pre>
-<script>color("hl-6d05e6bd685b4cc9", [["Node *", "type"],["tmp", "variable"],[";\ntmp = head;\nhead = head->next;\n", null],["delete", "keyword"],[" tmp; ", null],["// deällocate", "comment"],["\nhead->prev = ", null],["nullptr", "constant"],[";", null]]);</script>
+<script>color("hl-36d18c02e2c5b896", [["Node *", "type"],["tmp", "variable"],[";\ntmp = head;\nhead = head->next;\n", null],["delete", "keyword"],[" tmp; ", null],["// deällocate", "comment"],["\nhead->prev = ", null],["nullptr", "constant"],[";", null]]);</script>
     <p>swap, assuming pointers <code class="variable">i</code> and <code class="variable">j</code></p>
-    <pre class="highlit" id="hl-dd0506b16ceec871">
+    <pre class="highlit" id="hl-02cdf6dd2253b1af">
 Node *i_left  = i->prev;
 Node *i_right = i->next;
 Node *j_left  = j->prev;
@@ -157,7 +157,7 @@ j->next = i_right;
 Node *t = i;
 i = j;
 j = t;</pre>
-<script>color("hl-dd0506b16ceec871", [["Node *", "type"],["i_left", "variable"],["  = i->prev;\n", null],["Node *", "type"],["i_right", "variable"],[" = i->next;\n", null],["Node *", "type"],["j_left", "variable"],["  = j->prev;\n", null],["Node *", "type"],["j_right", "variable"],[" = j->next;\ni_left->next  = j;\ni_right->prev = j;\nj_left->next  = i;\nj_right->prev = i;\ni->prev = j_left;\nj->prev = i_left;\ni->next = j_right;\nj->next = i_right;\n", null],["Node *", "type"],["t", "variable"],[" = i;\ni = j;\nj = t;", null]]);</script>
+<script>color("hl-02cdf6dd2253b1af", [["Node *", "type"],["i_left", "variable"],["  = i->prev;\n", null],["Node *", "type"],["i_right", "variable"],[" = i->next;\n", null],["Node *", "type"],["j_left", "variable"],["  = j->prev;\n", null],["Node *", "type"],["j_right", "variable"],[" = j->next;\ni_left->next  = j;\ni_right->prev = j;\nj_left->next  = i;\nj_right->prev = i;\ni->prev = j_left;\nj->prev = i_left;\ni->next = j_right;\nj->next = i_right;\n", null],["Node *", "type"],["t", "variable"],[" = i;\ni = j;\nj = t;", null]]);</script>
     <p>we could also just swap the <code class="variable">data</code>s</p>
     <h1 id="algorithms">algorithms</h1>
     <dl>
@@ -282,7 +282,7 @@ j = t;</pre>
     <p>logs are very nice for runtime</p>
     <h1 id="searching">searching</h1>
     <h2 id="linear-search">linear search</h2>
-    <pre class="highlit" id="hl-949193fc3c525c2a">
+    <pre class="highlit" id="hl-687dff0bb3c413c3">
 // a : array
 // n : size
 // s : searchee
@@ -292,16 +292,16 @@ bool find(int a[], int n, int s) {
       return true; //         //
   return false;
 }</pre>
-<script>color("hl-949193fc3c525c2a", [["// a : array\n// n : size\n// s : searchee", "comment"],["\n", null],["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["// O(n)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],[" ", null],["// O(1)", "comment"],["    ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],["; ", null],["//", "comment"],["         ", null],["//", "comment"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
+<script>color("hl-687dff0bb3c413c3", [["// a : array\n// n : size\n// s : searchee", "comment"],["\n", null],["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["// O(n)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],[" ", null],["// O(1)", "comment"],["    ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],["; ", null],["//", "comment"],["         ", null],["//", "comment"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>worst case, <code class="variable">s</code> isn't in the array at all.</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
-    <p>best case, <code class="highlit" id="hl-09a37b1aa64a647e">s == a[0]</code>
-<script>color("hl-09a37b1aa64a647e", [["s == a[0]", null]]);</script></p>
+    <p>best case, <code class="highlit" id="hl-f57a10a1d3d4dd43">s == a[0]</code>
+<script>color("hl-f57a10a1d3d4dd43", [["s == a[0]", null]]);</script></p>
     <p>\(O(1)\), \(Ω(1)\), \(Θ(1)\)</p>
     <p>average case, <code class="variable">s</code> is in the middle</p>
     <p>\(O(n)\), \(Ω(n)\), \(Θ(n)\)</p>
     <h2 id="binary-search">binary search</h2>
-    <pre class="highlit" id="hl-d3603344fbcfb810">
+    <pre class="highlit" id="hl-7e5a3e0f2f8743f3">
 bool find(int a[], int n, int s) {
   int l = 0;
   int r = n - 1;
@@ -317,42 +317,42 @@ bool find(int a[], int n, int s) {
   }
   return false;
 }</pre>
-<script>color("hl-d3603344fbcfb810", [["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["l", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["r", "variable"],[" = n - ", null],["1", "constant"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["l \u003c= r", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    m = l + ", null],["(", "rainbow2"],["r - l", null],[")", "rainbow2"],[" / ", null],["2", "constant"],["; ", null],["// O(1)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],["       ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],[";       ", null],["//", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" \u003c s", null],[")", "rainbow2"],["        ", null],["//", "comment"],["\n      l = m + ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n    ", null],["else", "keyword"],["                 ", null],["//", "comment"],["\n      r = m - ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
+<script>color("hl-7e5a3e0f2f8743f3", [["bool", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["l", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["r", "variable"],[" = n - ", null],["1", "constant"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["l \u003c= r", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    m = l + ", null],["(", "rainbow2"],["r - l", null],[")", "rainbow2"],[" / ", null],["2", "constant"],["; ", null],["// O(1)", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" == s", null],[")", "rainbow2"],["       ", null],["//", "comment"],["\n      ", null],["return", "keyword"],[" ", null],["true", "constant"],[";       ", null],["//", "comment"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["m", null],["]", "rainbow3"],[" \u003c s", null],[")", "rainbow2"],["        ", null],["//", "comment"],["\n      l = m + ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n    ", null],["else", "keyword"],["                 ", null],["//", "comment"],["\n      r = m - ", null],["1", "constant"],[";         ", null],["//", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" ", null],["false", "constant"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>worst case, <code class="variable">s</code> isn't in the array at all</p>
     <p>\(O(\log n)\), \(Ω(\log n)\), \(Θ(\log n)\)</p>
     <h1 id="some-loops">some loops</h1>
-    <pre class="highlit" id="hl-bec99ecbad9a234d">
+    <pre class="highlit" id="hl-7bd050a1c41c1aa0">
 for (int i = 0; i < n; i += 3)
   cout << "...";</pre>
-<script>color("hl-bec99ecbad9a234d", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i += ", null],["3", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ", null],["\"...\"", "string"],[";", null]]);</script>
+<script>color("hl-7bd050a1c41c1aa0", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i += ", null],["3", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ", null],["\"...\"", "string"],[";", null]]);</script>
     <p>\(
       \frac13 ∑\limitsᵢ₌₀ⁿ⁻¹ 1 = \frac n3 = Θ(n)
     \)</p>
     <p>the counter updater bit is a big clue as to the complexity</p>
-    <pre class="highlit" id="hl-e1f556e808ac93c8">
+    <pre class="highlit" id="hl-f9a41a61a7ded93b">
 for (int i = n; i > 0; i /= 2)
   cout << ...;</pre>
-<script>color("hl-e1f556e808ac93c8", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = n; i > ", null],["0", "constant"],["; i /= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
-    <pre class="highlit" id="hl-ccf100a6b0502b1c">
+<script>color("hl-f9a41a61a7ded93b", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = n; i > ", null],["0", "constant"],["; i /= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
+    <pre class="highlit" id="hl-0b862846a1bb06a9">
 for (int i = 1; i < n; i *= 2)
   cout << ...;</pre>
-<script>color("hl-ccf100a6b0502b1c", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i *= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
+<script>color("hl-0b862846a1bb06a9", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i *= ", null],["2", "constant"],[")", "rainbow0"],["\n  ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>these are both \(\log₂ n = Θ(\log n)\)</p>
-    <pre class="highlit" id="hl-0ed742583286181c">
+    <pre class="highlit" id="hl-2edbeb92df8b3266">
 for (int i = 0; i < n; i++)
   for (int j = 0; j < n; j++)
     cout << ...;</pre>
-<script>color("hl-0ed742583286181c", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c n; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
+<script>color("hl-2edbeb92df8b3266", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c n; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁿ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ n
       = n² = Θ(n²)
     \)</p>
-    <pre class="highlit" id="hl-0d5ca48fcf5ba425">
+    <pre class="highlit" id="hl-e8d4a73cae9a3965">
 for (int i = 0; i < n; i++)
   for (int j = 0; j < i; j++)
     cout << ...;</pre>
-<script>color("hl-0d5ca48fcf5ba425", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c i; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
+<script>color("hl-e8d4a73cae9a3965", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["0", "constant"],["; j \u003c i; j++", null],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;", null]]);</script>
     <p>\(
       ∑\limitsᵢ₌₀ⁿ⁻¹ ∑\limitsⱼ₌₀ⁱ⁻¹ 1
       = ∑\limitsᵢ₌₀ⁿ⁻¹ i
@@ -360,20 +360,20 @@ for (int i = 0; i < n; i++)
       = \frac{n²}2 - \frac n2
       = Θ(n²)
     \)</p>
-    <pre class="highlit" id="hl-19d8df9321096013">
+    <pre class="highlit" id="hl-9d14250d50b9d86b">
 for (int i = 0; i < n; i++)
   for (int j = 1; j < n; j *= 2)
     cout << ...;
 </pre>
-<script>color("hl-19d8df9321096013", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c n; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
+<script>color("hl-9d14250d50b9d86b", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c n; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
 
     <p>\(Θ(n\log n)\)</p>
-    <pre class="highlit" id="hl-7dd9200a6485af37">
+    <pre class="highlit" id="hl-21bbddd8ceb0448b">
 for (int i = 0; i < n; i++)
   for (int j = 1; j < i; j *= 2)
     cout << ...;
 </pre>
-<script>color("hl-7dd9200a6485af37", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c i; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
+<script>color("hl-21bbddd8ceb0448b", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c n; i++", null],[")", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["j", "variable"],[" = ", null],["1", "constant"],["; j \u003c i; j *= ", null],["2", "constant"],[")", "rainbow1"],["\n    ", null],["cout", "builtin"],[" \u003c\u003c ...;\n", null]]);</script>
     <p>since \(\log 0\) is undefined we can cheat and do \(
       ∑\limitsᵢ₌₁ⁿ \log₂ i
       = \log₂(n!)
@@ -388,7 +388,7 @@ for (int i = 0; i < n; i++)
     \]</p>
     <h1 id="sorting">sorting</h1>
     <h2 id="insertion-sort">insertion sort</h2>
-    <pre class="highlit" id="hl-69f8b59c5acb618d">
+    <pre class="highlit" id="hl-a9e3012a2b7756e3">
 void insertionSort(int a[], int n) {
   for (int i = 1; i < n; i++) {
     int key = a[i];
@@ -401,13 +401,13 @@ void insertionSort(int a[], int n) {
   }
 }
 </pre>
-<script>color("hl-69f8b59c5acb618d", [["void", "type"],[" ", null],["insertionSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["int", "type"],[" ", null],["key", "variable"],[" = a", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[";\n    ", null],["int", "type"],[" ", null],["j", "variable"],[" = i - ", null],["1", "constant"],[";\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["j >= ", null],["0", "constant"],[" && a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > key", null],[")", "rainbow2"],[" ", null],["{", "rainbow2"],["\n      a", null],["[", "rainbow3"],["j + ", null],["1", "constant"],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[";\n      j--;\n    ", null],["}", "rainbow2"],["\n    a", null],["[", "rainbow2"],["j + ", null],["1", "constant"],["]", "rainbow2"],[" = key;\n  ", null],["}", "rainbow1"],["\n", null],["}", "rainbow0"],["\n", null]]);</script>
+<script>color("hl-a9e3012a2b7756e3", [["void", "type"],[" ", null],["insertionSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["n", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["1", "constant"],["; i \u003c n; i++", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["int", "type"],[" ", null],["key", "variable"],[" = a", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[";\n    ", null],["int", "type"],[" ", null],["j", "variable"],[" = i - ", null],["1", "constant"],[";\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["j >= ", null],["0", "constant"],[" && a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > key", null],[")", "rainbow2"],[" ", null],["{", "rainbow2"],["\n      a", null],["[", "rainbow3"],["j + ", null],["1", "constant"],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[";\n      j--;\n    ", null],["}", "rainbow2"],["\n    a", null],["[", "rainbow2"],["j + ", null],["1", "constant"],["]", "rainbow2"],[" = key;\n  ", null],["}", "rainbow1"],["\n", null],["}", "rainbow0"],["\n", null]]);</script>
     <p>
       after every iteration of the outer loop, the slice of the array from
       <code class="constant">0</code>
       to
-      <code class="highlit" id="hl-49fff7c537a1e7eb">i - 1</code>
-<script>color("hl-49fff7c537a1e7eb", [["i - 1", null]]);</script>
+      <code class="highlit" id="hl-f26b5f0a32414633">i - 1</code>
+<script>color("hl-f26b5f0a32414633", [["i - 1", null]]);</script>
       is always sorted
     </p>
     <p>the inner loop makes room for the key to be inserted</p>
@@ -430,7 +430,7 @@ void insertionSort(int a[], int n) {
       </li>
       <li>merge the halves</li>
     </ul>
-    <pre class="highlit" id="hl-7c9fbfe5e2784424">
+    <pre class="highlit" id="hl-d98763f79ac6560b">
 void mergeSort(int a[], int l, int r) {
   if (l >= r)
     return;
@@ -452,7 +452,7 @@ void merge(int a[], int l, int m, int r) {
   for (int x = 0; x < r - l + 1; x++)
     a[l + x] = b[x];
 }</pre>
-<script>color("hl-7c9fbfe5e2784424", [["void", "type"],[" ", null],["mergeSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["l >= r", null],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[" = l + ", null],["(", "rainbow1"],["r - l", null],[")", "rainbow1"],[" / ", null],["2", "constant"],[";\n  mergeSort", null],["(", "rainbow1"],["a, l, m", null],[")", "rainbow1"],[";\n  mergeSort", null],["(", "rainbow1"],["a, m + ", null],["1", "constant"],[", r", null],[")", "rainbow1"],[";\n  merge", null],["(", "rainbow1"],["a, l, m, r", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["merge", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["m", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["l", "constant"],[", ", null],["j", "variable"],[" = m + ", null],["1", "constant"],[", ", null],["k", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["b", "variable"],["[", "rainbow1"],["r - l + ", null],["1", "constant"],["]", "rainbow1"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m ** j \u003c= r", null],[")", "rainbow1"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c= a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[")", "rainbow2"],["\n      b", null],["[", "rainbow3"],["k++", null],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j++", null],["]", "rainbow3"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["i++", null],["]", "rainbow2"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["j \u003c= r", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["j++", null],["]", "rainbow2"],[";\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["x", "variable"],[" = ", null],["0", "constant"],["; x \u003c r - l + ", null],["1", "constant"],["; x++", null],[")", "rainbow1"],["\n    a", null],["[", "rainbow2"],["l + x", null],["]", "rainbow2"],[" = b", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[";\n", null],["}", "rainbow0"]]);</script>
+<script>color("hl-d98763f79ac6560b", [["void", "type"],[" ", null],["mergeSort", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["l >= r", null],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["int", "type"],[" ", null],["m", "variable"],[" = l + ", null],["(", "rainbow1"],["r - l", null],[")", "rainbow1"],[" / ", null],["2", "constant"],[";\n  mergeSort", null],["(", "rainbow1"],["a, l, m", null],[")", "rainbow1"],[";\n  mergeSort", null],["(", "rainbow1"],["a, m + ", null],["1", "constant"],[", r", null],[")", "rainbow1"],[";\n  merge", null],["(", "rainbow1"],["a, l, m, r", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["merge", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["m", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["l", "constant"],[", ", null],["j", "variable"],[" = m + ", null],["1", "constant"],[", ", null],["k", "variable"],[" = ", null],["0", "constant"],[";\n  ", null],["int", "type"],[" ", null],["b", "variable"],["[", "rainbow1"],["r - l + ", null],["1", "constant"],["]", "rainbow1"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m ** j \u003c= r", null],[")", "rainbow1"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c= a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[")", "rainbow2"],["\n      b", null],["[", "rainbow3"],["k++", null],["]", "rainbow3"],[" = a", null],["[", "rainbow3"],["j++", null],["]", "rainbow3"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= m", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["i++", null],["]", "rainbow2"],[";\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["j \u003c= r", null],[")", "rainbow1"],["\n    b", null],["[", "rainbow2"],["k++", null],["]", "rainbow2"],[" = a", null],["[", "rainbow2"],["j++", null],["]", "rainbow2"],[";\n  ", null],["for", "keyword"],[" ", null],["(", "rainbow1"],["int", "type"],[" ", null],["x", "variable"],[" = ", null],["0", "constant"],["; x \u003c r - l + ", null],["1", "constant"],["; x++", null],[")", "rainbow1"],["\n    a", null],["[", "rainbow2"],["l + x", null],["]", "rainbow2"],[" = b", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[";\n", null],["}", "rainbow0"]]);</script>
     <p>
       merging all the arrays at a given level together is \(Θ(n)\), and there are
       around \(\log₂ n\) levels
@@ -468,7 +468,7 @@ void merge(int a[], int l, int m, int r) {
       </li>
       <li>call <code class="function">quickSort</code> on each side</li>
     </ul>
-    <pre class="highlit" id="hl-feec3f691443cd7a">
+    <pre class="highlit" id="hl-a089ed45c556f9b0">
 int partition(int a[], int l, int r) {
   int pivot = a[l]; // easy
   int i = l + 1, j = r;
@@ -480,7 +480,7 @@ int partition(int a[], int l, int r) {
   }
   return j;
 }</pre>
-<script>color("hl-feec3f691443cd7a", [["int", "type"],[" ", null],["partition", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow1"],["\n  ", null],["int", "type"],[" ", null],["pivot", "variable"],[" = a", null],["[", "rainbow1"],["l", null],["]", "rainbow1"],["; ", null],["// easy", "comment"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = l + 1, ", null],["j", "variable"],[" = r;\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= j", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c pivot", null],[")", "rainbow2"],[" i++;\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > pivot", null],[")", "rainbow2"],[" j--;\n    ", null],["// if i and j both didn't move", "comment"],["\n      ", null],["// swap a[i++] and a[j--]", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" j;\n}", null]]);</script>
+<script>color("hl-a089ed45c556f9b0", [["int", "type"],[" ", null],["partition", "function"],["(", "rainbow0"],["int", "type"],[" ", null],["a", "variable"],["[]", "rainbow1"],[", ", null],["int", "type"],[" ", null],["l", "variable"],[", ", null],["int", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow1"],["\n  ", null],["int", "type"],[" ", null],["pivot", "variable"],[" = a", null],["[", "rainbow1"],["l", null],["]", "rainbow1"],["; ", null],["// easy", "comment"],["\n  ", null],["int", "type"],[" ", null],["i", "variable"],[" = l + 1, ", null],["j", "variable"],[" = r;\n  ", null],["while", "keyword"],[" ", null],["(", "rainbow1"],["i \u003c= j", null],[")", "rainbow1"],[" ", null],["{", "rainbow1"],["\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],[" \u003c pivot", null],[")", "rainbow2"],[" i++;\n    ", null],["while", "keyword"],[" ", null],["(", "rainbow2"],["a", null],["[", "rainbow3"],["j", null],["]", "rainbow3"],[" > pivot", null],[")", "rainbow2"],[" j--;\n    ", null],["// if i and j both didn't move", "comment"],["\n      ", null],["// swap a[i++] and a[j--]", "comment"],["\n  ", null],["}", "rainbow1"],["\n  ", null],["return", "keyword"],[" j;\n}", null]]);</script>
     <p>worst case, the list is already sorted: \(O(n²)\)</p>
     <p>best case the pivot is the median: \(O(n\log n)\)</p>
     <p>methods to avoid worst case:</p>
@@ -514,23 +514,23 @@ int partition(int a[], int l, int r) {
     <h1 id="binary-trees">binary trees</h1>
     <p>honestly not very useful in and of themselves</p>
     <p>we have a <code class="variable">root</code> pointer that points to a node, sort of analagous to the head of a linked list</p>
-    <pre class="highlit" id="hl-0396cdaac2979f3d">
+    <pre class="highlit" id="hl-79bfab981d2897e8">
        a
    b --'-- c
 d -'- e f -'- g</pre>
-<script>color("hl-0396cdaac2979f3d", [["       a\n   b --'-- c\nd -'- e f -'- g", null]]);</script>
-    <pre class="highlit" id="hl-fe4d736ccebe6de7">
+<script>color("hl-79bfab981d2897e8", [["       a\n   b --'-- c\nd -'- e f -'- g", null]]);</script>
+    <pre class="highlit" id="hl-8feaa4e82db158b3">
 class BinTreeNode {
   public:
     int data;
     BinTreeNode* left;
     BinTreeNode* right;
 }</pre>
-<script>color("hl-fe4d736ccebe6de7", [["class", "keyword"],[" ", null],["BinTreeNode", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["left", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["right", "variable"],[";\n}", null]]);</script>
+<script>color("hl-8feaa4e82db158b3", [["class", "keyword"],[" ", null],["BinTreeNode", "type"],[" ", null],["{", "rainbow0"],["\n  ", null],["public", "keyword"],[":\n    ", null],["int", "type"],[" ", null],["data", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["left", "variable"],[";\n    ", null],["BinTreeNode*", "type"],[" ", null],["right", "variable"],[";\n}", null]]);</script>
     <h2 id="traversing">traversing</h2>
     <p>more recursion! base case is the tree being empty. recursive case is a node where left and right point to a smaller binary tree</p>
     <p>there are a couple different ways to traverse a tree</p>
-    <pre class="highlit" id="hl-6e1b4858e5571797">
+    <pre class="highlit" id="hl-0bb7de5539021e87">
 void preorder(BinTreeNode* r) {
   if (r == nullptr)
     return;
@@ -545,33 +545,33 @@ void postorder(BinTreeNode* r) {
   postorder(r->right);
   cout << data;
 }</pre>
-<script>color("hl-6e1b4858e5571797", [["void", "type"],[" ", null],["preorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data; ", null],["// preorder process", "comment"],["\n  preorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  preorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["postorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  postorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  postorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data;\n}", null]]);</script>
+<script>color("hl-0bb7de5539021e87", [["void", "type"],[" ", null],["preorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data; ", null],["// preorder process", "comment"],["\n  preorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  preorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n", null],["}", "rainbow0"],["\n", null],["void", "type"],[" ", null],["postorder", "function"],["(", "rainbow0"],["BinTreeNode*", "type"],[" ", null],["r", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["r == ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    ", null],["return", "keyword"],[";\n  postorder", null],["(", "rainbow1"],["r->left", null],[")", "rainbow1"],[";\n  postorder", null],["(", "rainbow1"],["r->right", null],[")", "rainbow1"],[";\n  ", null],["cout", "builtin"],[" \u003c\u003c data;\n}", null]]);</script>
     <h2 id="binary-trees--searching">searching</h2>
-    <pre class="highlit" id="hl-9b77e2a2ddf11847">
+    <pre class="highlit" id="hl-efdd4176e5205620">
 binTreeNode* find(binTreeNode* r, int s) {
     if (!r || r->data == s) return r;
     binTreeNode* left = find(r->left, s);
     if (left) return left;
     return find(r->right, s);
 }</pre>
-<script>color("hl-9b77e2a2ddf11847", [["binTreeNode*", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["binTreeNode*", "type"],[" ", null],["r", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["!r || r->data == s", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" r;\n    ", null],["binTreeNode*", "type"],[" ", null],["left", "variable"],[" = find(r->left, s);\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["left", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" left;\n    ", null],["return", "keyword"],[" find(r->right, s);\n}", null]]);</script>
+<script>color("hl-efdd4176e5205620", [["binTreeNode*", "type"],[" ", null],["find", "function"],["(", "rainbow0"],["binTreeNode*", "type"],[" ", null],["r", "variable"],[", ", null],["int", "type"],[" ", null],["s", "variable"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["!r || r->data == s", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" r;\n    ", null],["binTreeNode*", "type"],[" ", null],["left", "variable"],[" = find(r->left, s);\n    ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["left", null],[")", "rainbow1"],[" ", null],["return", "keyword"],[" left;\n    ", null],["return", "keyword"],[" find(r->right, s);\n}", null]]);</script>
     <p>runtime for pre/post order:</p>
     <p>each function body runs \(Θ(1)\) times, and there are \(n\) nodes</p>
     <h2 id="height">height</h2>
     <p>levels are 0 indexed <span class="clarity">&lt;55555555</span></p>
-    <pre class="highlit" id="hl-b287ec70166d66cb">
+    <pre class="highlit" id="hl-02e8575b179f68ae">
 a
 '- b
    '- c
       '- d</pre>
-<script>color("hl-b287ec70166d66cb", [["a\n'- b\n   '- c\n      '- d", null]]);</script>
+<script>color("hl-02e8575b179f68ae", [["a\n'- b\n   '- c\n      '- d", null]]);</script>
     <p>the height of this tree is 3 and there are 4 nodes. this is the best case despite the tree looking absolutely fucking stupid</p>
-    <pre class="highlit" id="hl-5fbc7ff4176db39f">
+    <pre class="highlit" id="hl-0652be5407f377eb">
                a
        b ------'------ c
    d --'-- e       f --'-- g
 h -'- i j -'- k l -'- m n -'- o</pre>
-<script>color("hl-5fbc7ff4176db39f", [["               a\n       b ------'------ c\n   d --'-- e       f --'-- g\nh -'- i j -'- k l -'- m n -'- o", null]]);</script>
+<script>color("hl-0652be5407f377eb", [["               a\n       b ------'------ c\n   d --'-- e       f --'-- g\nh -'- i j -'- k l -'- m n -'- o", null]]);</script>
     <p>
       this has \(h\) levels and \(n = 2ʰ⁺¹ - 1\) nodes. now we can solve for h: \[
       \begin{align*}
@@ -588,7 +588,7 @@ h -'- i j -'- k l -'- m n -'- o</pre>
       <dd>helps find elements quickly, but overhead to maintain</dd>
     </dl>
     <p>a bit like having folders!</p>
-    <pre class="highlit" id="hl-492f6f287e656579">
+    <pre class="highlit" id="hl-2d491104f5f07eeb">
 template &lt;class K, class V>
 class BinTreeNode {
   public:
@@ -597,16 +597,16 @@ class BinTreeNode {
     BinTreeNode&amp;lt;K, V>* left;
     BinTreeNode&amp;lt;K, V>* right;
 }</pre>
-<script>color("hl-492f6f287e656579", [["template \u003cclass K, class V>\nclass BinTreeNode {\n  public:\n    K key;\n    V value;\n    BinTreeNode&lt;K, V>* left;\n    BinTreeNode&lt;K, V>* right;\n}", null]]);</script>
+<script>color("hl-2d491104f5f07eeb", [["template \u003cclass K, class V>\nclass BinTreeNode {\n  public:\n    K key;\n    V value;\n    BinTreeNode&lt;K, V>* left;\n    BinTreeNode&lt;K, V>* right;\n}", null]]);</script>
     <p>for each node \(r\):</p>
     <ul>
-      <li><code class="highlit" id="hl-3f0226ca12a954a8">r->left</code>
-<script>color("hl-3f0226ca12a954a8", [["r->left", null]]);</script>'s key is less than r's key</li>
-      <li><code class="highlit" id="hl-345773d9f5a59de3">r->right</code>
-<script>color("hl-345773d9f5a59de3", [["r->right", null]]);</script>'s key is larger than r's key</li>
+      <li><code class="highlit" id="hl-26e882830eb31de9">r->left</code>
+<script>color("hl-26e882830eb31de9", [["r->left", null]]);</script>'s key is less than r's key</li>
+      <li><code class="highlit" id="hl-64c82a086db3e4ce">r->right</code>
+<script>color("hl-64c82a086db3e4ce", [["r->right", null]]);</script>'s key is larger than r's key</li>
     </ul>
     <h2 id="binary-search-trees--searching">searching</h2>
-    <pre class="highlit" id="hl-3069bc114c4914ae">
+    <pre class="highlit" id="hl-ef6d9a767dfd24af">
 template &lt;class K, class V>
 bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
   if (r == nullptr) return false;
@@ -615,7 +615,7 @@ bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
     return find(r->left, k);
   return find(r->right, k);
 }</pre>
-<script>color("hl-3069bc114c4914ae", [["template \u003cclass K, class V>\nbool find(BinTreeNode&lt;K, V>* r, K k) {\n  if (r == nullptr) return false;\n  if (k == r->key) return true;\n  if (k \u003c r->key)\n    return find(r->left, k);\n  return find(r->right, k);\n}", null]]);</script>
+<script>color("hl-ef6d9a767dfd24af", [["template \u003cclass K, class V>\nbool find(BinTreeNode&lt;K, V>* r, K k) {\n  if (r == nullptr) return false;\n  if (k == r->key) return true;\n  if (k \u003c r->key)\n    return find(r->left, k);\n  return find(r->right, k);\n}", null]]);</script>
     <p>the function body is constant time. for here we only have to check one node per height level at most</p>
     <p>best case the runtime is \(Θ(\log n)\) if the tree is perfectly balanced. worst case it's \(O(n)\) if it's perfectly unbalanced</p>
     <p>the insertion order determines the height of the tree</p>
@@ -623,8 +623,8 @@ bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
     <h1 id="avl-trees">avl trees</h1>
     <p>this is a self-balancing binary search tree. when we insert or delete we balance the tree if needed</p>
     <p>how do we know if a tree is balanced? for each node the difference in its left and right subtree heights cannot exceed 1</p>
-    <p>this requires adding a <code class="highlit" id="hl-1ff5d3ad536f5643">size_t height</code>
-<script>color("hl-1ff5d3ad536f5643", [["size_t", "type"],[" height", null]]);</script> into <code class="type">BinTreeNode</code></p>
+    <p>this requires adding a <code class="highlit" id="hl-1ae2343862bdde55">size_t height</code>
+<script>color("hl-1ae2343862bdde55", [["size_t height", null]]);</script> into <code class="type">BinTreeNode</code></p>
     <p>the empty tree has a height of -1. for every node \(r\) its height is
       \(
       \max(
@@ -671,7 +671,7 @@ bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
       stl has a type called <code class="type">Map</code> for an ordered map, which is basically an
       avl tree
     </p>
-    <pre class="highlit" id="hl-61596dc0f24a78cc">
+    <pre class="highlit" id="hl-4b033a19d247601c">
 #include &amp;lt;map>
 using std::map;
 int main() {
@@ -679,9 +679,9 @@ int main() {
   people["Dan"] = 13;
   people.insert({"Tom", 12});
 }</pre>
-<script>color("hl-61596dc0f24a78cc", [["#include &lt;map>\nusing std::map;\nint main() {\n  map&lt;string, int> people;\n  people[\"Dan\"] = 13;\n  people.insert({\"Tom\", 12});\n}", null]]);</script>
+<script>color("hl-4b033a19d247601c", [["#include &lt;map>\nusing std::map;\nint main() {\n  map&lt;string, int> people;\n  people[\"Dan\"] = 13;\n  people.insert({\"Tom\", 12});\n}", null]]);</script>
     <p>ways to do stuff to every element:</p>
-    <pre class="highlit" id="hl-c52a652a9477eb2a">
+    <pre class="highlit" id="hl-4770af9a03e5607b">
 // `it` is a map&amp;lt;string, int>::iterator
 for (auto it = people.begin(); it != people.end(); it++) {
   // first = key, second = value
@@ -692,20 +692,20 @@ for (auto it = people.begin(); it != people.end(); it++) {
 for (auto it: people) {
   cout << it.first << ":" << it.second << endl;
 }</pre>
-<script>color("hl-c52a652a9477eb2a", [["// `it` is a map&lt;string, int>::iterator\nfor (auto it = people.begin(); it != people.end(); it++) {\n  // first = key, second = value\n  cout \u003c\u003c first second \u003c\u003c endl;\n}\n\n// `it` is the actual node object\nfor (auto it: people) {\n  cout \u003c\u003c it.first \u003c\u003c \":\" \u003c\u003c it.second \u003c\u003c endl;\n}", null]]);</script>
+<script>color("hl-4770af9a03e5607b", [["// `it` is a map&lt;string, int>::iterator\nfor (auto it = people.begin(); it != people.end(); it++) {\n  // first = key, second = value\n  cout \u003c\u003c first second \u003c\u003c endl;\n}\n\n// `it` is the actual node object\nfor (auto it: people) {\n  cout \u003c\u003c it.first \u003c\u003c \":\" \u003c\u003c it.second \u003c\u003c endl;\n}", null]]);</script>
     <h2 id="unordered-maps">unordered maps</h2>
-    <p><code class="highlit" id="hl-16cc50a89e3673ef">unordered_map</code>
-<script>color("hl-16cc50a89e3673ef", [["unordered_map", null]]);</script>, uses a hash table instead of a tree</p>
+    <p><code class="highlit" id="hl-3116a9d66a8c2f31">unordered_map</code>
+<script>color("hl-3116a9d66a8c2f31", [["unordered_map", null]]);</script>, uses a hash table instead of a tree</p>
     <p>insert and find are \(O(1)\)!</p>
     <p>
-      <code class="highlit" id="hl-fbe42e4a4eccfa52">map.find(key)</code>
-<script>color("hl-fbe42e4a4eccfa52", [["map.find", null],["(", "rainbow0"],["key", null],[")", "rainbow0"]]);</script> returns an iterator pointing to the item with some <code class="rainbow0 highlit">key</code>, or
-      <code class="highlit" id="hl-83a139017fad5e2d">map.end()</code>
-<script>color("hl-83a139017fad5e2d", [["map.end", null],["()", "rainbow0"]]);</script>
+      <code class="highlit" id="hl-a1ade47cf8936c11">map.find(key)</code>
+<script>color("hl-a1ade47cf8936c11", [["map.find(key)", null]]);</script> returns an iterator pointing to the item with some <code class="rainbow0 highlit">key</code>, or
+      <code class="highlit" id="hl-d4f40e6f805f91cc">map.end()</code>
+<script>color("hl-d4f40e6f805f91cc", [["map.end()", null]]);</script>
       if it's not found.
     </p>
     <h2 id="counting-duplicates">counting duplicates</h2>
-    <pre class="highlit" id="hl-32afeb15bd59c75b">
+    <pre class="highlit" id="hl-dfabb0e6744a59be">
 vector&amp;lt;string> names = {"evie", "luci", "violet", "matt", "evie", "luci", "luci"};
 unordered_map&amp;lt;string, int> condensed;
 for (auto name: names)
@@ -716,7 +716,7 @@ for (auto uniq: condensed) {
     cout << " [duplicates]";
 cout << endl;
 }</pre>
-<script>color("hl-32afeb15bd59c75b", [["vector&lt;string> names = {\"evie\", \"luci\", \"violet\", \"matt\", \"evie\", \"luci\", \"luci\"};\nunordered_map&lt;string, int> condensed;\nfor (auto name: names)\n  condensed[name] = condensed[name] + 1;\nfor (auto uniq: condensed) {\n  cout \u003c\u003c uniq.first;\n  if (uniq.second > 1)\n    cout \u003c\u003c \" [duplicates]\";\ncout \u003c\u003c endl;\n}", null]]);</script>
+<script>color("hl-dfabb0e6744a59be", [["vector&lt;string> names = {\"evie\", \"luci\", \"violet\", \"matt\", \"evie\", \"luci\", \"luci\"};\nunordered_map&lt;string, int> condensed;\nfor (auto name: names)\n  condensed[name] = condensed[name] + 1;\nfor (auto uniq: condensed) {\n  cout \u003c\u003c uniq.first;\n  if (uniq.second > 1)\n    cout \u003c\u003c \" [duplicates]\";\ncout \u003c\u003c endl;\n}", null]]);</script>
     <h1 id="hash-maps">hash maps</h1>
     <p>we maintain a very large table and have a hash function that helps us locate elements in the table</p>
     <p>
@@ -734,7 +734,7 @@ cout << endl;
     <h2 id="separate-chaining">separate chaining</h2>
     <p>when a collision occurs, we stack the elements at the location. so we need to maintain an array of linked lists. aaaaaaa</p>
     <p>we also want to know the <b>load factor</b> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
-    <pre class="highlit" id="hl-a9d8e8b9303eede4">
+    <pre class="highlit" id="hl-15b0d1e88c4958b9">
 template &lt;class K, class V>
 class HashMap {
   private:
@@ -772,11 +772,11 @@ class HashMap {
       return false;
     }
 };</pre>
-<script>color("hl-a9d8e8b9303eede4", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        Node *link;\n    };\n    size_t capacity;\n    size_t items;\n    Node **table;\n    size_t h(K k);\n  public:\n    HashMap() {\n      items = 0;\n      capacity = 5;\n      table = new Node*[capacity];\n      for (size_t i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return;\n      // insert a new Node into table[index]\n      items++;\n    }\n    bool find(K k) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return true;\n      return false;\n    }\n};", null]]);</script>
+<script>color("hl-15b0d1e88c4958b9", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        Node *link;\n    };\n    size_t capacity;\n    size_t items;\n    Node **table;\n    size_t h(K k);\n  public:\n    HashMap() {\n      items = 0;\n      capacity = 5;\n      table = new Node*[capacity];\n      for (size_t i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return;\n      // insert a new Node into table[index]\n      items++;\n    }\n    bool find(K k) {\n      size_t index = h(k) % capacity;\n      for (Node *i = table[index]; i != nullptr; i = i->link)\n        if (i->key == k)\n          return true;\n      return false;\n    }\n};", null]]);</script>
     <h3 id="separate-chaining--expected-runtime">expected runtime</h3>
     <p>hashing takes constant time. it does scale to the length of the key, but not the table. \(𝗆𝗈𝖽\) is also constant time. so computing the index is \(O(1)\)</p>
-    <p>it is expected that <code class="highlit" id="hl-ab46fb1419428b91">table[index]</code>
-<script>color("hl-ab46fb1419428b91", [["table[index]", null]]);</script> has zero or few nodes. so searching this also doesn't depend on table size</p>
+    <p>it is expected that <code class="highlit" id="hl-b33d3bfd526351de">table[index]</code>
+<script>color("hl-b33d3bfd526351de", [["table[index]", null]]);</script> has zero or few nodes. so searching this also doesn't depend on table size</p>
     <p>the tradeoff is you need a very big sparse table to minimize collision risk (capacity \(⋙\) items), and most of the locations will be empty</p>
     <p>the worst-but-very-unlikely case is everything gets mapped to the same index. we can fix this by resizing the table when the load factor becomes too high</p>
     <h2 id="open-addressing">open addressing</h2>
@@ -787,7 +787,7 @@ class HashMap {
       \]
     </p>
     <p>\(i\) is the collision counter, starting at 0.</p>
-    <pre class="highlit" id="hl-3f06af6aee82ea25">
+    <pre class="highlit" id="hl-848848add866a42a">
 template &lt;class K, class V>
 class HashMap {
   private:
@@ -837,7 +837,7 @@ class HashMap {
       // loop
     }
 };</pre>
-<script>color("hl-3f06af6aee82ea25", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        // no link!\n      };\n      size_t capacity;\n      size_t items;\n      Node **table;\n      size_t h(K k);\n    public:\n      HashMap() {\n        capacity = 10;\n        items = 0;\n        table = new Node*[capacity];\n      for (int i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr) {\n        table[index] = new Node();\n        table[index]->key = k;\n        table[index]->value = v;\n        items++;\n        return;\n      }\n      if (table[index]->key == k)\n        return;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n    V getValue(K k) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr)\n        return V(); // meh whatever\n      if (table[index]->key == k)\n        return table[index]->value;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n};", null]]);</script>
+<script>color("hl-848848add866a42a", [["template \u003cclass K, class V>\nclass HashMap {\n  private:\n    class Node {\n      public:\n        K key;\n        V value;\n        // no link!\n      };\n      size_t capacity;\n      size_t items;\n      Node **table;\n      size_t h(K k);\n    public:\n      HashMap() {\n        capacity = 10;\n        items = 0;\n        table = new Node*[capacity];\n      for (int i = 0; i \u003c capacity; i++)\n        table[i] = nullptr;\n    }\n    void insert(K k, V v) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr) {\n        table[index] = new Node();\n        table[index]->key = k;\n        table[index]->value = v;\n        items++;\n        return;\n      }\n      if (table[index]->key == k)\n        return;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n    V getValue(K k) {\n      size_t index = h(k) % capacity;\n      size_t i = 0;\n      if (table[index] == nullptr)\n        return V(); // meh whatever\n      if (table[index]->key == k)\n        return table[index]->value;\n      i++;\n      index = (index + 1) % capacity;\n      // loop\n    }\n};", null]]);</script>
     <h3 id="open-addressing--expected-runtime">expected runtime</h3>
     <p>constant again! ideally, we're not supposed to do any linear probing</p>
     <p>deleting nodes might cause issues because the indices depend on how many conflicts there are. we can solve this with orange traffic cones <img class="emoji" src="traffic-cone.png" alt="traffic cone emoji i drew" /></p>
@@ -847,13 +847,13 @@ class HashMap {
     <h2 id="resizing">resizing</h2>
     <p>the cs202 method to resize stuff is making a bigger thing and copying everything over. that's not gonna work here because the indices depend on the table size. we need to <u>re-<code class="function highlit">insert</code></u> all the elements</p>
     <p>we perform a resize when, say, \(α ≥ 20\%\). we don't remap the traffic cone entries</p>
-    <pre class="highlit" id="hl-df7096f757aa61c2">
+    <pre class="highlit" id="hl-3a0050dc5a299a96">
 for (int i = 0; i < old_capacity; i++)
   if (old_table[i] != nullptr)
     this->insert(old_table[i]->key, old_table[i]->value);
 // deallocate each node of old_table
 // deallocate old_table</pre>
-<script>color("hl-df7096f757aa61c2", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c old_capacity; i++", null],[")", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["old_table", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[" != ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    this->insert", null],["(", "rainbow2"],["old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->key, old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->value", null],[")", "rainbow2"],[";\n", null],["// deallocate each node of old_table", "comment"],["\n", null],["// deallocate old_table", "comment"]]);</script>
+<script>color("hl-3a0050dc5a299a96", [["for", "keyword"],[" ", null],["(", "rainbow0"],["int", "type"],[" ", null],["i", "variable"],[" = ", null],["0", "constant"],["; i \u003c old_capacity; i++", null],[")", "rainbow0"],["\n  ", null],["if", "keyword"],[" ", null],["(", "rainbow1"],["old_table", null],["[", "rainbow2"],["i", null],["]", "rainbow2"],[" != ", null],["nullptr", "constant"],[")", "rainbow1"],["\n    this->insert", null],["(", "rainbow2"],["old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->key, old_table", null],["[", "rainbow3"],["i", null],["]", "rainbow3"],["->value", null],[")", "rainbow2"],[";\n", null],["// deallocate each node of old_table", "comment"],["\n", null],["// deallocate old_table", "comment"]]);</script>
     <p>resizing is \(O(n)\)! scary! everything else is constant time! so we want to resize as infrequently as possible</p>
     <p>(tangent: procrastination is ok dont feel bad about it)</p>
     <dl>
@@ -890,9 +890,9 @@ for (int i = 0; i < old_capacity; i++)
         <th>avl tree</th>
       </tr>
       <tr>
-        <th scope="row">expected runtime for <code class="highlit" id="hl-ca057d6174568380">insert</code>
-<script>color("hl-ca057d6174568380", [["insert", null]]);</script>/<code class="highlit" id="hl-a5c24fed12b1f6da">find</code>
-<script>color("hl-a5c24fed12b1f6da", [["find", null]]);</script></th>
+        <th scope="row">expected runtime for <code class="highlit" id="hl-eaccf9ae313751b2">insert</code>
+<script>color("hl-eaccf9ae313751b2", [["insert", null]]);</script>/<code class="highlit" id="hl-3bd163d25798abbb">find</code>
+<script>color("hl-3bd163d25798abbb", [["find", null]]);</script></th>
         <td>\(Θ(1)\)</td>
         <td>\(Θ(\log n)\)</td>
       </tr>
@@ -904,20 +904,20 @@ for (int i = 0; i < old_capacity; i++)
     </table>
     <h1 id="priority-queues">priority queues</h1>
     <p>uses a <b>binary min heap</b> which is like a binary tree that we squish into an array. a binary min heap is valid if each node's priority value is \(≤\) that of both its children</p>
-    <pre class="highlit" id="hl-f4fa406bac7ad889">
+    <pre class="highlit" id="hl-630d7d9d68193a5b">
             3
        7 ---'--- 5
     8 -'- 10  6 -'- 12
 11 -'</pre>
-<script>color("hl-f4fa406bac7ad889", [["            3\n       7 ---'--- 5\n    8 -'- 10  6 -'- 12\n11 -'", null]]);</script>
+<script>color("hl-630d7d9d68193a5b", [["            3\n       7 ---'--- 5\n    8 -'- 10  6 -'- 12\n11 -'", null]]);</script>
     <p>gets listified as</p>
-    <pre class="highlit" id="hl-33f268441d056d66">
+    <pre class="highlit" id="hl-971572b53cfc2667">
 [, 3, 7, 5, 8, 10, 6, 12, 11, ]</pre>
-<script>color("hl-33f268441d056d66", [["[, 3, 7, 5, 8, 10, 6, 12, 11, ]", null]]);</script>
+<script>color("hl-971572b53cfc2667", [["[, 3, 7, 5, 8, 10, 6, 12, 11, ]", null]]);</script>
     <p>the first element is empty! the root node is at index 1. for each element at index \(i\), the left child is at index \(2i\),the right child is at \(2i + 1\), and the parent is at index \(\left⌊\frac i2\right⌋\)</p>
     <p><small>\(⌊ a/b⌋\) is integer division of \(a\) and \(b\)</small></p>
     <p>here the capacity is 9 and the heap size is 8</p>
-    <pre class="highlit" id="hl-2afede3548c89817">
+    <pre class="highlit" id="hl-2244d2a1db393623">
 template &amp;lt;class K, class P>
 class PriorityQ {
   private:
@@ -946,12 +946,12 @@ class PriorityQ {
       bubbleUp(heapSize);
     }
 }</pre>
-<script>color("hl-2afede3548c89817", [["template &lt;class K, class P>\nclass PriorityQ {\n  private:\n    class PriorityType {\n      public:\n        K key;\n        P priority;\n    };\n    size_t capacity;\n    size_t heapsize;\n    PriorityType *heap;\n    unordered_map&lt;K, size_t> key2index;\n    size_t bubbleUp(size_t);\n    size_t bubbleDown(size_t);\n  public:\n    PriorityQ() {\n      heapSize = 0;\n      capacity = 10;\n      heap = new PriorityType[capacity + 1];\n    }\n    void pushBack(K k, P p) {\n      // resize heap if needed\n      heap[heapSize + 1].key = k;\n      heap[heapSize + 1].priority = p;\n      heapSize++;\n      bubbleUp(heapSize);\n    }\n}", null]]);</script>
+<script>color("hl-2244d2a1db393623", [["template &lt;class K, class P>\nclass PriorityQ {\n  private:\n    class PriorityType {\n      public:\n        K key;\n        P priority;\n    };\n    size_t capacity;\n    size_t heapsize;\n    PriorityType *heap;\n    unordered_map&lt;K, size_t> key2index;\n    size_t bubbleUp(size_t);\n    size_t bubbleDown(size_t);\n  public:\n    PriorityQ() {\n      heapSize = 0;\n      capacity = 10;\n      heap = new PriorityType[capacity + 1];\n    }\n    void pushBack(K k, P p) {\n      // resize heap if needed\n      heap[heapSize + 1].key = k;\n      heap[heapSize + 1].priority = p;\n      heapSize++;\n      bubbleUp(heapSize);\n    }\n}", null]]);</script>
     <ul>
-      <li>assigning the element to index <code class="highlit" id="hl-df793a00aca843c4">heapSize</code>
-<script>color("hl-df793a00aca843c4", [["heapSize", null]]);</script> + 1 takes \(O(1)\)</li>
-      <li><code class="highlit" id="hl-54ed97e75efecb57">bubbleUp</code>
-<script>color("hl-54ed97e75efecb57", [["bubbleUp", null]]);</script> does
+      <li>assigning the element to index <code class="highlit" id="hl-11c46707bf3f7c7e">heapSize</code>
+<script>color("hl-11c46707bf3f7c7e", [["heapSize", null]]);</script> + 1 takes \(O(1)\)</li>
+      <li><code class="highlit" id="hl-f6714814d9221e0b">bubbleUp</code>
+<script>color("hl-f6714814d9221e0b", [["bubbleUp", null]]);</script> does
         <ul>
           <li>compute the parent index – \(O(1)\)</li>
           <li>compare priorities – \(O(1)\)</li>
@@ -960,13 +960,13 @@ class PriorityQ {
         up to [height of the tree] times. the tree is always balanced so this takes \(\log₂ n\) time
       </li>
     </ul>
-    <p>so <code class="highlit" id="hl-05fc485a653eaf92">pushBack</code>
-<script>color("hl-05fc485a653eaf92", [["pushBack", null]]);</script> is \(Θ(\log n)\)</p>
+    <p>so <code class="highlit" id="hl-568b5cec0722b4ec">pushBack</code>
+<script>color("hl-568b5cec0722b4ec", [["pushBack", null]]);</script> is \(Θ(\log n)\)</p>
     <p>updating:</p>
-    <pre class="highlit" id="hl-14c4d5afdcec3547">
+    <pre class="highlit" id="hl-c0f24a34d5277bb4">
 heap[key2index[...]].priority = ...;</pre>
-<script>color("hl-14c4d5afdcec3547", [["heap", null],["[", "rainbow0"],["key2index", null],["[", "rainbow1"],["...", null],["]", "rainbow1"],["]", "rainbow0"],[".priority = ...;", null]]);</script>
-    <pre class="highlit" id="hl-db4aa8fa917d0780">
+<script>color("hl-c0f24a34d5277bb4", [["heap", null],["[", "rainbow0"],["key2index", null],["[", "rainbow1"],["...", null],["]", "rainbow1"],["]", "rainbow0"],[".priority = ...;", null]]);</script>
+    <pre class="highlit" id="hl-da98b44ec84775b3">
 template &amp;lt;class K, class P>
 class PriorityQ {
   // ...
@@ -977,9 +977,9 @@ class PriorityQ {
       bubbleDown(1);
     }
 };</pre>
-<script>color("hl-db4aa8fa917d0780", [["template &lt;class K, class P>\nclass PriorityQ {\n  // ...\n  public:\n    void popFront() {\n      heap[1] = heap[heapSize];\n      heapSize--;\n      bubbleDown(1);\n    }\n};", null]]);</script>
-    <p><code class="highlit" id="hl-e104961ae41aed27">popFront</code>
-<script>color("hl-e104961ae41aed27", [["popFront", null]]);</script> is also \(Θ(\log n)\)</p>
+<script>color("hl-da98b44ec84775b3", [["template &lt;class K, class P>\nclass PriorityQ {\n  // ...\n  public:\n    void popFront() {\n      heap[1] = heap[heapSize];\n      heapSize--;\n      bubbleDown(1);\n    }\n};", null]]);</script>
+    <p><code class="highlit" id="hl-4e6e064571aa0d13">popFront</code>
+<script>color("hl-4e6e064571aa0d13", [["popFront", null]]);</script> is also \(Θ(\log n)\)</p>
     <h1 id="graph-theory">graph theory</h1>
     <p>a <b>graph</b> \(G\) is a pair of</p>
     <ul>
@@ -1030,7 +1030,7 @@ class PriorityQ {
       when you arrive at a node, pick a neighbor (doesn't matter which) and go there. if there's a dead end, back up
       to the last node you were at and try a different neighbor
     </p>
-    <pre class="highlit" id="hl-ce08851231359559">
+    <pre class="highlit" id="hl-8dfe509b2bcfe3ef">
 void dfs(
   int current,
   vector&amp;lt;list&amp;lt;int>> adjlist,
@@ -1058,14 +1058,14 @@ int main() {
     dfs(i, adjlist, visited, predecessors);
   return 0;
 }</pre>
-<script>color("hl-ce08851231359559", [["void dfs(\n  int current,\n  vector&lt;list&lt;int>> adjlist,\n  vector&lt;bool> &amp;visited,\n  vector&lt;int> &amp;predecessors\n) {\n  if (visited[current])\n    return;\n  visited[current] = true;\n  cout \u003c\u003c current \u003c\u003c endl; // preorder\n  for (int neighbor: adjlist[current])\n    if (!visited[neighbor]) {\n      predecessors[neighbor] = current;\n      dfs(neighbor, adjlist, visited, predecessors);\n    }\n  return; // or postorder\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;int> visited(v);\n  vector&lt;int> predecessors(v);\n  vector&lt;list&lt;int>> adjlist(v);\n  for (int i = 0; i \u003c v; i++)\n    dfs(i, adjlist, visited, predecessors);\n  return 0;\n}", null]]);</script>
+<script>color("hl-8dfe509b2bcfe3ef", [["void dfs(\n  int current,\n  vector&lt;list&lt;int>> adjlist,\n  vector&lt;bool> &amp;visited,\n  vector&lt;int> &amp;predecessors\n) {\n  if (visited[current])\n    return;\n  visited[current] = true;\n  cout \u003c\u003c current \u003c\u003c endl; // preorder\n  for (int neighbor: adjlist[current])\n    if (!visited[neighbor]) {\n      predecessors[neighbor] = current;\n      dfs(neighbor, adjlist, visited, predecessors);\n    }\n  return; // or postorder\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;int> visited(v);\n  vector&lt;int> predecessors(v);\n  vector&lt;list&lt;int>> adjlist(v);\n  for (int i = 0; i \u003c v; i++)\n    dfs(i, adjlist, visited, predecessors);\n  return 0;\n}", null]]);</script>
     <p>
       dfs will not find very good paths and is \(Θ(e + v) = Θ(e)\). can you🫵 see why?
     </p>
     <h2 id="breadth-first-search-bfs">breadth-first search / bfs</h2>
     <p>wheee no recursion! finds all of the shortest paths between two nodes</p>
     <p>since there's no recursion here we need a fifo queue to track what nodes we've looked at</p>
-    <pre class="highlit" id="hl-e8c29ddde18029e0">
+    <pre class="highlit" id="hl-67c6eab7341d6446">
 void bfs(int s, int v, vector&amp;lt;list&amp;lt;int>> adjlist) {
   vector&amp;lt;int> predecessors(v);
   vector&amp;lt;bool> visited(v);
@@ -1091,14 +1091,14 @@ int main() {
   bfs(0, adjlist);
   return 0;
 }</pre>
-<script>color("hl-e8c29ddde18029e0", [["void bfs(int s, int v, vector&lt;list&lt;int>> adjlist) {\n  vector&lt;int> predecessors(v);\n  vector&lt;bool> visited(v);\n  queue&lt;int> bfsq;\n  visited[s] = true;\n  bfsq.push_back(s);\n  while (!bfsq.empty()) {\n    int x = bfsq.front();\n    bfsq.pop_front();\n    cout \u003c\u003c x \u003c\u003c endl;\n    for (int y: adjlist[x])\n      if (!visited[y]) {\n        visited[y] = true;\n        predecessors[y] = x;\n        bfsq.push_back(y);\n      }\n  }\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;list&lt;int>> adjlist;\n  bfs(0, adjlist);\n  return 0;\n}", null]]);</script>
+<script>color("hl-67c6eab7341d6446", [["void bfs(int s, int v, vector&lt;list&lt;int>> adjlist) {\n  vector&lt;int> predecessors(v);\n  vector&lt;bool> visited(v);\n  queue&lt;int> bfsq;\n  visited[s] = true;\n  bfsq.push_back(s);\n  while (!bfsq.empty()) {\n    int x = bfsq.front();\n    bfsq.pop_front();\n    cout \u003c\u003c x \u003c\u003c endl;\n    for (int y: adjlist[x])\n      if (!visited[y]) {\n        visited[y] = true;\n        predecessors[y] = x;\n        bfsq.push_back(y);\n      }\n  }\n}\nint main() {\n  int v;\n  cin >> v;\n  vector&lt;list&lt;int>> adjlist;\n  bfs(0, adjlist);\n  return 0;\n}", null]]);</script>
     <p>
       putting each node on the queue takes \(Θ(e)\) time and examining each neighbor takes \(Θ(e)\) time. so bfs
       is also \(Θ(e)\)
     </p>
     <h2 id="dijkstras-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</h2>
     <p>here we are given a graph with <b>weights</b>. and we do bfs on it!</p>
-    <pre class="highlit" id="hl-f106b142ca8ce379">
+    <pre class="highlit" id="hl-4088035e2fdb21e7">
 dijkstra(s, adjlist)
   init pq
   init π array
@@ -1113,7 +1113,7 @@ relax(x, y, π, pq)
     y.v = x.v + edgeweight(x, y)
     π[y] = x
     update y in the pq</pre>
-<script>color("hl-f106b142ca8ce379", [["dijkstra", "function"],["(s, adjlist)\n  ", null],["init", "keyword"],[" pq\n  ", null],["init", "keyword"],[" π array\n  ", null],["init", "keyword"],[" w array with ∞ for each element\n  push s.0 onto the pq\n  ", null],["while", "keyword"],[" pq is not empty\n    pop x.v off the queue\n    ", null],["for", "keyword"],[" each neighbor y of x\n      relax(x, y, π, pq)\n", null],["relax", "function"],["(x, y, π, pq)\n  ", null],["if", "keyword"],[" x.v + edgeweight(x, y) \u003c y.v\n    y.v = x.v + edgeweight(x, y)\n    π[y] = x\n    update y in the pq", null]]);</script>
+<script>color("hl-4088035e2fdb21e7", [["dijkstra", "function"],["(s, adjlist)\n  ", null],["init", "keyword"],[" pq\n  ", null],["init", "keyword"],[" π array\n  ", null],["init", "keyword"],[" w array with ∞ for each element\n  push s.0 onto the pq\n  ", null],["while", "keyword"],[" pq is not empty\n    pop x.v off the queue\n    ", null],["for", "keyword"],[" each neighbor y of x\n      relax(x, y, π, pq)\n", null],["relax", "function"],["(x, y, π, pq)\n  ", null],["if", "keyword"],[" x.v + edgeweight(x, y) \u003c y.v\n    y.v = x.v + edgeweight(x, y)\n    π[y] = x\n    update y in the pq", null]]);</script>
     <p>
       if there are any negative edge weights, dijkstra's doesn't work, because it is too greedy. even worse are
       negative cycles because then the weight to get everywhere is \(-∞\) and <i>nothing</i> can solve that
@@ -1160,7 +1160,7 @@ relax(x, y, π, pq)
     </dl>
     <h3 id="union-find-structure">union-find structure</h3>
     <p>we have a predecessor array used to determine the leader of a group</p>
-    <pre class="highlit" id="hl-f19102e7501e6843">
+    <pre class="highlit" id="hl-ca4a5d8344313b5a">
 fn find(x) {leader[x] == x ? return x : return leader[x] = find(leader[x])} // compresses the path
 fn union(x, y) {
   if x is in the bigger group
@@ -1168,7 +1168,7 @@ fn union(x, y) {
   else
     leader[x] = leader[y];
 }</pre>
-<script>color("hl-f19102e7501e6843", [["fn", "keyword"],[" ", null],["find", "function"],["(", "rainbow0"],["x", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" == x ? ", null],["return", "keyword"],[" x : ", null],["return", "keyword"],[" leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = find", null],["(", "rainbow1"],["leader", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[")", "rainbow1"],["}", "rainbow0"],[" ", null],["// compresses the path", "comment"],["\n", null],["fn", "keyword"],[" ", null],["union", "function"],["(", "rainbow0"],["x, y", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" x is in the bigger group\n    leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[";\n  ", null],["else", "keyword"],["\n    leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[";\n", null],["}", "rainbow0"]]);</script>
+<script>color("hl-ca4a5d8344313b5a", [["fn", "keyword"],[" ", null],["find", "function"],["(", "rainbow0"],["x", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" == x ? ", null],["return", "keyword"],[" x : ", null],["return", "keyword"],[" leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = find", null],["(", "rainbow1"],["leader", null],["[", "rainbow2"],["x", null],["]", "rainbow2"],[")", "rainbow1"],["}", "rainbow0"],[" ", null],["// compresses the path", "comment"],["\n", null],["fn", "keyword"],[" ", null],["union", "function"],["(", "rainbow0"],["x, y", null],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["if", "keyword"],[" x is in the bigger group\n    leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[";\n  ", null],["else", "keyword"],["\n    leader", null],["[", "rainbow1"],["x", null],["]", "rainbow1"],[" = leader", null],["[", "rainbow1"],["y", null],["]", "rainbow1"],[";\n", null],["}", "rainbow0"]]);</script>
     <h3 id="the-algorithm">the algorithm</h3>
     <p>given a set \(E\) of weighted undirected edges</p>
     <ul>

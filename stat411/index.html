@@ -12,7 +12,7 @@
        color: var(--magenta-warmer);
      }
     </style>
-      <script src="../highlight.js"></script>
+    <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
@@ -65,10 +65,25 @@
             <li><a href="#5-1-discrete-uniform-distribution">5.1 discrete uniform distribution</a></li>
             <li><a href="#5-2-binomial-distribution">5.2 binomial distribution</a></li>
             <li><a href="#5-3-multinominal-distribution">5.3 multinominal distribution</a></li>
-            <li><a href="#5-4-hypergeometric-distribution">5.4 hypergeometric distribution</a></li>
-            <li><a href="#5-5-negative-binomial-distribution">5.5 negative binomial distribution</a></li>
-            <li><a href="#5-6-geometric-distribution">5.6 geometric distribution</a></li>
+            <li><a href="#5-5-negative-binomial-distribution">5.5  negative binomial distribution</a></li>
             <li><a href="#5-7-poisson-distribution">5.7 poisson distribution</a></li>
+            <li><a href="#giant-distribution-list">giant distribution list</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch6-continuous-probability-distributions">ch6 continuous probability distributions</a>
+          <ul class="tight">
+            <li><a href="#6-1-uniform-distribution">6.1 uniform distribution</a></li>
+            <li><a href="#6-2-normal-distribution">6.2 normal distribution</a></li>
+            <li><a href="#6-3-using-n-to-approximate-bin">6.3 using N to approximate bin</a></li>
+            <li><a href="#6-4-exponential-distribution">6.4 exponential distribution</a></li>
+            <li><a href="#6-5-gamma-distribution">6.5 gamma distribution</a></li>
+          </ul>
+        </li>
+        <li><a href="#ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</a></li>
+        <li><a href="#ch9-estimation">ch9 estimation</a></li>
+        <li><a href="#ch10-testing">ch10 testing</a>
+          <ul class="tight">
+            <li><a href="#testing-qualitative-categorical-data">testing qualitative/categorical data</a></li>
           </ul>
         </li>
       </ul>
@@ -195,7 +210,7 @@
       <dd>simplest and nicest. "center of gravity"</dd>
       <dd>\(
         x̄ = \frac1n ∑\limitsᵢ₌₁ⁿ xᵢ = ∑\limitsᵢ₌₁ⁿ \frac{xᵢ}n
-      \)</dd>
+        \)</dd>
       <dt>trimmed mean</dt>
       <dd>
         mean with some of the potential outliers cut out, eg 5% trimmed mean means
@@ -215,7 +230,7 @@
     <p>if the histogram of the data is symmetric, \(\text{mode} = x̃ = x̄\)</p>
     <p>if the histogram is skewed to (has a longer tail on) the right, \(
       \text{mode} < x̃ < x̄
-    \)</p>
+      \)</p>
     <h2 id="1-4-measures-of-variability">1.4 measures of variability</h2>
     <dl>
       <dt>range</dt>
@@ -227,14 +242,14 @@
         s²
         = \frac1{n - 1} ∑\limitsᵢ₌₁ⁿ (xᵢ - x̄)²
         = \frac1{n - 1} \left(
-          ∑\limitsᵢ₌₁ⁿ xᵢ² - \frac{\left(∑ xᵢ\right)²}n
+        ∑\limitsᵢ₌₁ⁿ xᵢ² - \frac{\left(∑ xᵢ\right)²}n
         \right)
-      \)</dd>
+        \)</dd>
       <dt>standard deviation</dt>
       <dd>\(s = \sqrt{s²}\)</dd>
     </dl>
     <p>the second form is nicer for computation since you don't need eg 2 loops</p>
-    <pre class="highlit" id="hl-89fb6f167728d0ed">
+    <pre class="highlit" id="hl-42b36d81ae5319e7">
 let mut sum_squares @ mut sum = 0;
 let n = sample.len() as f64;
 for x in sample {
@@ -243,7 +258,7 @@ for x in sample {
 }
 let s2 = 1./(n-1.) * (sum_squares - sum*sum/n);
 let s = s2.sqrt();</pre>
-<script>color("hl-89fb6f167728d0ed", [["let", "keyword"],[" ", null],["mut", "keyword"],[" ", null],["sum_squares", "variable"],[" @ ", null],["mut", "keyword"],[" ", null],["sum", "variable"],[" = ", null],["0", "constant"],[";\n", null],["let", "keyword"],[" ", null],["n", "variable"],[" = sample.len", null],["()", "rainbow0"],[" ", null],["as", "keyword"],[" ", null],["f64", "type"],[";\n", null],["for", "keyword"],[" ", null],["x", "variable"],[" ", null],["in", "keyword"],[" sample ", null],["{", "rainbow0"],["\n  sum += x;\n  sum_squares += x * x;\n", null],["}", "rainbow0"],["\n", null],["let", "keyword"],[" ", null],["s2", "variable"],[" = ", null],["1.", "constant"],["/", null],["(", "rainbow0"],["n-", null],["1.", "constant"],[")", "rainbow0"],[" * ", null],["(", "rainbow0"],["sum_squares - sum*sum/n", null],[")", "rainbow0"],[";\n", null],["let", "keyword"],[" ", null],["s", "variable"],[" = s2.sqrt", null],["()", "rainbow0"],[";", null]]);</script>
+    <script>color("hl-42b36d81ae5319e7", [["let", "keyword"],[" ", null],["mut", "keyword"],[" ", null],["sum_squares", "variable"],[" @ ", null],["mut", "keyword"],[" ", null],["sum", "variable"],[" = ", null],["0", "constant"],[";\n", null],["let", "keyword"],[" ", null],["n", "variable"],[" = sample.len", null],["()", "rainbow0"],[" ", null],["as", "keyword"],[" ", null],["f64", "type"],[";\n", null],["for", "keyword"],[" ", null],["x", "variable"],[" ", null],["in", "keyword"],[" sample ", null],["{", "rainbow0"],["\n  sum += x;\n  sum_squares += x * x;\n", null],["}", "rainbow0"],["\n", null],["let", "keyword"],[" ", null],["s2", "variable"],[" = ", null],["1.", "constant"],["/", null],["(", "rainbow0"],["n-", null],["1.", "constant"],[")", "rainbow0"],[" * ", null],["(", "rainbow0"],["sum_squares - sum*sum/n", null],[")", "rainbow0"],[";\n", null],["let", "keyword"],[" ", null],["s", "variable"],[" = s2.sqrt", null],["()", "rainbow0"],[";", null]]);</script>
     <p>the sum of deviations is \(∑\limitsᵢ₌₁ⁿ (xᵢ - x̄) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
@@ -277,9 +292,9 @@ let s = s2.sqrt();</pre>
       <dt>empirical rule</dt>
       <dd>
         for a normal (bell shaped) distribution, <ul>
-          <li>\(x̄ ± s\) contains 68% of values</li>
-          <li>\(x̄ ± 2s\) → 95%</li>
-          <li>\(x̄ ± 3s\) → 99.7%</li>
+        <li>\(x̄ ± s\) contains 68% of values</li>
+        <li>\(x̄ ± 2s\) → 95%</li>
+        <li>\(x̄ ± 3s\) → 99.7%</li>
         </ul>
         so almost the entire dataset fits in 6 standard deviations.
         this is only a rule of thumb. also called the <b>6σ rule</b>
@@ -375,7 +390,7 @@ let s = s2.sqrt();</pre>
     </dl>
     <p>
       the number of ways to choose \(r\) of \(n\) objects, regardless of order, is \[
-        C_{n, r} = {n \choose r} = \frac{P_{n, r}}{r!} = \frac{n!}{r! (n - r)!}
+      C_{n, r} = {n \choose r} = \frac{P_{n, r}}{r!} = \frac{n!}{r! (n - r)!}
       \]
     </p>
     <p>
@@ -396,7 +411,7 @@ let s = s2.sqrt();</pre>
     <h2 id="2-4-conditional-probability">2.4 conditional probability</h2>
     <p>the probability that \(A\) happens <b>given</b> \(B\) is \(
       P(A \mathbin| B) = \frac{P(A ∩ B)}{P(B)}
-    \)</p>
+      \)</p>
     <p>this changes the sample space</p>
     <dl>
       <dt>rule of multiplication</dt>
@@ -445,7 +460,7 @@ let s = s2.sqrt();</pre>
     </table>
     <p>eg \(
       P\left(\text{smoking} \middle| \text{bronchitis}^∁\right) = \frac12
-    \)</p>
+      \)</p>
     <p>smoking and bronchitis are dependent because \(P(S) ≠ P(S \mathbin| B)\)</p>
     <h2 id="2-7-bayes-theorem">2.7 bayes' theorem</h2>
     <p>the events \(B₁, B₂, …, Bₖ\) <b>partition</b> a sample space \(S\) if</p>
@@ -457,8 +472,8 @@ let s = s2.sqrt();</pre>
       suppose \(k = 2\) and some event \(A\) has occurred in a random manner in \(S\),
       and we want to know \(P(Bᵢ \mathbin| A)\). since \(A = (A ∩ B₁) ∪ (A ∩ B₂)\)
       from the partition, \[
-        P(Bᵢ \mathbin| A) = \frac{P(Bᵢ ∩ A)}{P(A)} = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{P(A)}
-        = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{∑ⱼ P(A \mathbin| Bⱼ)P(Bⱼ)}
+      P(Bᵢ \mathbin| A) = \frac{P(Bᵢ ∩ A)}{P(A)} = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{P(A)}
+      = \frac{P(A \mathbin| Bᵢ)P(Bᵢ)}{∑ⱼ P(A \mathbin| Bⱼ)P(Bⱼ)}
       \]
     </p>
     <p>
@@ -823,15 +838,15 @@ let s = s2.sqrt();</pre>
     </ul>
     <p>
       the other stuff is all the same except the usual
-      <code class="highlit" id="hl-a8955ff668325523-2">s/</code>
-<script>color("hl-a8955ff668325523-2", [["s", "function"],["/", null]]);</script> \(\displaystyle∑\) <code class="highlit" id="hl-cf1d3eb93fcb5a7a-2">/</code>
-<script>color("hl-cf1d3eb93fcb5a7a-2", [["/", null]]);</script> \(\displaystyle∫\) <code class="highlit" id="hl-73fce4d10cc99e17-2">/g</code>
-<script>color("hl-73fce4d10cc99e17-2", [["/g", null]]);</script>
+      <code class="highlit" id="hl-06264191ce8540a8">s/</code>
+      <script>color("hl-06264191ce8540a8", [["s", "function"],["/", null]]);</script> \(\displaystyle∑\) <code class="highlit" id="hl-84480ca3343416fc">/</code>
+      <script>color("hl-84480ca3343416fc", [["/", null]]);</script> \(\displaystyle∫\) <code class="highlit" id="hl-95faff4b3ae081ea">/g</code>
+      <script>color("hl-95faff4b3ae081ea", [["/g", null]]);</script>
       and
-      <code class="highlit" id="hl-a8955ff668325523">s/</code>
-<script>color("hl-a8955ff668325523", [["s", "function"],["/", null]]);</script>\(p\)<code class="highlit" id="hl-cf1d3eb93fcb5a7a">/</code>
-<script>color("hl-cf1d3eb93fcb5a7a", [["/", null]]);</script>\(f\)<code class="highlit" id="hl-73fce4d10cc99e17">/g</code>
-<script>color("hl-73fce4d10cc99e17", [["/g", null]]);</script>
+      <code class="highlit" id="hl-06264191ce8540a8-2">s/</code>
+      <script>color("hl-06264191ce8540a8-2", [["s", "function"],["/", null]]);</script>\(p\)<code class="highlit" id="hl-84480ca3343416fc-2">/</code>
+      <script>color("hl-84480ca3343416fc-2", [["/", null]]);</script>\(f\)<code class="highlit" id="hl-95faff4b3ae081ea-2">/g</code>
+      <script>color("hl-95faff4b3ae081ea-2", [["/g", null]]);</script>
     </p>
     <p>
       \[
@@ -900,12 +915,382 @@ let s = s2.sqrt();</pre>
     <p style="color: var(--green-faint)">cdfs are on book pp726-731</p>
     <p>what if there are more than 2 categories?...</p>
     <h2 id="5-3-multinominal-distribution">5.3 multinominal distribution</h2>
-    <!--
-    <h2 id="5-4-hypergeometric-distribution">5.4 hypergeometric distribution</h2>
-    <h2 id="5-5-negative-binomial-distribution">5.5 negative binomial distribution</h2>
-    <h2 id="5-6-geometric-distribution">5.6 geometric distribution</h2>
+    <h2 id="5-5-negative-binomial-distribution">5.5  negative binomial distribution</h2>
+    <p>
+      \(
+      \gdef\NB{\operatorname{NB}}
+      \gdef\Geo{\operatorname{Geo}}
+      \gdef\HG{\operatorname{HG}}
+      \gdef\Poi{\operatorname{Poi}}
+      \gdef\Exp{\operatorname{Exp}}
+      \gdef\Ga{\operatorname{Ga}}
+      \)
+    </p>
+    <p>this helps us find the number of trials needed for a certain amount of successes.</p>
     <h2 id="5-7-poisson-distribution">5.7 poisson distribution</h2>
-    -->
+    <p>
+      we take the binomial distribution and let \(n → ∞\) and \(p → 0\), get a stable number \(λ ≔ np\),
+      and take the limit:
+    </p>
+    <p>
+      \[
+      \def\thelim{\lim_{\substack{n → ∞ \\ p → 0}}}
+      \begin{align*}
+      \thelim p(x)
+      &= \thelim {n \choose x} pˣ (1 - p)ⁿ⁻ˣ \\
+      &= \thelim {n \choose x} \left(\fracλ n\right)ˣ \left(1 - \fracλ n\right)ⁿ⁻ˣ \\
+      …
+      &= \frac{λˣ}{x!}e^{-λ}
+      \end{align*}
+      \]
+    </p>
+    <p>remember \(\lim\limits_{n → ∞}\left(1 + \frac xn\right)ⁿ = eˣ\)</p>
+    <p>
+      workplace accidents follow a poisson distribution since there are a lot of workplaces and individual accidents
+      are unlikely
+    </p>
+    <h2 id="giant-distribution-list">giant distribution list</h2>
+    <table>
+      <tr>
+        <th>distribution</th>
+        <th>pmf \(p(\mathord·)\)</th>
+        <th>domain / params</th>
+        <th>mean \(E(X)\)</th>
+        <th>variance \(\var(X) = E[(X - μ)²]\)</th>
+      </tr>
+      <tr>
+        <td>bernoulli<br />\(\Ber(p)\)</td>
+        <td>\(p(x) = pˣ(1 - p)¹⁻ˣ\)</td>
+        <td>\(x = 0, 1\\ 0 ≤ p ≤ 1\)</td>
+        <td>\(p\)</td>
+        <td>\(p(1 - p)\)</td>
+      </tr>
+      <tr>
+        <td>binomial<br />\(\bin(n, p)\)</td>
+        <td>\(p(x) = {n \choose x} pˣ(1 - p)ⁿ⁻ˣ\)</td>
+        <td>\(x = 0, 1, …, n \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(np\)</td>
+        <td>\(np(1 - p)\)</td>
+      </tr>
+      <tr>
+        <td>negative binomial<br />\(\NB(r, p)\)</td>
+        <td>\(p(y) = {y - 1 \choose r - 1} pʳ(1 - p)ʸ⁻ʳ\)</td>
+        <td>\(y = r, r + 1, … \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(\frac rp\)</td>
+        <td>\(\frac {r(1 - p)}{p²}\)</td>
+      </tr>
+      <tr>
+        <td>geometric<br />\(\Geo(p)\)</td>
+        <td>\(p(y) = (1 - p)ʸ⁻¹p\)</td>
+        <td>\(y = 1, 2, … \\ 0 ≤ p ≤ 1\)</td>
+        <td>\(\frac1p\)</td>
+        <td>\(\frac{1 - p}{p²}\)</td>
+      </tr>
+      <tr>
+        <td>hypergeometric<br />\(\HG(N, n, r)\)</td>
+        <td>\(p(x) = \frac{{r \choose x}{N - r \choose n - x}}{N \choose n}\)</td>
+        <td>\(x = 0, 1, …, n \\ x ≤ r \\ n - x ≤ N - r\)</td>
+        <td>\(\frac{nr}N\)</td>
+        <td>\(\frac{nr}N \frac{N - r}N \frac{N - n}{N - 1}\)</td>
+      </tr>
+      <tr>
+        <td>poisson<br />\(\Poi(λ)\)</td>
+        <td>\(p(x) = \frac{e^{-λ} λˣ}{x!}\)</td>
+        <td>\(x = 0, 1, … \\ λ > 0\)</td>
+        <td>\(λ\)</td>
+        <td>\(λ\)</td>
+      </tr>
+      <tr>
+        <td>multinomial<br />\(M(n; pᵢ)\)</td>
+        <td>\(p(x₁, …, xₖ) = \frac{n!}{∏\limitsᵢ₌₁ᵏ xᵢ!} ∏\limitsᵢ₌₁ᵏ pᵢ^{xᵢ}\)</td>
+        <td>\(∑\limitsᵢ₌₁ᵏ xᵢ = n \\ ∑\limitsᵢ₌₁ᵏ pᵢ = 1\)</td>
+        <td>\(E(Xᵢ) = npᵢ\)</td>
+        <td>
+          \(
+          \var(Xᵢ) = npᵢ(1 - pᵢ) \\
+          \cov(Xᵢ, Xⱼ) = -npᵢpⱼ, i ≠ j \\
+          \corr(Xᵢ, Xⱼ) = \frac{\cov(Xᵢ, Xⱼ)}{\sqrt{σ²₁}\sqrt{σ²₂}}
+          \)
+        </td>
+      </tr>
+    </table>
+    <h1 id="ch6-continuous-probability-distributions">ch6 continuous probability distributions</h1>
+    <h2 id="6-1-uniform-distribution">6.1 uniform distribution</h2>
+    <p>
+      a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its
+      pdf looks like
+      \[
+      f(x) = \begin{cases}
+      \frac1{b - a}, & a ≤ x ≤ b \\
+      0, & \text{otherwise}
+      \end{cases}
+      \]
+    </p>
+    <p>
+      \[
+      E(X) = \frac{a + b}2 \qquad \var(X) = \frac1{12} (b - a)²
+      \]
+    </p>
+    <h2 id="6-2-normal-distribution">6.2 normal distribution</h2>
+    <p>the bell shaped one!</p>
+    <p>
+      \[
+      f(x)
+      = \frac1{σ\sqrt{2π}} e^{-\frac1{2σ²} (x - μ)²}
+      = \frac{e^{-z²/2}}{σ\sqrt{2π}}
+      \]
+    </p>
+    <p>\(x\) can be any real number. we write \(X ∼ N(μ, σ²)\). \(E(X) = μ\) and \(\var(X) = σ²\)</p>
+    <p>
+      the area under the curve is 1 (but the function has no closed-form integral) and there are points of inflection
+      at \(x = μ ± σ\)
+    </p>
+    <p>
+      <small>
+        digit contest:<br />
+        \(π = 3.14159265358979323...\)<br />
+        \(e = 2.718281828459045...\)
+      </small>
+    </p>
+    <p>
+      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <b>standard normal probability
+      distribution</b>. the pdf of \(Z\) is 
+      \[
+      φ(Z) = \frac1{\sqrt{2π}}e^{-x²/2}
+      \]
+    </p>
+    <p>
+      since it's not feasible to have tables for every possible normal distribution, we just have the one table for
+      \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)
+    </p>
+    <h2 id="6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
+    <p>
+      if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when
+      \(np > 5\) and \(npq > 5\)
+    </p>
+    <p>you might need a <b>continuity correction</b> of adding/subtracting 0.5</p>
+    <h2 id="6-4-exponential-distribution">6.4 exponential distribution</h2>
+    <p>for random phonemena involving time, eg device lifespan</p>
+    <p>
+      \[
+      f(x) = \frac1θ e^{-x/θ} , \quad θ > 0
+      \]
+    </p>
+    <p>if \(X\) follows this we write \(X ∼ \Exp(θ)\)</p>
+    <p>this is also called a <b>laplace distribution</b></p>
+    <p>\(E(X) = θ\) and \(\var(X) = θ²\). the standard deviation is the mean! and mean > median</p>
+    <p>
+      \[
+      F(X) = \begin{cases}
+      1 - e^{-x/θ}, & x ≥ 0 \\
+      0, & x < 0
+      \end{cases}
+      \]
+    </p>
+    <p>
+      after <b>reparameterization</b> \(λ = \frac1θ\) we can write \(f(x) = λe^{-λx}\). \(θ\) represents the
+      mean time between events and \(λ\) represents the number of events per unit of time
+    </p>
+    <p>
+      the <b>survival function / reliability</b> is \(1 - F(x) =\)
+      \[
+      F̄(x) = S(x) = ∫ₓ^∞ f(t) \;\mathrm dt = \exp(-λx)
+      \]
+    </p>
+    <p>
+      a random variable is <b>memoryless</b> if \(P(X > s + t \mathbin| X > t) = P(X > s)\) for all \(s, t ≥ 0\)
+    </p>
+    <h2 id="6-5-gamma-distribution">6.5 gamma distribution</h2>
+    <p>the <b>gamma function</b> is \(Γ(k) = ∫₀^∞ yᵏ⁻¹e⁻ʸ \;dy\) and has properties</p>
+    <ul>
+      <li>\(Γ(k) = (k - 1)!\) for \(k ∈ ℕ₁\)</li>
+      <li>\(Γ(k + 1) = kΓ(k) = k!\)</li>
+      <li>\(Γ(1) = 0! = 1\) and \(Γ\left(\frac12\right) = \sqrtπ\)</li>
+    </ul>
+    <p>
+      the \(E(X)\) for the exponential distribution is, by definition,
+      \[
+      ∫₀^∞ x\frac1θ e^{-x/θ} \;dx
+      \]
+    </p>
+    <p>
+      if we let \(y = \frac xθ\), then \(x = yθ\) and \(dx = θ dy\), and therefore
+      \[
+      \begin{align*}
+      E(X)
+      &= ∫₀^∞ θ y \frac1θ e⁻ʸ θ \;dy \\
+      &= θ ∫₀^∞ ye⁻ʸ \;dy \\
+      &= θ ∫₀^∞ y²⁻¹e⁻ʸ \;dy \\
+      &= θ Γ(2) = θ
+      \end{align*}
+      \]
+    </p>
+    <p>
+      a random variable follows the <b>gamma distribution</b> \(\Ga(α, β)\) if \(x ≥ 0\)
+      \[
+      f(x) = \frac1{Γ(α)β^α} x^{α - 1} e^{-x/β}
+      \]
+    </p>
+    <p>\(\Ga(1, β) = \Exp(β)\)</p>
+    <p>
+      <small>
+        on the wikipedia page for gamma distribution, this is the "shape-and-scale" gamma distribution;
+        we are using \(β\) for scale but wikipedia uses \(β\) for rate and \(θ = 1/β\) for scale
+      </small>
+    </p>
+    <p>\(E(X) = αβ\) and \(\var(X) = αβ²\)</p>
+    <h1 id="ch8-samples-and-sampling-distributions">ch8 samples and sampling distributions</h1>
+    <dl>
+      <dt>random sample</dt>
+      <dd>
+        a sample of size \(n\) (\(X₁, X₂, …, Xₙ\)) with probability function \(f(x)\) where each \(Xᵢ\) are
+        independent and identically distributed (<b>iid</b>) with the population distribution
+      </dd>
+      <dt>statistic</dt>
+      <dd>function of random variables in a sample. since it varies from sample to sample, it's a random variable</dd>
+      <dt>sampling distribution</dt>
+      <dd>probability distibution of a statistic</dd>
+      <dt>law of large mnumbers (LLN)</dt>
+      <dd>
+        as \(n\) gets "large", a statistic approaches the parameter. eg \(x̄ → μ\) or
+        \({\lim\limits_{n → ∞} \left|x̄ - μ\right|} = 0\)
+      </dd>
+    </dl>
+    <p>\(\left|x̄ - μ\right|\) specifically is the <b>sampling error</b>, controllable by the sample size \(n\)</p>
+    <p>
+      for a sample \(X₁, X₂, …, Xₙ\) from a normal distribution \(N(μ, σ²)\), then the <i>sample mean</i> \(X̄\) is
+      normally distributed with \(E(X̄) ≡ μ_X̄ = μ\) and \(\var(X̄) ≡ σ_X̄² = \frac{σ²}n\)
+    </p>
+    <p>the <b>standard error</b> \(σ_X̄ = \fracσ{\sqrt n}\)</p>
+    <p>
+      if the population size is finite, we need to multiple the finite population correction, ie \(\var(X̄) =
+      \frac{σ²}n\left(\frac{N - n}{N - 1}\right)\)
+    </p>
+    <p>
+      for <i>any</i> random sample with sufficiently large \(n ≥ 25\), \(X̄\) is approximately normally distributed
+      with \(E(X̄) = μ_X̄ = μ\) and \(\var(X̄) = σ_X̄² = \frac{σ²}n\)
+    </p>
+    <p>
+      this is true no matter what the population distribution may be!!<br /><small>well as long as \(σ² < ∞\)</small>
+    </p>
+    <dl>
+      <dt>central limit theorem (CLT)</dt>
+      <dd>
+        \[
+        \lim_{n → ∞} P\left(\frac{X̄ - μ}{σ / \sqrt n}\right) = Φ(z)
+        \]
+      </dd>
+    </dl>
+    <h1 id="ch9-estimation">ch9 estimation</h1>
+    <dl>
+      <dt>estimator</dt>
+      <dd>formula used to estimate a parameter</dd>
+      <dt>estimate</dt>
+      <dd>a numerical value produced by an estimator. eg if a sample has \(X̄ = 162\) then \(μ̂ = 162\)</dd>
+    </dl>
+    <p>
+      a single numerical value is called a <b>point estimate</b>. the accuracy is evaluated by the
+      <i>margin of error</i>
+    </p>
+    <dl>
+      <dt>margin of error</dt>
+      <dd>\(±1.96σ\) or \(±1.96s\)</dd>
+    </dl>
+    <p>an estimator \(θ̂\) is <b>unbiased</b> for the parameter \(θ\) if \(E(θ̃) = θ\)</p>
+    <p>an estimator \(θ̂\) is more <b>efficient</b> than another estimator \(θ̃\) if \(\var(θ̂) ≤ {\var(θ̃)}\)</p>
+    <p>
+      we can also construct an interval around the point estimate that's likely to contain the real parameter.
+      for a \(N(μ, σ²)\),
+    </p>
+    <p>
+      \[
+      P\left(-z_{α/2} < \frac{X̄ - μ}{σ/\sqrt n} ≤ z_{α/2}\right) = 1 - α
+      \]\[
+      ⇔
+      P\left(X̄ - z_{α/2}\fracσ{\sqrt n} < μ ≤ X̄ + z_{α/2}\fracσ{\sqrt n}\right) = 1 - α
+      \]
+    </p>
+    <p>
+      when the sample is drawn from a population the interval is not random anymore. it it called the
+      \((1 - α) · 100\%\) <b>confidence interval</b> for \(μ\)
+      and given by
+    </p>
+    <p>
+      \[
+      \left]x̄ - z_{α/2} \fracσ{\sqrt n}, x̄ + z_{α/2} \fracσ{\sqrt n}\right[
+      \]
+    </p>
+    <p><mark>todo! slides!</mark></p>
+    <h1 id="ch10-testing">ch10 testing</h1>
+    <p>q: does a sample eg \(x̄ = μ̂\) show enough evidence to believe some statement about \(μ\)?</p>
+    <dl>
+      <dt>null hypothesis (\(H₀\))</dt>
+      <dd>the assumed-until-proven-otherwise fact that a hypothesis is false</dd>
+      <dt>alternative hypothesis (\(Hₐ\) or \(H₁\))</dt>
+      <dd>new evidence based on data about \(μ\)</dd>
+      <dt>type i error</dt>
+      <dd>\(α = P\left(\text{reject }H₀ \mathbin| H₀\text{ is true}\right)\)</dd>
+      <dd>false positive rate / <b>level of significance</b>. we want this as small as possible</dd>
+      <dt>type ii error</dt>
+      <dd>\(β = P\left(\text{¬reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
+      <dd>false negative rate</dd>
+      <dt>power of the test</dt>
+      <dd>\(1 - β = P\left(\text{reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
+    </dl>
+    <p>how to test stuff:</p>
+    <ol>
+      <li><b>two hypotheses</b> \(H₀\) and \(H₁\)</li>
+      <li><b>test statistics</b>: use the statistic to find \(z\) or \(t\)</li>
+      <li><b>critical value & rejection region</b> from \(α\)</li>
+      <li><b>make a statistical decision</b></li>
+      <li><b>draw a conclusion</b></li>
+    </ol>
+    <table>
+      <tr>
+        <th>test form</th>
+        <th><i>H</i><sub>0</sub></th>
+        <th><i>H</i><sub>1</sub></th>
+        <th>CV & RR</th>
+      </tr>
+      <tr>
+        <th scope="row">left-tailed</th>
+        <td rowspan="3">\(μ = μ₀\)</td>
+        <td>\(μ < μ₀\)</td>
+        <td>\(z < -z_α\)</td>
+      </tr>
+      <tr>
+        <th scope="row">right-tailed</th>
+        <td>\(μ > μ₀\)</td>
+        <td>\(z > z_α\)</td>
+      </tr>
+      <tr>
+        <th scope="row">two-tailed</th>
+        <td>\(μ ≠ μ₀\)</td>
+        <td>\(z < -z_{α/2}\) or \(z > z_{α/2}\)</td>
+      </tr>
+    </table>
+    <dl>
+      <dt><i>p</i>-value</dt>
+      <dd><u>observed</u> level of significance. = tail probability</dd>
+      <dd>small \(p\) value is evidence against the null hypothesis</dd>
+    </dl>
+    <h2 id="testing-qualitative-categorical-data">testing qualitative/categorical data</h2>
+    <p>we want to count the frequencies of things! since all we have is just the \(k\) categories</p>
+    <p>
+      in 1900 karl pearson introduced the <b>chi-squared test</b>
+      \[
+      χ² = ∑ᵢ₌₁ᵏ \frac{\left(Oᵢ - Eᵢ\right)²}{Eᵢ}
+      \]
+      where \(Oᵢ\) is the observed frequency and \(Eᵢ\) is the expected frequency 
+    </p>
+    <p>it's small if it fits the expectation/model and large when it doesn't</p>
+    <p>\(χ²\) tests are <b>distribution-free</b></p>
+    <p>
+      we can test indpendence given an \(r\mathord× c\) contingency table. let<br />
+      \(fᵢⱼ =\) <u>observed</u> frequency for \(i\)th row and \(j\)th column<br />
+      \(eᵢⱼ =\) <u>expected</u> frequency<br />
+      d.f. \(= (r - 1)(c - 1)\)
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>

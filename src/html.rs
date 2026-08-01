@@ -14,7 +14,14 @@ pub static ID_ATTR_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r#"\sid="([
 
 static IMG_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"<img\b[^>]*>").unwrap());
 
-pub fn strip_tags(html: &str) -> String { TAG_RE.replace_all(html, "").into_owned() }
+static SCRIPT_RE: LazyLock<Regex> = LazyLock::new(|| {
+    Regex::new(r"(?s)<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>").unwrap()
+});
+
+pub fn strip_tags(html: &str) -> String {
+    let no_scripts = SCRIPT_RE.replace_all(html, "");
+    TAG_RE.replace_all(&no_scripts, "").into_owned()
+}
 
 pub fn warn_missing_alt(html: &str) -> bool {
     let missing = IMG_RE.find_iter(html).filter(|m| !m.as_str().contains("alt=")).count();

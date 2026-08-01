@@ -1,10 +1,7 @@
-use std::{
-    collections::HashSet,
-    hash::{DefaultHasher, Hash as _, Hasher as _},
-    sync::LazyLock,
-};
+use std::{collections::HashSet, hash::Hasher as _, sync::LazyLock};
 
 use regex::Regex;
+use rustc_hash::FxHasher;
 
 use crate::{
     entities,
@@ -186,8 +183,8 @@ fn trailing_script_end(html: &str, after: usize) -> usize {
 }
 
 fn content_hash(s: &str) -> String {
-    let mut h = DefaultHasher::new();
-    s.hash(&mut h);
+    let mut h = FxHasher::default();
+    h.write(s.as_bytes());
     format!("{:016x}", h.finish())
 }
 
@@ -243,7 +240,7 @@ pub fn apply_spans(
     let script = tokens_to_script(&id, &tokens);
     let encoded = entities::encode_basic(&element.stripped_content);
     let body = if element.content.starts_with('\n') { format!("\n{encoded}") } else { encoded };
-    format!("<{tag}{attrs}>{body}</{tag}>\n{script}")
+    format!("<{tag}{attrs}>{body}</{tag}>{script}")
 }
 
 fn build_tokens(content: &str, spans: &[FinishedSpan]) -> Vec<(String, Option<&'static str>)> {
