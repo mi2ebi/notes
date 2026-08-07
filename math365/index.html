@@ -114,7 +114,6 @@
                 <li><a href="#constructing-an-orthogonal-basis">constructing an orthogonal basis</a></li>
               </ul>
             </li>
-            <li>3.7 linear transformation from \(ℝⁿ\) to \(ℝᵐ\)</li>
           </ul>
         </li>
         <li><a href="#ch4-the-eigenvalue-problem">ch4 the eigenvalue problem</a>
@@ -148,6 +147,7 @@
             <li><a href="#5-4-linear-independence-bases-coordinates">5.4 linear independence, bases, coordinates</a></li>
             <li><a href="#5-5-dimension">5.5 dimension</a></li>
             <li><a href="#5-7-linear-transformations-from-ℝⁿ-to-𝐑ᵐ">5.7 linear transformations from \(ℝⁿ\) to \(𝐑ᵐ\)</a></li>
+            <li><a href="#5-8-operations-with-linear-transformations">5.8 operations with linear transformations</a></li>
           </ul>
         </li>
       </ul>
@@ -1545,6 +1545,19 @@
       is \(F : \begin{bmatrix}x₁\\ x₂\\ x₃\end{bmatrix} ↦ \begin{bmatrix}x₁ - x₂\\ x₂ + x₃\end{bmatrix}\)
       a linear transformation?
     </p>
+    todo null space and range of transformation 
+    <h2 id="5-8-operations-with-linear-transformations">5.8 operations with linear transformations</h2>
+    <p>you can add or compose two linear transformations to get another one</p>
+    <p>
+      a linear transformation is <b>one-to-one</b> / <b>injective</b> if \(T(x₁) = T(x₂) ⇔ x₁ = x₂\).
+      here this just means \(T(x₁ - x₂) = 0 ⇔ x₁ - x₂ = 0\), i.e. \(\ker T = 0\)
+    </p>
+    <p>and <b>surjective</b> if the range of \(T\) is exactly \(W\) rather than a (proper) subset of it</p>
+    <p>
+      a linear transformation is <b>invertible</b> or <b>bijective</b> or an <b>isomorphism</b> if it's both
+      injective and surjective. two vector spaces are <b>isomorphic</b> if there's a linear isomorphism between them
+    </p>
+    <p>if any finite dimensional vector space has \(n\) dimensions it's isomorphic to \(ℝⁿ\)</p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
