@@ -9,7 +9,7 @@
        color: var(--magenta-warmer);
      }
      dt, p > b, b.defn {
-       color: var(--magenta);
+       color: var(--magenta-cooler);
      }
     </style>
   </head>
@@ -146,8 +146,15 @@
             <li><a href="#5-3-subspaces">5.3 subspaces</a></li>
             <li><a href="#5-4-linear-independence-bases-coordinates">5.4 linear independence, bases, coordinates</a></li>
             <li><a href="#5-5-dimension">5.5 dimension</a></li>
-            <li><a href="#5-7-linear-transformations-from-ℝⁿ-to-𝐑ᵐ">5.7 linear transformations from \(ℝⁿ\) to \(𝐑ᵐ\)</a></li>
+            <li><a href="#5-7-linear-transformations-from-ℝⁿ-to-ℝᵐ">5.7 linear transformations from \(ℝⁿ\) to \(ℝᵐ\)</a></li>
             <li><a href="#5-8-operations-with-linear-transformations">5.8 operations with linear transformations</a></li>
+            <li><a href="#5-9-matrix-representations-of-linear-transformations">5.9 matrix representations of linear transformations</a></li>
+            <li><a href="#5-10-diagonalizable-transformations">5.10 diagonalizable transformations</a>
+              <ul class="tight">
+                <li><a href="#transition-matrix">transition matrix</a></li>
+                <li><a href="#change-of-basis">change of basis</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -1514,26 +1521,28 @@
     <p>
       pick an \(𝐀 ∈ W\). then \(d = b - 2a - 3c\) and we can write
       \[
+      \begin{align*}
       𝐀
-      = \begin{bmatrix}a & b\\ c & b - 2a - 3c\end{bmatrix}
-      = \begin{bmatrix}a & 0\\ 0 & -2a\end{bmatrix}
+      &= \begin{bmatrix}a & b\\ c & b - 2a - 3c\end{bmatrix}\\
+      &= \begin{bmatrix}a & 0\\ 0 & -2a\end{bmatrix}
       + \begin{bmatrix}0 & b\\ 0 & b\end{bmatrix}
-      + \begin{bmatrix}0 & 0\\ c & -3c\end{bmatrix}
-      = a \begin{bmatrix}1 & 0\\ 0 & -2\end{bmatrix}
+      + \begin{bmatrix}0 & 0\\ c & -3c\end{bmatrix}\\
+      &= a \begin{bmatrix}1 & 0\\ 0 & -2\end{bmatrix}
       + b \begin{bmatrix}0 & 1\\ 0 & 1\end{bmatrix}
       + c \begin{bmatrix}0 & 0\\ 1 & -3\end{bmatrix}
+      \end{align*}
       \]
       aha! a spanning set! is \(\{𝐄₁, 𝐄₂, 𝐄₃\}\) linearly independent? 
     </p>
     <p>
-      \[x₁E₁ + x₂E₂ + x₃E₃ = \begin{bmatrix}0 & 0\\ 0 & 0\end{bmatrix} ⇔ x₁ = x₂ = x₃ = 0\]
+      \[x₁𝐄₁ + x₂𝐄₂ + x₃𝐄₃ = \begin{bmatrix}0 & 0\\ 0 & 0\end{bmatrix} ⇔ x₁ = x₂ = x₃ = 0\]
       yes :3 so it's a basis and \(\dim W = 3\)
     </p>
-    <h2 id="5-7-linear-transformations-from-ℝⁿ-to-𝐑ᵐ">5.7 linear transformations from \(ℝⁿ\) to \(𝐑ᵐ\)</h2>
+    <h2 id="5-7-linear-transformations-from-ℝⁿ-to-ℝᵐ">5.7 linear transformations from \(ℝⁿ\) to \(ℝᵐ\)</h2>
     <p>
       a function \(T : V → W\) is called a <b>linear transformation</b> if for all vectors \(𝐮, 𝐯 ∈ V\),
       \[
-      T(𝐮 + 𝐯) = T(𝐮) + T(𝐯\))
+      T(𝐮 + 𝐯) = T(𝐮) + T(𝐯)
       \]
       and
       \[
@@ -1558,6 +1567,40 @@
       injective and surjective. two vector spaces are <b>isomorphic</b> if there's a linear isomorphism between them
     </p>
     <p>if any finite dimensional vector space has \(n\) dimensions it's isomorphic to \(ℝⁿ\)</p>
+    <h2 id="5-9-matrix-representations-of-linear-transformations">5.9 matrix representations of linear transformations</h2>
+    <p>
+      if \(T : U → V\), \(U\) has basis \(B\), and \(V\) has basis \(C\), we can just plug in the basis vectors
+      into \(T\) to get the matrix
+      \[
+      𝐐 = \begin{bmatrix}𝐪₁ & … & 𝐪ₙ\end{bmatrix}
+      \]
+      where \(𝐪ᵢ = [T(𝐛ᵢ)]_C\)
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      let \(U\) be the vector space of all \(2 × 2\) matrices and define \(T : U → 𝒫₂\) by
+      \[
+      T(𝐀) = (a - d) + (a + 2b)x + (b - 3c)x²,~~
+      𝐀 = \begin{bmatrix}a & b\\ c & d\end{bmatrix} ∈ U
+      \]
+      find the matrix representation of \(T\) wrt the natural bases for \(U\) and \(𝒫₂\)
+    </p>
+    <p><mark><b>todo</b> finish</mark></p>
+    <h2 id="5-10-diagonalizable-transformations">5.10 diagonalizable transformations</h2>
+    <p>
+      a transformation is <b>diagonalizable</b> if its matrix representation is a diagonalizable matrix
+      / not <a href="#4-5-eigenvectors-and-eigenspaces">defective</a>
+    </p>
+    <h3 id="transition-matrix">transition matrix</h3>
+    <p>
+      if \(B\) and \(C\) are both bases of \(V\), with \(B = \{𝐛₁, …, 𝐛ₙ\}\), let \(𝐏\) be the square matrix with
+      columns \(𝐏ᵢ = [𝐛ᵢ]_C\). then \(𝐏\) is nonsingular and \([𝐯]_C = 𝐏[𝐯]_B\)
+    </p>
+    <h3 id="change-of-basis">change of basis</h3>
+    <p>
+      let \(𝐐₁\) be the matrix for \(T\) wrt \(B\) and \(𝐐₂\) be the matrix for \(T\) wrt \(C\). then \(𝐐₂ = 𝐏⁻¹𝐐₁𝐏\).
+      notice this means \(𝐐₁\) and \(𝐐₂\) are similar!
+    </p>
     <!-- temml -->
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
