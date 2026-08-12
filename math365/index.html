@@ -29,6 +29,7 @@
                 <li><a href="#vectors-in-ℝⁿ">vectors in \(ℝⁿ\)</a></li>
                 <li><a href="#matrix-multiplication">matrix multiplication</a></li>
                 <li><a href="#other-representations-of-matrices">other representations of matrices</a></li>
+                <li><a href="#solving-matrix-equations">solving matrix equations</a></li>
               </ul>
             </li>
             <li><a href="#1-6-algebraic-properties-of-matrix-operations">1.6 algebraic properties of matrix operations</a>
@@ -142,7 +143,11 @@
         </li>
         <li><a href="#ch5-vector-spaces-and-linear-transformations">ch5 vector spaces and linear transformations</a>
           <ul class="tight">
-            <li><a href="#5-2-vector-spaces">5.2 vector spaces</a></li>
+            <li><a href="#5-2-vector-spaces">5.2 vector spaces</a>
+              <ul class="tight">
+                <li><a href="#cancellation-laws">cancellation laws</a></li>
+              </ul>
+            </li>
             <li><a href="#5-3-subspaces">5.3 subspaces</a></li>
             <li><a href="#5-4-linear-independence-bases-coordinates">5.4 linear independence, bases, coordinates</a></li>
             <li><a href="#5-5-dimension">5.5 dimension</a></li>
@@ -650,6 +655,47 @@
       \end{bmatrix}
       \]
     </p>
+    <h3 id="solving-matrix-equations">solving matrix equations</h3>
+    <p>
+      an equation of the form \(𝐀𝐗 = 𝐁\) can be solved by augmenting \(𝐀\) with the columns of \(𝐁\).
+      if \(𝐀\) is square and nonsingular, the unique solution is \(𝐗 = 𝐀⁻¹𝐁\).
+    </p>
+    <p>
+      if \(𝐀\) is not invertible, the augmented system may be inconsistent or may have free variables.
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      solve \(𝐀𝐁 = 𝐂\) where
+      \(
+      𝐀 = \begin{bmatrix}1 & 3\\ 1 & 4\end{bmatrix}
+      \)
+      and
+      \(
+      𝐂 = \begin{bmatrix}2 & 6\\ 3 & 6\end{bmatrix}
+      \).
+    </p>
+    <p>
+      augment \(𝐀\) with both columns of \(𝐂\) at once:
+      \[
+      \left[
+      \begin{array}{cc|cc}
+      1 & 3 & 2 & 6\\
+      1 & 4 & 3 & 6
+      \end{array}
+      \right]
+      \xrightarrow{\text{rref}}
+      \left[
+      \begin{array}{cc|cc}
+      1 & 0 & -1 & 6\\
+      0 & 1 & 1 & 0
+      \end{array}
+      \right]
+      \]
+      so
+      \(
+      𝐁 = \begin{bmatrix}-1 & 6\\ 1 & 0\end{bmatrix}
+      \).
+    </p>
     <h1 id="ch2-vectors-in-2-space-and-3-space">ch2 vectors in 2-space and 3-space</h1>
     <p>‘2-space’ just means \(ℝ²\) and ‘3-space’ just means \(ℝ³\)</p>
     <h2 id="2-1-vectors-in-the-plane">2.1 vectors in the plane</h2>
@@ -760,7 +806,7 @@
     </p>
     <p>
       the <b>projection</b> of \(𝐯\) in the direction of \(𝐮\) is the vector
-      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) 𝐮̂ = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖²}𝐮\)
+      \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) 𝐮̂ = \frac{𝐮 ⋅ 𝐯}{𝐮 ⋅ 𝐮}𝐮\)
     </p>
     <h3 id="cross-product">cross product</h3>
     <p>
@@ -1100,7 +1146,44 @@
       \right\}
       \]
     </p>
-    <p><mark><b>todo</b></mark></p>
+    <p>
+      rref of \([𝐀 | 𝟎]\) is
+      \[
+      \left[
+      \begin{array}{ccc|c}
+      1 & 0 & 1 & 0\\
+      0 & 1 & 1 & 0\\
+      0 & 0 & 0 & 0
+      \end{array}
+      \right]
+      \]
+      so \(x₁ = -x₃\) and \(x₂ = -x₃\) with \(x₃\) free. therefore
+      \[
+      \ker 𝐀 = \Sp\left\{\begin{bmatrix}-1\\ -1\\ 1\end{bmatrix}\right\}
+      \]
+    </p>
+    <p>
+      <b class="example">ex.</b>
+      find a basis for
+      \(
+      W = \left\{𝐱 ∈ ℝ⁴ \,\middle|\, x₄ = x₂,~ x₃ = x₁ + x₂\right\}
+      \)
+    </p>
+    <p>
+      every vector in \(W\) can be written as
+      \[
+      𝐱 = \begin{bmatrix}x₁\\ x₂\\ x₁ + x₂\\ x₂\end{bmatrix}
+      = x₁\begin{bmatrix}1\\ 0\\ 1\\ 0\end{bmatrix}
+      + x₂\begin{bmatrix}0\\ 1\\ 1\\ 1\end{bmatrix}
+      \]
+      so a basis is
+      \(
+      \left\{
+      \begin{bmatrix}1\\ 0\\ 1\\ 0\end{bmatrix},
+      \begin{bmatrix}0\\ 1\\ 1\\ 1\end{bmatrix}
+      \right\}
+      \)
+    </p>
     <h2 id="3-5-dimension">3.5 dimension</h2>
     <p>
       let \(W\) be a subspace of \(ℝⁿ\) and \(B = \left\{𝐛₁, …, 𝐛ₖ\right\}\) be a basis for \(W\).
@@ -1305,7 +1388,16 @@
       \begin{bmatrix}4 & -2\\ 6 & -3\end{bmatrix}𝐱 = 𝟎
       \]
     </p>
-    <p><mark><b>todo</b> finish</mark></p>
+    <p>
+      for \(λ = 1\): \(𝐀 - 𝐈₂ = \begin{bmatrix}4 & -2\\ 6 & -3\end{bmatrix}\) has rref
+      \(\begin{bmatrix}1 & -\frac12\\ 0 & 0\end{bmatrix}\), so \(x₁ = \frac12x₂\).
+      taking \(x₂ = 2\) gives the eigenvector \(\begin{bmatrix}1\\ 2\end{bmatrix}\).
+    </p>
+    <p>
+      for \(λ = 2\): \(𝐀 - 2𝐈₂ = \begin{bmatrix}3 & -2\\ 6 & -4\end{bmatrix}\) has rref
+      \(\begin{bmatrix}1 & -\frac23\\ 0 & 0\end{bmatrix}\), so \(x₁ = \frac23x₂\).
+      taking \(x₂ = 3\) gives the eigenvector \(\begin{bmatrix}2\\ 3\end{bmatrix}\).
+    </p>
     <h2 id="4-2-determinants-and-the-eigenvalue-problem">4.2 determinants and the eigenvalue problem</h2>
     <h3 id="for-3-3-matrices">for \(3 × 3\) matrices</h3>
     <p>
@@ -1353,7 +1445,7 @@
       <b class="example">ex.</b>
       find the characteristic polynomial and eigenvalues of \(𝐀 = \begin{bmatrix}1 & 5\\ 3 & 3\end{bmatrix}\)
     </p>
-    <p>\(p(t) = t² - 4t - 12 = (t + 2)(t - 6) = 0\) <mark><b>todo</b> why</mark></p>
+    <p>\(p(t) = \det(𝐀 - t𝐈₂) = (1 - t)(3 - t) - 15 = t² - 4t + 3 - 15 = t² - 4t - 12 = (t + 2)(t - 6) = 0\)</p>
     <p>so the eigenvalues are \(λ = -2\) or \(λ = 6\)</p>
     <p>properties:</p>
     <ul>
@@ -1424,7 +1516,29 @@
       <b class="example">ex.</b>
       show that \(𝐀 = \begin{bmatrix}5 & -6\\ 3 & -4\end{bmatrix}\) is diagonalizable
     </p>
-    <p><mark><b>todo</b></mark> finish</p>
+    <p>
+      characteristic polynomial:
+      \[
+      \det(𝐀 - λ𝐈₂) = (5 - λ)(-4 - λ) + 18 = λ² - λ - 2 = (λ - 2)(λ + 1) = 0
+      \]
+      so \(λ = 2\) or \(λ = -1\).
+    </p>
+    <p>
+      for \(λ = 2\): \(𝐀 - 2𝐈₂ = \begin{bmatrix}3 & -6\\ 3 & -6\end{bmatrix}\) → rref
+      \(\begin{bmatrix}1 & -2\\ 0 & 0\end{bmatrix}\), eigenvector \(\begin{bmatrix}2\\ 1\end{bmatrix}\)
+    </p>
+    <p>
+      for \(λ = -1\): \(𝐀 + 𝐈₂ = \begin{bmatrix}6 & -6\\ 3 & -3\end{bmatrix}\) → rref
+      \(\begin{bmatrix}1 & -1\\ 0 & 0\end{bmatrix}\), eigenvector \(\begin{bmatrix}1\\ 1\end{bmatrix}\)
+    </p>
+    <p>
+      since \(𝐀\) has two linearly independent eigenvectors, it's diagonalizable:
+      \[
+      𝐃 = \begin{bmatrix}2 & 0\\ 0 & -1\end{bmatrix},~~
+      𝐒 = \begin{bmatrix}2 & 1\\ 1 & 1\end{bmatrix},~~
+      𝐃 = 𝐒⁻¹𝐀𝐒
+      \]
+    </p>
     <p>
       if \(𝐃\) is diagonal and \(𝐀\) and \(𝐃\) are similar,
       so are \(𝐀ᵏ\) and \(𝐃ᵏ\) for \(k ∈ ℕ₁\) (and \(𝐀ᵏ\) is also diagonalizable)
@@ -1432,6 +1546,15 @@
     <p>
       <b class="example">ex.</b>
       compute \(𝐀¹⁵\) of the previous example
+    </p>
+    <p>
+      use \(𝐀¹⁵ = 𝐒𝐃¹⁵𝐒⁻¹\). since \(𝐒⁻¹ = \begin{bmatrix}1 & -1\\ -1 & 2\end{bmatrix}\),
+      \[
+      𝐀¹⁵ = \begin{bmatrix}2 & 1\\ 1 & 1\end{bmatrix}
+      \begin{bmatrix}2¹⁵ & 0\\ 0 & (-1)¹⁵\end{bmatrix}
+      \begin{bmatrix}1 & -1\\ -1 & 2\end{bmatrix}
+      = \begin{bmatrix}65537 & -65538\\ 32769 & -32770\end{bmatrix}
+      \]
     </p>
     <h3 id="orthogonal-matrices">orthogonal matrices</h3>
     <p>
@@ -1478,7 +1601,14 @@
       is it a vector space?
     </p>
     <p>this is isomorphic to \(ℝⁿ⁺¹\), which is definitely a vector space</p>
-    todo cancelation laws
+    <h3 id="cancellation-laws">cancellation laws</h3>
+    <p>in any vector space \(V\):</p>
+    <ul>
+      <li>if \(𝐮 + 𝐯 = 𝐮 + 𝐰\) then \(𝐯 = 𝐰\)</li>
+      <li>if \(𝐯 + 𝐮 = 𝐰 + 𝐮\) then \(𝐯 = 𝐰\)</li>
+      <li>if \(a𝐯 = a𝐰\) and \(a ≠ 0\) then \(𝐯 = 𝐰\)</li>
+      <li>if \(a𝐯 = b𝐯\) and \(𝐯 ≠ 𝟎\) then \(a = b\)</li>
+    </ul>
     <h2 id="5-3-subspaces">5.3 subspaces</h2>
     <p>
       if \(V\) and \(W\) are real vector spaces and \(W ⊂ V\), \(W\) is a <b>subspace</b> of \(V\)
@@ -1497,14 +1627,36 @@
       \]
       exhibit a spanning set for \(W\)
     </p>
-    <p><mark><b>todo</b> finish</mark></p>
+    <p>
+      the condition is \(a₂ = 3a₀ - a₁\), so
+      \[
+      p(x) = a₀ + a₁x + (3a₀ - a₁)x² = a₀(1 + 3x²) + a₁(x - x²).
+      \]
+      therefore a spanning set for \(W\) is \(\{1 + 3x²,\; x - x²\}\).
+      these are linearly independent, so they form a basis
+    </p>
     <h2 id="5-4-linear-independence-bases-coordinates">5.4 linear independence, bases, coordinates</h2>
-    <p><mark><b>todo</b> generalise everything from ch3</mark></p>
-    <p>the coords for \(𝐯\) wrt a basis \(B\) are denoted \([𝐯]_B\)</p>
+    <p>very quick ch3 generalization:</p>
+    <ul>
+      <li>
+        a set \(\{𝐯₁, …, 𝐯ₖ\} ⊂ V\) is <b class="defn">linearly independent</b> if
+        \(c₁𝐯₁ + ⋯ + cₖ𝐯ₖ = 𝟎_V\) implies all \(cᵢ = 0\)
+      </li>
+      <li>it <b class="defn">spans</b> \(V\) if every vector in \(V\) is a linear combination of the \(𝐯ᵢ\)</li>
+      <li>a <b class="defn">basis</b> is a linearly independent spanning set</li>
+      <li>
+        <span style="color:var(--yellow-intense)">(new!)</span>
+        every vector \(𝐯 ∈ V\) has a unique coordinate representation \(𝐯 = x₁𝐛₁ + ⋯ + xₙ𝐛ₙ\) wrt a basis
+        \(B = \{𝐛₁,…,𝐛ₙ\}\);
+        the scalars \(xᵢ\) are the <b class="defn">coordinates</b> which we can put a vector called \([𝐯]_B\)
+      </li>
+      <li>all bases for \(V\) have the same cardinality, called the <b class="defn">dimension</b> of \(V\)</li>
+    </ul>
     <h2 id="5-5-dimension">5.5 dimension</h2>
     <p>
       \(\dim V = p\) means \(V\)'s basis \(B\) has \(p\) vectors in it.
       any set of \(p\) linearly independent vectors in \(V\) is a basis for \(V\).
+    </p>
     <p>
       if \(V\) doesn't have a finite amount of vectors in its basis, it is <b>infinite dimensional</b>
     </p>
@@ -1538,6 +1690,10 @@
       \[x₁𝐄₁ + x₂𝐄₂ + x₃𝐄₃ = \begin{bmatrix}0 & 0\\ 0 & 0\end{bmatrix} ⇔ x₁ = x₂ = x₃ = 0\]
       yes :3 so it's a basis and \(\dim W = 3\)
     </p>
+    <p>
+      in general, if a subspace of an \(n\)-dimensional space is defined by \(k\) independent linear constraints,
+      its dimension is \(n - k\).
+    </p>
     <h2 id="5-7-linear-transformations-from-ℝⁿ-to-ℝᵐ">5.7 linear transformations from \(ℝⁿ\) to \(ℝᵐ\)</h2>
     <p>
       a function \(T : V → W\) is called a <b>linear transformation</b> if for all vectors \(𝐮, 𝐯 ∈ V\),
@@ -1554,7 +1710,19 @@
       is \(F : \begin{bmatrix}x₁\\ x₂\\ x₃\end{bmatrix} ↦ \begin{bmatrix}x₁ - x₂\\ x₂ + x₃\end{bmatrix}\)
       a linear transformation?
     </p>
-    todo null space and range of transformation 
+    <p>
+      for a linear transformation \(T : V → W\), its <b>null space</b> / <b>kernel</b> is
+      \[
+      \ker T = \left\{𝐯 ∈ V \,\middle|\, T(𝐯) = 𝟎_W\right\}
+      \]
+      and its <b>range</b>/<b>image</b> is
+      \[
+      \im T = \left\{T(𝐯) \,\middle|\, 𝐯 ∈ V\right\}.
+      \]
+      both are subspaces (of \(V\) and \(W\) respectively).
+      if \(V\) is finite-dimensional, the <b>rank-nullity theorem</b> gives
+      \(\dim V = \underbrace{\dim \im T}_{\text{rank}} + \underbrace{\dim \ker T}_{\text{nullity}}\).
+    </p>
     <h2 id="5-8-operations-with-linear-transformations">5.8 operations with linear transformations</h2>
     <p>you can add or compose two linear transformations to get another one</p>
     <p>
@@ -1585,7 +1753,30 @@
       \]
       find the matrix representation of \(T\) wrt the natural bases for \(U\) and \(𝒫₂\)
     </p>
-    <p><mark><b>todo</b> finish</mark></p>
+    <p>
+      using the natural bases \(B = \left\{
+      \begin{bmatrix}1&0\\0&0\end{bmatrix},
+      \begin{bmatrix}0&1\\0&0\end{bmatrix},
+      \begin{bmatrix}0&0\\1&0\end{bmatrix},
+      \begin{bmatrix}0&0\\0&1\end{bmatrix}
+      \right\}\) for \(U\) and \(C = \{1, x, x²\}\) for \(𝒫₂\):
+      \[
+      \begin{align*}
+      T\left(\begin{bmatrix}1&0\\0&0\end{bmatrix}\right) &= 1 + x,\\
+      T\left(\begin{bmatrix}0&1\\0&0\end{bmatrix}\right) &= 2x + x²,\\
+      T\left(\begin{bmatrix}0&0\\1&0\end{bmatrix}\right) &= -3x²,\\
+      T\left(\begin{bmatrix}0&0\\0&1\end{bmatrix}\right) &= -1.
+      \end{align*}
+      \]
+      so the matrix representation is
+      \[
+      𝐐 = \begin{bmatrix}
+      1 & 0 & 0 & -1\\
+      1 & 2 & 0 & 0\\
+      0 & 1 & -3 & 0
+      \end{bmatrix}
+      \]
+    </p>
     <h2 id="5-10-diagonalizable-transformations">5.10 diagonalizable transformations</h2>
     <p>
       a transformation is <b>diagonalizable</b> if its matrix representation is a diagonalizable matrix
