@@ -90,7 +90,7 @@ fn needs_highlighting(attrs: &str, stripped_content: &str) -> bool {
     true
 }
 
-fn content_hash(s: &str) -> String {
+pub fn content_hash(s: &str) -> String {
     let mut h = FxHasher::default();
     h.write(s.as_bytes());
     format!("{:016x}", h.finish())
@@ -104,7 +104,7 @@ fn id_matches_hash(id: &str, hash_hex: &str) -> bool {
             .is_some_and(|suffix| !suffix.is_empty() && suffix.bytes().all(|b| b.is_ascii_digit()))
 }
 
-fn dedup_id(hash_hex: &str, used: &mut HashSet<String>) -> String {
+pub fn dedup_id(hash_hex: &str, used: &mut HashSet<String>) -> String {
     let base = format!("hl-{hash_hex}");
     if used.insert(base.clone()) {
         return base;
@@ -119,20 +119,14 @@ fn dedup_id(hash_hex: &str, used: &mut HashSet<String>) -> String {
     }
 }
 
-pub fn apply_spans(
-    element: &Element,
-    spans: &[FinishedSpan],
-    used_ids: &mut HashSet<String>,
-) -> (String, String) {
+pub fn apply_spans(element: &Element, spans: &[FinishedSpan], id: &str) -> (String, String) {
     let tag = match element.kind {
         ElementKind::Pre => "pre",
         ElementKind::Code => "code",
     };
-    let hash_hex = content_hash(&element.stripped_content);
-    let id = dedup_id(&hash_hex, used_ids);
-    let attrs = set_id(&element.attrs, &id);
+    let attrs = set_id(&element.attrs, id);
     let tokens = build_tokens(&element.stripped_content, spans);
-    let js = tokens_to_js(&id, &tokens);
+    let js = tokens_to_js(id, &tokens);
     let encoded = entities::encode_basic(&element.stripped_content);
     let body = if element.content.starts_with('\n') { format!("\n{encoded}") } else { encoded };
     (format!("<{tag}{attrs}>{body}</{tag}>"), js)
@@ -187,6 +181,7 @@ fn js_string_literal(s: &str) -> String {
             '\n' => out.push_str(r"\n"),
             '\r' => out.push_str(r"\r"),
             '<' => out.push_str(r"\u003c"),
+            '&' => out.push_str(r"\u0026"),
             _ => out.push(c),
         }
     }

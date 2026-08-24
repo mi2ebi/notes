@@ -193,7 +193,7 @@ fn build_nav(entries: &[Entry]) -> String {
 fn line_indent(html: &str, pos: usize) -> &str {
     let line_start = html[.. pos].rfind('\n').map_or(0, |i| i + 1);
     let prefix = &html[line_start .. pos];
-    if prefix.chars().all(|c| c == ' ' || c == '\t') { prefix } else { "" }
+    if prefix.chars().all(|c| c == ' ') { prefix } else { "" }
 }
 
 fn indent_lines(text: &str, prefix: &str) -> String {
@@ -222,7 +222,12 @@ pub fn process(html: &str) -> String {
     assign_slugs(&mut entries);
     let nav = indent_lines(&build_nav(&entries), base_indent);
     let mut edits: Vec<(usize, usize, String)> = Vec::new();
-    edits.push((toc_m.start(), toc_m.end(), format!("<!-- toc here -->\n{nav}")));
+    let replacement = if nav.is_empty() {
+        "<!-- toc here -->".to_string()
+    } else {
+        format!("<!-- toc here -->\n{nav}")
+    };
+    edits.push((toc_m.start(), toc_m.end(), replacement));
     for e in &entries {
         if e.fake || e.nolink {
             continue;

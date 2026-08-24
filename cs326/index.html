@@ -4,10 +4,106 @@
     <title>cs 326</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+     pre[data-lang]::before {
+       content: attr(data-lang);
+       width: fit-content;
+       font-family: var(--sans);
+       color: var(--fg-alt);
+       background: var(--bg-inactive);
+       padding: 0.2em 0.4em;
+       margin-bottom: 0.2em;
+       display: block;
+     }
+    </style>
+    <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
     <h1 class="h0">cs 326</h1>
     <!-- toc here -->
+    <nav class="toc">
+      <ul class="tight">
+        <li><a href="#202-recap-intro">202 recap / intro</a></li>
+      </ul>
+    </nav>
+    <h1 id="202-recap-intro">202 recap / intro</h1>
+    <p>consider this c++</p>
+    <pre data-lang="c++" id="hl-2687e65b437c52bb">
+int x = 10;
+x += ++x + x++;</pre>
+    <p>what's the value of <code id="hl-fda84126a9551e2b">x</code> after?</p>
+    <p>no one in class could tell if it was 31 or 32 or 35 or... this is very bad! why can't we agree?</p>
+    <p><del>are we all secretly bad at c++ and don't wanna admit it?</del></p>
+    <p>
+      well we know that in a <code id="hl-699e2564aed3fdd5">for</code> loop,
+      <code id="hl-2183b2edacf864a8">++i</code> is more efficient than <code id="hl-95c27c2228318fb2">i++</code>. but
+      again why? (answer: because the pre-increment is evaluted immediately, whereas the post-increment creates a
+      temporary variable before incrementing)
+    </p>
+    <p>
+      also these days we have stupidly good compilers that are great at optimizing things so now it doesn't matter
+      that much which one you use <u>in your loops</u>. everywhere else they still behave noticeably differently!
+    </p>
+    <p>
+      if we have that↑ example in c++, on my laptop<span style="color:var(--cyan);">*</span> it's 34. (and
+      <code id="hl-b5b2a083243cf02d">clang-repl</code> also emits a
+      <code id="hl-a6901f2b1e893700">-Wunsequenced</code>). on <i>your</i> laptop, idk what compiler you have but it
+      might give something else! because it's <dfn>undefined behavior</dfn>
+    </p>
+    <p style="color:var(--cyan);">
+      *whenever i say "on my laptop" <abbr title="or similar"><i>vel sim.</i></abbr> for c++ it means "with clang
+      22.1.8"
+    </p>
+    <p>and in java, it's 33! always! because the language specification says so</p>
+    <dl>
+      <dt>imperative language</dt>
+      <dd>you tell it <i>how</i> to do things, the steps</dd>
+      <dt>declarative language</dt>
+      <dd>you tell it <i>what</i> to do, the intent</dd>
+    </dl>
+    <pre data-lang="c++" id="hl-52c03f8a4f4be009">
+#include &lt;iostream>
+using namespace std;
+const int x = 19;
+cout << x << endl;
+// x = 10; &lt;- illegal, x is const
+int *p = (int *)&amp;x;
+*p = 100;
+cout << p << ", " << *p << endl;
+cout << &amp;x << ", " << x << endl;</pre>
+    <p>for me it segfaults. but cisneros gets</p>
+    <pre data-lang="output" id="hl-53ecdfb5dda459ff">
+19
+0x50528c, 100
+0x50528c, 19</pre>
+    <p>uh oh!</p>
+    <p>what about this?</p>
+    <pre data-lang="c++" id="hl-ad9d37a26adca5f5">
+int *foo() {
+  int x = 100;
+  return &amp;x;
+}
+int main() {
+  int *y = foo(); // what does this point to?
+}</pre>
+    <p>
+      <code id="hl-0c28803940249936">y</code> is a dangling pointer! because
+      <code id="hl-c49d0bdb88e78ff2">foo</code>'s stack frame is gone
+    </p>
+    <script>
+     color("hl-2687e65b437c52bb", [["int", "type"],[" ", null],["x", "variable"],[" = 10;\nx += ++x + x++;", null]]);
+     color("hl-fda84126a9551e2b", [["x", null]]);
+     color("hl-699e2564aed3fdd5", [["for", "keyword"]]);
+     color("hl-2183b2edacf864a8", [["++i", null]]);
+     color("hl-95c27c2228318fb2", [["i++", null]]);
+     color("hl-b5b2a083243cf02d", [["clang-repl", null]]);
+     color("hl-a6901f2b1e893700", [["-Wunsequenced", null]]);
+     color("hl-52c03f8a4f4be009", [["#include", "preprocessor"],[" ", null],["\u003ciostream>", "string"],["\n", null],["using", "keyword"],[" ", null],["namespace", "keyword"],[" std;\n", null],["const", "keyword"],[" ", null],["int", "type"],[" ", null],["x", "variable"],[" = 19;\ncout \u003c\u003c x \u003c\u003c endl;\n", null],["// x = 10; \u003c- illegal, x is const", "comment"],["\n", null],["int", "type"],[" *", null],["p", "variable"],[" = ", null],["(", "rainbow0"],["int", "type"],[" *", null],[")", "rainbow0"],["\u0026x;\n*p = 100;\ncout \u003c\u003c p \u003c\u003c ", null],["\", \"", "string"],[" \u003c\u003c *p \u003c\u003c endl;\ncout \u003c\u003c \u0026x \u003c\u003c ", null],["\", \"", "string"],[" \u003c\u003c x \u003c\u003c endl;", null]]);
+     color("hl-53ecdfb5dda459ff", [["19\n0x50528c, 100\n0x50528c, 19", null]]);
+     color("hl-ad9d37a26adca5f5", [["int", "type"],[" *", null],["foo", "function"],["(", "rainbow0"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" ", null],["x", "variable"],[" = 100;\n  ", null],["return", "keyword"],[" \u0026x;\n", null],["}", "rainbow0"],["\n", null],["int", "type"],[" ", null],["main", "function"],["(", "rainbow0"],[")", "rainbow0"],[" ", null],["{", "rainbow0"],["\n  ", null],["int", "type"],[" *", null],["y", "variable"],[" = foo(); ", null],["// what does this point to?", "comment"],["\n", null],["}", "rainbow0"]]);
+     color("hl-0c28803940249936", [["y", null]]);
+     color("hl-c49d0bdb88e78ff2", [["foo", null]]);
+    </script>
   </body>
 </html>

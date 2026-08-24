@@ -27,7 +27,6 @@ pub struct FinishedSpan {
 }
 
 pub struct Session<'a> {
-    pub content: String,
     pub chars: Vec<char>,
     pub spans: Vec<Span>,
     pub current: usize,
@@ -38,7 +37,7 @@ impl<'a> Session<'a> {
     pub fn new(content: &str, suggestions: &'a mut HashMap<Vec<char>, &'static ClassInfo>) -> Self {
         let chars = content.chars().collect::<Vec<_>>();
         let spans = if chars.is_empty() { vec![] } else { vec![Span::new(0)] };
-        Self { content: content.to_string(), chars, spans, current: 0, suggestions }
+        Self { chars, spans, current: 0, suggestions }
     }
 
     pub fn cursor(&self) -> usize { self.spans[self.current].end }

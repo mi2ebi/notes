@@ -117,26 +117,26 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
 pub static STRUCTURAL: phf::Set<&str> =
     phf_set!["&shy;", "&ensp;", "&emsp;", "&thinsp;", "&lt;", "&gt;", "&amp;"];
 
-static LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/!])").unwrap());
-static AMP_RE: LazyLock<FancyRegex> =
+static DECODE_LT_RE: LazyLock<FancyRegex> =
+    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/!-])").unwrap());
+static DECODE_AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&amp;(?![a-zA-Z0-9#])").unwrap());
-static RAW_LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("<(?=[a-zA-Z0-9/!])").unwrap());
-static RAW_AMP_RE: LazyLock<FancyRegex> =
+static ENCODE_LT_RE: LazyLock<FancyRegex> =
+    LazyLock::new(|| FancyRegex::new("<(?=[a-zA-Z0-9/!-])").unwrap());
+static ENCODE_AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&(?=[a-zA-Z0-9#])").unwrap());
 
 static ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&[a-zA-Z]+;").unwrap());
 
 pub fn decode_basic(text: &str) -> String {
     let text = text.replace("&gt;", ">");
-    let text = LT_RE.replace_all(&text, "<");
-    AMP_RE.replace_all(&text, "&").into_owned()
+    let text = DECODE_LT_RE.replace_all(&text, "<");
+    DECODE_AMP_RE.replace_all(&text, "&").into_owned()
 }
 
 pub fn encode_basic(text: &str) -> String {
-    let text = RAW_AMP_RE.replace_all(text, "&amp;");
-    RAW_LT_RE.replace_all(&text, "&lt;").into_owned()
+    let text = ENCODE_AMP_RE.replace_all(text, "&amp;");
+    ENCODE_LT_RE.replace_all(&text, "&lt;").into_owned()
 }
 
 pub fn decode_basic_unconditional(text: &str) -> String {

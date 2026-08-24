@@ -50,7 +50,3 @@ pub fn by_key(key: char) -> Option<&'static ClassInfo> { CLASSES.iter().find(|c|
 pub fn rainbow_by_key(key: char) -> Option<&'static ClassInfo> {
     RAINBOW.iter().find(|c| c.key == key)
 }
-
-pub fn by_name(name: &str) -> Option<&'static ClassInfo> {
-    CLASSES.iter().chain(RAINBOW).find(|c| c.name == name)
-}
