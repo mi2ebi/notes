@@ -8,9 +8,6 @@
      .example {
        color: var(--magenta-warmer);
      }
-     dt, p > b, b.defn {
-       color: var(--magenta-cooler);
-     }
     </style>
   </head>
   <body>
@@ -201,7 +198,7 @@
       <li>there aren't any solutions (parallel)</li>
       <li>there are infinitely many solutions (exact same line)</li>
     </ul>
-    <p>a system is <b>consistent</b> if it has at least one solution and <b>inconsistent</b> if not</p>
+    <p>a system is <dfn>consistent</dfn> if it has at least one solution and <dfn>inconsistent</dfn> if not</p>
     <p>our goal is to write a system as something like \(ax = b\)</p>
     <dl>
       <dt>matrix</dt>
@@ -251,20 +248,20 @@
       \]
     </p>
     <p>
-      the matrix just on the left of the line is the <b>coefficient matrix</b>. together with the other side it's an
-      <b>augmented matrix</b>
+      the matrix just on the left of the line is the <dfn>coefficient matrix</dfn>. together with the other side it's
+      an <dfn>augmented matrix</dfn>
     </p>
     <p>
-      we want to rewrite the matrices so it's easy for us to solve. we'll need some <b>row operations</b> to use on
-      augmented matrices
+      we want to rewrite the matrices so it's easy for us to solve. we'll need some <dfn>row operations</dfn> to use
+      on augmented matrices
     </p>
     <ol>
-      <li><b>\(Rᵢ ↔ Rⱼ\)</b> interchange two rows</li>
-      <li><b>\(kRᵢ\)</b> multiply a row by a nonzero scalar (real number)</li>
-      <li><b>\(Rᵢ + kRⱼ\)</b> add a constant multiple of row \(j\) to row \(i\)</li>
+      <li><dfn>\(Rᵢ ↔ Rⱼ\)</dfn> interchange two rows</li>
+      <li><dfn>\(kRᵢ\)</dfn> multiply a row by a nonzero scalar (real number)</li>
+      <li><dfn>\(Rᵢ + kRⱼ\)</dfn> add a constant multiple of row \(j\) to row \(i\)</li>
     </ol>
     <h2 id="1-2-echelon-form-gauss-jordan-elimination">1.2 echelon form & gauss-jordan elimination</h2>
-    <p>an \((m × n)\) matrix is in <b>echelon form</b> if</p>
+    <p>an \((m × n)\) matrix is in <dfn>echelon form</dfn> if</p>
     <ol>
       <li>all rows consisting entirely of zeros are grouped together at the bottom of the matrix</li>
       <li>if every nonzero row, the leftmost nonzero entry is 1</li>
@@ -279,8 +276,8 @@
       given matrix
     </p>
     <p>
-      a matrix is in <b>reduced echelon form</b> if it's in echelon form <i>and</i> each column contiaining a leading
-      1 has zeros in all entries above that 1. <b class="example">eg</b>
+      a matrix is in <dfn>reduced echelon form</dfn> if it's in echelon form <i>and</i> each column contiaining a
+      leading 1 has zeros in all entries above that 1. <b class="example">eg</b>
       \[
       \left[
       \begin{array}{ccc|c}
@@ -365,7 +362,7 @@
     </p>
     <h3 id="vectors-in-ℝⁿ">vectors in \(ℝⁿ\)</h3>
     <p>
-      a <b>vector in \(ℝⁿ\)</b> is of the form
+      a <dfn>vector in \(ℝⁿ\)</dfn> is of the form
       \[
       𝐱 = \begin{bmatrix} x₁\\ x₂\\ ⋮\\ xₙ \end{bmatrix}
       \]
@@ -504,7 +501,7 @@
     <p>
       if \(𝐀\) is an \(m × n\) matrix, \(𝐀^⊤\) is an \(n × m\) matrix with entries \((𝐀^⊤)ᵢⱼ = aⱼᵢ\)
     </p>
-    <p>\(𝐀\) is <b>symmetric</b> if \(𝐀 = 𝐀^⊤\)</p>
+    <p>\(𝐀\) is <dfn>symmetric</dfn> if \(𝐀 = 𝐀^⊤\)</p>
     <p>properties of transpose:</p>
     <ul>
       <li>\((𝐀 + 𝐁)^⊤ = 𝐀^⊤ + 𝐁^⊤\)</li>
@@ -564,16 +561,15 @@
       so the only solution is \(x₁ = x₂ = 0\)
     </p>
     <p>
-      a set of vectors \(𝐀₁, 𝐀₂, …, 𝐀ₙ ∈ ℝᵐ\) is <b>linearly independent</b> if the only solution to the equation
+      a set of vectors \(𝐀₁, 𝐀₂, …, 𝐀ₙ ∈ ℝᵐ\) is <dfn>linearly independent</dfn> if the only solution to the equation
       \[x₁𝐀₁ + x₂𝐀₂ + ⋯ + xₙ𝐀ₙ = 𝟎\]
       is
       \[x₁ = x₂ = ⋯ = xₙ = 0\]
     </p>
-    <p>otherwise they're <b>linearly dependent</b></p>
+    <p>otherwise they're <dfn>linearly dependent</dfn></p>
     <h3 id="unit-vectors">unit vectors</h3>
     <p>
-      a <b>unit vector</b> is a vector with length 1.
-      the unit vectors in \(ℝⁿ\) are
+      a <dfn>unit vector</dfn> is a vector with length 1. the unit vectors in \(ℝⁿ\) are
       \[
       𝐞₁ = \begin{bmatrix} 1\\ 0\\ ⋮\\ 0 \end{bmatrix},
       𝐞₂ = \begin{bmatrix} 0\\ 1\\ ⋮\\ 0 \end{bmatrix},
@@ -585,14 +581,12 @@
     <p>any vector \(𝐱\) can be written as \(x₁𝐞₁ + x₂𝐞₂ + ⋯ + xₙ𝐞ₙ\)</p>
     <h3 id="nonsingular-matrices">nonsingular matrices</h3>
     <p>
-      an \(n × n\) matrix is <b>nonsingular</b> if its column vectors are linearly independent. otherwise it's
-      <b>singular</b>
+      an \(n × n\) matrix is <dfn>nonsingular</dfn> if its column vectors are linearly independent. otherwise it's
+      <dfn>singular</dfn>
     </p>
     <p>if you can RREF it into being an identity matrix, it's nonsingular</p>
     <p>
-      if \(𝐀\) is a square matrix and \(𝐛 ∈ ℝⁿ\), \(𝐀\) is nonsingular if
-      \[𝐀𝐱 = 𝐛\]
-      has exactly one solution
+      if \(𝐀\) is a square matrix and \(𝐛 ∈ ℝⁿ\), \(𝐀\) is nonsingular if \[𝐀𝐱 = 𝐛\] has exactly one solution
     </p>
     <p>
       if \(𝐀\) is nonsingular, so is \(𝐀^⊤\). this means \(𝐀\) is also nonsingular if its <i>row</i>
@@ -601,8 +595,8 @@
     <h2 id="1-9-matrix-inverses-and-their-properties">1.9 matrix inverses and their properties</h2>
     <p>we can solve \(ax = b\) by doing \(x = a⁻¹b\). can we do the same for matrices?</p>
     <p>
-      a square nonsingular matrix \(𝐀\) is <b>invertible</b> if we can find another square matrix \(𝐏 ≕ 𝐀⁻¹\) such
-      that
+      a square nonsingular matrix \(𝐀\) is <dfn>invertible</dfn> if we can find another square matrix \(𝐏 ≕ 𝐀⁻¹\)
+      such that
       \[𝐀⁻¹𝐀 = 𝐀𝐀⁻¹ = 𝐈\]
     </p>
     <p>all nonsingular matrices are invertible and vice versa. they mean the same thing</p>
@@ -643,7 +637,7 @@
     </ul>
     <h3 id="determinant-of-2-2-matrix">determinant of \(2 × 2\) matrix</h3>
     <p>
-      let \(𝐀 = \begin{bmatrix} a & b\\ c & d \end{bmatrix}\). the <b>determinant</b> of \(𝐀\) is defined as
+      let \(𝐀 = \begin{bmatrix} a & b\\ c & d \end{bmatrix}\). the <dfn>determinant</dfn> of \(𝐀\) is defined as
       \(Δ = \det 𝐀 =  ad - bc\)
     </p>
     <p>
@@ -700,21 +694,22 @@
     <p>‘2-space’ just means \(ℝ²\) and ‘3-space’ just means \(ℝ³\)</p>
     <h2 id="2-1-vectors-in-the-plane">2.1 vectors in the plane</h2>
     <p>
-      <b>physical vectors</b> are used to characterize stuff that has both a magnitude/length and a direction.
-      a <b>geometric vector</b> is a directed line segment.
-      when we just care about the components we call it an <b>algebraic vector</b>
+      <dfn>physical vectors</dfn> are used to characterize stuff that has both a magnitude/length and a direction.
+      a <dfn>geometric vector</dfn> is a directed line segment.
+      when we just care about the components we call it an <dfn>algebraic vector</dfn>
     </p>
     <h3 id="geometric-vectors">geometric vectors</h3>
     <p>
       suppose \(A = (a₁, a₂)\) and \(B = (b₁, b₂)\) are points. the directed line segment from \(A\) to \(B\)
-      is called \(\overrightarrow{AB}\). \(A\) is the <b>initial point</b> and \(B\) is the <b>terminal point</b>
+      is called \(\overrightarrow{AB}\). \(A\) is the <dfn>initial point</dfn> and \(B\) is the
+      <dfn>terminal point</dfn>
     </p>
     <p>the magnitude of the vector, \(\left‖\overrightarrow{AB}\right‖\), is \(\sqrt{(b₂ - a₂)² + (b₁ - a₁)²}\)</p>
     <p>two geometric vectors are equal if they have the same magnitude and the same direction</p>
     <p>
-      the <b>position vector</b> of a certain vector \(\overrightarrow{AB}\) is the vector \(\overrightarrow{OP}\)
-      that equals \(\overrightarrow{AB}\) but starts at the origin. \(P = (b₁ - a₁, b₂ - a₂)\), and the components
-      of both vectors are \(⟨b₁ - a₁, b₂ - a₂⟩\)
+      the <dfn>position vector</dfn> of a certain vector \(\overrightarrow{AB}\) is the vector
+      \(\overrightarrow{OP}\) that equals \(\overrightarrow{AB}\) but starts at the origin.
+      \(P = (b₁ - a₁, b₂ - a₂)\), and the components of both vectors are \(⟨b₁ - a₁, b₂ - a₂⟩\)
     </p>
     <h3 id="algebraic-vectors-operations-on-vectors">algebraic vectors, operations on vectors</h3>
     <p>
@@ -743,7 +738,7 @@
     </p>
     <h2 id="2-2-vectors-in-space">2.2 vectors in space</h2>
     <p>
-      we have three orthogonal axes \(x\), \(y\), \(z\). positive \(z\) is up (<b>right-hand rule</b>)
+      we have three orthogonal axes \(x\), \(y\), \(z\). positive \(z\) is up (<dfn>right-hand rule</dfn>)
       as opposed to down (left-hand rule)
     </p>
     <p>the plane containing the \(x\) and \(y\) axes is called the \(xy\)-plane etc</p>
@@ -763,7 +758,7 @@
     <h2 id="2-3-dot-product-and-cross-product">2.3 dot product and cross product</h2>
     <h3 id="dot-product">dot product</h3>
     <p>
-      the <b>dot product</b> of two vectors is
+      the <dfn>dot product</dfn> of two vectors is
       \[
       𝐮 ⋅ 𝐯 = u₁v₁ + u₂v₂ + ⋯ + uₙvₙ
       \]
@@ -801,11 +796,11 @@
       \)
     </p>
     <p>
-      the <b>component</b> of \(𝐯\) in the direction of \(𝐮\) is
+      the <dfn>component</dfn> of \(𝐯\) in the direction of \(𝐮\) is
       \(\comp_𝐮(𝐯) = \frac{𝐮 ⋅ 𝐯}{\left‖𝐮\right‖}\)
     </p>
     <p>
-      the <b>projection</b> of \(𝐯\) in the direction of \(𝐮\) is the vector
+      the <dfn>projection</dfn> of \(𝐯\) in the direction of \(𝐮\) is the vector
       \(\proj_𝐮(𝐯) = \comp_𝐮(𝐯) 𝐮̂ = \frac{𝐮 ⋅ 𝐯}{𝐮 ⋅ 𝐮}𝐮\)
     </p>
     <h3 id="cross-product">cross product</h3>
@@ -813,14 +808,14 @@
       suppose we want to find a vector in 3-space orthogonal to both \(𝐮\) and \(𝐯\).
     </p>
     <p>
-      their <b>cross product</b> is a new vector, namely
+      their <dfn>cross product</dfn> is a new vector, namely
       \[
       𝐮 × 𝐯 = \begin{bmatrix}u₂v₃ - u₃v₂\\ u₃v₁ - u₁v₃\\ u₁v₂ - u₂v₁\end{bmatrix}
       \]
     </p>
     <p>properties of cross product:</p>
     <ul>
-      <li><b class="defn">anticommutative</b> i.e. \(𝐮 × 𝐯 = -𝐯 × 𝐮\)</li>
+      <li><dfn>anticommutative</dfn> i.e. \(𝐮 × 𝐯 = -𝐯 × 𝐮\)</li>
       <li>distributive over vector addition: \(𝐮 × (𝐯 + 𝐰) = 𝐮 × 𝐯 + 𝐮 × 𝐰\)</li>
       <li>\(𝐮\) and \(𝐯\) are parallel if their cross product is \(𝟎\)</li>
       <li>\(c𝐮 × 𝐯 = 𝐮 × c𝐯 = c(𝐮 × 𝐯)\)</li>
@@ -844,7 +839,7 @@
       there is a unique real number \(t\) <abbr title="such that">s.t.</abbr> \(\overrightarrow{AP} = t𝐮\).
       in particular,
       \[\overrightarrow{OP} = \overrightarrow{OA} + \overrightarrow{AP} = \overrightarrow{OA} + t𝐮\]
-      this is the <b>vector equation of a line</b>
+      this is the <dfn>vector equation of a line</dfn>
     </p>
     <p>
       since \(\overrightarrow{OP} = \left⟨x, y\right⟩\) and \(\overrightarrow{OA} = \left⟨x₀, y₀\right⟩\),
@@ -856,13 +851,13 @@
       \end{align*}
       \right.
       \]
-      this is the <b>parametric equation</b>
+      this is the <dfn>parametric equation</dfn>
     </p>
     <h3 id="lines-in-space">lines in space</h3>
     <p>same deal just with three axes</p>
     <h3 id="planes-in-space">planes in space</h3>
     <p>
-      a plane \(𝒫\) is determined by a point \(A\) and a <b>normal vector</b> \(𝐧\) orthogonal
+      a plane \(𝒫\) is determined by a point \(A\) and a <dfn>normal vector</dfn> \(𝐧\) orthogonal
       to the entire plane
     </p>
     <p>
@@ -870,7 +865,7 @@
       exactly when \(\overrightarrow{AP}\) lies in the plane too, i.e. when it's orthogonal to \(𝐧\):
       \[𝐧 ⋅ \overrightarrow{AP} = 0\]
       writing \(\overrightarrow{AP} = ⟨x - x₀, y - y₀, z - z₀⟩\) and expanding the dot product gives the
-      <b>scalar equation of the plane</b>
+      <dfn>scalar equation of the plane</dfn>
       \[a(x - x₀) + b(y - y₀) + c(z - z₀) = 0\]
       (which can be regrouped into the form \(ax + by + cz = d\))
     </p>
@@ -899,8 +894,8 @@
     <p>\(W\) is a subspace iff:</p>
     <ul>
       <li>the zero vector \(𝟎 ∈ W\)</li>
-      <li><b class="defn">closed under addition</b>: \(𝐮 + 𝐯 ∈ W\) if \(𝐮, 𝐯 ∈ W\)</li>
-      <li><b class="defn">closed under scalar multiplication</b>: \(a𝐮 ∈ W\) if \(a ∈ ℝ\) and \(𝐮 ∈ W\)</li>
+      <li><dfn>closed under addition</dfn>: \(𝐮 + 𝐯 ∈ W\) if \(𝐮, 𝐯 ∈ W\)</li>
+      <li><dfn>closed under scalar multiplication</dfn>: \(a𝐮 ∈ W\) if \(a ∈ ℝ\) and \(𝐮 ∈ W\)</li>
     </ul>
     <p>
       <b class="example">ex.</b>
@@ -935,7 +930,7 @@
       any vector that can be written as \[
       𝐮 = c₁𝐮₁ + ⋯ + cₖ𝐮ₖ
       \]
-      where all \(cᵢ ∈ ℝ\) is called a <b>linear combination</b> of the \(𝐮ᵢ\) vectors
+      where all \(cᵢ ∈ ℝ\) is called a <dfn>linear combination</dfn> of the \(𝐮ᵢ\) vectors
     </p>
     <p>
       <b class="example">ex.</b>
@@ -972,7 +967,7 @@
     <p>\(𝐮 = \frac12𝐚 - \frac52𝐛\)</p>
     <p style="height: 0; margin: 0; visibility: hidden;">\(\gdef\Sp{\operatorname{Sp}}\)</p>
     <p>
-      the <b>span</b> of a set \(S = \{𝐮₁, …, 𝐮ₖ\}\) is the set of all linear combinations of its vectors:
+      the <dfn>span</dfn> of a set \(S = \{𝐮₁, …, 𝐮ₖ\}\) is the set of all linear combinations of its vectors:
       \[
       \Sp\{S\} = \left\{c₁𝐮₁ + ⋯ + cₖ𝐮ₖ \,\middle|\, c₁, …, cₖ ∈ ℝ\right\}
       \]
@@ -984,7 +979,7 @@
     <p>the span of any set of vectors in \(ℝⁿ\) is a subspace of \(ℝⁿ\)</p>
     <h3 id="null-space-kernel">null space / kernel</h3>
     <p>
-      given an \(m × n\) matrix \(𝐀\), the <b>null space</b> or <b>kernel</b> of \(𝐀\), denoted
+      given an \(m × n\) matrix \(𝐀\), the <dfn>null space</dfn> or <dfn>kernel</dfn> of \(𝐀\), denoted
       \(𝒩(𝐀)\) or \(\ker 𝐀\), is the set
       \[
       \left\{𝐮 ∈ ℝⁿ \,\middle|\, 𝐀𝐮 = 𝟎\right\}
@@ -1024,20 +1019,20 @@
       so the product \(𝐀𝐮\) is exactly a linear combination of the columns of \(𝐀\)
     </p>
     <p>
-      the <b>range</b> or <b>column space</b> or <b>image</b> of \(𝐀\) is therefore
+      the <dfn>range</dfn> or <dfn>column space</dfn> or <dfn>image</dfn> of \(𝐀\) is therefore
       \[
       ℛ(𝐀) = \im 𝐀 = \left\{𝐀𝐮 \,\middle|\, 𝐮 ∈ ℝⁿ\right\}
       = \Sp\{𝐀₁, 𝐀₂, …, 𝐀ₙ\}
       \]
       which is a subspace of \(ℝᵐ\).
     </p>
-    <p>likewise, the <b>row space</b> is the span of the rows of \(𝐀\)</p>
+    <p>likewise, the <dfn>row space</dfn> is the span of the rows of \(𝐀\)</p>
     <h2 id="3-4-bases-for-subspaces">3.4 bases for subspaces</h2>
     <h3 id="span-recap">span recap</h3>
     <p>
       let \(W\) be a subspace of \(ℝⁿ\), and let \(S = \left\{𝐰₁, …, 𝐰ₘ\right\} ⊂ W\). \(S\) is a
-      <b>spanning set for \(W\)</b> or <b>spans \(W\)</b> if \(W = \Sp\{S\}\), i.e. all elements of \(W\) can be
-      written as a linear combination of vectors in \(S\)
+      <dfn>spanning set for \(W\)</dfn> or <dfn>spans \(W\)</dfn> if \(W = \Sp\{S\}\), i.e. all elements of \(W\) can
+      be written as a linear combination of vectors in \(S\)
     </p>
     <p>
       <b class="example">ex.</b>
@@ -1088,8 +1083,8 @@
     </p>
     <h3 id="minimal-spanning-set-basis">minimal spanning set / basis</h3>
     <p>
-      a set \(B = \{𝐛₁, …, 𝐛ₘ\} ⊂ ℝⁿ\) is a <b>minimal spanning set</b> or <b>basis</b> for a subspace \(W\) of
-      \(ℝⁿ\) if \(B\)'s elements are all linearly independent and \(W = \Sp\{B\}\)
+      a set \(B = \{𝐛₁, …, 𝐛ₘ\} ⊂ ℝⁿ\) is a <dfn>minimal spanning set</dfn> or <dfn>basis</dfn> for a subspace \(W\)
+      of \(ℝⁿ\) if \(B\)'s elements are all linearly independent and \(W = \Sp\{B\}\)
     </p>
     <p>if \(B\) is a basis for \(W\),</p>
     <ul>
@@ -1195,7 +1190,7 @@
     <p>i.e. if there are two different bases they must have the same number of elements</p>
     <p>
       so! \(W\) is a subspace of \(ℝⁿ\), \(B\) is a basis of \(W\) with \(k\) vectors in it,
-      so the <b>dimension</b> of \(W\) is \(k\). we write \(\dim W = k\)
+      so the <dfn>dimension</dfn> of \(W\) is \(k\). we write \(\dim W = k\)
     </p>
     <h3 id="three-techniques-to-exhibit-a-basis">three techniques to exhibit a basis</h3>
     <p>suppose \(W = \Sp\{𝐮₁, …, 𝐮ₖ\}\)</p>
@@ -1242,8 +1237,8 @@
       \gdef\nullity{\operatorname{nullity}}
       \)
     </p>
-    <p><b>\(\rank 𝐀\)</b> \(= \dim \im 𝐀\)</p>
-    <p><b>\(\nullity 𝐀\)</b> \(= \dim \ker 𝐀\)</p>
+    <p><dfn>\(\rank 𝐀\)</dfn> \(= \dim \im 𝐀\)</p>
+    <p><dfn>\(\nullity 𝐀\)</dfn> \(= \dim \ker 𝐀\)</p>
     <p>properties of rank and nullity for an \(m × n\) matrix \(𝐀\):</p>
     <ul>
       <li>\(\rank 𝐀 = \rank 𝐀^⊤\), i.e. the column space and row space of \(𝐀\) have the same dimension</li>
@@ -1268,8 +1263,8 @@
     <p>alternatively \(\nullity 𝐀 = 2 - \rank 𝐀 = 0\)</p>
     <h2 id="3-6-orthogonal-bases-for-subspaces">3.6 orthogonal bases for subspaces</h2>
     <p>
-      let \(S = \left\{𝐮₁, …, 𝐮ₖ\right\}\) be a set of vectors in \(ℝⁿ\). it's an <b>orthogonal set</b> if every pair
-      of vectors in \(S\) is orthogonal, i.e. their dot product is zero, and an <b>orthonormal set</b> if
+      let \(S = \left\{𝐮₁, …, 𝐮ₖ\right\}\) be a set of vectors in \(ℝⁿ\). it's an <dfn>orthogonal set</dfn> if every
+      pair of vectors in \(S\) is orthogonal, i.e. their dot product is zero, and an <dfn>orthonormal set</dfn> if
       additionally every vector is a unit vector
     </p>
     <p>
@@ -1277,13 +1272,13 @@
       \(W\), it's a basis for \(W\)
     </p>
     <p>
-      if \(B\) is orthogonal and a basis for \(W\) it's an <b>orthogonal basis</b>. if each vector in \(B\) is also
-      a unit vector it's an <b>orthonormal basis</b>
+      if \(B\) is orthogonal and a basis for \(W\) it's an <dfn>orthogonal basis</dfn>. if each vector in \(B\) is
+      also a unit vector it's an <dfn>orthonormal basis</dfn>
     </p>
     <h3 id="coordinates">coordinates</h3>
     <p>
       suppose \(W\) is a subspace of \(ℝⁿ\) and \(B\) is a basis for \(W\). if \(𝐮 ∈ W\), the
-      <b>coordinates</b> of \(𝐮\) wrt \(B\) are the scalars \(x₁, …, xₖ\) s.t.
+      <dfn>coordinates</dfn> of \(𝐮\) wrt \(B\) are the scalars \(x₁, …, xₖ\) s.t.
       \[
       𝐮 = x₁𝐮₁ + ⋯ + xₖ𝐮ₖ
       \]
@@ -1330,7 +1325,7 @@
     </p>
     <h3 id="constructing-an-orthogonal-basis">constructing an orthogonal basis</h3>
     <p>
-      <b>gram-schmidt process</b>:
+      <dfn>gram-schmidt process</dfn>:
       suppose \(W\) is a subspace of \(ℝⁿ\) and
       \(B = \left\{𝐰₁, …, 𝐰ₖ\right\}\)
       is a basis for \(W\). construct the vectors \(𝐮₁, …, 𝐮ₖ\) inductively as follows:
@@ -1352,9 +1347,9 @@
     <dl>
       <dt>the eigenvalue problem</dt>
       <dd>
-        let \(𝐀\) be an \(m × n\) matrix. an <b class="defn">eigenvalue</b> for \(𝐀\) is a scalar \(λ\) for which
+        let \(𝐀\) be an \(m × n\) matrix. an <dfn>eigenvalue</dfn> for \(𝐀\) is a scalar \(λ\) for which
         the matrix \(𝐀 - λ𝐈ₙ\) is singular. in particular, \(λ\) is an eigenvalue of \(𝐀\) iff there is
-        a nonzero <b class="defn">eigenvector</b> \(𝐱 ∈ ℝⁿ\) s.t. \(𝐀𝐱 = λ𝐱\)
+        a nonzero <dfn>eigenvector</dfn> \(𝐱 ∈ ℝⁿ\) s.t. \(𝐀𝐱 = λ𝐱\)
       </dd>
     </dl>
     <h2 id="4-1-eigenvalue-problem-for-2-2-matrices">4.1 eigenvalue problem for \(2 × 2\) matrices</h2>
@@ -1422,8 +1417,8 @@
       + c \begin{vmatrix}d & e\\ g & h\end{vmatrix}\)
     </p>
     <h3 id="minor-matrices-det-of-n-n">minor matrices, det of \(n × n\)</h3>
-    <p>a <b>minor matrix</b> \(𝐌ᵢⱼ\) is \(𝐀\) but with row \(i\) and column \(j\) deleted</p>
-    <p>a <b>cofactor matrix</b> is \(𝐂ᵢⱼ = (-1)ⁱ⁺ʲ\, 𝐌ᵢⱼ\)</p>
+    <p>a <dfn>minor matrix</dfn> \(𝐌ᵢⱼ\) is \(𝐀\) but with row \(i\) and column \(j\) deleted</p>
+    <p>a <dfn>cofactor matrix</dfn> is \(𝐂ᵢⱼ = (-1)ⁱ⁺ʲ\, 𝐌ᵢⱼ\)</p>
     <p>
       for an \(n × n\) matrix \(𝐀\), \[\det 𝐀 = ∑ⱼ₌₁ⁿ (-1)ⁱ⁺ʲ\, \det 𝐌ᵢⱼ\] where \(i\) is <u>whatever!</u>
       maybe pick the row with the most zeros
@@ -1435,11 +1430,11 @@
       \[
       p(t) = \det (𝐀 - t𝐈ₙ)
       \]
-      is the <b>characteristic polynomial</b>. iff \(p(t) = 0\), \(t\) is an eigenvalue
+      is the <dfn>characteristic polynomial</dfn>. iff \(p(t) = 0\), \(t\) is an eigenvalue
     </p>
     <p>
       if \(λ\) is an eigenvalue of \(𝐀\), the number of times \((t - λ)\) appears in the
-      factorization of \(p(t)\) is the <b>algebraic multiplicity \(μ_𝐀(λ)\)</b> of \(λ\)
+      factorization of \(p(t)\) is the <dfn>algebraic multiplicity \(μ_𝐀(λ)\)</dfn> of \(λ\)
     </p>
     <p>
       <b class="example">ex.</b>
@@ -1456,23 +1451,23 @@
     <p><a href="https://unlv.instructure.com/courses/211908/files/34156759">ex 2 from lecture</a></p>
     <h2 id="4-5-eigenvectors-and-eigenspaces">4.5 eigenvectors and eigenspaces</h2>
     <p>
-      the <b>eigenspace</b> of \(λ\) is \(E_λ ≔ \ker(𝐀 - λ𝐈ₙ)\).
-      \(\dim E_λ\) is the <b>geometric multiplicity \(γ_𝐀(λ)\)</b> of \(λ\)
+      the <dfn>eigenspace</dfn> of \(λ\) is \(E_λ ≔ \ker(𝐀 - λ𝐈ₙ)\).
+      \(\dim E_λ\) is the <dfn>geometric multiplicity \(γ_𝐀(λ)\)</dfn> of \(λ\)
     </p>
     <p>
       \(γ_𝐀(λ)\) is always \(≤ μ_𝐀(λ)\).
-      if there is an eigenvalue \(λ\) s.t. \(γ_𝐀(λ) < μ_𝐀(λ)\), \(𝐀\) is a <b>defective matrix</b>
+      if there is an eigenvalue \(λ\) s.t. \(γ_𝐀(λ) < μ_𝐀(λ)\), \(𝐀\) is a <dfn>defective matrix</dfn>
     </p>
     <h3 id="triangular-matrices">triangular matrices</h3>
     <p>
-      a matrix is <b>upper triangular</b> if everything <i>below</i> the main diagonal is 0, and
-      <b>lower triangular</b> if everything <i>above</i> it is zero. for triangular matrices the eigenvalues are
+      a matrix is <dfn>upper triangular</dfn> if everything <i>below</i> the main diagonal is 0, and
+      <dfn>lower triangular</dfn> if everything <i>above</i> it is zero. for triangular matrices the eigenvalues are
       all the diagonal entries!
     </p>
     <h2 id="4-7-similarity-transformations-and-diagonalization">4.7 similarity transformations and diagonalization</h2>
     <h3 id="similar-matrices">similar matrices</h3>
     <p>
-      let \(𝐀\) and \(𝐁\) be two \(n × n\) matrices. they're <b>similar</b> if there exists an invertible matrix
+      let \(𝐀\) and \(𝐁\) be two \(n × n\) matrices. they're <dfn>similar</dfn> if there exists an invertible matrix
       \(𝐒\) such that \(𝐁 = 𝐒⁻¹𝐀𝐒\) (or equivalently \(𝐀 = 𝐒𝐁𝐒⁻¹\))
     </p>
     <p>
@@ -1489,9 +1484,9 @@
       identity matrix! and certainly \(𝐀 ≠ 𝐈₂\)... so they're not similar
     </p>
     <h3 id="diagonal-matrices">diagonal matrices</h3>
-    <p>a matrix is <b>diagonal</b> if it's both upper triangular and lower triangular</p>
+    <p>a matrix is <dfn>diagonal</dfn> if it's both upper triangular and lower triangular</p>
     <p>
-      a matrix is <b>diagonalizable</b> if it's similar to a diagonal matrix. or if it has \(n\) linearly
+      a matrix is <dfn>diagonalizable</dfn> if it's similar to a diagonal matrix. or if it has \(n\) linearly
       independent eigenvectors. or if all the eigenvalues are distinct. or iff it's not defective
     </p>
     <p>
@@ -1558,7 +1553,7 @@
     </p>
     <h3 id="orthogonal-matrices">orthogonal matrices</h3>
     <p>
-      an \(n × n\) matrix \(𝐐\) is <b>orthogonal</b> if it's invertible and \(𝐐⁻¹ = 𝐐^⊤\).
+      an \(n × n\) matrix \(𝐐\) is <dfn>orthogonal</dfn> if it's invertible and \(𝐐⁻¹ = 𝐐^⊤\).
       equivalently if the column vectors are orthonormal
     </p>
     <p>any symmetric matrix is diagonalizable</p>
@@ -1566,7 +1561,7 @@
     <p>this is mostly v similar to ch3</p>
     <h2 id="5-2-vector-spaces">5.2 vector spaces</h2>
     <p>
-      a set of elements \(V\) is a <b>vector space</b> over a field \(F\) if an addition operation is defined
+      a set of elements \(V\) is a <dfn>vector space</dfn> over a field \(F\) if an addition operation is defined
       between any two elements of \(V\), and a scalar multiplication operation is defined between any element of
       \(F\) and any element of \(V\)
     </p>
@@ -1610,7 +1605,7 @@
     </ul>
     <h2 id="5-3-subspaces">5.3 subspaces</h2>
     <p>
-      if \(V\) and \(W\) are real vector spaces and \(W ⊂ V\), \(W\) is a <b>subspace</b> of \(V\)
+      if \(V\) and \(W\) are real vector spaces and \(W ⊂ V\), \(W\) is a <dfn>subspace</dfn> of \(V\)
     </p>
     <ul>
       <li>\(V\)'s zero vector \(𝟎_V ∈ W\)</li>
@@ -1638,18 +1633,18 @@
     <p>very quick ch3 generalization:</p>
     <ul>
       <li>
-        a set \(\{𝐯₁, …, 𝐯ₖ\} ⊂ V\) is <b class="defn">linearly independent</b> if
+        a set \(\{𝐯₁, …, 𝐯ₖ\} ⊂ V\) is <dfn>linearly independent</dfn> if
         \(c₁𝐯₁ + ⋯ + cₖ𝐯ₖ = 𝟎_V\) implies all \(cᵢ = 0\)
       </li>
-      <li>it <b class="defn">spans</b> \(V\) if every vector in \(V\) is a linear combination of the \(𝐯ᵢ\)</li>
-      <li>a <b class="defn">basis</b> is a linearly independent spanning set</li>
+      <li>it <dfn>spans</dfn> \(V\) if every vector in \(V\) is a linear combination of the \(𝐯ᵢ\)</li>
+      <li>a <dfn>basis</dfn> is a linearly independent spanning set</li>
       <li>
         <span style="color:var(--yellow-intense)">(new!)</span>
         every vector \(𝐯 ∈ V\) has a unique coordinate representation \(𝐯 = x₁𝐛₁ + ⋯ + xₙ𝐛ₙ\) wrt a basis
         \(B = \{𝐛₁,…,𝐛ₙ\}\);
-        the scalars \(xᵢ\) are the <b class="defn">coordinates</b> which we can put a vector called \([𝐯]_B\)
+        the scalars \(xᵢ\) are the <dfn>coordinates</dfn> which we can put a vector called \([𝐯]_B\)
       </li>
-      <li>all bases for \(V\) have the same cardinality, called the <b class="defn">dimension</b> of \(V\)</li>
+      <li>all bases for \(V\) have the same cardinality, called the <dfn>dimension</dfn> of \(V\)</li>
     </ul>
     <h2 id="5-5-dimension">5.5 dimension</h2>
     <p>
@@ -1657,7 +1652,7 @@
       any set of \(p\) linearly independent vectors in \(V\) is a basis for \(V\).
     </p>
     <p>
-      if \(V\) doesn't have a finite amount of vectors in its basis, it is <b>infinite dimensional</b>
+      if \(V\) doesn't have a finite amount of vectors in its basis, it is <dfn>infinite dimensional</dfn>
     </p>
     <p>
       <b class="example">ex.</b>
@@ -1695,7 +1690,7 @@
     </p>
     <h2 id="5-7-linear-transformations-from-ℝⁿ-to-ℝᵐ">5.7 linear transformations from \(ℝⁿ\) to \(ℝᵐ\)</h2>
     <p>
-      a function \(T : V → W\) is called a <b>linear transformation</b> if for all vectors \(𝐮, 𝐯 ∈ V\),
+      a function \(T : V → W\) is called a <dfn>linear transformation</dfn> if for all vectors \(𝐮, 𝐯 ∈ V\),
       \[
       T(𝐮 + 𝐯) = T(𝐮) + T(𝐯)
       \]
@@ -1710,28 +1705,29 @@
       a linear transformation?
     </p>
     <p>
-      for a linear transformation \(T : V → W\), its <b>null space</b> / <b>kernel</b> is
+      for a linear transformation \(T : V → W\), its <dfn>null space</dfn> / <dfn>kernel</dfn> is
       \[
       \ker T = \left\{𝐯 ∈ V \,\middle|\, T(𝐯) = 𝟎_W\right\}
       \]
-      and its <b>range</b>/<b>image</b> is
+      and its <dfn>range</dfn>/<dfn>image</dfn> is
       \[
       \im T = \left\{T(𝐯) \,\middle|\, 𝐯 ∈ V\right\}.
       \]
       both are subspaces (of \(V\) and \(W\) respectively).
-      if \(V\) is finite-dimensional, the <b>rank-nullity theorem</b> gives
+      if \(V\) is finite-dimensional, the <dfn>rank-nullity theorem</dfn> gives
       \(\dim V = \underbrace{\dim \im T}_{\text{rank}} + \underbrace{\dim \ker T}_{\text{nullity}}\).
     </p>
     <h2 id="5-8-operations-with-linear-transformations">5.8 operations with linear transformations</h2>
     <p>you can add or compose two linear transformations to get another one</p>
     <p>
-      a linear transformation is <b>one-to-one</b> / <b>injective</b> if \(T(x₁) = T(x₂) ⇔ x₁ = x₂\).
+      a linear transformation is <dfn>one-to-one</dfn> / <dfn>injective</dfn> if \(T(x₁) = T(x₂) ⇔ x₁ = x₂\).
       here this just means \(T(x₁ - x₂) = 0 ⇔ x₁ - x₂ = 0\), i.e. \(\ker T = 0\)
     </p>
-    <p>and <b>surjective</b> if the range of \(T\) is exactly \(W\) rather than a (proper) subset of it</p>
+    <p>and <dfn>surjective</dfn> if the range of \(T\) is exactly \(W\) rather than a (proper) subset of it</p>
     <p>
-      a linear transformation is <b>invertible</b> or <b>bijective</b> or an <b>isomorphism</b> if it's both
-      injective and surjective. two vector spaces are <b>isomorphic</b> if there's a linear isomorphism between them
+      a linear transformation is <dfn>invertible</dfn> or <dfn>bijective</dfn> or an <dfn>isomorphism</dfn> if it's
+      both injective and surjective. two vector spaces are <dfn>isomorphic</dfn> if there's a linear isomorphism
+      between them
     </p>
     <p>if any finite dimensional vector space has \(n\) dimensions it's isomorphic to \(ℝⁿ\)</p>
     <h2 id="5-9-matrix-representations-of-linear-transformations">5.9 matrix representations of linear transformations</h2>
@@ -1778,7 +1774,7 @@
     </p>
     <h2 id="5-10-diagonalizable-transformations">5.10 diagonalizable transformations</h2>
     <p>
-      a transformation is <b>diagonalizable</b> if its matrix representation is a diagonalizable matrix
+      a transformation is <dfn>diagonalizable</dfn> if its matrix representation is a diagonalizable matrix
       / not <a href="#4-5-eigenvectors-and-eigenspaces">defective</a>
     </p>
     <h3 id="transition-matrix">transition matrix</h3>

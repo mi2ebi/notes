@@ -98,15 +98,15 @@
     <p>types of statistics:</p>
     <ol>
       <li>
-        <b>descriptive</b> –
+        <dfn>descriptive</dfn> –
         methods to organise/display/describe data
       </li>
       <li>
-        <b>inferential</b> –
+        <dfn>inferential</dfn> –
         methods to utilise data to make decisions and models etc
       </li>
     </ol>
-    <p>the generalisation from sample to population is <b>statistical inference</b></p>
+    <p>the generalisation from sample to population is <dfn>statistical inference</dfn></p>
     <h3 id="history">history</h3>
     <p>aristotle combined empiricism and rationalism</p>
     <p>see also <i lang="la">cōgitō ergō sum</i></p>
@@ -125,12 +125,12 @@
     <dl>
       <dt>population</dt>
       <dd>
-        all elements under study being characterized by some <b>parameter</b>:
+        all elements under study being characterized by some <dfn>parameter</dfn>:
         eg population mean, \(μ\)
       </dd>
       <dt>sample</dt>
       <dd>
-        a properly chosen subset of a population characterized by a <b>statistic</b>:
+        a properly chosen subset of a population characterized by a <dfn>statistic</dfn>:
         eg sample mean, \(x̄\)
       </dd>
       <dt>sample space</dt>
@@ -159,47 +159,47 @@
     </dl>
     <h3 id="places-to-get-data-from">places to get data from</h3>
     <p>census, survey, experiment, simulation, ...</p>
-    <p>but to get scientific data we need 2 <b>statistical studies</b></p>
+    <p>but to get scientific data we need 2 <dfn>statistical studies</dfn></p>
     <dl>
       <dt>observational study</dt>
       <dd>conducted in a way where we have no control over any variables</dd>
       <dd>
-        <b>cross-sectional</b> –
+        <dfn>cross-sectional</dfn> –
         collect data at one point in time
       </dd>
       <dd>
-        <b>longitudinal/cohort</b> –
+        <dfn>longitudinal/cohort</dfn> –
         collect data over a period of time about common factors
       </dd>
       <dt>experimental study</dt>
       <dd>
-        we have control over 1 variable. <b>treatment</b> group and <b>control</b>
+        we have control over 1 variable. <dfn>treatment</dfn> group and <dfn>control</dfn>
         group. eg clinical trials
       </dd>
       <dd>
         principles (cf ch13-15 which we're not covering):<br />
-        <b>replication</b>, <b>randomization</b>, <b>blocking/blinding</b>
+        <dfn>replication</dfn>, <dfn>randomization</dfn>, <dfn>blocking/blinding</dfn>
       </dd>
     </dl>
     <h2 id="1-6-types-of-variables">1.6 types of variables</h2>
     <dl>
       <dt>quantitative variables</dt>
-      <dd><b>discrete</b> – countable</dd>
-      <dd><b>continuous</b> – any numerical value</dd>
+      <dd><dfn>discrete</dfn> – countable</dd>
+      <dd><dfn>continuous</dfn> – any numerical value</dd>
       <dt>qualitative/categorical variables</dt>
-      <dd><b>nominal</b> – not rankable</dd>
-      <dd><b>ordinal</b> – rankable</dd>
+      <dd><dfn>nominal</dfn> – not rankable</dd>
+      <dd><dfn>ordinal</dfn> – rankable</dd>
     </dl>
     <p>levels of measurement</p>
     <ul>
       <li>nominal</li>
       <li>ordinal</li>
       <li>
-        <b>interval</b> –
+        <dfn>interval</dfn> –
         no such thing as absolute zero. eg we can't say las vegas is twice as hot as
         chicago if it's 60° in vegas and 30° in chicago
       </li>
-      <li><b>ratio</b> – there is a possible absolute zero</li>
+      <li><dfn>ratio</dfn> – there is a possible absolute zero</li>
     </ul>
     <h2 id="1-3-measures-of-central-tendency">1.3 measures of central tendency</h2>
     <p>if we have a random sample \(x₁, x₂, …, xₙ\) of size \(n\)</p>
@@ -222,10 +222,10 @@
       <dd>
         if \(n\) is even, \(x̃ = \frac12\left(x_{\frac n2} + x_{\frac n2 + 1}\right)\)
       </dd>
-      <dd>median is less sensitive to outliers so it is more <b>robust</b></dd>
+      <dd>median is less sensitive to outliers so it is more <dfn>robust</dfn></dd>
       <dt>mode</dt>
       <dd>values that occur most frequently</dd>
-      <dd>one mode → <b>unimodal</b>, two modes → <b>bimodal</b>, etc</dd>
+      <dd>one mode → <dfn>unimodal</dfn>, two modes → <dfn>bimodal</dfn>, etc</dd>
     </dl>
     <p>if the histogram of the data is symmetric, \(\text{mode} = x̃ = x̄\)</p>
     <p>if the histogram is skewed to (has a longer tail on) the right, \(
@@ -271,10 +271,10 @@ let s = s2.sqrt();</pre>
       <dd>middle 50% of the sample</dd>
       <dt>five-number summary</dt>
       <dd>the three quartiles along with min and max</dd>
-      <dd>used to make a <b>boxplot</b></dd>
+      <dd>used to make a <dfn>boxplot</dfn></dd>
       <dt>inner fence</dt>
       <dd>the range between \(Q₁ - 1.5~\text{IQR}\) and \(Q₃ + 1.5~\text{IQR}\)</dd>
-      <dd>outside this are <b>mild outliers</b></dd>
+      <dd>outside this are <dfn>mild outliers</dfn></dd>
       <dt>percentiles</dt>
       <dd>like quartiles but with 100 equal parts</dd>
       <dd>\(Q₁ = p₂₅\) etc</dd>
@@ -296,14 +296,14 @@ let s = s2.sqrt();</pre>
         <li>\(x̄ ± 3s\) → 99.7%</li>
         </ul>
         so almost the entire dataset fits in 6 standard deviations.
-        this is only a rule of thumb. also called the <b>6σ rule</b>
+        this is only a rule of thumb. also called the <dfn>6σ rule</dfn>
       </dd>
       <dt>z-score</dt>
       <dd>\(zᵢ = \frac{xᵢ - x̄}s\)</dd>
       <dd>unit-free!</dd>
       <dd>if \(|z| > 2\) for an observation it could be considered an outlier</dd>
-      <dd>converting \(xᵢ\) to \(zᵢ\) is called <b>standardization</b></dd>
-      <dd>and \(xᵢ = x̄ + zᵢs\) for <b>destandardization</b></dd>
+      <dd>converting \(xᵢ\) to \(zᵢ\) is called <dfn>standardization</dfn></dd>
+      <dd>and \(xᵢ = x̄ + zᵢs\) for <dfn>destandardization</dfn></dd>
     </dl>
     <h1 id="ch2-probability">ch2 probability</h1>
     <h2 id="2-1-intro">2.1 intro</h2>
@@ -393,7 +393,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      \(n \choose r\) is also called the <b>binomial coefficient</b> and is equal to
+      \(n \choose r\) is also called the <dfn>binomial coefficient</dfn> and is equal to
       \({n \choose n - r}\)
     </p>
     <dl>
@@ -408,7 +408,7 @@ let s = s2.sqrt();</pre>
       "mississippi"
     </p>
     <h2 id="2-4-conditional-probability">2.4 conditional probability</h2>
-    <p>the probability that \(A\) happens <b>given</b> \(B\) is \(
+    <p>the probability that \(A\) happens <dfn>given</dfn> \(B\) is \(
       P(A \mathbin| B) = \frac{P(A ∩ B)}{P(B)}
       \)</p>
     <p>this changes the sample space</p>
@@ -420,7 +420,7 @@ let s = s2.sqrt();</pre>
       eg if you're rolling a fair die, \(P(\set{5} \mathbin| \set{1, 3, 5}) = \frac13\)
     </p>
     <p>
-      two events \(A\) and \(B\) are <b>independent</b> if \(P(A \mathbin| B) = P(A)\),
+      two events \(A\) and \(B\) are <dfn>independent</dfn> if \(P(A \mathbin| B) = P(A)\),
       or equivalently if \(P(A ∩ B) = P(A)P(B)\)
     </p>
     <p>two mutually exclusive events are always dependent</p>
@@ -462,7 +462,7 @@ let s = s2.sqrt();</pre>
       \)</p>
     <p>smoking and bronchitis are dependent because \(P(S) ≠ P(S \mathbin| B)\)</p>
     <h2 id="2-7-bayes-theorem">2.7 bayes' theorem</h2>
-    <p>the events \(B₁, B₂, …, Bₖ\) <b>partition</b> a sample space \(S\) if</p>
+    <p>the events \(B₁, B₂, …, Bₖ\) <dfn>partition</dfn> a sample space \(S\) if</p>
     <ul>
       <li>\(Bᵢ ∩ Bⱼ = ∅\) for all \(i ≠ j\)</li>
       <li>\(⋃\limits_{1 ≤ i ≤ k} Bᵢ = S\)</li>
@@ -476,10 +476,10 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      \(P(Bᵢ \mathbin| A)\) is the <b>posterior</b> probability
-      and \(P(Bᵢ)\) is the <b>prior</b> probability
+      \(P(Bᵢ \mathbin| A)\) is the <dfn>posterior</dfn> probability
+      and \(P(Bᵢ)\) is the <dfn>prior</dfn> probability
     </p>
-    <p>this tells us how to <b>update</b> \(P(Bᵢ)\) given the new information \(P(A)\)</p>
+    <p>this tells us how to <dfn>update</dfn> \(P(Bᵢ)\) given the new information \(P(A)\)</p>
     <h1 id="ch3-random-variables-and-their-probability-distributions">ch3 random variables and their probability distributions</h1>
     <dl>
       <dt>random variable</dt>
@@ -489,16 +489,16 @@ let s = s2.sqrt();</pre>
       </dd>
     </dl>
     <p>
-      the sample space \(S\) can be either <b>discrete</b> (there are countably many outcomes) or
-      <b>continuous</b> (there are uncountably many outcomes)
+      the sample space \(S\) can be either <dfn>discrete</dfn> (there are countably many outcomes) or
+      <dfn>continuous</dfn> (there are uncountably many outcomes)
     </p>
     <p>
-      we also define a <b>probability (mass) function</b> \(p\) which takes the numerical
+      we also define a <dfn>probability (mass) function</dfn> \(p\) which takes the numerical
       values of the random variable. we write \(P(X = x)\) or \(p(x)\)
     </p>
     <p>
       example: tossing a coin twice, \(X\) is the number of heads we get (0 or 1 or 2). then we
-      can make the <b>probability density function (PDF)</b> of \(X\):
+      can make the <dfn>probability density function (PDF)</dfn> of \(X\):
     </p>
     <table>
       <tr>
@@ -527,7 +527,7 @@ let s = s2.sqrt();</pre>
     </ul>
     <img src="pdf.png" alt="a probability density function" />
     <p>
-      the <b>cumulative distribution function (CDF)</b> of a random variable, \(F(x)\),
+      the <dfn>cumulative distribution function (CDF)</dfn> of a random variable, \(F(x)\),
       is defined as \[
       F_X(x) = P(X ≤ x) = ∑\limits_{X ≤ x} p(x)
       \]
@@ -727,13 +727,13 @@ let s = s2.sqrt();</pre>
     </p>
     <h2 id="3-4-joint-probability-distributions"><span style="color:var(--red-cooler)">3.4</span> joint probability distributions</h2>
     <p>
-      when a random variable indicates a single numerical response it is called <b>univariate</b>.
-      when it could have more than one response it's called <b>multivariate</b>.
-      in particular when there are 2 responses it's <b>bivariate</b>
+      when a random variable indicates a single numerical response it is called <dfn>univariate</dfn>.
+      when it could have more than one response it's called <dfn>multivariate</dfn>.
+      in particular when there are 2 responses it's <dfn>bivariate</dfn>
     </p>
     <p>eg if we are measuring height and weight at the same time</p>
     <p>
-      the <b>joint probability density/mass function</b> of \(X₁\) and \(X₂\) is
+      the <dfn>joint probability density/mass function</dfn> of \(X₁\) and \(X₂\) is
       \(
       p(x₁, x₂) = P(X₁ = x₁, X₂ = x₂)
       \)
@@ -745,7 +745,7 @@ let s = s2.sqrt();</pre>
       <li>\(∑\limits_{x₁} ∑\limits_{x₂} p(x₁, x₂) = 1\)</li>
     </ul>
     <p>
-      the <b>marginal probability distributions</b> of \(X₁\) and \(X₂\) respectively are given by
+      the <dfn>marginal probability distributions</dfn> of \(X₁\) and \(X₂\) respectively are given by
       \[
       p₁(x₁) = ∑\limits_{x₂} p(x₁, x₂)
       \]
@@ -755,7 +755,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      the <b>conditional probability function</b> of \(X₁\) given \(X₂=x₂\) is
+      the <dfn>conditional probability function</dfn> of \(X₁\) given \(X₂=x₂\) is
       \[
       P(X₁ = x₁ \mathbin| X₂ = x₂) = \frac{p(x₁, x₂)}{p₂(x₂)}
       \]
@@ -774,7 +774,7 @@ let s = s2.sqrt();</pre>
     </p>
     \(\gdef\cov{\operatorname{cov}}\)
     <p>
-      the <b>covariance</b> of two random variables is defined by
+      the <dfn>covariance</dfn> of two random variables is defined by
       \[
       \cov(X₁, X₂)
       = E[(X₁ - μ₁)(X₂ - μ₂)]
@@ -803,7 +803,7 @@ let s = s2.sqrt();</pre>
     \(\gdef\corr{\operatorname{corr}}\)
     <p>
       since the covariance depends on the measurement unit, we standardize it, which is called the
-      <b>correlation coefficient</b>
+      <dfn>correlation coefficient</dfn>
       \[
       \corr(X₁, X₂) = ρ_{x₁, x₂}
       = \frac{\cov(X₁, X₂)}{\sqrt{\var(X₁)}\sqrt{\var(X₂)}}
@@ -814,7 +814,7 @@ let s = s2.sqrt();</pre>
       not a slope! \(-1 ≤ ρ ≤ 1\)
     </p>
     <p>
-      the <b>sample correlation coefficient</b> is defined as
+      the <dfn>sample correlation coefficient</dfn> is defined as
       \[
       \begin{align*}
       r_{X, Y}
@@ -829,7 +829,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      the continuous version of the joint pmf is the <b>joint pdf</b> \(f(x₁, x₂)\)
+      the continuous version of the joint pmf is the <dfn>joint pdf</dfn> \(f(x₁, x₂)\)
     </p>
     <ul>
       <li>\(f(x₁,x₂) ≥ 0\) for all real numbers \(x₁, x₂\)</li>
@@ -865,7 +865,7 @@ let s = s2.sqrt();</pre>
     \)
     <h2 id="5-1-discrete-uniform-distribution">5.1 discrete uniform distribution</h2>
     <p>
-      a random variable has a <b>discrete uniform distribution</b> if its pmf is given by \[
+      a random variable has a <dfn>discrete uniform distribution</dfn> if its pmf is given by \[
       P(X = x) = p(x) = \frac1k, \quad x = x₁, x₂, …, xₖ
       \]
     </p>
@@ -876,7 +876,7 @@ let s = s2.sqrt();</pre>
       \(P(\text{failure}) = 1 - p\). let \(X = 1\) if success and 0 otherwise. then the
       probability distribution is \[p(x) = pˣ (1 - p)¹⁻ˣ\]
     </p>
-    <p>\(X\) is called a <b>bernoulli random variable</b> with parameter \(p\), and its distribution is denoted \(X∼\Ber(X)\)</p>
+    <p>\(X\) is called a <dfn>bernoulli random variable</dfn> with parameter \(p\), and its distribution is denoted \(X∼\Ber(X)\)</p>
     <p>here \(E(X) = p\) and \(\var(X) = p(1 - p) = pq\)</p>
     <p>tossing a coin is a bernoulli random variable with \(p = \frac12\)</p>
     <p>what if we repeat the bernoulli trials \(n\) times?</p>
@@ -898,7 +898,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      this is the <b>binomial probability distribution</b>. \(E(X) = np\) and \(\var(X) = np(1 - p)\).
+      this is the <dfn>binomial probability distribution</dfn>. \(E(X) = np\) and \(\var(X) = np(1 - p)\).
       we write this one as \(X∼\bin(n, p)\)
     </p>
     <ul>
@@ -1010,7 +1010,7 @@ let s = s2.sqrt();</pre>
     <h1 id="ch6-continuous-probability-distributions">ch6 continuous probability distributions</h1>
     <h2 id="6-1-uniform-distribution">6.1 uniform distribution</h2>
     <p>
-      a random variable \(X\) follows the <b>uniform probability distribution</b> on the interval \([a, b]\) if its
+      a random variable \(X\) follows the <dfn>uniform probability distribution</dfn> on the interval \([a, b]\) if its
       pdf looks like
       \[
       f(x) = \begin{cases}
@@ -1046,22 +1046,22 @@ let s = s2.sqrt();</pre>
       </small>
     </p>
     <p>
-      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <b>standard normal probability
-      distribution</b>. the pdf of \(Z\) is 
+      a rv \(Z\) with \(μ = 0\) and \(σ = 1\) and its probability distribution is a <dfn>standard normal probability
+      distribution</dfn>. the pdf of \(Z\) is 
       \[
       φ(Z) = \frac1{\sqrt{2π}}e^{-x²/2}
       \]
     </p>
     <p>
       since it's not feasible to have tables for every possible normal distribution, we just have the one table for
-      \(Z ∼ N(0, 1)\). we can <b>standardize</b> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)
+      \(Z ∼ N(0, 1)\). we can <dfn>standardize</dfn> a normal distribution by mapping \(xᵢ ↦ zᵢ ≔ \frac{xᵢ - μ}σ\)
     </p>
     <h2 id="6-3-using-n-to-approximate-bin">6.3 using <i>N</i> to approximate bin</h2>
     <p>
       if \(X ∼ \bin(n, p)\) it can be approximated by a normal distribution with \(μ = np\) and \(σ² = npq\) when
       \(np > 5\) and \(npq > 5\)
     </p>
-    <p>you might need a <b>continuity correction</b> of adding/subtracting 0.5</p>
+    <p>you might need a <dfn>continuity correction</dfn> of adding/subtracting 0.5</p>
     <h2 id="6-4-exponential-distribution">6.4 exponential distribution</h2>
     <p>for random phonemena involving time, eg device lifespan</p>
     <p>
@@ -1070,7 +1070,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>if \(X\) follows this we write \(X ∼ \Exp(θ)\)</p>
-    <p>this is also called a <b>laplace distribution</b></p>
+    <p>this is also called a <dfn>laplace distribution</dfn></p>
     <p>\(E(X) = θ\) and \(\var(X) = θ²\). the standard deviation is the mean! and mean > median</p>
     <p>
       \[
@@ -1081,20 +1081,20 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      after <b>reparameterization</b> \(λ = \frac1θ\) we can write \(f(x) = λe^{-λx}\). \(θ\) represents the
+      after <dfn>reparameterization</dfn> \(λ = \frac1θ\) we can write \(f(x) = λe^{-λx}\). \(θ\) represents the
       mean time between events and \(λ\) represents the number of events per unit of time
     </p>
     <p>
-      the <b>survival function / reliability</b> is \(1 - F(x) =\)
+      the <dfn>survival function / reliability</dfn> is \(1 - F(x) =\)
       \[
       F̄(x) = S(x) = ∫ₓ^∞ f(t) \;\mathrm dt = \exp(-λx)
       \]
     </p>
     <p>
-      a random variable is <b>memoryless</b> if \(P(X > s + t \mathbin| X > t) = P(X > s)\) for all \(s, t ≥ 0\)
+      a random variable is <dfn>memoryless</dfn> if \(P(X > s + t \mathbin| X > t) = P(X > s)\) for all \(s, t ≥ 0\)
     </p>
     <h2 id="6-5-gamma-distribution">6.5 gamma distribution</h2>
-    <p>the <b>gamma function</b> is \(Γ(k) = ∫₀^∞ yᵏ⁻¹e⁻ʸ \;dy\) and has properties</p>
+    <p>the <dfn>gamma function</dfn> is \(Γ(k) = ∫₀^∞ yᵏ⁻¹e⁻ʸ \;dy\) and has properties</p>
     <ul>
       <li>\(Γ(k) = (k - 1)!\) for \(k ∈ ℕ₁\)</li>
       <li>\(Γ(k + 1) = kΓ(k) = k!\)</li>
@@ -1119,7 +1119,7 @@ let s = s2.sqrt();</pre>
       \]
     </p>
     <p>
-      a random variable follows the <b>gamma distribution</b> \(\Ga(α, β)\) if \(x ≥ 0\)
+      a random variable follows the <dfn>gamma distribution</dfn> \(\Ga(α, β)\) if \(x ≥ 0\)
       \[
       f(x) = \frac1{Γ(α)β^α} x^{α - 1} e^{-x/β}
       \]
@@ -1137,7 +1137,7 @@ let s = s2.sqrt();</pre>
       <dt>random sample</dt>
       <dd>
         a sample of size \(n\) (\(X₁, X₂, …, Xₙ\)) with probability function \(f(x)\) where each \(Xᵢ\) are
-        independent and identically distributed (<b>iid</b>) with the population distribution
+        independent and identically distributed (<dfn>iid</dfn>) with the population distribution
       </dd>
       <dt>statistic</dt>
       <dd>function of random variables in a sample. since it varies from sample to sample, it's a random variable</dd>
@@ -1149,12 +1149,12 @@ let s = s2.sqrt();</pre>
         \({\lim\limits_{n → ∞} \left|x̄ - μ\right|} = 0\)
       </dd>
     </dl>
-    <p>\(\left|x̄ - μ\right|\) specifically is the <b>sampling error</b>, controllable by the sample size \(n\)</p>
+    <p>\(\left|x̄ - μ\right|\) specifically is the <dfn>sampling error</dfn>, controllable by the sample size \(n\)</p>
     <p>
       for a sample \(X₁, X₂, …, Xₙ\) from a normal distribution \(N(μ, σ²)\), then the <i>sample mean</i> \(X̄\) is
       normally distributed with \(E(X̄) ≡ μ_X̄ = μ\) and \(\var(X̄) ≡ σ_X̄² = \frac{σ²}n\)
     </p>
-    <p>the <b>standard error</b> \(σ_X̄ = \fracσ{\sqrt n}\)</p>
+    <p>the <dfn>standard error</dfn> \(σ_X̄ = \fracσ{\sqrt n}\)</p>
     <p>
       if the population size is finite, we need to multiple the finite population correction, ie \(\var(X̄) =
       \frac{σ²}n\left(\frac{N - n}{N - 1}\right)\)
@@ -1182,15 +1182,15 @@ let s = s2.sqrt();</pre>
       <dd>a numerical value produced by an estimator. eg if a sample has \(X̄ = 162\) then \(μ̂ = 162\)</dd>
     </dl>
     <p>
-      a single numerical value is called a <b>point estimate</b>. the accuracy is evaluated by the
+      a single numerical value is called a <dfn>point estimate</dfn>. the accuracy is evaluated by the
       <i>margin of error</i>
     </p>
     <dl>
       <dt>margin of error</dt>
       <dd>\(±1.96σ\) or \(±1.96s\)</dd>
     </dl>
-    <p>an estimator \(θ̂\) is <b>unbiased</b> for the parameter \(θ\) if \(E(θ̃) = θ\)</p>
-    <p>an estimator \(θ̂\) is more <b>efficient</b> than another estimator \(θ̃\) if \(\var(θ̂) ≤ {\var(θ̃)}\)</p>
+    <p>an estimator \(θ̂\) is <dfn>unbiased</dfn> for the parameter \(θ\) if \(E(θ̃) = θ\)</p>
+    <p>an estimator \(θ̂\) is more <dfn>efficient</dfn> than another estimator \(θ̃\) if \(\var(θ̂) ≤ {\var(θ̃)}\)</p>
     <p>
       we can also construct an interval around the point estimate that's likely to contain the real parameter.
       for a \(N(μ, σ²)\),
@@ -1205,7 +1205,7 @@ let s = s2.sqrt();</pre>
     </p>
     <p>
       when the sample is drawn from a population the interval is not random anymore. it it called the
-      \((1 - α) · 100\%\) <b>confidence interval</b> for \(μ\)
+      \((1 - α) · 100\%\) <dfn>confidence interval</dfn> for \(μ\)
       and given by
     </p>
     <p>
@@ -1223,7 +1223,7 @@ let s = s2.sqrt();</pre>
       <dd>new evidence based on data about \(μ\)</dd>
       <dt>type i error</dt>
       <dd>\(α = P\left(\text{reject }H₀ \mathbin| H₀\text{ is true}\right)\)</dd>
-      <dd>false positive rate / <b>level of significance</b>. we want this as small as possible</dd>
+      <dd>false positive rate / <dfn>level of significance</dfn>. we want this as small as possible</dd>
       <dt>type ii error</dt>
       <dd>\(β = P\left(\text{¬reject }H₀ \mathbin| H₀\text{ is ¬true}\right)\)</dd>
       <dd>false negative rate</dd>
@@ -1232,11 +1232,11 @@ let s = s2.sqrt();</pre>
     </dl>
     <p>how to test stuff:</p>
     <ol>
-      <li><b>two hypotheses</b> \(H₀\) and \(H₁\)</li>
-      <li><b>test statistics</b>: use the statistic to find \(z\) or \(t\)</li>
-      <li><b>critical value & rejection region</b> from \(α\)</li>
-      <li><b>make a statistical decision</b></li>
-      <li><b>draw a conclusion</b></li>
+      <li><dfn>two hypotheses</dfn> \(H₀\) and \(H₁\)</li>
+      <li><dfn>test statistics</dfn>: use the statistic to find \(z\) or \(t\)</li>
+      <li><dfn>critical value & rejection region</dfn> from \(α\)</li>
+      <li><dfn>make a statistical decision</dfn></li>
+      <li><dfn>draw a conclusion</dfn></li>
     </ol>
     <table>
       <tr>
@@ -1270,14 +1270,14 @@ let s = s2.sqrt();</pre>
     <h2 id="testing-qualitative-categorical-data">testing qualitative/categorical data</h2>
     <p>we want to count the frequencies of things! since all we have is just the \(k\) categories</p>
     <p>
-      in 1900 karl pearson introduced the <b>chi-squared test</b>
+      in 1900 karl pearson introduced the <dfn>chi-squared test</dfn>
       \[
       χ² = ∑ᵢ₌₁ᵏ \frac{\left(Oᵢ - Eᵢ\right)²}{Eᵢ}
       \]
       where \(Oᵢ\) is the observed frequency and \(Eᵢ\) is the expected frequency 
     </p>
     <p>it's small if it fits the expectation/model and large when it doesn't</p>
-    <p>\(χ²\) tests are <b>distribution-free</b></p>
+    <p>\(χ²\) tests are <dfn>distribution-free</dfn></p>
     <p>
       we can test indpendence given an \(r\mathord× c\) contingency table. let<br />
       \(fᵢⱼ =\) <u>observed</u> frequency for \(i\)th row and \(j\)th column<br />

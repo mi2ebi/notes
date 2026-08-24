@@ -602,7 +602,7 @@ bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
       ) + 1
       \)
     </p>
-    <p>to fix imbalanced trees we can <b class="rotate">rotate</b> them</p>
+    <p>to fix imbalanced trees we can <dfn class="rotate">rotate</dfn> them</p>
     <style>
      .rotate {display: inline-block; animation: spin 3s linear infinite;}
      @keyframes spin {from {transform: rotate(0deg);} to {transform: rotate(360deg);}}
@@ -610,10 +610,10 @@ bool find(BinTreeNode&amp;lt;K, V>* r, K k) {
     <img src="rotation.png" alt="diagram of tree rotation" />
     <p>
       if the tree still isn't balanced, via a zigzag, we need to
-      <b class="rotate">
+      <dfn class="rotate">
         <span class="rotate" style="background:var(--bg-main);padding:2px">double</span>
         <span style="background:var(--bg-main);padding:2px">rotate</span>
-      </b>
+      </dfn>
       instead. we perform an intermediate rotation on one of the subtrees to align the tree
     </p>
     <p>eg inserting \([75, 50, 90, 40, 60, 100, 55, 65, 52]\)</p>
@@ -690,13 +690,13 @@ cout << endl;
     <p>this takes constant time!</p>
     <p>properties of hash functions and maps:</p>
     <ul>
-      <li>the hash function returns the same number for the same key (it's <b>deterministic</b>)</li>
-      <li>ideally, indices are unique, otherwise we get a <b>collision</b></li>
+      <li>the hash function returns the same number for the same key (it's <dfn>deterministic</dfn>)</li>
+      <li>ideally, indices are unique, otherwise we get a <dfn>collision</dfn></li>
     </ul>
     <p>suppose the parking lot is a hashmap from student id to parking spot. you get to your assigned parking spot and a car is already there. now what you'd like to do is just stack the cars, right. or you can try to park somewhere else</p>
     <h2 id="separate-chaining">separate chaining</h2>
     <p>when a collision occurs, we stack the elements at the location. so we need to maintain an array of linked lists. aaaaaaa</p>
-    <p>we also want to know the <b>load factor</b> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
+    <p>we also want to know the <dfn>load factor</dfn> \(α = \frac n{\text{table capacity}}\) which tells us how full the table is</p>
     <pre class="highlit" id="hl-15b0d1e88c4958b9">
 template &lt;class K, class V>
 class HashMap {
@@ -741,7 +741,7 @@ class HashMap {
     <p>the tradeoff is you need a very big sparse table to minimize collision risk (capacity \(⋙\) items), and most of the locations will be empty</p>
     <p>the worst-but-very-unlikely case is everything gets mapped to the same index. we can fix this by resizing the table when the load factor becomes too high</p>
     <h2 id="open-addressing">open addressing</h2>
-    <p>if we have a collision, we try a different location. a simple version is called <b>linear probing</b>. to compute the index,</p>
+    <p>if we have a collision, we try a different location. a simple version is called <dfn>linear probing</dfn>. to compute the index,</p>
     <p>
       \[
       \text{index} = \left((h(\text{key}) \mathbin{𝗆𝗈𝖽} \text{capacity}) + i\right) \mathbin{𝗆𝗈𝖽} \text{capacity}
@@ -860,7 +860,7 @@ for (int i = 0; i < old_capacity; i++)
       </tr>
     </table>
     <h1 id="priority-queues">priority queues</h1>
-    <p>uses a <b>binary min heap</b> which is like a binary tree that we squish into an array. a binary min heap is valid if each node's priority value is \(≤\) that of both its children</p>
+    <p>uses a <dfn>binary min heap</dfn> which is like a binary tree that we squish into an array. a binary min heap is valid if each node's priority value is \(≤\) that of both its children</p>
     <pre class="highlit" id="hl-630d7d9d68193a5b">
             3
        7 ---'--- 5
@@ -929,12 +929,12 @@ class PriorityQ {
 };</pre>
     <p><code class="highlit" id="hl-4e6e064571aa0d13">popFront</code> is also \(Θ(\log n)\)</p>
     <h1 id="graph-theory">graph theory</h1>
-    <p>a <b>graph</b> \(G\) is a pair of</p>
+    <p>a <dfn>graph</dfn> \(G\) is a pair of</p>
     <ul>
       <li>a set \(V\) of vertices that look like \(vᵢ\)</li>
       <li>a set \(E\) of edges that look like \(\set{vᵢ, vⱼ}\) between them</li>
     </ul>
-    <p>it's a <b>directed graph</b> if \(E\) is instead a set of tuples \((vᵢ, vⱼ)\)</p>
+    <p>it's a <dfn>directed graph</dfn> if \(E\) is instead a set of tuples \((vᵢ, vⱼ)\)</p>
     <img src="digraph.png" alt="a sample directed graph" />
     <p>
       for this graph, \[
@@ -945,15 +945,15 @@ class PriorityQ {
       \]
     </p>
     <p>
-      a graph is <b>connected</b> if between any two nodes there is a path between them, and <b>unconnected</b> if
-      not
+      a graph is <dfn>connected</dfn> if between any two nodes there is a path between them, and
+      <dfn>unconnected</dfn> if not
     </p>
     <p>
-      a graph is <b>sparse</b> if "it doesn't have many edges": \(e = Θ(v)\). if \(\#E = Θ\left(v²\right)\)
-      it's <b>dense</b>
+      a graph is <dfn>sparse</dfn> if "it doesn't have many edges": \(e = Θ(v)\). if \(\#E = Θ\left(v²\right)\)
+      it's <dfn>dense</dfn>
     </p>
     <p>there are two ways to store a graph</p>
-    <b>adjacency matrix</b>
+    <dfn>adjacency matrix</dfn>
     <p>
       \[
       \begin{bmatrix}
@@ -1043,7 +1043,7 @@ int main() {
       is also \(Θ(e)\)
     </p>
     <h2 id="dijkstras-minimum-path-weight-algorithm">dijkstra's [[minimum [path weight]] algorithm]</h2>
-    <p>here we are given a graph with <b>weights</b>. and we do bfs on it!</p>
+    <p>here we are given a graph with <dfn>weights</dfn>. and we do bfs on it!</p>
     <pre class="highlit" id="hl-4088035e2fdb21e7">
 dijkstra(s, adjlist)
   init pq

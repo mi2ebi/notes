@@ -147,7 +147,7 @@ input > process > output
     <ol>
       <li>application software</li>
       <li>system software eg compiler, os</li>
-      <li><b>instruction set architecture</b></li>
+      <li><dfn>instruction set architecture</dfn></li>
       <li>hardware eg processor, memory, i/o</li>
     </ol>
     <h2 id="inside-the-cpu">inside the cpu</h2>
@@ -191,7 +191,7 @@ input > process > output
     <h1>2026-01-27</h1>
     <p>
       a "2&#x202f;GHz" processor has a 1/(2&#x202f;GHz) = 0.5&#x202f;ns <small>=
-      500&#x202f;ps</small> <b>clock cycle</b>
+      500&#x202f;ps</small> <dfn>clock cycle</dfn>
     </p>
     <p>ExecTime = ClockCycles × CycleTime = ClockCycles / ClockRate</p>
     <blockquote>
@@ -465,16 +465,19 @@ a    c    1    7    0    0    0    4
       most constants are small. i-format instructions can only handle 16-bit immediates
     </p>
     <p>to put <code class="highlit" id="hl-e57c7691e6265256">0x12345678</code> into <code class="highlit" id="hl-00228ecd89ae7b77">$t0</code>, you write</p>
-<pre class="highlit" id="hl-f0c86de13d502c75">li $t0, 0x12345678
+    <pre class="highlit" id="hl-f0c86de13d502c75">li $t0, 0x12345678
 # is assembled into
 lui $at, 0x1234       # Load Upper Immediate
 ori $t0, $at, 0x5678
 </pre>
     <!-- toc skip -->
-<h1>2026-02-12</h1>
-<!-- toc fake label: numbers and math algorithms -->
+    <h1>2026-02-12</h1>
+    <!-- toc fake label: numbers and math algorithms -->
     <h2 id="addition">addition</h2>
-    <p><b>signed</b> numbers can be positive and negative and <b>unsigned</b> numbers can only be positive</p>
+    <p>
+      <dfn>signed</dfn> numbers can be positive and negative and
+      <dfn>unsigned</dfn> numbers can only be positive
+    </p>
     <dl>
       <dt>overflow</dt>
       <dd>value outside the range that can fit, eg trying to fit 3×10<sup>9</sup> into an <code class="type" id="hl-f4ca6342a90fc9e6">int</code></dd>
@@ -755,21 +758,21 @@ sign exponent   mantissa</pre>
     <p>steps to execute an instruction:</p>
     <ol>
       <li>
-        <b>IF (instruction fetch)</b> –<br/>
+        <dfn>IF (instruction fetch)</dfn> –<br/>
         pc (program counter) gets the instruction's address and gives it to instruction memory, which
         converts the instruction into binary
       </li>
       <li>
-        <b>ID (instruction decode)</b> –<br/>
+        <dfn>ID (instruction decode)</b> –<br/>
         identifies the registers used in the instruction as source and destination, and sends the values
         in those registers to the ALU
       </li>
       <li>
-        <b>IE (instruction execute)</b> –<br/>
+        <dfn>IE (instruction execute)</dfn> –<br/>
         ALU takes the inputs and (a) performs the arithmetic/logical operations as necessary (b) calculates addresses for lw/sw (c) makes branch decisions
       </li>
-      <li><b>DM (data memory)</b> –<br/> not used for every instruction, just for load/store</li>
-      <li><b>WB (write back)</b> –<br/> writes the result into the destination register</li>
+      <li><dfn>DM (data memory)</dfn> –<br/> not used for every instruction, just for load/store</li>
+      <li><dfn>WB (write back)</dfn> –<br/> writes the result into the destination register</li>
     </ol>
     <p>reminder: load :  reading from memory :: store : writing to memory</p>
     <blockquote>
@@ -940,19 +943,21 @@ Clk -|≥__|</pre>
       <li>when it's done, moving it to the dryer and starting the next load</li>
       <li>etc</li>
     </ul>
-    <p>buuuuut moving stuff between the washer and dryer takes time! (<b>overhead</b>)</p>
+    <p>buuuuut moving stuff between the washer and dryer takes time! (<dfn>overhead</dfn>)</p>
     <p>we want CPI to be as close to 1 as possible</p>
     <h3 id="hazards">hazards</h3>
-    <p>pipelining does come with <b>hazards</b>, eg the same processor unit can't be used twice in the same cycle</p>
+    <p>
+      pipelining does come with <dfn>hazards</dfn>, eg the same processor unit can't be used twice in the same cycle
+    </p>
     <dl>
       <dt>control hazard</dt>
       <dd>branches and jumps</dd>
       <dt>data hazard</dt>
       <dd>
         dependencies between instructions<br />
-        <b>WaR</b> (write after read)<br />
-        <b>RaW</b> (read after write)<br />
-        <b>WaW</b> (write after write)<br />
+        <dfn>WaR</dfn> (write after read)<br />
+        <dfn>RaW</dfn> (read after write)<br />
+        <dfn>WaW</dfn> (write after write)<br />
       </dd>
       <dt>structural hazard</dt>
       <dd>resource conflicts</dd>
@@ -960,7 +965,8 @@ Clk -|≥__|</pre>
     <!-- toc skip -->
     <h1>2026-03-31</h1>
     <p>
-      to prevent overlapping stages, the result of each stage is stored into a <b>buffer</b> until the clock says "hey do the next part now"
+      to prevent overlapping stages, the result of each stage is stored into a <dfn>buffer</dfn> until the clock says
+      "hey do the next part now"
     </p>
     <p>mips has 32 registers but usually we only need up to 19 of them (s0-7, t0-9, zero)</p>
     <p>if you have eg</p>
@@ -972,7 +978,7 @@ add $t3, $t0, $s0</pre>
      1 2 3 4 5 6
 lw:  F D E M W
 add:   F D E M W</pre>
-    <p>in cycle 5, <code class="function highlit" id="hl-ffb190ad25a5fd49">lw</code> is writing into <code class="constant highlit" id="hl-00228ecd89ae7b77-2">$t0</code>. but <code class="function highlit" id="hl-97dc8f0ed0463ee9-2">add</code> reads the <b>garbage</b> value of the register in cycle 3! this is a <b>RaW data hazard</b></p>
+    <p>in cycle 5, <code class="function highlit" id="hl-ffb190ad25a5fd49">lw</code> is writing into <code class="constant highlit" id="hl-00228ecd89ae7b77-2">$t0</code>. but <code class="function highlit" id="hl-97dc8f0ed0463ee9-2">add</code> reads the <i>garbage</i> value of the register in cycle 3! this is a <dfn>RaW data hazard</dfn></p>
     <p>or:</p>
     <pre class="highlit" id="hl-2200a1f0d678840d">
 sub $t4, $t5, $t3
@@ -982,7 +988,7 @@ add $t5, $t2, $t3</pre>
      1 2 3 4 5 6
 sub: F D E M W
 add:   F D E M W</pre>
-    <p><code class="function highlit" id="hl-564e32d284c9c244">sub</code> cycle 2 needs to read <code class="constant highlit" id="hl-a6970ef466be1404">$t5</code>. <code class="function highlit" id="hl-97dc8f0ed0463ee9">add</code> cycle 6 needs to write to it. this isn't a problem for either of these instructions. but if there's a third instruction it might be! it's not a <b>threat</b> but it is a <b>WaR hazard</b></p>
+    <p><code class="function highlit" id="hl-564e32d284c9c244">sub</code> cycle 2 needs to read <code class="constant highlit" id="hl-a6970ef466be1404">$t5</code>. <code class="function highlit" id="hl-97dc8f0ed0463ee9">add</code> cycle 6 needs to write to it. this isn't a problem for either of these instructions. but if there's a third instruction it might be! it's not a <dfn>threat</dfn> but it is a <dfn>WaR hazard</dfn></p>
     <p>or:</p>
     <pre class="highlit" id="hl-591df96ca01a2ffa">
 sub $t6, $t5, $t3
@@ -992,18 +998,18 @@ add $t6, $t2, $t3</pre>
      1 2 3 4 5 6
 sub: F D E M W
 add:   F D E M W</pre>
-    <p>this is also not a threat, but it is a <b>WaW hazard</b></p>
+    <p>this is also not a threat, but it is a <dfn>WaW hazard</dfn></p>
     <p>the rest of class was a review for test2</p>
     <p>reference sheet covers: r/i/j format instructions; alu opcodes (<code class="highlit" id="hl-9874c0361ec910fe">10</code> for <code class="function highlit" id="hl-a07ddcbe59a67e07">addi</code> etc); formulas for ET and IL; some number prefixes</p>
     <!-- toc skip -->
     <h1>2026-04-07</h1>
     <p><code class="highlit" id="hl-5c9b1b97227251df">nop</code> is an operation that does nothing</p>
-    <p>we can sove the hazards in pipeling by inserting it when needed. this is called <b>stalling</b>. a <b>dead cycle</b> is a cycle with some stalling (but possibly not <i>just</i> stalling</p>
+    <p>we can sove the hazards in pipeling by inserting it when needed. this is called <dfn>stalling</dfn>. a <dfn>dead cycle</dfn> is a cycle with some stalling (but possibly not <i>just</i> stalling)</p>
     <!-- toc skip -->
     <h1>2026-04-09</h1>
     <h2 id="pipelining">pipelining</h2>
     <h3 id="forwarding">forwarding</h3>
-    <p>instead of stalling we can <b>forward</b> data directly to where it is needed, so we do less waiting</p>
+    <p>instead of stalling we can <dfn>forward</dfn> data directly to where it is needed, so we do less waiting</p>
     <ul>
       <li>exe buffer to exe</li>
       <li>mem buffer to mem</li>
@@ -1050,11 +1056,11 @@ forwarding:
     <!-- toc skip -->
     <h1>2026-04-21</h1>
     <!-- toc fake label: memory -->
-    <p><b>volatile</b> memory is temporary</p>
+    <p><dfn>volatile</dfn> memory is temporary</p>
     <h2 id="cache">cache</h2>
     <p>
-      to make common accesses faster we can <b>cache</b> them. what should get cached? things that are <i>spatially
-      local</i> and <i>temporally local</i>
+      to make common accesses faster we can <dfn>cache</dfn> them. what should get cached? things that are
+      <i>spatially local</i> and <i>temporally local</i>
     </p>
     <p>the cache's hit time should be ≪ the miss penalty</p>
     <!-- toc skip -->
@@ -1066,16 +1072,16 @@ forwarding:
       <li>set associativity: 2-way, 4-way, 8-way = fully associative</li>
     </ul>
     <p>
-      <b>set associative</b>: split the cache into sets each with <i>n</i> ways. an address maps to exactly one set
-      but can go in any of the <i>n</i> ways within it
+      <dfn>set associative</dfn>: split the cache into sets each with <i>n</i> ways. an address maps to exactly one
+      set but can go in any of the <i>n</i> ways within it
     </p>
     <p>
-      <b>direct mapped</b>: each memory address maps to exactly 1 cache line. take some bits from th addr as an index
-      into the cache and thats where it lives. no searching, but suffers from conflict misses / <b>thrashing</b>.
-      this is set associative with <i>n</i> = 1
+      <dfn>direct mapped</dfn>: each memory address maps to exactly 1 cache line. take some bits from th addr as an
+      index into the cache and thats where it lives. no searching, but suffers from conflict misses /
+      <dfn>thrashing</dfn>. this is set associative with <i>n</i> = 1
     </p>
     <p>
-      <b>fully associative</b>: set associative with <i>n</i> = total lines. a block can go in any cache line. on
+      <dfn>fully associative</dfn>: set associative with <i>n</i> = total lines. a block can go in any cache line. on
       lookup you need to compare the tag agianst every single line at the same time. no conflict misses, but really
       expensive
     </p>
