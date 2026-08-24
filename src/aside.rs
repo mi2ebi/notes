@@ -2,7 +2,10 @@ use std::sync::LazyLock;
 
 use regex::Regex;
 
-use crate::colors::{RESET, YELLOW};
+use crate::{
+    colors::{RESET, YELLOW},
+    html::apply_edits,
+};
 
 const COLORS: &[(&str, &str)] = &[
     ("ochre", "--bg-ochre"),
@@ -62,13 +65,5 @@ pub fn process(html: &str) -> String {
         );
         edits.push((tag_m.start(), tag_m.end(), format!("<aside{new_inner}>")));
     }
-    if edits.is_empty() {
-        return html.to_owned();
-    }
-    edits.sort_by_key(|e| e.0);
-    let mut result = html.to_owned();
-    for (start, end, replacement) in edits.into_iter().rev() {
-        result.replace_range(start .. end, &replacement);
-    }
-    result
+    apply_edits(html, edits)
 }

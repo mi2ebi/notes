@@ -35,3 +35,15 @@ pub fn warn_missing_alt(html: &str) -> bool {
         false
     }
 }
+
+pub fn apply_edits(html: &str, mut edits: Vec<(usize, usize, String)>) -> String {
+    if edits.is_empty() {
+        return html.to_owned();
+    }
+    edits.sort_by_key(|e| e.0);
+    let mut result = html.to_owned();
+    for (start, end, replacement) in edits.into_iter().rev() {
+        result.replace_range(start .. end, &replacement);
+    }
+    result
+}

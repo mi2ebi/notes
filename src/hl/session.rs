@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use crate::hl::classes::ClassInfo;
 
 #[derive(Debug, Clone)]
@@ -24,28 +26,30 @@ pub struct FinishedSpan {
     pub class_name: &'static str,
 }
 
-pub struct Session {
+pub struct Session<'a> {
     pub content: String,
     pub chars: Vec<char>,
     pub spans: Vec<Span>,
     pub current: usize,
+    suggestions: &'a mut HashMap<Vec<char>, &'static ClassInfo>,
 }
 
-impl Session {
-    pub fn new(content: &str) -> Self {
+impl<'a> Session<'a> {
+    pub fn new(content: &str, suggestions: &'a mut HashMap<Vec<char>, &'static ClassInfo>) -> Self {
         let chars = content.chars().collect::<Vec<_>>();
-        let len = chars.len();
-        let spans = if len == 0 { vec![] } else { vec![Span::new(0)] };
-        Self { content: content.to_string(), chars, spans, current: 0 }
+        let spans = if chars.is_empty() { vec![] } else { vec![Span::new(0)] };
+        Self { content: content.to_string(), chars, spans, current: 0, suggestions }
     }
 
     pub fn cursor(&self) -> usize { self.spans[self.current].end }
 
     pub fn at_end(&self) -> bool { self.cursor() >= self.chars.len() }
 
-    pub fn advance(&mut self) {
+    pub fn advance(&mut self, n: isize) {
         if !self.at_end() {
-            self.spans[self.current].end += 1;
+            let span = &mut self.spans[self.current];
+            let new_end = span.end.saturating_add_signed(n).clamp(span.start, self.chars.len());
+            span.end = new_end;
         }
     }
 
@@ -53,6 +57,10 @@ impl Session {
         let span = &self.spans[self.current];
         if span.start == span.end {
             return;
+        }
+        if let SpanKind::Styled(info) = &kind {
+            let text: Vec<char> = self.chars[span.start .. span.end].to_vec();
+            self.suggestions.insert(text, info);
         }
         self.spans[self.current].kind = Some(kind);
         let next_start = self.cursor();
@@ -80,5 +88,22 @@ impl Session {
                 Some(SpanKind::Skip) | None => None,
             })
             .collect()
+    }
+
+    pub fn suggestion(&self) -> Option<(&'static ClassInfo, usize)> {
+        let start = self.spans[self.current].start;
+        self.suggestions
+            .iter()
+            .filter(|(key, _)| self.chars[start ..].starts_with(key))
+            .map(|(key, info)| (*info, key.len()))
+            .max_by_key(|&(_, len)| len)
+    }
+
+    pub fn accept_suggestion(&mut self) -> bool {
+        let Some((info, len)) = self.suggestion() else { return false };
+        let start = self.spans[self.current].start;
+        self.spans[self.current].end = start + len;
+        self.commit(SpanKind::Styled(info));
+        true
     }
 }

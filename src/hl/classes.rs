@@ -45,25 +45,12 @@ pub const RAINBOW: &[ClassInfo] = &[
     class!('8', "rainbow8", 0x_f78fe7),
 ];
 
-pub const HEADINGS: &[ClassInfo] = &[
-    class!('1', "heading-1", 0x_ffffff),
-    class!('2', "heading-2", 0x_d2b580),
-    class!('3', "heading-3", 0x_82b0ec),
-    class!('4', "heading-4", 0x_feacd0),
-    class!('5', "heading-5", 0x_88ca9f),
-    class!('6', "heading-6", 0x_ef8386),
-];
-
 pub fn by_key(key: char) -> Option<&'static ClassInfo> { CLASSES.iter().find(|c| c.key == key) }
 
 pub fn rainbow_by_key(key: char) -> Option<&'static ClassInfo> {
     RAINBOW.iter().find(|c| c.key == key)
 }
 
-pub fn heading_by_key(key: char) -> Option<&'static ClassInfo> {
-    HEADINGS.iter().find(|c| c.key == key)
-}
-
 pub fn by_name(name: &str) -> Option<&'static ClassInfo> {
-    CLASSES.iter().chain(RAINBOW).chain(HEADINGS).find(|c| c.name == name)
+    CLASSES.iter().chain(RAINBOW).find(|c| c.name == name)
 }

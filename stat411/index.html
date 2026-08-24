@@ -258,7 +258,6 @@ for x in sample {
 }
 let s2 = 1./(n-1.) * (sum_squares - sum*sum/n);
 let s = s2.sqrt();</pre>
-    <script>color("hl-42b36d81ae5319e7", [["let", "keyword"],[" ", null],["mut", "keyword"],[" ", null],["sum_squares", "variable"],[" @ ", null],["mut", "keyword"],[" ", null],["sum", "variable"],[" = ", null],["0", "constant"],[";\n", null],["let", "keyword"],[" ", null],["n", "variable"],[" = sample.len", null],["()", "rainbow0"],[" ", null],["as", "keyword"],[" ", null],["f64", "type"],[";\n", null],["for", "keyword"],[" ", null],["x", "variable"],[" ", null],["in", "keyword"],[" sample ", null],["{", "rainbow0"],["\n  sum += x;\n  sum_squares += x * x;\n", null],["}", "rainbow0"],["\n", null],["let", "keyword"],[" ", null],["s2", "variable"],[" = ", null],["1.", "constant"],["/", null],["(", "rainbow0"],["n-", null],["1.", "constant"],[")", "rainbow0"],[" * ", null],["(", "rainbow0"],["sum_squares - sum*sum/n", null],[")", "rainbow0"],[";\n", null],["let", "keyword"],[" ", null],["s", "variable"],[" = s2.sqrt", null],["()", "rainbow0"],[";", null]]);</script>
     <p>the sum of deviations is \(∑\limitsᵢ₌₁ⁿ (xᵢ - x̄) = 0\)</p>
     <dl>
       <dt>coefficient of variation</dt>
@@ -838,15 +837,9 @@ let s = s2.sqrt();</pre>
     </ul>
     <p>
       the other stuff is all the same except the usual
-      <code class="highlit" id="hl-06264191ce8540a8">s/</code>
-      <script>color("hl-06264191ce8540a8", [["s", "function"],["/", null]]);</script> \(\displaystyle∑\) <code class="highlit" id="hl-84480ca3343416fc">/</code>
-      <script>color("hl-84480ca3343416fc", [["/", null]]);</script> \(\displaystyle∫\) <code class="highlit" id="hl-95faff4b3ae081ea">/g</code>
-      <script>color("hl-95faff4b3ae081ea", [["/g", null]]);</script>
+      <code class="highlit" id="hl-06264191ce8540a8">s/</code> \(\displaystyle∑\) <code class="highlit" id="hl-84480ca3343416fc">/</code> \(\displaystyle∫\) <code class="highlit" id="hl-95faff4b3ae081ea">/g</code>
       and
-      <code class="highlit" id="hl-06264191ce8540a8-2">s/</code>
-      <script>color("hl-06264191ce8540a8-2", [["s", "function"],["/", null]]);</script>\(p\)<code class="highlit" id="hl-84480ca3343416fc-2">/</code>
-      <script>color("hl-84480ca3343416fc-2", [["/", null]]);</script>\(f\)<code class="highlit" id="hl-95faff4b3ae081ea-2">/g</code>
-      <script>color("hl-95faff4b3ae081ea-2", [["/g", null]]);</script>
+      <code class="highlit" id="hl-06264191ce8540a8-2">s/</code>\(p\)<code class="highlit" id="hl-84480ca3343416fc-2">/</code>\(f\)<code class="highlit" id="hl-95faff4b3ae081ea-2">/g</code>
     </p>
     <p>
       \[
@@ -1295,5 +1288,14 @@ let s = s2.sqrt();</pre>
     <link rel="stylesheet" href="../Temml-Local.css" />
     <script src="../temml.min.js"></script>
     <script>temml.renderMathInElement(document.body, {trust: true});</script>
+    <script>
+     color("hl-42b36d81ae5319e7", [["let", "keyword"],[" ", null],["mut", "keyword"],[" ", null],["sum_squares", "variable"],[" @ ", null],["mut", "keyword"],[" ", null],["sum", "variable"],[" = ", null],["0", "constant"],[";\n", null],["let", "keyword"],[" ", null],["n", "variable"],[" = sample.len", null],["()", "rainbow0"],[" ", null],["as", "keyword"],[" ", null],["f64", "type"],[";\n", null],["for", "keyword"],[" ", null],["x", "variable"],[" ", null],["in", "keyword"],[" sample ", null],["{", "rainbow0"],["\n  sum += x;\n  sum_squares += x * x;\n", null],["}", "rainbow0"],["\n", null],["let", "keyword"],[" ", null],["s2", "variable"],[" = ", null],["1.", "constant"],["/", null],["(", "rainbow0"],["n-", null],["1.", "constant"],[")", "rainbow0"],[" * ", null],["(", "rainbow0"],["sum_squares - sum*sum/n", null],[")", "rainbow0"],[";\n", null],["let", "keyword"],[" ", null],["s", "variable"],[" = s2.sqrt", null],["()", "rainbow0"],[";", null]]);
+     color("hl-06264191ce8540a8", [["s", "function"],["/", null]]);
+     color("hl-84480ca3343416fc", [["/", null]]);
+     color("hl-95faff4b3ae081ea", [["/g", null]]);
+     color("hl-06264191ce8540a8-2", [["s", "function"],["/", null]]);
+     color("hl-84480ca3343416fc-2", [["/", null]]);
+     color("hl-95faff4b3ae081ea-2", [["/g", null]]);
+    </script>
   </body>
 </html>

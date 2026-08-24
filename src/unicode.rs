@@ -1,6 +1,7 @@
 use std::{collections::HashMap, fs, io, path::Path};
 
-use reqwest::blocking::get;
+use jiff::{Timestamp, tz::TimeZone};
+use reqwest::blocking::Client;
 
 use crate::colors::{RED, RESET, YELLOW};
 
@@ -33,41 +34,47 @@ pub fn load_local() -> io::Result<UnicodeData> {
     }
 }
 
-pub fn fetch_raw() -> io::Result<String> {
-    get(UNICODE_DATA_URL).and_then(reqwest::blocking::Response::text).map_or_else(
-        |_| {
-            println!("  {YELLOW}fetch error:{RESET} trying local backup");
-            let path = Path::new(LOCAL_PATH);
-            if path.exists() {
-                fs::read_to_string(path)
-            } else {
-                Err(io::Error::new(
-                    io::ErrorKind::NotFound,
-                    format!(
-                        "  {RED}error:{RESET} fetch failed and no backup exists.\n  download \
-                         manually from:\n    {UNICODE_DATA_URL}"
-                    ),
-                ))
-            }
-        },
-        |new_text| {
-            let path = Path::new(LOCAL_PATH);
-            match fs::read_to_string(path) {
-                Ok(old_text) if old_text != new_text => {
-                    let old = parse(&old_text);
-                    let new = parse(&new_text);
-                    diff_maps("superscripts", &old.superscripts, &new.superscripts);
-                    diff_maps("subscripts", &old.subscripts, &new.subscripts);
-                    diff_maps("negations", &old.negations, &new.negations);
-                }
-                _ => {}
-            }
-            if fs::write(LOCAL_PATH, &new_text).is_err() {
-                println!("  {RED}writing error{RESET}");
-            }
-            Ok(new_text)
-        },
-    )
+fn fetch_raw() -> io::Result<String> {
+    let client = Client::new();
+    let mut request = client.get(UNICODE_DATA_URL);
+    let path = Path::new(LOCAL_PATH);
+    if let Ok(meta) = fs::metadata(path)
+        && let Ok(modified) = meta.modified()
+    {
+        let ts = Timestamp::try_from(modified).unwrap();
+        let http_date = ts.to_zoned(TimeZone::UTC).strftime("%a, %d %b %Y %T GMT");
+        request = request.header("If-Modified-Since", http_date.to_string());
+    }
+    let response = request.send().map_err(io::Error::other)?;
+    if response.status() == 304 {
+        return fs::read_to_string(path);
+    }
+    if !response.status().is_success() {
+        println!("  {YELLOW}fetch error:{RESET} HTTP {}, trying local backup", response.status());
+        return fs::read_to_string(path).map_err(|_e| {
+            io::Error::new(
+                io::ErrorKind::NotFound,
+                format!(
+                    "fetch failed and no backup exists.\n  download manually from:\n    \
+                     {UNICODE_DATA_URL}"
+                ),
+            )
+        });
+    }
+    let new_text = response.text().map_err(io::Error::other)?;
+    if let Ok(old_text) = fs::read_to_string(path)
+        && old_text != new_text
+    {
+        let old = parse(&old_text);
+        let new = parse(&new_text);
+        diff_maps("superscripts", &old.superscripts, &new.superscripts);
+        diff_maps("subscripts", &old.subscripts, &new.subscripts);
+        diff_maps("negations", &old.negations, &new.negations);
+    }
+    if fs::write(path, &new_text).is_err() {
+        println!("  {RED}writing error{RESET}");
+    }
+    Ok(new_text)
 }
 
 fn diff_maps(name: &str, old: &HashMap<char, char>, new: &HashMap<char, char>) {

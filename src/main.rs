@@ -1,8 +1,4 @@
-use std::{
-    collections::HashMap,
-    hash::{DefaultHasher, Hash as _, Hasher as _},
-    path::PathBuf,
-};
+use std::path::PathBuf;
 
 use glob::glob;
 use jiff::{Timestamp, tz::TimeZone};
@@ -18,10 +14,6 @@ use notes::{
     },
     toc, unicode,
     unicode::UnicodeData,
-};
-use notify_debouncer_full::{
-    DebouncedEvent, new_debouncer, notify,
-    notify::{EventKind, event::ModifyKind},
 };
 
 struct Pipeline {
@@ -112,7 +104,7 @@ impl Pipeline {
                         converted = hl_result;
                         changed = true;
                     }
-                    let needs_color = converted.contains("<script>color(");
+                    let needs_color = converted.contains("color(");
                     if let Some(new_html) =
                         boilerplate::ensure_highlight_js(&converted, path, needs_color)
                     {
@@ -139,12 +131,6 @@ impl Pipeline {
     }
 }
 
-fn hash_bytes(data: &[u8]) -> u64 {
-    let mut h = DefaultHasher::new();
-    data.hash(&mut h);
-    h.finish()
-}
-
 fn is_build_artifact(path: &std::path::Path) -> bool {
     path.components().any(|c| match c {
         std::path::Component::Normal(s) => {
@@ -157,8 +143,7 @@ fn is_build_artifact(path: &std::path::Path) -> bool {
 fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
     let check = args.iter().any(|a| a == "--check");
-    let watch = args.iter().any(|a| a == "--watch");
-    let no_hl = args.iter().any(|a| a == "--no-hl") || watch;
+    let no_hl = args.iter().any(|a| a == "--no-hl");
     let paths: Vec<PathBuf> =
         args.iter().filter(|a| !a.starts_with("--")).map(PathBuf::from).collect();
     let files: Vec<PathBuf> = if paths.is_empty() {
@@ -242,38 +227,5 @@ fn main() {
     println!("{GREEN}done{RESET}");
     if check && any_changes {
         std::process::exit(1);
-    }
-    if watch {
-        println!("watching...");
-        let (tx, rx) = std::sync::mpsc::channel();
-        let mut last_seen: HashMap<PathBuf, u64> = HashMap::new();
-        let mut debouncer = new_debouncer(std::time::Duration::from_secs(1), None, tx).unwrap();
-        for path in &files {
-            debouncer.watch(path, notify::RecursiveMode::NonRecursive).unwrap();
-        }
-        for events in rx.into_iter().flatten() {
-            for DebouncedEvent { event, .. } in events {
-                if matches!(event.kind, EventKind::Modify(ModifyKind::Data(_))) {
-                    for path in &event.paths {
-                        let Ok(content) = std::fs::read(path) else {
-                            continue;
-                        };
-                        let hash = hash_bytes(&content);
-                        if last_seen.get(path) == Some(&hash) {
-                            continue;
-                        }
-                        last_seen.insert(path.clone(), hash);
-                        println!("{}", path.display());
-                        let result = pipeline.run(path, false);
-                        if !result.changed && !result.had_warnings && result.okay {
-                            print!("\x1b[A\r\x1b[K");
-                        }
-                        if let Ok(new_content) = std::fs::read(path) {
-                            last_seen.insert(path.clone(), hash_bytes(&new_content));
-                        }
-                    }
-                }
-            }
-        }
     }
 }

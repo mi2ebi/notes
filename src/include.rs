@@ -2,7 +2,10 @@ use std::{fs, path::Path, sync::LazyLock};
 
 use regex::Regex;
 
-use crate::colors::{RED, RESET, YELLOW};
+use crate::{
+    colors::{RED, RESET, YELLOW},
+    html::apply_edits,
+};
 
 static INCLUDE_RE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(
@@ -56,14 +59,5 @@ pub fn process(html: &str, path: &Path) -> String {
         );
         edits.push((m.start(), m.end(), replacement));
     }
-
-    if edits.is_empty() {
-        return html.to_owned();
-    }
-    edits.sort_by_key(|e| e.0);
-    let mut result = html.to_owned();
-    for (start, end, replacement) in edits.into_iter().rev() {
-        result.replace_range(start .. end, &replacement);
-    }
-    result
+    apply_edits(html, edits)
 }

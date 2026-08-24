@@ -1,10 +1,16 @@
-use std::io::{self, Write};
+use std::{
+    fmt::Write as _,
+    io::{self, Write},
+};
 
 use crossterm::{
     cursor,
     event::{self, Event, KeyCode, KeyEvent, KeyEventKind, KeyModifiers},
     execute, queue,
-    style::{Color, Print, SetBackgroundColor, SetForegroundColor},
+    style::{
+        Attribute, Color, Print, SetAttribute, SetBackgroundColor, SetForegroundColor,
+        SetUnderlineColor,
+    },
     terminal::{self, ClearType, EnterAlternateScreen, LeaveAlternateScreen},
 };
 
@@ -30,8 +36,9 @@ pub fn run(session: &mut Session, status: &str) -> io::Result<TuiResult> {
 }
 
 enum Action {
-    Advance,
+    Advance(isize),
     Commit(SpanKind),
+    AcceptSuggestion,
     Undo,
     SaveBlock,
     DiscardBlock,
@@ -60,10 +67,18 @@ fn run_inner(
         }
         render(session, stdout, scroll_offset, status, &mut prev_cells)?;
         match read_event()? {
-            Action::Advance => session.advance(),
+            Action::Advance(n) => session.advance(n),
             Action::Commit(kind) => {
+                if session.spans[session.current].start == session.spans[session.current].end {
+                    session.advance(1);
+                }
                 session.commit(kind);
                 if session.at_end() {
+                    break;
+                }
+            }
+            Action::AcceptSuggestion => {
+                if session.accept_suggestion() && session.at_end() {
                     break;
                 }
             }
@@ -86,24 +101,19 @@ fn read_event() -> io::Result<Action> {
             continue;
         };
         let action = match (code, modifiers) {
-            (KeyCode::Right, _) => Action::Advance,
+            (KeyCode::Right, _) => Action::Advance(1),
+            (KeyCode::Left, _) => Action::Advance(-1),
             (KeyCode::Char('u'), KeyModifiers::NONE) => Action::Undo,
             (KeyCode::Enter, _) => Action::SaveBlock,
             (KeyCode::Char('c'), KeyModifiers::CONTROL) => Action::DiscardBlock,
             (KeyCode::Char(' '), KeyModifiers::NONE) => Action::Commit(SpanKind::Skip),
-            (KeyCode::Char('R' | 'r'), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
+            (KeyCode::Char('r'), KeyModifiers::NONE) => {
                 match read_prefixed_char()?.and_then(classes::rainbow_by_key) {
                     Some(info) => Action::Commit(SpanKind::Styled(info)),
                     None => continue,
                 }
             }
-            (KeyCode::Char('H' | 'h'), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
-                match read_prefixed_char()?.and_then(classes::heading_by_key) {
-                    Some(info) => Action::Commit(SpanKind::Styled(info)),
-                    None => continue,
-                }
-            }
-            (KeyCode::Char(ch), KeyModifiers::NONE | KeyModifiers::SHIFT) => {
+            (KeyCode::Char(ch), KeyModifiers::NONE) => {
                 if let Some(info) = classes::by_key(ch) {
                     Action::Commit(SpanKind::Styled(info))
                 } else {
@@ -111,6 +121,7 @@ fn read_event() -> io::Result<Action> {
                 }
             }
             (KeyCode::Char('q'), KeyModifiers::CONTROL) => Action::QuitFile,
+            (KeyCode::Tab, _) => Action::AcceptSuggestion,
             _ => continue,
         };
         return Ok(action);
@@ -134,7 +145,9 @@ enum CharStyle {
     Plain,
     Open,
     Bg(u8, u8, u8),
+    Underline(u8, u8, u8),
     Cursor,
+    CursorUnderline(u8, u8, u8),
 }
 
 const TRAILING_C: (u8, u8, u8) = (0x98, 0x98, 0x98);
@@ -149,10 +162,11 @@ struct Cell {
     ch: char,
     fg: Color,
     bg: Color,
+    underline: Option<Color>,
 }
 
 impl Default for Cell {
-    fn default() -> Self { Self { ch: ' ', fg: Color::Reset, bg: Color::Reset } }
+    fn default() -> Self { Self { ch: ' ', fg: Color::Reset, bg: Color::Reset, underline: None } }
 }
 
 const fn style_bg(style: &CharStyle) -> Color {
@@ -174,6 +188,7 @@ const fn char_to_cell(ch: char, style: &CharStyle, trailing: bool) -> Cell {
                 Color::Rgb { r: TRAILING_C.0, g: TRAILING_C.1, b: TRAILING_C.2 }
             },
             bg: style_bg(style),
+            underline: None,
         },
         ' ' if trailing || is_cursor => Cell {
             ch: '\u{00b7}',
@@ -183,15 +198,24 @@ const fn char_to_cell(ch: char, style: &CharStyle, trailing: bool) -> Cell {
                 Color::Rgb { r: TRAILING_C.0, g: TRAILING_C.1, b: TRAILING_C.2 }
             },
             bg: Color::Reset,
+            underline: None,
         },
         _ => Cell {
             ch,
             fg: match style {
                 CharStyle::Bg(..) => Color::Black,
-                CharStyle::Cursor => Color::Rgb { r: CURSOR_C.0, g: CURSOR_C.1, b: CURSOR_C.2 },
+                CharStyle::Cursor | CharStyle::CursorUnderline(..) => {
+                    Color::Rgb { r: CURSOR_C.0, g: CURSOR_C.1, b: CURSOR_C.2 }
+                }
                 _ => Color::Reset,
             },
             bg: style_bg(style),
+            underline: match style {
+                CharStyle::Underline(r, g, b) | CharStyle::CursorUnderline(r, g, b) => {
+                    Some(Color::Rgb { r: *r, g: *g, b: *b })
+                }
+                _ => None,
+            },
         },
     }
 }
@@ -244,16 +268,18 @@ fn build_frame(
         }
     }
     let keys = CLASSES.iter().map(|c| c.key).collect::<String>();
-    let bar = format!(
-        "[{keys}] [R0-8]rainbow [H1-6]heading  [spc]r.skip  [u]undo  [ret]b.save  [^c]b.discard \
-         [^q]f.quit"
-    );
+    let mut bar =
+        format!("[{keys}] [r#]rainbow [spc]r.skip [u]undo [ret]b.save [^c]b.discard [^q]f.quit");
+    if let Some((info, _)) = session.suggestion() {
+        let _ = write!(bar, " [tab]{}", info.name);
+    }
     let bar_row = content_height as usize;
     for (col, ch) in bar.chars().take(width as usize).enumerate() {
         cells[bar_row * width as usize + col] = Cell {
             ch,
             fg: Color::Rgb { r: KEYBINDS_C.0, g: KEYBINDS_C.1, b: KEYBINDS_C.2 },
             bg: Color::Reset,
+            underline: None,
         };
     }
     let status_row = (height - 1) as usize;
@@ -262,12 +288,13 @@ fn build_frame(
             ch,
             fg: Color::Rgb { r: STATUS_C.0, g: STATUS_C.1, b: STATUS_C.2 },
             bg: Color::Reset,
+            underline: None,
         };
     }
     cells
 }
 
-#[allow(clippy::similar_names, reason = "fg/bg")]
+#[expect(clippy::similar_names, reason = "fg/bg")]
 fn emit_diff(
     stdout: &mut impl Write,
     new_cells: &[Cell],
@@ -276,11 +303,14 @@ fn emit_diff(
 ) -> io::Result<()> {
     if prev_cells.len() != new_cells.len() {
         queue!(stdout, terminal::Clear(ClearType::All))?;
-        *prev_cells =
-            vec![Cell { ch: '\x00', fg: Color::Reset, bg: Color::Reset }; new_cells.len()];
+        *prev_cells = vec![
+            Cell { ch: '\x00', fg: Color::Reset, bg: Color::Reset, underline: None };
+            new_cells.len()
+        ];
     }
     let mut cur_fg = Color::Reset;
     let mut cur_bg = Color::Reset;
+    let mut cur_ul = None::<Color>;
     let mut last_pos: Option<(u16, u16)> = None;
     for (idx, (new, prev)) in new_cells.iter().zip(prev_cells.iter()).enumerate() {
         if new == prev {
@@ -291,6 +321,22 @@ fn emit_diff(
         let need_move = last_pos.is_none_or(|(lr, lc)| lr != row || lc.saturating_add(1) != col);
         if need_move {
             queue!(stdout, cursor::MoveTo(col, row))?;
+        }
+        match (new.underline, cur_ul) {
+            (Some(c), None) => {
+                queue!(stdout, SetAttribute(Attribute::Underlined))?;
+                queue!(stdout, SetUnderlineColor(c))?;
+                cur_ul = Some(c);
+            }
+            (Some(new_c), Some(old_c)) if new_c != old_c => {
+                queue!(stdout, SetUnderlineColor(new_c))?;
+                cur_ul = Some(new_c);
+            }
+            (None, Some(_)) => {
+                queue!(stdout, SetAttribute(Attribute::NoUnderline))?;
+                cur_ul = None;
+            }
+            _ => {}
         }
         if new.bg != cur_bg {
             queue!(stdout, SetBackgroundColor(new.bg))?;
@@ -303,8 +349,11 @@ fn emit_diff(
         queue!(stdout, Print(new.ch))?;
         last_pos = Some((row, col));
     }
-    if cur_fg != Color::Reset || cur_bg != Color::Reset {
+    if cur_fg != Color::Reset || cur_bg != Color::Reset || cur_ul.is_some() {
         queue!(stdout, SetForegroundColor(Color::Reset), SetBackgroundColor(Color::Reset))?;
+        if cur_ul.is_some() {
+            queue!(stdout, SetAttribute(Attribute::NoUnderline))?;
+        }
     }
     prev_cells.clone_from_slice(new_cells);
     Ok(())
@@ -328,10 +377,26 @@ fn render(
             *cs = style.clone();
         }
     }
+    if let Some((info, len)) = session.suggestion() {
+        let start = session.spans[session.current].start;
+        let end = (start + len).min(char_styles.len());
+        for cs in char_styles.iter_mut().take(end).skip(start) {
+            match cs {
+                CharStyle::Plain => *cs = CharStyle::Underline(info.bg.0, info.bg.1, info.bg.2),
+                CharStyle::Cursor => {
+                    *cs = CharStyle::CursorUnderline(info.bg.0, info.bg.1, info.bg.2);
+                }
+                _ => {}
+            }
+        }
+    }
     let open_span = &session.spans[session.current];
     if open_span.start == open_span.end {
         if let Some(cs) = char_styles.get_mut(open_span.start) {
-            *cs = CharStyle::Cursor;
+            match cs {
+                CharStyle::Underline(r, g, b) => *cs = CharStyle::CursorUnderline(*r, *g, *b),
+                _ => *cs = CharStyle::Cursor,
+            }
         }
     } else {
         for cs in char_styles.iter_mut().take(open_span.end).skip(open_span.start) {

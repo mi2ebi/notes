@@ -7,7 +7,7 @@ use attrs::{TocAttrs, parse_toc_comment};
 use regex::Regex;
 use slugs::{assign_slugs, slugify};
 
-use crate::html::{ID_ATTR_RE, strip_tags};
+use crate::html::{ID_ATTR_RE, apply_edits, strip_tags};
 
 static TOC_HERE_RE: LazyLock<Regex> = LazyLock::new(|| {
     Regex::new(r#"(?s)<!--\s*toc\s+here\s*-->(?:\s*<nav class="toc">.*?</nav>\n?)?"#).unwrap()
@@ -234,10 +234,5 @@ pub fn process(html: &str) -> String {
             edits.push((pos, pos, id_attr));
         }
     }
-    edits.sort_by_key(|e| e.0);
-    let mut result = html.to_owned();
-    for (start, end, replacement) in edits.into_iter().rev() {
-        result.replace_range(start .. end, &replacement);
-    }
-    result
+    apply_edits(html, edits)
 }

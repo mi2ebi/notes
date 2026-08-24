@@ -3,13 +3,7 @@ use std::{collections::HashSet, hash::Hasher as _, sync::LazyLock};
 use regex::Regex;
 use rustc_hash::FxHasher;
 
-use crate::{
-    entities,
-    hl::{classes, session::FinishedSpan},
-    html::{CLASS_RE, ID_ATTR_RE},
-};
-
-const LEGACY_DONE_CLASS: &str = "highlit";
+use crate::{entities, hl::session::FinishedSpan, html::ID_ATTR_RE};
 
 static LEGACY_SPAN_RE: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r#"<span class="([a-zA-Z0-9_-]+)">|</span>"#).unwrap());
@@ -24,11 +18,9 @@ pub struct Element {
     pub kind: ElementKind,
     pub start: usize,
     pub end: usize,
-    pub full_end: usize,
     pub attrs: String,
     pub content: String,
     pub stripped_content: String,
-    pub legacy_spans: Option<Vec<FinishedSpan>>,
 }
 
 pub fn find(html: &str) -> Vec<Element> {
@@ -74,17 +66,14 @@ fn find_elements_of_kind(html: &str, kind: &ElementKind) -> Vec<Element> {
             let s = entities::decode_basic_unconditional(&s);
             s.strip_prefix('\n').map_or_else(|| s.clone(), str::to_owned)
         };
-        if let Some(legacy_spans) = classify(attrs, kind, &content, &stripped_content, html, end) {
-            let full_end = trailing_script_end(html, end);
+        if needs_highlighting(attrs, &stripped_content) {
             elements.push(Element {
                 kind: kind.clone(),
                 start,
                 end,
-                full_end,
                 attrs: attrs.to_owned(),
                 content,
                 stripped_content,
-                legacy_spans,
             });
         }
         pos = end;
@@ -92,94 +81,13 @@ fn find_elements_of_kind(html: &str, kind: &ElementKind) -> Vec<Element> {
     elements
 }
 
-/// Returns `None` if the block is already up to date (new scheme with a
-/// matching hash and a companion script tag). Otherwise returns
-/// `Some(legacy_spans)`: `Some(Some(spans))` for a clean migration,
-/// `Some(None)` for a block that needs a fresh interactive pass.
-#[allow(clippy::option_option, reason = "^that")]
-fn classify(
-    attrs: &str,
-    kind: &ElementKind,
-    content: &str,
-    stripped_content: &str,
-    html: &str,
-    end: usize,
-) -> Option<Option<Vec<FinishedSpan>>> {
+fn needs_highlighting(attrs: &str, stripped_content: &str) -> bool {
     if let Some(id) = ID_ATTR_RE.captures(attrs).map(|c| c.get(1).unwrap().as_str().to_owned())
         && id_matches_hash(&id, &content_hash(stripped_content))
-        && has_color_script(html, end, &id)
     {
-        return None;
+        return false;
     }
-    let classes_here: Vec<&str> = CLASS_RE
-        .captures(attrs)
-        .map(|c| c.get(1).unwrap().as_str().split_whitespace().collect())
-        .unwrap_or_default();
-    if *kind == ElementKind::Code && classes_here.iter().any(|cls| classes::by_name(cls).is_some())
-    {
-        return None; // old or new single-class inline-code fast path
-    }
-    if classes_here.contains(&LEGACY_DONE_CLASS)
-        && let Some(spans) = parse_legacy_spans(content)
-    {
-        return Some(Some(spans));
-    }
-    Some(None)
-}
-
-fn has_color_script(html: &str, after: usize, id: &str) -> bool {
-    let rest = &html[after ..];
-    let skipped = rest.len() - rest.trim_start_matches([' ', '\t', '\n']).len();
-    let tag_start = after + skipped;
-    let body = &html[tag_start ..];
-    let Some(inner) = body.strip_prefix("<script>") else { return false };
-    let Some(close_rel) = inner.find("</script>") else { return false };
-    let script_body = &inner[.. close_rel];
-    let expected = format!(r#"color("{id}", ["#);
-    let expected_empty = format!(r#"color("{id}", [])"#);
-    script_body.starts_with(&expected) || script_body.starts_with(&expected_empty)
-}
-
-fn parse_legacy_spans(content: &str) -> Option<Vec<FinishedSpan>> {
-    let content = content.strip_prefix('\n').unwrap_or(content);
-    let mut spans = Vec::new();
-    let mut open: Option<(usize, &'static str)> = None;
-    let mut stripped_pos = 0_usize;
-    let mut last_byte = 0_usize;
-    for caps in LEGACY_SPAN_RE.captures_iter(content) {
-        let m = caps.get(0).unwrap();
-        stripped_pos +=
-            entities::decode_basic_unconditional(&content[last_byte .. m.start()]).chars().count();
-        last_byte = m.end();
-        if let Some(class_name) = caps.get(1) {
-            if open.is_some() {
-                return None; // nested spans - not a shape we ever produced
-            }
-            let info = classes::by_name(class_name.as_str())?;
-            open = Some((stripped_pos, info.name));
-        } else {
-            let (start, class_name) = open.take()?;
-            spans.push(FinishedSpan { start, end: stripped_pos, class_name });
-        }
-    }
-    if open.is_some() {
-        return None; // unbalanced
-    }
-    let total = entities::decode_basic_unconditional(content).chars().count();
-    if spans.iter().any(|s| s.end > total) {
-        return None; // offsets don't add up - bail rather than feed build_tokens garbage
-    }
-    Some(spans)
-}
-
-fn trailing_script_end(html: &str, after: usize) -> usize {
-    let rest = &html[after ..];
-    let skipped = rest.len() - rest.trim_start_matches([' ', '\t', '\n']).len();
-    let tag_start = after + skipped;
-    let body = &html[tag_start ..];
-    let Some(inner) = body.strip_prefix("<script>") else { return after };
-    let Some(close_rel) = inner.find("</script>") else { return after };
-    tag_start + "<script>".len() + close_rel + "</script>".len()
+    true
 }
 
 fn content_hash(s: &str) -> String {
@@ -215,32 +123,19 @@ pub fn apply_spans(
     element: &Element,
     spans: &[FinishedSpan],
     used_ids: &mut HashSet<String>,
-) -> String {
+) -> (String, String) {
     let tag = match element.kind {
         ElementKind::Pre => "pre",
         ElementKind::Code => "code",
     };
-    if element.kind == ElementKind::Code {
-        let char_count = element.stripped_content.chars().count();
-        if let [span] = spans
-            && span.start == 0
-            && span.end == char_count
-        {
-            let attrs = set_class(&element.attrs, span.class_name);
-            return format!(
-                "<{tag}{attrs}>{}</{tag}>",
-                entities::encode_basic(&element.stripped_content)
-            );
-        }
-    }
     let hash_hex = content_hash(&element.stripped_content);
     let id = dedup_id(&hash_hex, used_ids);
     let attrs = set_id(&element.attrs, &id);
     let tokens = build_tokens(&element.stripped_content, spans);
-    let script = tokens_to_script(&id, &tokens);
+    let js = tokens_to_js(&id, &tokens);
     let encoded = entities::encode_basic(&element.stripped_content);
     let body = if element.content.starts_with('\n') { format!("\n{encoded}") } else { encoded };
-    format!("<{tag}{attrs}>{body}</{tag}>{script}")
+    (format!("<{tag}{attrs}>{body}</{tag}>"), js)
 }
 
 fn build_tokens(content: &str, spans: &[FinishedSpan]) -> Vec<(String, Option<&'static str>)> {
@@ -271,7 +166,7 @@ fn build_tokens(content: &str, spans: &[FinishedSpan]) -> Vec<(String, Option<&'
     tokens
 }
 
-fn tokens_to_script(id: &str, tokens: &[(String, Option<&'static str>)]) -> String {
+fn tokens_to_js(id: &str, tokens: &[(String, Option<&'static str>)]) -> String {
     let items: Vec<String> = tokens
         .iter()
         .map(|(text, class_name)| {
@@ -279,7 +174,7 @@ fn tokens_to_script(id: &str, tokens: &[(String, Option<&'static str>)]) -> Stri
             format!("[{}, {class_js}]", js_string_literal(text))
         })
         .collect();
-    format!("<script>color({}, [{}]);</script>", js_string_literal(id), items.join(","))
+    format!("color({}, [{}]);", js_string_literal(id), items.join(","))
 }
 
 fn js_string_literal(s: &str) -> String {
@@ -287,30 +182,16 @@ fn js_string_literal(s: &str) -> String {
     out.push('"');
     for c in s.chars() {
         match c {
-            '\\' => out.push_str("\\\\"),
-            '"' => out.push_str("\\\""),
-            '\n' => out.push_str("\\n"),
-            '\r' => out.push_str("\\r"),
-            '<' => out.push_str("\\u003c"),
+            '\\' => out.push_str(r"\\"),
+            '"' => out.push_str(r#"\""#),
+            '\n' => out.push_str(r"\n"),
+            '\r' => out.push_str(r"\r"),
+            '<' => out.push_str(r"\u003c"),
             _ => out.push(c),
         }
     }
     out.push('"');
     out
-}
-
-fn set_class(attrs: &str, class_name: &str) -> String {
-    CLASS_RE.captures(attrs).map_or_else(
-        || format!(r#"{attrs} class="{class_name}""#),
-        |caps| {
-            let existing = caps.get(1).unwrap().as_str();
-            attrs.replacen(
-                &format!(r#"class="{existing}""#),
-                &format!(r#"class="{class_name}""#),
-                1,
-            )
-        },
-    )
 }
 
 fn set_id(attrs: &str, id: &str) -> String {
