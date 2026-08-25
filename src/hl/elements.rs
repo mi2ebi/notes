@@ -168,7 +168,7 @@ fn tokens_to_js(id: &str, tokens: &[(String, Option<&'static str>)]) -> String {
             format!("[{}, {class_js}]", js_string_literal(text))
         })
         .collect();
-    format!("color({}, [{}]);", js_string_literal(id), items.join(","))
+    format!("color({}, [{}]);", js_string_literal(id), items.join(", "))
 }
 
 fn js_string_literal(s: &str) -> String {
