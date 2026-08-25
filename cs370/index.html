@@ -9,5 +9,56 @@
     <!-- toc skip -->
     <h1 class="h0">cs 370</h1>
     <p><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">free textbook</a>!</p>
+    <!-- toc here -->
+    <nav class="toc">
+      <ul class="tight">
+        <li><a href="#intro">intro</a></li>
+      </ul>
+    </nav>
+    <h1 id="intro">intro</h1>
+    <p>
+      operating systems lie between the applications and hardware resources. we have fewer resources than we have
+      users! challenges:
+    </p>
+    <ol>
+      <li>selecting the proper level of abstraction</li>
+      <li>defining the abstract interface</li>
+      <li>how much behavior to expose</li>
+    </ol>
+    <dl>
+      <dt>isolation</dt>
+      <dd>protecting applications from accessing resources of other applications</dd>
+      <dt>scheduling</dt>
+      <dd>providing fair and efficient access to the resources</dd>
+      <dt>???</dt>
+      <dd>sharing information between applications</dd>
+    </dl>
+    <p>
+      pillars of operating systems per ostep:
+      <dfn style="color:var(--red-cooler)">virtualizaation</dfn>,
+      <dfn style="color:var(--blue-cooler)">concurrency</dfn>,
+      <dfn style="color:var(--green)">persistence</dfn>
+      (bonus: <dfn style="color:var(--cyan)">security</dfn>)
+    </p>
+    <p>hierarchy: <b>users</b> > <b>applications</b> > <b>operating system</b> > <b>hardware</b></p>
+    <p>
+      usb sticks use an old file system called fat32. they have 2^32 sectors each of which can store 1 KiB in theory,
+      so they can store ~2 TiB
+    </p>
+    <p>
+      in a virtualized environment, we have infinite cpu time and infinite memory. in real life we don't!
+      how do we share it?
+    </p>
+    <p>
+      concurrency is the ability for 1 processor to switch context between multiple independent processes.
+      vs parallelism is multiple processors doing things at the same time. parallelism ⊂ concurrency
+    </p>
+    <p>in a good OS, the processes are unware they're being run concurrently</p>
+    <p>
+      persistence is about retaining information even after the process finishes. but we also need to protect against
+      failure and unauthorized access. eg the OS lives in RAM, but the process might also need to use the RAM. how do
+      we prevent it from destroying the OS?
+    </p>
+    <p>'security is the inverse of usability'</p>
   </body>
 </html>
