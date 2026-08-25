@@ -10,7 +10,7 @@ use slugs::{assign_slugs, slugify};
 use crate::html::{ID_ATTR_RE, apply_edits, strip_tags};
 
 static TOC_HERE_RE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r#"(?s)<!--\s*toc\s+here\s*-->(?:\s*<nav class="toc">.*?</nav>\n?)?"#).unwrap()
+    Regex::new(r#"(?s)<!--\s*toc\s+here\s*-->\n?(?:\s*<nav class="toc">.*?</nav>\n?)?"#).unwrap()
 });
 
 static HEADING_RE: LazyLock<Regex> =
