@@ -46,7 +46,8 @@ pub fn process(
     apply_in_math_regions(text, font_maps, superscripts, subscripts, negations)
 }
 
-static UNKNOWN_ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&([a-zA-Z]+);").unwrap());
+static UNKNOWN_ENTITY_RE: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new("&([a-zA-Z0-9]+);").unwrap());
 static UNCONVERTED_MACRO_RE: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"\\([a-zA-Z]+)").unwrap());
 static DEFINE_RE: LazyLock<Regex> =

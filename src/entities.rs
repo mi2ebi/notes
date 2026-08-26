@@ -103,6 +103,8 @@ pub static ENTITIES: phf::Map<&str, char> = phf_map! {
     "&sube;" => '⊆',
     "&sum;" => '∑',
     "&sup;" => '⊃',
+    "&sup2;" => '²',
+    "&sup3;" => '³',
     "&supe;" => '⊇',
     "&tau;" => 'τ',
     "&theta;" => 'θ',
@@ -126,7 +128,7 @@ static ENCODE_LT_RE: LazyLock<FancyRegex> =
 static ENCODE_AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&(?=[a-zA-Z0-9#])").unwrap());
 
-static ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&[a-zA-Z]+;").unwrap());
+static ENTITY_RE: LazyLock<Regex> = LazyLock::new(|| Regex::new("&[a-zA-Z0-9]+;").unwrap());
 
 pub fn decode_basic(text: &str) -> String {
     let text = text.replace("&gt;", ">");
