@@ -13,6 +13,11 @@
     <nav class="toc">
       <ul class="tight">
         <li><a href="#intro">intro</a></li>
+        <li><a href="#virtualization">virtualization</a>
+          <ul class="tight">
+            <li><a href="#virtual-cpus-processes-and-threads">virtual CPUs: processes and threads</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <h1 id="intro">intro</h1>
@@ -30,17 +35,17 @@
       <dd>protecting applications from accessing resources of other applications</dd>
       <dt>scheduling</dt>
       <dd>providing fair and efficient access to the resources</dd>
-      <dt>???</dt>
+      <dt>IPC (inter-process communication)</dt>
       <dd>sharing information between applications</dd>
     </dl>
     <p>
       pillars of operating systems per ostep:
-      <dfn style="color:var(--red-cooler)">virtualizaation</dfn>,
+      <dfn style="color:var(--red-cooler)">virtualization</dfn>,
       <dfn style="color:var(--blue-cooler)">concurrency</dfn>,
       <dfn style="color:var(--green)">persistence</dfn>
       (bonus: <dfn style="color:var(--cyan)">security</dfn>)
     </p>
-    <p>hierarchy: <b>users</b> > <b>applications</b> > <b>operating system</b> > <b>hardware</b></p>
+    <p>hierarchy: users > applications > operating system > hardware</p>
     <p>
       usb sticks use an old file system called fat32. they have 2^32 sectors each of which can store 1 KiB in theory,
       so they can store ~2 TiB
@@ -60,5 +65,69 @@
       we prevent it from destroying the OS?
     </p>
     <p>'security is the inverse of usability'</p>
+    <h1 id="virtualization">virtualization</h1>
+    <h2 id="virtual-cpus-processes-and-threads">virtual CPUs: processes and threads</h2>
+    <p>
+      a <dfn>process</dfn> in an <dfn>execution stream</dfn> (flow of commands) in the context of some
+      <dfn>state</dfn> (anything that affects or is affected by the process)
+    </p>
+    <p>we'll be making some simplifying assumptions for now. these aren't actually true</p>
+    <ul>
+      <li>processors can execute infinite execution streams from memory</li>
+      <li>all system memory (RAM) is in one contiguous physical address space</li>
+      <li>the disk is a finite set of blocks</li>
+      <li>all instructions execute in privileged mode</li>
+    </ul>
+    <p>from the process's pov nothing else is executing at the same time</p>
+    <p>
+      a <dfn>program</dfn> consists of static code and some data. a process is an instance of a program. so
+      "<i>f</i> : program ↦ process" is a one-to-many relation
+    </p>
+    <p>the OS provides an illusory deidcated CPU to each process. these are <dfn>virtual CPUs</dfn></p>
+    <p>
+      processes all have 4 <dfn>segments</dfn> that live in memory: code, data, stack (fn calls and locals), heap
+      (dynamic memory)
+    </p>
+    <p>
+      these days we have multi threaded processes. a <dfn>thread</dfn> is an execution stream in an address space.
+      they each require their own stack (but use the same code/data/heap as the other threads). we're gonna come back
+      to this later
+    </p>
+    <p>forms of resource sharing:</p>
+    <dl>
+      <dt>time sharing</dt>
+      <dd>full access to the resource for 1 user at a time</dd>
+      <dt>space sharing</dt>
+      <dd>partial access for some or all users</dd>
+    </dl>
+    <p>
+      an <dfn>address space</dfn> is the range of memory addresses a process is allowed to rwx (read/write/execute)
+      while it runs. if we do space sharing of memory, the process doesn't know the absolute addresses of anything it
+      needs! so we need to tell the process the relative addresses. this is the <dfn>virtual address space</dfn>
+    </p>
+    <p>for virtualizing the CPU we time share the processor. but we use space sharing for memory and disk</p>
+    <p>
+      the <dfn>scheduler</dfn> decides, at any moment in time, what process runs next, or when to switch between
+      processes. it needs to keep a list of processes and some metadata about them, and it has to enforce some system
+      <dfn>policy</dfn> about what to execute next. the <dfn>mechanism</dfn> is the implementation of the policy.
+      separating policy and mechanism lets the mechanism be more flexible, and we can analyze them separately
+    </p>
+    <p>when a process is created the OS does these things:</p>
+    <ol>
+      <li>allocates internal data structures to track the process</li>
+      <li>
+        allocates an address space.
+        <ol style="list-style-type:lower-alpha;">
+          <li>loads code and data from disk</li>
+          <li>creates runtime stack and heap</li>
+        </ol>
+      </li>
+      <li>opens 'standard' files (stdin, stdout, stderr)</li>
+      <li>initializes the CPU registers to a known state (eg program counter)</li>
+    </ol>
+    <p>
+      the OS owns all the memory, so it needs to reserve some metadata. hm. is the OS a process? then it shouldn't be
+      able to access the other processes' memory. aaaa
+    </p>
   </body>
 </html>
