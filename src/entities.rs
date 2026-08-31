@@ -122,11 +122,11 @@ pub static STRUCTURAL: phf::Set<&str> =
     phf_set!["&shy;", "&ensp;", "&emsp;", "&thinsp;", "&lt;", "&gt;", "&amp;"];
 
 static DECODE_LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("&lt;(?![a-zA-Z0-9/!-])").unwrap());
+    LazyLock::new(|| FancyRegex::new(r"&lt;(?![-\p{L}\p{N}/!_.:])").unwrap());
 static DECODE_AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&amp;(?![a-zA-Z0-9#])").unwrap());
 static ENCODE_LT_RE: LazyLock<FancyRegex> =
-    LazyLock::new(|| FancyRegex::new("<(?=[a-zA-Z0-9/!-])").unwrap());
+    LazyLock::new(|| FancyRegex::new(r"<(?=[-\p{L}\p{N}/!_.:])").unwrap());
 static ENCODE_AMP_RE: LazyLock<FancyRegex> =
     LazyLock::new(|| FancyRegex::new("&(?=[a-zA-Z0-9#])").unwrap());
 

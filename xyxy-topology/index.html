@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+  <head>
+    <title>xyxy-topology</title>
+    <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../highlight.js"></script>
+  </head>
+  <body>
+    <!-- toc skip -->
+    <h1 class="h0">xyxy/topology</h1>
+    <p>
+      <a href="https://files.catbox.moe/318tqy.pdf">book</a>
+    </p>
+    <!-- toc here -->
+    <nav class="toc">
+      <ul class="tight">
+        <li><a href="#ch1-set-theory-and-logic">ch1 set theory and logic</a>
+          <ul class="tight">
+            <li><a href="#1-fundamental-concepts">§1 fundamental concepts</a></li>
+            <li><a href="#2-functions">§2 functions</a></li>
+            <li><a href="#3-relations">§3 relations</a>
+              <ul class="tight">
+                <li><a href="#lubp-glbp">lubp/glbp</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <h1 id="ch1-set-theory-and-logic">ch1 set theory and logic</h1>
+    <h2 id="1-fundamental-concepts">§1 fundamental concepts</h2>
+    <p>all the usual set stuff. \(⊊\) <code id="hl-ee9589e4aad5f4c6">\subsetneq</code> is good tex practice</p>
+    <p>lynn's contrapositive example: "what doesn't make you stronger kills you"</p>
+    <p>does this guy not know about \(¬\)</p>
+    <p>an <dfn>ordered pair</dfn> \((a, b)\) is really a set \(\big\{\{a\}, \{a, b\}\big\}\)</p>
+    <h2 id="2-functions">§2 functions</h2>
+    <p>
+      a <dfn>rule of assignment</dfn> is a subset \(r\) of a cartesian product \(C × D\), s.t. each element of \(C\)
+      is the first coordinate of at most one pair in \(r\). the <dfn>domain</dfn> of \(r\) is \(C\) and the
+      <dfn>image set</dfn> of \(r\) is the <i>subset of \(D\)</i> containing all the second coordinates of pairs in
+      \(r\). i.e.
+      \[\operatorname{domain} r = \left\{c \,\middle|\, ∃ d ∈ D.\; (c, d) ∈ r\right\}\]
+      \[ \operatorname{image} r = \left\{d \,\middle|\, ∃ c ∈ C.\; (c, d) ∈ r\right\}\]
+    </p>
+    <p>
+      a <dfn>function</dfn> \(f\) is a rule of assignment \(r\) together with a set \(B\) that <i>contains</i> the
+      image set of \(r\). "domain" and "image set" of \(f\) refer to those of \(r\), and \(B\) is the
+      <dfn>range</dfn> of \(f\)
+    </p>
+    <p>
+      if \(A₀ ⊂ A\), the <dfn>restriction</dfn> of \(f\) to \(A₀\) is the function
+      \(f|A₀ = \left\{(a, f(a)) \,\middle|\, a ∈ A₀\right\}\)
+    </p>
+    <p>why in the world are we using \(ℝ̄₊\) for the nonnegative reals</p>
+    <p>
+      \(f\) is <dfn>injective</dfn> if \([f(a) = f(a')] \implies [a = a']\), <dfn>surjective</dfn> if
+      \(b ∈ B \implies ∃ a ∈ A.\; b = f(a)\), and <dfn>bijective</dfn> if both
+    </p>
+    <p>it's not true in general that \(f⁻¹(f(A₀)) = A₀\) and \(f(f⁻¹(B₀)) = B₀\)</p>
+    <p>
+      the <dfn>identity function</dfn> \(i_C\) on a set \(C\) maps all elements in \(C\) to themselves. given a
+      function \(f : A → B\), it could have some <dfn>left inverses</dfn> \(g : B → A\) if \(g ∘ f = i_A\),
+      and/or some <dfn>right inverses</dfn> \(h : B → A\) if \(f ∘ h = i_B\). (courtesy of rezuaq: a function
+      with multiple right inverses is e.g. \(f : \{0, 1\} → \{0\}\) by \(x ↦ 0\), which has \(g(0) = 0\) and
+      \(g'(0) = 1\))
+    </p>
+    <h2 id="3-relations">§3 relations</h2>
+    <p>a <dfn>relation</dfn> on \(A\) is a subset \(R\) of the product \(A × A\)</p>
+    <p>an <dfn>equivalence relation</dfn> on \(A\) is a relation \(∼\) with some extra properties:</p>
+    <dl>
+      <dt>reflexivity</dt>
+      <dd>\(∀ x ∈ A.\; x ∼ x\)</dd>
+      <dt>symmetry</dt>
+      <dd>\(x ∼ y \implies y ∼ x\)</dd>
+      <dt>transitivity</dt>
+      <dd>\(x ∼ y ∧ y ∼ z \implies x ∼ z\)</dd>
+    </dl>
+    <p>
+      the <dfn>equivalence class</dfn> determined by \(x\) is the set \(E = \left\{y \,\middle|\, y ∼ x\right\}\).
+      (the notation i learned for this was \(x̄\).) two equivalence classes \(E\) and \(E'\) are disjoint xor equal
+    </p>
+    <p>
+      a <dfn>partition</dfn> of a set \(A\) is a collection of disjoint nonempty subsets of \(A\) whose union is
+      all of \(A\)
+    </p>
+    <p>an <dfn>order relation</dfn> on \(A\) is another relation \(<\) with some other properties:</p>
+    <dl>
+      <dt>comparability</dt>
+      <dd>\(∀ x, y ∈ A\mathord:\; x ≠ y.\; [x < y ∨ y < x]\)</dd>
+      <dt>nonreflexivity</dt>
+      <dd>\(∄ x ∈ A.\; x < x\)</dd>
+      <dt>transitivity</dt>
+      <dd>\(x < y ∧ y < z \implies x < z\)</dd>
+    </dl>
+    <p>
+      the <dfn>open interval</dfn> \((a, b)\) is the set \(\left\{x \,\middle|\, a < x < b\right\}\). if it's empty,
+      we call \(a\) the <dfn>immediate predecessor</dfn> of \(b\) and \(b\) the <dfn>immediate successor</dfn>
+      of \(a\)
+    </p>
+    <p>
+      suppose \(A\) and \(B\) are two sets with order relations \(&lt;_A\) and \(&lt;_B\). \(A\) and \(B\) have the
+      same <dfn>order type</dfn> if there's a bijection \(f : A → B\) s.t.
+      \[a₁ &lt;_A a₂ \implies f(a₁) &lt;_B f(a₂)\]
+    </p>
+    <p>
+      define an order relation \(<\) on \(A × B\) by defining \(a₁ × b₁ < a₂ × b₂\) if
+      \[a₁ &lt;_A a₂ ∨ a₁ = a₂ ∧ b₁ &lt;_B b₂\]
+      this is the <dfn>dictionary order relation</dfn> on \(A × B\)
+    </p>
+    <h3 id="lubp-glbp">lubp/glbp</h3>
+    <p>
+      suppose \(A\) is a set ordered by \(<\), and it has a subset \(A₀\). an element \(b\) is the <dfn>largest
+      element</dfn> of \(A₀\) if \(b ∈ A₀\) and if \(x ≤ b\) for every \(x ∈ A₀\). similarly an element \(a\) is the
+      <dfn>smallest element</dfn> of \(A₀\) if \(a ∈ A₀\) and if \(a ≤ x\) for every \(x ∈ A₀\). every
+      ordered set has at most one largest element and at most one smallest element
+    </p>
+    <p>
+      \(A₀\) is <dfn>bounded above</dfn> if there is an element \(b\) of \(A\)‼️ s.t. \(x ≤ b\) for every
+      \(x ∈ A₀\). if the set of all upper bounds has a smallest element, that element is the <dfn>least upper bound /
+      supremum</dfn> of \(A₀\) and denoted by \(\sup A₀\). it may or may not be in \(A₀\). if it is, it's the
+      largest element
+    </p>
+    <p>similar for <dfn>bounded below</dfn> and <dfn>infimum</dfn> (\(\inf A₀\))</p>
+    <p>
+      \(A\) has the <dfn>least upper bound property</dfn> if <i>every</i> nonempty subset \(A₀\) of \(A\) that is
+      bounded above has a least upper bound. similar for <dfn>greatest lower bound property</dfn>
+    </p>
+    <pre id="hl-bc5187d2f25f380c">
+grep -o "/dfn" xyxy-topology/index.html | wc -l
+31</pre>
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true, wrap: "tex"});</script>
+    <script>
+     color("hl-ee9589e4aad5f4c6", [["\\subsetneq", "escape"]]);
+     color("hl-bc5187d2f25f380c", [["grep", "function"], [" ", null], ["-o", "variable"], [" ", null], ["\"/dfn\"", "string"], [" xyxy-topology/index.html | ", null], ["wc", "function"], [" ", null], ["-l", "variable"], ["\n31", null]]);
+    </script>
+  </body>
+</html>
