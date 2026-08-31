@@ -23,6 +23,7 @@ pub const CLASSES: &[ClassInfo] = &[
     class!('b', "builtin", 0x_feacd0),
     class!('c', "constant", 0x_b6a0ff),
     class!('d', "docstring", 0x_9ac8e0),
+    class!('e', "escape", 0x_caa6df),
     class!('f', "function", 0x_f78fe7),
     class!('k', "keyword", 0x_79a8ff),
     class!('m', "docmarkup", 0x_caa6df),

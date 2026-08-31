@@ -106,6 +106,7 @@ pub static MACROS: phf::Map<&str, char> = phf_map! {
     "simeq" => '≃',
     "subset" => '⊂',
     "subseteq" => '⊆',
+    "subsetneq" => '⊊',
     "sum" => '∑',
     "supset" => '⊃',
     "supseteq" => '⊇',

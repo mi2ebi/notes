@@ -25,11 +25,8 @@
     <nav class="toc">
       <ul class="tight">
         <li><a href="#202-recap-intro">202 recap / intro</a></li>
-        <li><a href="#history-of-programming-languages">history of programming languages</a>
-          <ul class="tight">
-            <li><a href="#paradigms">paradigms</a></li>
-          </ul>
-        </li>
+        <li><a href="#history-of-programming-languages">history of programming languages</a></li>
+        <li><a href="#paradigms">paradigms</a></li>
       </ul>
     </nav>
     <h1 id="202-recap-intro">202 recap / intro</h1>
@@ -131,12 +128,19 @@ int main() {
       and 1998
     </p>
     <p>in 2009 oracle bought sun microsystems, so now they own java</p>
-    <h2 id="paradigms">paradigms</h2>
+    <h1 id="paradigms">paradigms</h1>
     <p>
       in theory all programming languages are equivalent. in practics they have differenw ways of thinking about
       things
     </p>
-    
+    <dl>
+      <dt>compiled language</dt>
+      <dd>turn stuff into syntax trees and symbol tables and do all the codegen and optimizing and whatever</dd>
+      <dt>interpreted language</dt>
+      <dd>just shove the code through a vm</dd>
+      <dt>hybrid</dt>
+      <dd>do the first bits of compiling and them shove it in a vm</dd>
+    </dl>
     <script>
      color("hl-2687e65b437c52bb", [["int", "type"],[" ", null],["x", "variable"],[" = 10;\nx += ++x + x++;", null]]);
      color("hl-fda84126a9551e2b", [["x", null]]);
