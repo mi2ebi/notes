@@ -15,7 +15,8 @@
         <li><a href="#intro">intro</a></li>
         <li><a href="#virtualization">virtualization</a>
           <ul class="tight">
-            <li><a href="#virtual-cpus-processes-and-threads">virtual CPUs: processes and threads</a></li>
+            <li><a href="#processes-and-threads">processes and threads</a></li>
+            <li><a href="#process-api">process API</a></li>
           </ul>
         </li>
       </ul>
@@ -66,7 +67,7 @@
     </p>
     <p>'security is the inverse of usability'</p>
     <h1 id="virtualization">virtualization</h1>
-    <h2 id="virtual-cpus-processes-and-threads">virtual CPUs: processes and threads</h2>
+    <h2 id="processes-and-threads">processes and threads</h2>
     <p>
       a <dfn>process</dfn> in an <dfn>execution stream</dfn> (flow of commands) in the context of some
       <dfn>state</dfn> (anything that affects or is affected by the process)
@@ -129,5 +130,45 @@
       the OS owns all the memory, so it needs to reserve some metadata. hm. is the OS a process? then it shouldn't be
       able to access the other processes' memory. aaaa
     </p>
+    <p>to model this life cycle we could use a state machine:</p>
+    <dl>
+      <dt>running</dt>
+      <dd>currently executing on the CPU</dd>
+      <dt>ready</dt>
+      <dd>fully prepared. will exec when the policy says so!</dd>
+      <dt>blocked</dt>
+      <dd>suspended/waiting for some event. the OS will unblock when that's complete</dd>
+      <dt>new</dt>
+      <dd>not done being created</dd>
+      <dt>dead/terminated</dt>
+      <dd>completed execution. resources haven't been reclaimed yet</dd>
+    </dl>
+    <p>for each process we have a diagram like this:</p>
+    <img src="process-dfa.png" alt="process dfa" />
+    <p>
+      the scheduler can only select programs that are ready. what if there aren't any? then we <dfn>idle</dfn>.
+      magical process that always has something to do, which is "do nothing"! waste of resources tho
+    </p>
+    <p>
+      the <dfn>process control block</dfn> is the process metadata. for now it has the PID, state, virtual
+      address space, processor context, .... these live in the <dfn>PCB list / process list</dfn> which is a
+      linked list. there are a finite numbers of PIDs so you can only run finitely many processes! but we can
+      recycle them
+    </p>
+    <p>
+      each <u>thread</u> has its own stack pointer, program counter, and any other registers it needs. so we
+      also need a thread list
+    </p>
+    <h2 id="process-api">process API</h2>
+    <img src="syscalls.png" alt="syscall diagram" />
+    <p>the process API is a subset of the system calls to control processes</p>
+    <h3>fork()</h3>
+    <ol>
+      <li>OS allocated data structures for tracking the child process</li>
+      <li>copy the entire parent address space to create the child's</li>
+      <li>mark the child as 'ready'</li>
+    </ol>
+    <p>in the parent, it returns the PID of the child (positive number). in the child it returns 0</p>
+    <p>this is called fork because <i>after</i> we call fork we need to check the PID ourselves</p>
   </body>
 </html>
