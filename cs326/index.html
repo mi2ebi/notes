@@ -27,6 +27,11 @@
         <li><a href="#202-recap-intro">202 recap / intro</a></li>
         <li><a href="#history-of-programming-languages">history of programming languages</a></li>
         <li><a href="#paradigms">paradigms</a></li>
+        <li><a href="#grammar">grammar</a>
+          <ul class="tight">
+            <li><a href="#regular-expressions">regular expressions</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
     <h1 id="202-recap-intro">202 recap / intro</h1>
@@ -141,7 +146,71 @@ int main() {
       <dt>hybrid</dt>
       <dd>do the first bits of compiling and them shove it in a vm</dd>
     </dl>
-    
+    <h1 id="grammar">grammar</h1>
+    <dl>
+      <dt>syntax</dt>
+      <dd>rules describing how symbols can be combined to form a program</dd>
+      <dt>semantics</dt>
+      <dd>the meaning of a <i>syntatically valid</i> program</dd>
+      <dt>grammar</dt>
+      <dd>description of syntax for a given language</dd>
+    </dl>
+    <p>recognizer/lexer/scanner:</p>
+    <pre data-lang="c++" id="hl-a6bee6f7c4a022c9">
+int x = 2;</pre>
+    <table>
+      <tr>
+        <th>lexeme</th>
+        <th>token class</th>
+      </tr>
+      <tr>
+        <td>int</td>
+        <td>INT</td>
+      </tr>
+      <tr>
+        <td>x</td>
+        <td>ident</td>
+      </tr>
+      <tr>
+        <td>=</td>
+        <td>equals</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>int_lit</td>
+      </tr>
+      <tr>
+        <td>;</td>
+        <td>semicolon</td>
+      </tr>
+    </table>
+    <h2 id="regular-expressions">regular expressions</h2>
+    <table>
+      <tr>
+        <td>ε</td>
+        <td>empty string</td>
+      </tr>
+      <tr>
+        <td>.</td>
+        <td>concat</td>
+      </tr>
+      <tr>
+        <td>|</td>
+        <td>choice</td>
+      </tr>
+      <tr>
+        <td>*</td>
+        <td>zero or more</td>
+      </tr>
+      <tr>
+        <td>+</td>
+        <td>one or more</td>
+      </tr>
+    </table>
+    <p>eg</p>
+    <pre data-lang="grammar" id="hl-15014bc3493e19e6">
+digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+int_lit = digit+</pre>
     <script>
      color("hl-2687e65b437c52bb", [["int", "type"],[" ", null],["x", "variable"],[" = 10;\nx += ++x + x++;", null]]);
      color("hl-fda84126a9551e2b", [["x", null]]);
@@ -155,6 +224,8 @@ int main() {
      color("hl-ad9d37a26adca5f5", [["int", "type"], [" *", null], ["foo", "function"], ["()", "rainbow0"], [" ", null], ["{", "rainbow0"], ["\n  ", null], ["int", "type"], [" ", null], ["x", "variable"], [" = 100;\n  ", null], ["return", "keyword"], [" \u0026x;\n", null], ["}", "rainbow0"], ["\n", null], ["int", "type"], [" ", null], ["main", "function"], ["()", "rainbow0"], [" ", null], ["{", "rainbow0"], ["\n  ", null], ["int", "type"], [" *", null], ["y", "variable"], [" = foo", null], ["()", "rainbow1"], ["; ", null], ["// what does this point to?", "comment"], ["\n", null], ["}", "rainbow0"]]);
      color("hl-0c28803940249936", [["y", null]]);
      color("hl-c49d0bdb88e78ff2", [["foo", null]]);
+     color("hl-a6bee6f7c4a022c9", [["int", "type"], [" ", null], ["x", "variable"], [" = 2;", null]]);
+     color("hl-15014bc3493e19e6", [["digit", "constant"], [" = ", null], ["0", "string"], [" | ", null], ["1", "string"], [" | ", null], ["2", "string"], [" | ", null], ["3", "string"], [" | ", null], ["4", "string"], [" | ", null], ["5", "string"], [" | ", null], ["6", "string"], [" | ", null], ["7", "string"], [" | ", null], ["8", "string"], [" | ", null], ["9", "string"], ["\n", null], ["int_lit", "constant"], [" = ", null], ["digit", "constant"], ["+", null]]);
     </script>
   </body>
 </html>
