@@ -16,7 +16,11 @@
         <li><a href="#virtualization">virtualization</a>
           <ul class="tight">
             <li><a href="#processes-and-threads">processes and threads</a></li>
-            <li><a href="#process-api">process API</a></li>
+            <li><a href="#process-api">process API</a>
+              <ul class="tight">
+                <li><a href="#fork">fork()</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -162,7 +166,7 @@
     <h2 id="process-api">process API</h2>
     <img src="syscalls.png" alt="syscall diagram" />
     <p>the process API is a subset of the system calls to control processes</p>
-    <h3>fork()</h3>
+    <h3 id="fork">fork()</h3>
     <ol>
       <li>OS allocated data structures for tracking the child process</li>
       <li>copy the entire parent address space to create the child's</li>
