@@ -4,6 +4,7 @@
     <title>cs 370</title>
     <link rel="stylesheet" href="https://mi2ebi.github.io/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../highlight.js"></script>
   </head>
   <body>
     <!-- toc skip -->
@@ -15,12 +16,15 @@
         <li><a href="#intro">intro</a></li>
         <li><a href="#virtualization">virtualization</a>
           <ul class="tight">
-            <li><a href="#processes-and-threads">processes and threads</a></li>
-            <li><a href="#process-api">process API</a>
+            <li><a href="#ch4-processes-and-threads">ch4 processes and threads</a></li>
+            <li><a href="#ch5-process-api">ch5 process API</a>
               <ul class="tight">
                 <li><a href="#fork">fork()</a></li>
+                <li><a href="#exec">exec()</a></li>
+                <li><a href="#exit-and-wait">exit() and wait()</a></li>
               </ul>
             </li>
+            <li><a href="#ch6-limited-direct-execution">ch6 limited direct execution</a></li>
           </ul>
         </li>
       </ul>
@@ -71,7 +75,7 @@
     </p>
     <p>'security is the inverse of usability'</p>
     <h1 id="virtualization">virtualization</h1>
-    <h2 id="processes-and-threads">processes and threads</h2>
+    <h2 id="ch4-processes-and-threads">ch4 processes and threads</h2>
     <p>
       a <dfn>process</dfn> in an <dfn>execution stream</dfn> (flow of commands) in the context of some
       <dfn>state</dfn> (anything that affects or is affected by the process)
@@ -163,10 +167,10 @@
       each <u>thread</u> has its own stack pointer, program counter, and any other registers it needs. so we
       also need a thread list
     </p>
-    <h2 id="process-api">process API</h2>
+    <h2 id="ch5-process-api">ch5 process API</h2>
     <img src="syscalls.png" alt="syscall diagram" />
     <p>the process API is a subset of the system calls to control processes</p>
-    <h3 id="fork">fork()</h3>
+    <h3 id="fork"><code id="hl-e6d5225409dbab28">fork()</code></h3>
     <ol>
       <li>OS allocated data structures for tracking the child process</li>
       <li>copy the entire parent address space to create the child's</li>
@@ -174,5 +178,102 @@
     </ol>
     <p>in the parent, it returns the PID of the child (positive number). in the child it returns 0</p>
     <p>this is called fork because <i>after</i> we call fork we need to check the PID ourselves</p>
+    <h3 id="exec"><code id="hl-3c680472dbf41712">exec()</code></h3>
+    <p>replaces the address space of the current process with another loaded from disk</p>
+    <p>
+      we often use <code id="hl-3c680472dbf41712-2">exec()</code> after
+      <code id="hl-e6d5225409dbab28-2">fork()</code>
+    </p>
+    <h3 id="exit-and-wait"><code id="hl-99f0cc07e2880d72">exit()</code> and <code id="hl-53b930b5de750491">wait()</code></h3>
+    <p>
+      the child process calls <code id="hl-cb0e3bfa7c9a1c75">exit(int retval)</code> to provide a return value. 0 for
+      success, nonzero for failure
+    </p>
+    <p>
+      the parent may <code id="hl-226ad092b3e74be4">wait(int &amp;pid)</code> for any child to finish, and puts the
+      PID of that child in <code id="hl-53628957f1ac7244">pid</code>
+    </p>
+    <p>
+      the retval lives in the PCB for the child, which is still around because the parent might not have called
+      <code id="hl-53b930b5de750491-2">wait()</code> yet
+    </p>
+    <dl>
+      <dt>orphan</dt>
+      <dd>child if the parent dies before it does</dd>
+      <dt>zombie</dt>
+      <dd>child if it dies before the parent does</dd>
+    </dl>
+    <p>
+      every process has <dfn>init</dfn> (process with PID of zero) as its
+      oldest parent
+    </p>
+    <p>tbd is the <i>kernel</i> a process?</p>
+    <h2 id="ch6-limited-direct-execution">ch6 limited direct execution</h2>
+    <dl>
+      <dt>direct execution</dt>
+      <dd>process executing instructions directly on the CPU</dd>
+    </dl>
+    <p>problems: any process may</p>
+    <ul>
+      <li>access memory for another process</li>
+      <li>run indefinitely, starving other processes</li>
+      <li>await some I/O which takes (comparatively) forever</li>
+    </ul>
+    <dl>
+      <dt>limited direct execution</dt>
+      <dd>user processes can only execute a subset of all available instructions</dd>
+    </dl>
+    <p>
+      to enforce LDE, we need 2 modes: kernel mode and user mode. instructions that can only run in kernel mode are
+      <dfn>privileged</dfn>. if we try to run them in user mode we get a <dfn>trap</dfn> = illegal instruction
+      exception. raising this trap is a <u>hardware instruction</u> that has 2 steps:
+    </p>
+    <ol>
+      <li>set kernel_mode to 1</li>
+      <li>begin executing the OS's trap handler</li>
+    </ol>
+    <p>
+      we want to handle different illegal operations in different ways, so we have a <dfn>trap table</dfn>
+      <u>prescribed</u> by the hardware and <u>filled in</u> by the OS to that specification. it has entries like
+    </p>
+    <table>
+      <tr>
+        <th>name</th>
+        <th>number</th>
+        <th>address</th>
+      </tr>
+      <tr>
+        <td><code id="hl-99f0cc07e2880d72-2">exit()</code></td>
+        <td>5</td>
+        <td><code id="hl-fdc2b37df79b1ae8">0x0000c844</code></td>
+      </tr>
+    </table>
+    <p>
+      on RISC-V the <code id="hl-4da3f8da27243891">ecall</code> instruction runs the trap stored in the register
+      <code id="hl-30b19d00fa986704">a7</code>
+    </p>
+    <p>
+      privileged instruction examples: <code id="hl-b79bb2c5a2bb065b">open()</code>,
+      <code id="hl-e6d5225409dbab28-3">fork()</code> etc, allocating more memory, ...
+    </p>
+    
+    <script>
+     color("hl-e6d5225409dbab28", [["fork()", null]]);
+     color("hl-3c680472dbf41712", [["exec()", null]]);
+     color("hl-3c680472dbf41712-2", [["exec()", null]]);
+     color("hl-e6d5225409dbab28-2", [["fork()", null]]);
+     color("hl-99f0cc07e2880d72", [["exit()", null]]);
+     color("hl-53b930b5de750491", [["wait()", null]]);
+     color("hl-cb0e3bfa7c9a1c75", [["exit(", null], ["int", "type"], [" ", null], ["retval", "variable"], [")", null]]);
+     color("hl-226ad092b3e74be4", [["wait(", null], ["int", "type"], [" \u0026", null], ["pid", "variable"], [")", null]]);
+     color("hl-53628957f1ac7244", [["pid", null]]);
+     color("hl-53b930b5de750491-2", [["wait()", null]]);
+     color("hl-99f0cc07e2880d72-2", [["exit()", null]]);
+     color("hl-fdc2b37df79b1ae8", [["0x0000c844", null]]);
+     color("hl-4da3f8da27243891", [["ecall", null]]);
+     color("hl-30b19d00fa986704", [["a7", null]]);
+     color("hl-b79bb2c5a2bb065b", [["open()", null]]);
+     color("hl-e6d5225409dbab28-3", [["fork()", null]]);
+    </script>
   </body>
 </html>
