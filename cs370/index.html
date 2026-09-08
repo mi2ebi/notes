@@ -25,6 +25,7 @@
               </ul>
             </li>
             <li><a href="#ch6-limited-direct-execution">ch6 limited direct execution</a></li>
+            <li><a href="#ch7-scheduling-introduction">ch7 scheduling introduction</a></li>
           </ul>
         </li>
       </ul>
@@ -56,8 +57,8 @@
     </p>
     <p>hierarchy: users > applications > operating system > hardware</p>
     <p>
-      usb sticks use an old file system called fat32. they have 2^32 sectors each of which can store 1 KiB in theory,
-      so they can store ~2 TiB
+      usb sticks use an old file system called fat32. they have \(2^{32}\) sectors each of which can store 1&nbsp;KiB
+      in theory, so they can store ~2&nbsp;TiB
     </p>
     <p>
       in a virtualized environment, we have infinite cpu time and infinite memory. in real life we don't!
@@ -140,23 +141,24 @@
     </p>
     <p>to model this life cycle we could use a state machine:</p>
     <dl>
-      <dt>running</dt>
+      <dt>RUNNING</dt>
       <dd>currently executing on the CPU</dd>
-      <dt>ready</dt>
+      <dt>READY</dt>
       <dd>fully prepared. will exec when the policy says so!</dd>
-      <dt>blocked</dt>
+      <dt>BLOCKED</dt>
       <dd>suspended/waiting for some event. the OS will unblock when that's complete</dd>
-      <dt>new</dt>
+      <dt>NEW</dt>
       <dd>not done being created</dd>
-      <dt>dead/terminated</dt>
+      <dt>DEAD/TERMINATED</dt>
       <dd>completed execution. resources haven't been reclaimed yet</dd>
     </dl>
     <p>for each process we have a diagram like this:</p>
     <img src="process-dfa.png" alt="process dfa" />
     <p>
-      the scheduler can only select programs that are ready. what if there aren't any? then we <dfn>idle</dfn>.
+      the scheduler can only select programs that are READY. what if there aren't any? then we <dfn>idle</dfn>.
       magical process that always has something to do, which is "do nothing"! waste of resources tho
     </p>
+    <p>processes being READY is also called <dfn>arriving</dfn></p>
     <p>
       the <dfn>process control block</dfn> is the process metadata. for now it has the PID, state, virtual
       address space, processor context, .... these live in the <dfn>PCB list / process list</dfn> which is a
@@ -174,7 +176,7 @@
     <ol>
       <li>OS allocated data structures for tracking the child process</li>
       <li>copy the entire parent address space to create the child's</li>
-      <li>mark the child as 'ready'</li>
+      <li>mark the child as READY</li>
     </ol>
     <p>in the parent, it returns the PID of the child (positive number). in the child it returns 0</p>
     <p>this is called fork because <i>after</i> we call fork we need to check the PID ourselves</p>
@@ -203,11 +205,12 @@
       <dt>zombie</dt>
       <dd>child if it dies before the parent does</dd>
     </dl>
-    <p>
-      every process has <dfn>init</dfn> (process with PID of zero) as its
-      oldest parent
-    </p>
+    <p>every process has <dfn>init</dfn> (process with PID of zero) as its oldest parent</p>
     <p>tbd is the <i>kernel</i> a process?</p>
+    <p>
+      if you <code id="hl-53b930b5de750491-3">wait()</code> with no child processes, the book says you wait forever, but in practice on linux
+      it'll return immediately with some kind of error
+    </p>
     <h2 id="ch6-limited-direct-execution">ch6 limited direct execution</h2>
     <dl>
       <dt>direct execution</dt>
@@ -225,25 +228,25 @@
     </dl>
     <p>
       to enforce LDE, we need 2 modes: kernel mode and user mode. instructions that can only run in kernel mode are
-      <dfn>privileged</dfn>. if we try to run them in user mode we get a <dfn>trap</dfn> = illegal instruction
-      exception. raising this trap is a <u>hardware instruction</u> that has 2 steps:
+      <dfn>privileged</dfn>. if we try to run them in user mode we get a <dfn>trap/interrupt</dfn> = illegal
+      instruction exception. raising this trap is a <u>hardware instruction</u> that has 2 steps:
     </p>
     <ol>
       <li>set kernel_mode to 1</li>
       <li>begin executing the OS's trap handler</li>
     </ol>
     <p>
-      we want to handle different illegal operations in different ways, so we have a <dfn>trap table</dfn>
+      we want to handle different illegal operations in different ways, so we have a <dfn>trap/interrupt table</dfn>
       <u>prescribed</u> by the hardware and <u>filled in</u> by the OS to that specification. it has entries like
     </p>
     <table>
       <tr>
-        <th>name</th>
+        <th class="noborder">name</th>
         <th>number</th>
         <th>address</th>
       </tr>
       <tr>
-        <td><code id="hl-99f0cc07e2880d72-2">exit()</code></td>
+        <td class="noborder"><code id="hl-99f0cc07e2880d72-2">exit()</code></td>
         <td>5</td>
         <td><code id="hl-fdc2b37df79b1ae8">0x0000c844</code></td>
       </tr>
@@ -256,7 +259,80 @@
       privileged instruction examples: <code id="hl-b79bb2c5a2bb065b">open()</code>,
       <code id="hl-e6d5225409dbab28-3">fork()</code> etc, allocating more memory, ...
     </p>
+    <h2 id="ch7-scheduling-introduction">ch7 scheduling introduction</h2>
+    <p>some scheduling <b>policies</b>:</p>
+    <dl>
+      <dt>cooperative \(≈\) non-preemptive</dt>
+      <dd>processes run until done and then explicitly give up control, eg via <code id="hl-99f0cc07e2880d72-3">exit()</code></dd>
+      <dt>non-cooperative = preemptive</dt>
+      <dd>"fuck you i decide" -scheduler</dd>
+      <dt>FIFO</dt>
+      <dd>first in first out. store checkout queue</dd>
+      <dt>SJF</dt>
+      <dd>shortest job first</dd>
+    </dl>
+    <p>some <b>mechanisms</b>:</p>
+    <dl>
+      <dt>context switching</dt>
+      <dd>
+        save the READY process's state in its PCB, restore the READY process's state from <i>its</i> PCB, and RUN it
+      </dd>
+    </dl>
+    <p>a context switch is transparent to both processes</p>
+    <dl>
+      <dt><code id="hl-95379f841d82ccc5">yield()</code></dt>
+      <dd>polite operation telling the scheduler 'excuse me sir, my resources are available, would you like it?'</dd>
+    </dl>
+    <p>any other system call is also a yield!</p>
+    <dl>
+      <dt>timer interrupt / clock</dt>
+      <dd>set a countdown, clock decrements it, sends interrupt when it expires</dd>
+    </dl>
+    <p>
+      what does the interrupt handler do? the scheduling algorithm! the countdown is the <dfn>tick rate</dfn>. this
+      is used in noncooperative scheduling. modern operatings have a static tick, so it ticks even when there are no
+      other processes to run
+    </p>
     
+    <p><b>metrics</b>:</p>
+    <dl>
+      <dt>utilization</dt>
+      <dd>proportion of time spent executing processes</dd>
+      <dt>turnaround time</dt>
+      <dd>time from process creation to termination</dd>
+      <dt>response time</dt>
+      <dd>time from process creation/READY to RUNNING</dd>
+      <dt>progress</dt>
+      <dd>time spent moving a process toward completion. (what is <dfn style="color: var(--yellow)">work</dfn>?)</dd>
+      <dt>fairness</dt>
+      <dd>fraction of CPU time allocated to a process. \(F = T_{\text{end}}¹/T_{\text{end}}ⁿ\)</dd>
+    </dl>
+    <p>fairness says, try to make all the processes finish at the same time. is this really fair?</p>
+    <p>the context of evaluation and metric depend on the system designer's goals!</p>
+    <p>initial scheduler assumptions: all jobs</p>
+    <ul>
+      <li>run for the same amount of time</li>
+      <li>finish at the same time</li>
+      <li>execute until completion</li>
+      <li>aren't blocking</li>
+      <li>have a known runtime</li>
+      <li>use 1 CPU</li>
+    </ul>
+    <h3>FIFO</h3>
+    <p>
+      suppose we have 3 tasks A B C. all arrive at time \(t = 0\) and run for 2 units. tiebraker says sort them
+      alphabetically. here the avg turnaround time is \(\frac{2 + 4 + 6 }3 = 4\) and the avg response time is
+      \(\frac{0 + 2 + 4}3 = 2\)
+    </p>
+    <p>
+      if they <i>don't</i> all run for the same time and A runs for 6 units, this bumps the avg turnaround time to 8
+      and the avg response time is 4.7. this isn't a very good scheudle! we want to minimize these
+    </p>
+    
+    <!-- temml -->
+    <link rel="stylesheet" href="../Temml-Local.css" />
+    <script src="../temml.min.js"></script>
+    <script>temml.renderMathInElement(document.body, {trust: true, wrap: "tex"});</script>
     <script>
      color("hl-e6d5225409dbab28", [["fork()", null]]);
      color("hl-3c680472dbf41712", [["exec()", null]]);
@@ -268,12 +344,15 @@
      color("hl-226ad092b3e74be4", [["wait(", null], ["int", "type"], [" \u0026", null], ["pid", "variable"], [")", null]]);
      color("hl-53628957f1ac7244", [["pid", null]]);
      color("hl-53b930b5de750491-2", [["wait()", null]]);
+     color("hl-53b930b5de750491-3", [["wait()", null]]);
      color("hl-99f0cc07e2880d72-2", [["exit()", null]]);
      color("hl-fdc2b37df79b1ae8", [["0x0000c844", null]]);
      color("hl-4da3f8da27243891", [["ecall", null]]);
      color("hl-30b19d00fa986704", [["a7", null]]);
      color("hl-b79bb2c5a2bb065b", [["open()", null]]);
      color("hl-e6d5225409dbab28-3", [["fork()", null]]);
+     color("hl-99f0cc07e2880d72-3", [["exit()", null]]);
+     color("hl-95379f841d82ccc5", [["yield()", null]]);
     </script>
   </body>
 </html>
