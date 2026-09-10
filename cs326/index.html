@@ -29,7 +29,9 @@
         <li><a href="#paradigms">paradigms</a></li>
         <li><a href="#grammar">grammar</a>
           <ul class="tight">
+            <li><a href="#recognizer">recognizer</a></li>
             <li><a href="#regular-expressions">regular expressions</a></li>
+            <li><a href="#parser">parser</a></li>
           </ul>
         </li>
       </ul>
@@ -155,17 +157,18 @@ int main() {
       <dt>grammar</dt>
       <dd>description of syntax for a given language</dd>
     </dl>
-    <p>recognizer/lexer/scanner:</p>
+    <h2 id="recognizer">recognizer</h2>
+    <p>aka lexer, scanner, tokenizer</p>
     <pre data-lang="c++" id="hl-a6bee6f7c4a022c9">
 int x = 2;</pre>
     <table>
       <tr>
-        <th>lexeme</th>
+        <th>lexeme/token</th>
         <th>token class</th>
       </tr>
       <tr>
         <td>int</td>
-        <td>INT</td>
+        <td>int_kw</td>
       </tr>
       <tr>
         <td>x</td>
@@ -211,6 +214,24 @@ int x = 2;</pre>
     <pre data-lang="grammar" id="hl-15014bc3493e19e6">
 digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 int_lit = digit+</pre>
+    <h2 id="parser">parser</h2>
+    <p>fed a list of tokens from the recognizer</p>
+    <dl>
+      <dt>nonterminal</dt>
+      <dd>placeholder for patterns of (non)terminals</dd>
+      <dt>terminal</dt>
+      <dd>= token</dd>
+      <dt>grammar (formal def)</dt>
+      <dd>
+        4tuple (T, N, S, P):<br/>
+        T = finite set of terminals<br/>
+        N = finite set of nonterminals <br/>
+        S = start symbol<br />
+        P = finite set of production rules
+      </dd>
+    </dl>
+    <p>every nonterminal is a node in the syntax tree</p>    
+    
     <script>
      color("hl-2687e65b437c52bb", [["int", "type"],[" ", null],["x", "variable"],[" = 10;\nx += ++x + x++;", null]]);
      color("hl-fda84126a9551e2b", [["x", null]]);

@@ -25,7 +25,11 @@
               </ul>
             </li>
             <li><a href="#ch6-limited-direct-execution">ch6 limited direct execution</a></li>
-            <li><a href="#ch7-scheduling-introduction">ch7 scheduling introduction</a></li>
+            <li><a href="#ch7-scheduling-introduction">ch7 scheduling introduction</a>
+              <ul class="tight">
+                <li><a href="#fifo">FIFO</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -57,8 +61,8 @@
     </p>
     <p>hierarchy: users > applications > operating system > hardware</p>
     <p>
-      usb sticks use an old file system called fat32. they have \(2^{32}\) sectors each of which can store 1&nbsp;KiB
-      in theory, so they can store ~2&nbsp;TiB
+      usb sticks use an old file system called fat32. they have \(2³²\) sectors each of which can store 1 KiB
+      in theory, so they can store ~2 TiB
     </p>
     <p>
       in a virtualized environment, we have infinite cpu time and infinite memory. in real life we don't!
@@ -318,7 +322,7 @@
       <li>have a known runtime</li>
       <li>use 1 CPU</li>
     </ul>
-    <h3>FIFO</h3>
+    <h3 id="fifo">FIFO</h3>
     <p>
       suppose we have 3 tasks A B C. all arrive at time \(t = 0\) and run for 2 units. tiebraker says sort them
       alphabetically. here the avg turnaround time is \(\frac{2 + 4 + 6 }3 = 4\) and the avg response time is
