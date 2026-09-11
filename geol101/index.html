@@ -42,7 +42,9 @@
             </li>
             <li><a href="#02-5-identifying-minerals">02.5 identifying minerals</a>
               <ul class="tight">
-                <li><a href="#special-properties">special properties</a></li>
+                <li><a href="#cleavage-and-fracture-more-detail">cleavage and fracture (more detail)</a></li>
+                <li><a href="#color-more-detail">color (more detail)</a></li>
+                <li><a href="#more-properties">more properties</a></li>
               </ul>
             </li>
           </ul>
@@ -160,7 +162,7 @@
       <dt>hardness</dt>
       <dd>ability to scratch something else</dd>
       <dt>streak</dt>
-      <dd>true color of a sample</dd>
+      <dd>true color of a sample in powdered form. test by rubbing on unglazed porcelain</dd>
       <dt>luster</dt>
       <dd>how light reflects off something</dd>
       <dt>fracture and cleavage</dt>
@@ -405,8 +407,7 @@
       </tr>
     </table>
     <h2 id="02-4-mineral-classes">02.4 mineral classes</h2>
-    <p>based on the anion (negative charge)</p>
-    <p>there are >4000 minerals but only like 30 are common</p>
+    <p>based on the anion (negative charge). there are ~6000 known minerals total but only like 30 are common</p>
     <table>
       <tr>
         <th>class</th>
@@ -448,10 +449,16 @@
         <td>just 1 element by itself</td>
         <td>graphite, copper</td>
       </tr>
+      <tr>
+        <td><dfn>phosphates</dfn></td>
+        <td>contain PO<sub>4</sub><sup>3−</sup></td>
+        <td>apatite</td>
+      </tr>
     </table>
     <p>
       all silicates contain the <dfn>silica tetrahedron</dfn> (SiO<sub>4</sub>)<sup>4−</sup> which can be combined in
-      various ways
+      various ways. <dfn>ferromagnesian silicates</dfn> also contain Fe and/or Mg and tend to be darker and denser,
+      <dfn>non-ferromagnesian silicates</dfn> contain Ca, Al, and/or K instead
     </p>
     <table>
       <tr>
@@ -512,18 +519,100 @@
     <p>in the real world:</p>
     <ol>
       <li>assume it's one of the common minerals</li>
-      <li>use the phsyical properties</li>
+      <li>look at luster first (metallic/submetallic/nonmetallic), cuts down the candidates a lot</li>
+      <li>narrow further using fracture vs cleavage</li>
+      <li>estimate hardness</li>
+      <li>if those three don't nail it down, fall back on the other physical properties (density, streak, etc)</li>
     </ol>
     <p>most rocks have a specific gravity around 2.6</p>
-    <h3 id="special-properties">special properties</h3>
-    <ol>
+    <p>
+      eliminate the common minerals before considering rare ones. eg a clear sample the size of a baseball that's
+      hard enough to scratch glass is almost certainly quartz, not diamond
+    </p>
+    <h3 id="cleavage-and-fracture-more-detail">cleavage and fracture (more detail)</h3>
+    <dl>
+      <dt>cleavage</dt>
+      <dd>breaks along weak plane(s) in the crystal structure</dd>
+    </dl>
+    <p>examples:</p>
+    <ul>
+      <li>
+        mica (biotite, muscovite, chlorite) has strong bonds in 2 directions and weak in the third, so it cleaves
+        into flat parallel sheets
+      </li>
+      <li>calcite cleaves into rhombohedrons (skewed cubes)</li>
+      <li>halite cleaves into cubes</li>
+    </ul>
+    <p>
+      for nonparallel cleavage planes, estimate the angle between faces. this lets you tell eg hornblende and augite
+      apart, since they're otherwise very similar. <b>cleavage ≠ crystal shape</b>: biotite crystals are six-sided
+      but still only cleave in one direction
+    </p>
+    <dl>
+      <dt>fracture</dt>
+      <dd>
+        breaking roughly instead of along planes. can be uneven/rough, splintery/fibrous, or conchoidal (curved,
+        like broken glass)
+      </dd>
+    </dl>
+    <p>some minerals (feldspar, pyroxene) show both cleavage <i>and</i> fracture</p>
+    <p>examples of cleavage directions:</p>
+    <table>
+      <tr>
+        <th>mineral</th>
+        <th>cleavage directions</th>
+        <th>result</th>
+      </tr>
+      <tr>
+        <td>biotite</td>
+        <td>1</td>
+        <td>splits into thin sheets along that one plane</td>
+      </tr>
+      <tr>
+        <td>pyroxene</td>
+        <td>2 at ~right angles</td>
+        <td>also shows a fractured surface ~perpendicular to the cleavage planes</td>
+      </tr>
+      <tr>
+        <td>halite</td>
+        <td>3 at right angles</td>
+        <td>breaks into cubes</td>
+      </tr>
+      <tr>
+        <td>calcite</td>
+        <td>3 <i>not</i> at right angles</td>
+        <td>breaks into rhombohedrons. the andle btwn planes is the same in all calcite</td>
+      </tr>
+    </table>
+    <h3 id="color-more-detail">color (more detail)</h3>
+    <p>
+      generally unreliable as the sole ID property, but: in translucent/transparent minerals (calcite, halite,
+      quartz), trace chemical impurities can control color — eg diamond with &lt;0.001% nitrogen is yellow, same
+      amount of sulfur makes it green. a few minerals (galena, sulfur, chalcopyrite, azurite) have distinctive
+      enough coloration that color alone is sufficient for ID
+    </p>
+    <h3 id="more-properties">more properties</h3>
+    <ul>
       <li>magnetism</li>
       <li>smell (eg sulfur is awful)</li>
       <li>taste</li>
       <li>reaction to HCl (eg calcite, dolomite powder)</li>
       <li>fibrous texture (eg asbetos)</li>
-      <li>bright color</li>
-      <li>fluorescence (color under ultraviolet)</li>
-    </ol>
+      <li>bright color. generally unreliable as the sole identification property</li>
+      <li>fluorescence (color under ultraviolet), phosphorescense (keeps glowing after UV removed)</li>
+      <li><dfn>diaphaneity</dfn>: transparent/translucent/opaque</li>
+      <li><dfn>tenacity</dfn>: behavior when subjected to impact/bending. 'toughness'</li>
+      <li>
+        <dfn>double refraction</dfn>, eg transparent calcite placed on top of a picture makes you see two images
+      </li>
+      <li>
+        <dfn>striations</dfn>: shallow parallel grooves on fresh cleavage faces, from uneven growth/crystal defects
+        (eg plagioclase, pyrite)
+      </li>
+      <li>
+        <dfn>parting</dfn>: planar surfaces from crystal defects/uneven growth. looks like cleavage but isn't always
+        present and can't be induced by breaking the sample yourself
+      </li>
+    </ul>
   </body>
 </html>
